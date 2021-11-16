@@ -42,9 +42,11 @@ CORS(app)
 # we won't be using a buildpack when we deploy to Heroku.
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
-# Well.........
 @app.before_request
 def https_redirect():
+    '''
+    Changes request made in production from http to https
+    '''
     if os.environ.get('FLASK_ENV') == 'production':
         if request.headers.get('X-Forwarded-Proto') == 'http':
             url = request.url.replace('http://', 'https://', 1)
@@ -54,6 +56,9 @@ def https_redirect():
 
 @app.after_request
 def inject_csrf_token(response):
+    '''
+    Injects csrf_token into response and sets CORS options in production
+    '''
     response.set_cookie(
         'csrf_token',
         generate_csrf(),
@@ -67,6 +72,9 @@ def inject_csrf_token(response):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
+    '''
+    Sends favicon if requested and react app otherwise
+    '''
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
