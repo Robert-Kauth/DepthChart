@@ -28,6 +28,7 @@ Mako = "==1.1.4"
 flask-socketio = "*"
 eventlet = "==0.30.2"
 email-validator = "*"
+flask-avatars = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
