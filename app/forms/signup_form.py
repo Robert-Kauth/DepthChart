@@ -1,11 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
+from wtforms.fields.html5 import EmailField, PasswordField, URLField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
 
 
 def user_exists(form, field):
-    # Checking if user exists
+    '''
+    Checks if user email already exists in database
+    '''
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
@@ -13,7 +16,9 @@ def user_exists(form, field):
 
 
 def username_exists(form, field):
-    # Checking if username is already in use
+    '''
+    Checks if username already exists in database
+    '''
     username = field.data
     user = User.query.filter(User.username == username).first()
     if user:
@@ -23,5 +28,7 @@ def username_exists(form, field):
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+    email = EmailField('email', validators=[
+                       DataRequired(), user_exists, Email()])
+    password = PasswordField('password', validators=[DataRequired()])
+    avatar = URLField('avatar', nullable=True)
