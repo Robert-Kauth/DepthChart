@@ -1,6 +1,10 @@
 from .db import db
+import datetime
+from flask_avatars import Identicon
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
+# TODO Add default value for Avatar
 
 
 class User(db.Model, UserMixin):
@@ -10,6 +14,18 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    avatar = db.Column(db.String(255), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
+
+    # def __init__():
+    #     generate_avatar()
+
+    # def generate_avatar(self):
+    #     avatar = Identicon()
+    #     filenames = avatar.generate(text=self.username)
+    #     self.avatar = filenames[1]
+    #     db.session.commit()
 
     @property
     def password(self):
@@ -26,5 +42,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'avatar': self.avatar
         }

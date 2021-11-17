@@ -1,32 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+
+import { loadUsers } from "../store/users";
 
 function UsersList() {
-  const [users, setUsers] = useState([]);
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api/users/');
-      const responseData = await response.json();
-      setUsers(responseData.users);
+    const users = useSelector((state) => state.users.users);
+    useEffect(() => {
+        dispatch(loadUsers());
+    }, [dispatch]);
+
+    if (!users) {
+        return null;
     }
-    fetchData();
-  }, []);
 
-  const userComponents = users.map((user) => {
     return (
-      <li key={user.id}>
-        <NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
-      </li>
+        <div>
+            <h1>User List: </h1>
+            <ul>
+                {users.length &&
+                    Object.values(users).map((user) => (
+                        <li key={user.id}>
+                            <NavLink to={`/users/${user.id}`}>
+                                {user.username}
+                            </NavLink>
+                        </li>
+                    ))}
+            </ul>
+        </div>
     );
-  });
-
-  return (
-    <>
-      <h1>User List: </h1>
-      <ul>{userComponents}</ul>
-    </>
-  );
 }
 
 export default UsersList;
