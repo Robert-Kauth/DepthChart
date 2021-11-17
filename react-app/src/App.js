@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/UserProfile";
 import SplashPage from "./components/SplashPage";
+import Footer from "./components/Footer";
 
 import { authenticate } from "./store/session";
 
@@ -46,6 +47,7 @@ export default function App() {
                     <SplashPage />
                 )}
             </Switch>
+            <Footer />
         </div>
     );
 }

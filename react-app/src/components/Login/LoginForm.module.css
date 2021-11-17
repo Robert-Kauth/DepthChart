@@ -4,11 +4,11 @@
 }
 
 .modalButton {
-    border: 2px solid lightgreen;
+    border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
     border-style: inset;
-    background-color: cyan;
+    background-color: green;
 }
 
 .form {
