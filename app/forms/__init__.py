@@ -1,3 +1,3 @@
 from .login_form import LoginForm
 from .signup_form import SignUpForm
-from .server_add_form import ServerAddForm
+from .server_form import ServerForm

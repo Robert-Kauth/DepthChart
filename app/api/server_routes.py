@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.forms import ServerAddForm
+from app.forms import ServerForm
 from app.models import db, Server, User_server
 
 server_routes = Blueprint('servers', __name__)
@@ -32,7 +32,7 @@ def create_server():
     '''
     Creates new server and assigns creator as owner
     '''
-    form = ServerAddForm()
+    form = ServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         server = Server(
@@ -66,6 +66,7 @@ def editServer(id):
     '''
     Edits server
     '''
+    server = ServerForm()
 
 
 @server_routes.route('/<int:id>', methods=['DELETE'])
