@@ -4,7 +4,10 @@ import { NavLink } from "react-router-dom";
 
 import { loadUsers } from "../store/users";
 
-function UsersList() {
+import styles from "./UsersList.module.css";
+// className={styles. }
+
+export default function UsersList() {
     const dispatch = useDispatch();
 
     const users = useSelector((state) => state.users.users);
@@ -17,7 +20,7 @@ function UsersList() {
     }
 
     return (
-        <div>
+        <div className={styles.listContainer}>
             <h1>User List: </h1>
             <ul>
                 {users.length &&
@@ -32,5 +35,3 @@ function UsersList() {
         </div>
     );
 }
-
-export default UsersList;

@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import "./index.css";
+
+import { ModalProvider } from "./Modal";
+
 import App from "./App";
 import configureStore from "./store";
 
 import * as usersActions from "./store/users";
 import * as userActions from "./store/user";
+
+import "./index.css";
 
 const store = configureStore();
 
