@@ -30,6 +30,7 @@ eventlet = "==0.30.2"
 email-validator = "*"
 flask-avatars = "*"
 boto3 = "*"
+faker = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
