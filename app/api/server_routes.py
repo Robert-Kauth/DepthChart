@@ -26,6 +26,30 @@ def loadServers():
     return {server.id: server.to_dict() for server in Server.query.all()}
 
 
+@server_routes.route('', methods=["POST"])
+@login_required
+def create_server():
+    '''
+    Creates new Server and assigns creator as owner
+    '''
+    form = ServerAddForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        server = Server(
+            name=form.data['name'], topic=form.data['topic'],
+            icon=form.data['icon'], owner_id=current_user.id)
+        db.session.add(server)
+        db.session.commit()
+        user_server = User_server(
+            server_id=server.id,
+            user_id=data["owner_id"]
+        )
+        db.session.add(user_server)
+        db.session.commit()
+        return server.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
 @server_routes.route('/<int:id>', methods=['GET'])
 @login_required
 def loadServer(id):
@@ -34,6 +58,14 @@ def loadServer(id):
     '''
     server = Server.query.get(id)
     return server.to_dict()
+
+
+@server_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def editServer(id):
+    '''
+    Edits server
+    '''
 
 
 @server_routes.route('/<int:id>', methods=['DELETE'])
@@ -49,20 +81,3 @@ def destroyServer(id):
         return str(id), 201
     else:
         return {'errors': ['Unauthorized']}
-
-
-@server_routes.route('', methods=["POST"])
-@login_required
-def create_server():
-    '''
-    Creates new Server and assigns creator as owner
-    '''
-    form = ServerAddForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        server = Server(
-            name=form.data['name'], topic=form.data['topic'],
-            icon=form.data['icon'], owner_id=current_user.id)
-        db.session.add(server)
-        db.session.commit()
-        return server.to_dict()
