@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
 import { ModalProvider } from "./Modal";
 
@@ -22,11 +23,21 @@ if (process.env.NODE_ENV !== "production") {
     window.userActions = userActions;
 }
 
+const Root = () => {
+    return (
+        <Provider store={store}>
+            <ModalProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </ModalProvider>
+        </Provider>
+    );
+};
+
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
+        <Root />
     </React.StrictMode>,
     document.getElementById("root")
 );

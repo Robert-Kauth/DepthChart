@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Modal } from "./Modal";
 import LoginForm from "./components/Login";
 import SignUpForm from "./components/Signup";
 import NavBar from "./components/Nav";
@@ -11,7 +12,9 @@ import User from "./components/User";
 
 import { authenticate } from "./store/session";
 
-function App() {
+import "./index.css";
+
+export default function App() {
     const dispatch = useDispatch();
 
     const isOnline = useSelector((state) => state.session.online);
@@ -25,8 +28,9 @@ function App() {
     }
 
     return (
-        <BrowserRouter>
+        <div className="appContainer">
             <NavBar />
+            <Modal />
             <Switch>
                 <Route path="/login" exact={true}>
                     <LoginForm />
@@ -44,8 +48,6 @@ function App() {
                     <h1>My Home Page</h1>
                 </ProtectedRoute>
             </Switch>
-        </BrowserRouter>
+        </div>
     );
 }
-
-export default App;
