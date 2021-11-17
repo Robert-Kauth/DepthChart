@@ -7,7 +7,7 @@ user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('/')
-@login_required
+# @login_required
 def users():
     '''
     Returns normalized Users data
@@ -32,4 +32,4 @@ def delete_user(id):
     '''
     User.query.filter(User.id == id).delete()
     db.session.commit()
-    return "True", 201
+    return str(id), 201
