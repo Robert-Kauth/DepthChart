@@ -17,6 +17,40 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+@server_routes.route('/', methods=['GET'])
+@login_required
+def loadServers():
+    '''
+    Loads all servers
+    '''
+    return {server.id: server.to_dict() for server in Server.query.all()}
+
+
+@server_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def loadServer(id):
+    '''
+    Loads single server
+    '''
+    server = Server.query.get(id)
+    return server.to_dict()
+
+
+@server_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def destroyServer(id):
+    '''
+    Deletes a server
+    '''
+    server = Server.query.get(id)
+    if server.owner_id == current_user.id:
+        Server.query.filter(Server.id == id).delete()
+        db.session.commit()
+        return str(id), 201
+    else:
+        return {'errors': ['Unauthorized']}
+
+
 @server_routes.route('', methods=["POST"])
 @login_required
 def create_server():
