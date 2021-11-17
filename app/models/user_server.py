@@ -10,14 +10,14 @@ class User_server(db.Model):
     server_id = db.Column(db.Integer, db.ForeignKey(
         'servers.id', ondelete='CASCADE'))
 
-    user = db.relationship(
-        'User', backpopulates='user_servers', cascade='all,delete')
-    server = db.relationship(
-        'Server', backpopulates='user_server', cascade='all,delete')
+    users = db.relationship(
+        'User', backpopulates='member', cascade='all,delete')
+    servers = db.relationship(
+        'Server', backpopulates='server_users', cascade='all,delete')
 
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user.id,
-            'server_id': self.server.id
+            'user_id': self.users.id,
+            'server_id': self.servers.id
         }

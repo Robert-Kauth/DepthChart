@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import ServerAddForm
-from app.models import db, Server
+from app.models import db, Server, User_server
 
 server_routes = Blueprint('servers', __name__)
 
@@ -30,7 +30,7 @@ def loadServers():
 @login_required
 def create_server():
     '''
-    Creates new Server and assigns creator as owner
+    Creates new server and assigns creator as owner
     '''
     form = ServerAddForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -42,7 +42,7 @@ def create_server():
         db.session.commit()
         user_server = User_server(
             server_id=server.id,
-            user_id=data["owner_id"]
+            user_id=server["owner_id"]
         )
         db.session.add(user_server)
         db.session.commit()

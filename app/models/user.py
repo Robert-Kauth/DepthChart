@@ -18,6 +18,11 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
+    member = db.relationship(
+        'User_server', backpopulates='users', cascade='all,delete')
+    server_owner = db.relationship(
+        'Server', backpopulates='owner', cascade='all,delete')
+
     # def __init__():
     #     generate_avatar()
 
