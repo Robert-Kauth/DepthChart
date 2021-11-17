@@ -1,5 +1,4 @@
 from .db import db
-from flask_login import UserMixin
 
 
 class Server(db.Model):
@@ -13,3 +12,8 @@ class Server(db.Model):
         "users.id", ondelete='CASCADE'))
     flag_id = db.Column(db.Integer, db.ForeignKey(
         'flags.id', ondelete='CASCADE'))
+
+    owner = db.relationship(
+        'User', back_populates='servers', cascade='all, delete')
+    flag = db.relationship(
+        "Flags", back_populates='servers', cascade='all,delete')
