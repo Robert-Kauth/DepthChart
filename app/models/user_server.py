@@ -11,9 +11,9 @@ class User_server(db.Model):
         'servers.id', ondelete='CASCADE'))
 
     users = db.relationship(
-        'User', backpopulates='member', cascade='all,delete')
+        'User', back_populates='member', cascade='all,delete')
     servers = db.relationship(
-        'Server', backpopulates='server_users', cascade='all,delete')
+        'Server', back_populates='server_users', cascade='all,delete')
 
     def to_dict(self):
         return {
