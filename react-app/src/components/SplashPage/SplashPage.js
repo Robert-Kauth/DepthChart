@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../Login";
+import LoginModal from "../Login";
 import SignupForm from "../Signup";
 
 import styles from "./SplashPage.module.css";
@@ -8,8 +8,7 @@ import styles from "./SplashPage.module.css";
 export default function SplashPage() {
     return (
         <div className={styles.splash}>
-            <h1>Hello From SplashPage</h1>
-            <LoginForm />
+            <LoginModal />
             <SignupForm />
         </div>
     );

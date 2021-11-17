@@ -2,14 +2,11 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Modal } from "./Modal";
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/UserProfile";
 import SplashPage from "./components/SplashPage";
-import LoginForm from "./components/Login/LoginForm";
-import SignUpForm from "./components/Signup/SignUpForm";
 
 import { authenticate } from "./store/session";
 
@@ -28,7 +25,6 @@ export default function App() {
     return (
         <div className="appContainer">
             <NavBar />
-            <Modal />
             <Switch>
                 <Route path="/login" exact={true}>
                     <SplashPage />
