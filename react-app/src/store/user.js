@@ -13,9 +13,9 @@ const destroyOne = (id) => ({
     id,
 });
 
-const upload = (form) => ({
+const upload = (fileUrl) => ({
     type: UPLOAD,
-    form,
+    fileUrl,
 });
 /*-------------THUNK CREATORS-------------*/
 export const loadUser = (userId) => async (dispatch) => {
@@ -35,6 +35,9 @@ export const uploadFile = (fileForm) => async (dispatch) => {
         method: "POST",
         body: form,
     });
+
+    const fileUrl = await res.json();
+    dispatch(upload(fileUrl));
 };
 
 export const destroyUser = (userId) => async (dispatch) => {

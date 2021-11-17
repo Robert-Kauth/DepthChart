@@ -68,12 +68,12 @@ export const logout = () => async (dispatch) => {
 };
 /*-------------REDUCER-------------*/
 
-export default function reducer(state = { user: null, loaded: false }, action) {
+export default function reducer(state = { user: null, online: false }, action) {
     switch (action.type) {
         case CREATE:
-            return { ...state, user: action.user, loaded: true };
+            return { ...state, user: action.user, online: true };
         case DESTROY:
-            return { ...state, user: null, loaded: true };
+            return { ...state, user: null, online: true };
         default:
             return state;
     }

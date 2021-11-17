@@ -14,13 +14,13 @@ import { authenticate } from "./store/session";
 function App() {
     const dispatch = useDispatch();
 
-    const isLoaded = useSelector((state) => state.session.loaded);
+    const isOnline = useSelector((state) => state.session.online);
 
     useEffect(() => {
         dispatch(authenticate());
     }, [dispatch]);
 
-    if (!isLoaded) {
+    if (!isOnline) {
         return null;
     }
 

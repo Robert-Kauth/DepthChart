@@ -2,6 +2,8 @@ import boto3
 import botocore
 from .config import Config
 
+# These are the allowed file types, edit this part to fit your needs
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'svg'}
 
 s3 = boto3.client(
     "s3",
@@ -30,6 +32,10 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
         return e
 
     return f"{Config.S3_LOCATION}{file.filename}"
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.split('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # def upload_file(file_name, bucket):
 #     """
