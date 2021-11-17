@@ -10,10 +10,15 @@ class Server(db.Model):
     icon = db.Column(db.String(500))
     owner_id = db.Column(db.Integer, db.ForeignKey(
         "users.id", ondelete='CASCADE'))
-    flag_id = db.Column(db.Integer, db.ForeignKey(
-        'flags.id', ondelete='CASCADE'))
 
     owner = db.relationship(
         'User', back_populates='servers', cascade='all, delete')
-    flag = db.relationship(
-        "Flags", back_populates='servers', cascade='all,delete')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'topic': self.topic,
+            'icon': self.icon,
+            'owner_id': self.owner.id
+        }
