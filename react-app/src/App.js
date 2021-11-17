@@ -3,12 +3,13 @@ import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Modal } from "./Modal";
-import LoginForm from "./components/Login";
-import SignUpForm from "./components/Signup";
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
-import User from "./components/User";
+import User from "./components/UserProfile";
+import SplashPage from "./components/SplashPage";
+import LoginForm from "./components/Login/LoginForm";
+import SignUpForm from "./components/Signup/SignUpForm";
 
 import { authenticate } from "./store/session";
 
@@ -18,14 +19,11 @@ export default function App() {
     const dispatch = useDispatch();
 
     const isOnline = useSelector((state) => state.session.online);
+    const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(authenticate());
     }, [dispatch]);
-
-    if (!isOnline) {
-        return null;
-    }
 
     return (
         <div className="appContainer">
@@ -33,10 +31,10 @@ export default function App() {
             <Modal />
             <Switch>
                 <Route path="/login" exact={true}>
-                    <LoginForm />
+                    <SplashPage />
                 </Route>
                 <Route path="/sign-up" exact={true}>
-                    <SignUpForm />
+                    <SplashPage />
                 </Route>
                 <ProtectedRoute path="/users" exact={true}>
                     <UsersList />
@@ -44,9 +42,13 @@ export default function App() {
                 <ProtectedRoute path="/users/:userId" exact={true}>
                     <User />
                 </ProtectedRoute>
-                <ProtectedRoute path="/" exact={true}>
-                    <h1>My Home Page</h1>
-                </ProtectedRoute>
+                {user && isOnline ? (
+                    <ProtectedRoute path="/" exact={true}>
+                        <h1>My Home Page</h1>
+                    </ProtectedRoute>
+                ) : (
+                    <SplashPage />
+                )}
             </Switch>
         </div>
     );

@@ -15,7 +15,7 @@ def name_exists(form, field):
         raise ValidationError('Server name is already in use')
 
 
-class ServerAddForm(FlaskForm):
+class ServerForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     topic = StringField('topic')
     icon = URLField('icon')

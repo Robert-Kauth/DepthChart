@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import { loadUsers } from "../store/users";
+import { loadUsers } from "../../store/users";
 
 import styles from "./UsersList.module.css";
 // className={styles. }

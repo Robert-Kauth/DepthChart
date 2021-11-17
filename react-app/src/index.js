@@ -9,7 +9,6 @@ import App from "./App";
 import configureStore from "./store";
 
 import * as usersActions from "./store/users";
-import * as userActions from "./store/user";
 
 import "./index.css";
 
@@ -20,10 +19,9 @@ if (process.env.NODE_ENV !== "production") {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     window.usersActions = usersActions;
-    window.userActions = userActions;
 }
 
-const Root = () => {
+function Root() {
     return (
         <Provider store={store}>
             <ModalProvider>
@@ -33,7 +31,7 @@ const Root = () => {
             </ModalProvider>
         </Provider>
     );
-};
+}
 
 ReactDOM.render(
     <React.StrictMode>
