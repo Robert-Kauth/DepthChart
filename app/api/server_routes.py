@@ -26,7 +26,7 @@ def loadServers():
     return {server.id: server.to_dict() for server in Server.query.all()}
 
 
-@server_routes.route('', methods=["POST"])
+@server_routes.route('/', methods=["POST"])
 @login_required
 def create_server():
     '''

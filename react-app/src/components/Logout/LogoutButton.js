@@ -12,8 +12,10 @@ export default function LogoutButton() {
     };
 
     return (
-        <button className={styles.button} onClick={onLogout}>
-            Logout
-        </button>
+        <div className={styles.buttonWrapper}>
+            <button className={styles.button} onClick={onLogout}>
+                Logout
+            </button>
+        </div>
     );
 }

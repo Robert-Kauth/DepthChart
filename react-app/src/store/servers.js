@@ -23,6 +23,7 @@ const create = (server) => ({
 
 const edit = (server) => ({
     type: EDIT,
+    server,
 });
 
 const destroy = (id) => ({
@@ -31,4 +32,68 @@ const destroy = (id) => ({
 });
 
 /*-------------THUNK CREATORS-------------*/
+
+export const loadServers = () => async (dispatch) => {
+    const res = await fetch("/api/servers/");
+    const servers = await res.json();
+    dispatch(load(servers));
+};
+
+export const loadServer = (id) => async (dispatch) => {
+    const res = await fetch(`/api/servers/${id}`);
+    const server = await res.json();
+    dispatch(loadOne(server));
+};
+
+export const createServer = (payload) => async (dispatch) => {
+    const res = await fetch("/api/servers/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
+    const server = await res.json();
+    dispatch(create(server));
+};
+
+export const editServer = (payload) => async (dispatch) => {
+    const res = await fetch(`/api/servers/${payload.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
+    const server = await res.json();
+    dispatch(edit(server));
+};
+
+export const destroyServer = (serverId) => async (dispatch) => {
+    const res = await fetch(`/api/servers/${serverId}`, {
+        method: "DELETE",
+    });
+    const id = await res.json();
+    dispatch(destroy(id));
+};
 /*-------------REDUCER-------------*/
+const initialState = {};
+
+export default function reducer(state = initialState, action) {
+    switch (action.type) {
+        case LOAD_ALL:
+            return { ...state, ...action.servers };
+        case LOAD:
+            return { ...state, ...action.server };
+        case CREATE:
+            return { ...state, ...action.server };
+        case EDIT:
+            return { ...state, [action.server.id]: action.server };
+        case DESTROY:
+            const newState = { ...state };
+            delete newState[action.id];
+            return newState;
+        default:
+            return state;
+    }
+}
