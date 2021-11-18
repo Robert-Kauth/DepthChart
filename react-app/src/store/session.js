@@ -40,6 +40,18 @@ export const login = (email, password) => async (dispatch) => {
     } else dispatch(createSession(user));
 };
 
+export const demoLogin = () => async (dispatch) => {
+    const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: "demo@aa.io", password: "password" }),
+    });
+    const user = await res.json();
+    dispatch(createSession(user));
+};
+
 export const signUp = (username, email, password) => async (dispatch) => {
     const response = await fetch("/api/auth/signup", {
         method: "POST",

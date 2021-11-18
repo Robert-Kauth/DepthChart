@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+
+import { ModalProvider } from "./Modal";
+
 import App from "./App";
 import configureStore from "./store";
 
 import * as usersActions from "./store/users";
-import * as userActions from "./store/user";
+
+import "./index.css";
 
 const store = configureStore();
 
@@ -15,14 +19,23 @@ if (process.env.NODE_ENV !== "production") {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     window.usersActions = usersActions;
-    window.userActions = userActions;
+}
+
+function Root() {
+    return (
+        <Provider store={store}>
+            <ModalProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </ModalProvider>
+        </Provider>
+    );
 }
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
+        <Root />
     </React.StrictMode>,
     document.getElementById("root")
 );

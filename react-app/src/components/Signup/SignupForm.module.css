@@ -1,0 +1,88 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e4d2b;
+    box-shadow: 0 0 2px 1px darkcyan;
+    background-position: center;
+    background-clip: padding-box;
+    background-repeat: no-repeat;
+    max-width: 80%;
+    min-height: 100%;
+}
+.titleContainer {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e4d2b;
+}
+.title {
+    border: 2px solid black;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    padding: 10px 20px;
+    background-color: darkgreen;
+    font-size: 80px;
+    margin: 5px;
+}
+.subtitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    padding: 10px 20px;
+    background-color: darkgreen;
+    font-size: 80px;
+    margin: 5px;
+}
+.subtitle1 {
+    font-size: 80px;
+    margin: 5px;
+}
+.subtitle2 {
+    font-size: 80px;
+    margin: 5px;
+}
+
+.modalContainer {
+    display: inline-flex;
+    justify-content: center;
+}
+
+.modalButton {
+    border: 2px solid lightgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    background-color: darkgreen;
+    margin-bottom: 5px;
+    padding: 15px;
+    font-size: 25px;
+}
+.form {
+    background-color: darkgreen;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.field {
+    color: black;
+    border: 2px solid lightgrey;
+    padding: 50px;
+}
+
+.legend {
+    background-color: lightgray;
+    font-size: 50px;
+    padding: 10px;
+}
+.buttonContainer {
+    display: flex;
+    margin-top: 5px;
+    justify-content: center;
+}

@@ -1,3 +1,4 @@
 from .db import db
 from .user import User
-from .flag import Flag
+from .server import Server
+from .user_server import User_server
