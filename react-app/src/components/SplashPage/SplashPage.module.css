@@ -5,3 +5,9 @@
     background-repeat: none;
     background-size: cover;
 }
+
+.modalWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 300px 0;
+}

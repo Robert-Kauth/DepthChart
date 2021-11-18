@@ -1,16 +1,18 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: #1e4d2b;
     box-shadow: 0 0 2px 1px darkcyan;
     background-position: center;
     background-clip: padding-box;
     background-repeat: no-repeat;
-    min-width: 100%;
+    max-width: 80%;
     min-height: 100%;
 }
 .titleContainer {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -48,7 +50,7 @@
 }
 
 .modalContainer {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
 }
 
