@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { loadServers } from "../../store/servers";
 
@@ -19,7 +20,13 @@ export default function ServerTile() {
             {servers &&
                 servers.map((server) => (
                     <div key={server.id} className={styles.iconWrapper}>
-                        <img className={styles.icon} src={server.icon} alt="" />
+                        <Link to={`/servers/${server.id}`}>
+                            <img
+                                className={styles.icon}
+                                src={server.icon}
+                                alt="Server-Icon"
+                            />
+                        </Link>
                     </div>
                 ))}
         </div>
