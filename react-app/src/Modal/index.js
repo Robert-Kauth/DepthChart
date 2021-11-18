@@ -1,3 +1,3 @@
-import { ModalProvider, Modal } from "./Modal";
+import { ModalProvider, Modal, useModal } from "./Modal";
 
-export { ModalProvider, Modal };
+export { ModalProvider, Modal, useModal };

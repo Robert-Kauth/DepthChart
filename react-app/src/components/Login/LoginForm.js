@@ -1,25 +1,36 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { login } from "../../store/session";
+import { Redirect, useHistory } from "react-router-dom";
+import { login, demoLogin } from "../../store/session";
 
 import styles from "./LoginForm.module.css";
 // className={styles. }
 
-export default function LoginForm() {
+export default function LoginForm({ setShowModal }) {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const user = useSelector((state) => state.session.user);
+
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const user = useSelector((state) => state.session.user);
-    const dispatch = useDispatch();
-
-    const onLogin = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
         if (data) {
             setErrors(data);
         }
+        setShowModal(false);
+        history.push("/");
+    };
+
+    const handleDemoLogin = async (e) => {
+        e.preventDefault();
+        await dispatch(demoLogin());
+        setShowModal(false);
+        history.push("/");
     };
 
     const updateEmail = (e) => {
@@ -36,7 +47,7 @@ export default function LoginForm() {
 
     return (
         <div>
-            <form className={styles.form} onSubmit={onLogin}>
+            <form className={styles.form}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Login</legend>
                     <div>
@@ -64,8 +75,16 @@ export default function LoginForm() {
                             onChange={updatePassword}
                         />
                         <div className={styles.buttonContainer}>
-                            <button className={styles.button} type="submit">
+                            <button
+                                className={styles.button}
+                                type="submit"
+                                onClick={handleLogin}>
                                 Login
+                            </button>
+                        </div>
+                        <div className={styles.buttonContainer}>
+                            <button type="submit" onClick={handleDemoLogin}>
+                                Demo Login
                             </button>
                         </div>
                     </div>

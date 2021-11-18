@@ -20,7 +20,7 @@ export default function LoginModal() {
             )}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <LoginForm />
+                    <LoginForm setShowModal={setShowModal} />
                 </Modal>
             )}
         </div>
