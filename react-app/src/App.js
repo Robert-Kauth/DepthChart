@@ -11,7 +11,8 @@ import Footer from "./components/Footer";
 
 import { authenticate } from "./store/session";
 
-import "./index.css";
+import styles from "./App.module.css";
+// className={styles. }
 
 export default function App() {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function App() {
     }, [dispatch]);
 
     return (
-        <div className="appContainer">
+        <div className={styles.appContainer}>
             <NavBar />
             <Switch>
                 <Route path="/login" exact={true}>

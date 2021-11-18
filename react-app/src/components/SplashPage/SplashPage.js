@@ -7,7 +7,9 @@ import styles from "./SplashPage.module.css";
 export default function SplashPage() {
     return (
         <div className={styles.splash}>
-            <SignupModal />
+            <div>
+                <SignupModal />
+            </div>
         </div>
     );
 }
