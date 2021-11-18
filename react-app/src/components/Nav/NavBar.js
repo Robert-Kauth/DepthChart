@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../Logout";
+import LoginModal from "../Login";
 
 import styles from "./NavBar.module.css";
 // className={styles. }
@@ -8,34 +9,30 @@ import styles from "./NavBar.module.css";
 export default function NavBar() {
     return (
         <nav className={styles.nav}>
-            <ul>
-                <li>
-                    <NavLink to="/" exact={true} activeClassName="active">
-                        Home
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/login" exact={true} activeClassName="active">
-                        Login
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/sign-up"
-                        exact={true}
-                        activeClassName="active">
-                        Sign Up
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/users" exact={true} activeClassName="active">
-                        Users
-                    </NavLink>
-                </li>
-                <li>
-                    <LogoutButton />
-                </li>
-            </ul>
+            <div className={styles.home}>
+                <NavLink
+                    to="/"
+                    exact={true}
+                    className={styles.link}
+                    activeClassName={styles.active}>
+                    Home
+                </NavLink>
+            </div>
+            <div className={styles.users}>
+                <NavLink
+                    to="/users"
+                    exact={true}
+                    className={styles.link}
+                    activeClassName={styles.active}>
+                    Users
+                </NavLink>
+            </div>
+            <div className={styles.login}>
+                <LoginModal />
+            </div>
+            <div className={styles.logout}>
+                <LogoutButton />
+            </div>
         </nav>
     );
 }

@@ -11,11 +11,13 @@ export default function LoginModal() {
 
     return (
         <div className={style.modalContainer}>
-            <button
-                className={style.modalButton}
-                onClick={() => setShowModal(true)}>
-                Login
-            </button>
+            {!sessionUser && (
+                <button
+                    className={style.modalButton}
+                    onClick={() => setShowModal(true)}>
+                    Login
+                </button>
+            )}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <LoginForm />

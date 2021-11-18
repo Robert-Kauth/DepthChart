@@ -6,7 +6,7 @@ import { signUp } from "../../store/session";
 import styles from "./SignupForm.module.css";
 // className={styles. }
 
-export default function SignUpForm() {
+export default function SignupForm() {
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");

@@ -1,3 +1,3 @@
-import SignupForm from "./SignUpForm";
+import SignupModal from "./SignupModal";
 
-export default SignupForm;
+export default SignupModal;

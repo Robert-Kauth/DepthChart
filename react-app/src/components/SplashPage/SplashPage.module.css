@@ -1,3 +1,4 @@
 .splash {
     display: flex;
+    justify-content: center;
 }

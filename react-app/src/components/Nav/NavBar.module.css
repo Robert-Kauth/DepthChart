@@ -1,4 +1,33 @@
 .nav {
     display: flex;
     justify-content: center;
+    padding: 20px;
+}
+
+.home {
+    display: flex;
+    padding: 5px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.active {
+    text-decoration: none;
+}
+
+.users {
+    display: flex;
+    padding: 5px;
+}
+
+.login {
+    display: flex;
+    padding: 5px;
+}
+
+.logout {
+    display: flex;
+    padding: 5px;
 }
