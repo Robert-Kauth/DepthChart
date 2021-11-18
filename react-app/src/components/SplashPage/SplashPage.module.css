@@ -1,0 +1,13 @@
+.splash {
+    width: 100%;
+    height: 100%;
+    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/field.png);
+    background-repeat: none;
+    background-size: cover;
+}
+
+.modalWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 300px 0;
+}

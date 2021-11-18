@@ -1,0 +1,22 @@
+.footerContainer {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    bottom: 0px;
+    width: 100%;
+    background-color: #087830;
+}
+.logoContainer,
+.linkedIn,
+.github,
+img {
+    position: relative;
+    max-width: 6vh;
+    align-content: center;
+}
+.dev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
