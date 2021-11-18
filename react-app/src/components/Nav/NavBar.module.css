@@ -1,8 +1,16 @@
 .nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     padding: 20px;
     border: 2px solid aliceblue;
+}
+
+.navLeft {
+    display: flex;
+}
+
+.navRight {
+    display: flex;
 }
 
 .home {
