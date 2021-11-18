@@ -1,0 +1,11 @@
+.homeWrapper {
+    display: flex;
+}
+
+.servers {
+    display: flex;
+}
+
+.messages {
+    display: flex;
+}
