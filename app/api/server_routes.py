@@ -66,7 +66,17 @@ def editServer(id):
     '''
     Edits server
     '''
-    server = ServerForm()
+    form = ServerForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        server = Server.query.get(id)
+        server.name = form.data['name']
+        server.topic = form.data['topic']
+        server.icon = form.data['icon']
+        db.session.commit()
+        return server.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @server_routes.route('/<int:id>', methods=['DELETE'])
