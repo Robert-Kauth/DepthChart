@@ -6,7 +6,18 @@ import styles from "./Servers.module.css";
 export default function Servers() {
     return (
         <div className={styles.wrapper}>
-            <ServerTile />
+            <div className={styles.tileWrapper}>
+                <ServerTile />
+            </div>
+            <div className={styles.add}>
+                <button className={styles.addButton}>
+                    <img
+                        className={styles.buttonImg}
+                        src="https://fantasydepthchart.s3.us-west-1.amazonaws.com/plus-box.png"
+                        alt="add server"
+                    />
+                </button>
+            </div>
         </div>
     );
 }
