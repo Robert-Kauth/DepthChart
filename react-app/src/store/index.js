@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session";
 import users from "./users";
 import servers from "./servers";
+import user_servers from "./user_servers";
 
 const rootReducer = combineReducers({
     session,
     users,
     servers,
+    user_servers,
 });
 
 let enhancer;

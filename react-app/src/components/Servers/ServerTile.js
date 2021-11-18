@@ -2,18 +2,20 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { loadServers } from "../../store/servers";
+import { getUserServers } from "../../store/user_servers";
 
 import styles from "./ServerTile.module.css";
 // className={styles. }
 
 export default function ServerTile() {
     const dispatch = useDispatch();
-    const servers = useSelector((state) => Object.values(state.servers));
+
+    const servers = useSelector((state) => Object.values(state.user_servers));
+    const user_id = useSelector((state) => state.session.user.id);
 
     useEffect(() => {
-        dispatch(loadServers());
-    }, [dispatch]);
+        dispatch(getUserServers(user_id));
+    }, [dispatch, user_id]);
 
     return (
         <div>
