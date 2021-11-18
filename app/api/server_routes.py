@@ -26,6 +26,14 @@ def loadServers():
     return {server.id: server.to_dict() for server in Server.query.all()}
 
 
+@server_routes.route('/user/<int:user_id', methods=['GET'])
+@login_required
+def loadUserServers(userId):
+    user_servers = Server.query.join(
+        User_server).filter(User_server.user_id == userId).all()
+    return {server.id: server.to_dict() for server in user_servers}
+
+
 @server_routes.route('/', methods=["POST"])
 @login_required
 def create_server():
