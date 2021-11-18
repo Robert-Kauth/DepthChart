@@ -89,7 +89,11 @@ export default function SignupForm() {
                             value={repeatPassword}
                             required={true}></input>
                     </div>
-                    <button type="submit">Sign Up</button>
+                    <div className={styles.buttonContainer}>
+                        <button className={styles.button} type="submit">
+                            Sign Up
+                        </button>
+                    </div>
                 </fieldset>
             </form>
         </div>

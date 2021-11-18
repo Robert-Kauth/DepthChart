@@ -12,5 +12,24 @@
 }
 
 .form {
+    background-color: darkgreen;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.field {
+    color: black;
+    border: 2px solid lightgrey;
+    padding: 50px;
+}
+
+.legend {
+    background-color: lightgray;
+    font-size: 50px;
+    padding: 10px;
+}
+.buttonContainer {
     display: flex;
+    margin-top: 5px;
+    justify-content: center;
 }
