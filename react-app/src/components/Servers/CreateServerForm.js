@@ -41,7 +41,7 @@ export default function CreateServerForm({ setShowModal }) {
 
         if (!errors.length) {
             setErrors([]);
-            const data = dispatch(createServer({ name, topic, icon }));
+            const data = await dispatch(createServer({ name, topic, icon }));
             if (data) {
                 setErrors(data);
             }

@@ -5,6 +5,10 @@
     justify-content: center;
 }
 
+.tileWrapper {
+    background-color: grey;
+}
+
 .add {
     display: flex;
     justify-content: center;
