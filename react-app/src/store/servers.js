@@ -88,7 +88,7 @@ export default function reducer(state = initialState, action) {
         case LOAD_ALL:
             return { ...state, ...action.servers };
         case LOAD:
-            return { ...state, ...action.server };
+            return { ...state, [action.server.id]: action.server };
         case CREATE:
             newState[action.server.id] = action.server;
             return newState;

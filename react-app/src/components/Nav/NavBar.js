@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../Logout";
 import LoginModal from "../Login";
+import ServerEditModal from "../Server/ServerEditModal";
 
 import styles from "./NavBar.module.css";
 // className={styles. }
@@ -27,6 +28,9 @@ export default function NavBar() {
                         activeClassName={styles.active}>
                         Users
                     </NavLink>
+                </div>
+                <div className={styles.edit}>
+                    <ServerEditModal />
                 </div>
             </div>
             <div className={styles.navRight}>
