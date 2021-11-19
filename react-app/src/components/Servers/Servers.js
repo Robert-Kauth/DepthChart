@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ServerTile from "./ServerTile";
 import CreateServerModal from "./CreateServerModal";
-import { getUserServers } from "../../store/user_servers";
 import { loadServers } from "../../store/servers";
 
 import styles from "./Servers.module.css";
@@ -12,11 +11,9 @@ export default function Servers() {
     const dispatch = useDispatch();
 
     const servers = useSelector((state) => state.servers);
-    // const servers = useSelector((state) => Object.values(state.user_servers));
     const user_id = useSelector((state) => state.session.user.id);
 
     useEffect(() => {
-        dispatch(getUserServers(user_id));
         dispatch(loadServers());
     }, [dispatch, user_id]);
 
@@ -32,7 +29,6 @@ export default function Servers() {
 
     return (
         <div className={styles.wrapper}>
-            gs
             <div className={styles.tileWrapper}>{user_servers}</div>
             <div className={styles.add}>
                 <CreateServerModal />
