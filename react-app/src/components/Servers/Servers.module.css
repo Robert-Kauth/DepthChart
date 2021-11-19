@@ -1,0 +1,17 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tileWrapper {
+    background-color: grey;
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}

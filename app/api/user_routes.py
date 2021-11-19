@@ -14,7 +14,7 @@ user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('/')
-# @login_required
+@login_required
 def users():
     '''
     Returns normalized Users data

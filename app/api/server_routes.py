@@ -26,7 +26,7 @@ def loadServers():
     return {server.id: server.to_dict() for server in Server.query.all()}
 
 
-@server_routes.route('', methods=["POST"])
+@server_routes.route('/', methods=["POST"])
 @login_required
 def create_server():
     '''
@@ -42,7 +42,7 @@ def create_server():
         db.session.commit()
         user_server = User_server(
             server_id=server.id,
-            user_id=server["owner_id"]
+            user_id=current_user.id
         )
         db.session.add(user_server)
         db.session.commit()
@@ -66,7 +66,17 @@ def editServer(id):
     '''
     Edits server
     '''
-    server = ServerForm()
+    form = ServerForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        server = Server.query.get(id)
+        server.name = form.data['name']
+        server.topic = form.data['topic']
+        server.icon = form.data['icon']
+        db.session.commit()
+        return server.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @server_routes.route('/<int:id>', methods=['DELETE'])

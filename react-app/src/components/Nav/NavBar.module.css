@@ -1,24 +1,48 @@
 .nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     padding: 20px;
+    border: 2px solid aliceblue;
+}
+
+.navLeft {
+    display: flex;
+}
+
+.navRight {
+    display: flex;
 }
 
 .home {
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
 }
 
 .link {
     text-decoration: none;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    background-color: green;
+    font-size: 20px;
+    color: black;
+    padding: 10px;
 }
 
 .active {
     text-decoration: none;
+    text-align: center;
+    color: black;
+    background-color: aliceblue;
 }
 
 .users {
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
 }
 
