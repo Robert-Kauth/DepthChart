@@ -1,0 +1,15 @@
+.modalContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.modalButton {
+    font-size: 20px;
+    display: flex;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    background-color: green;
+    padding: 5px;
+}
