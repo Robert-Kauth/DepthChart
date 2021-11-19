@@ -34,8 +34,14 @@ export default function Channels({ serverId }) {
                     <ChannelCard key={channel.id} channel={channel} />
                 ))
             ) : (
-                <AddChannel />
+                <div>
+                    <h2>No Channels yet</h2>
+                    <h3>Click + to create one</h3>
+                </div>
             )}
+            <div>
+                <AddChannel />
+            </div>
         </div>
     );
 }
