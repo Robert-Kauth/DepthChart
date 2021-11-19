@@ -24,3 +24,25 @@ def loadChanels():
     Loads all channels
     '''
     return {channel.id: channel.to_dict() for channel in Channel.query.all()}
+
+
+@channel_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def loadChannel(id):
+    '''
+    Loads single channel
+    '''
+    channel = Channel.query.get(id)
+    return channel.to_dict()
+
+
+@channel_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def destroyServer(id):
+    '''
+    Deletes a channel
+    '''
+    channel = Channel.query.get(id)
+    Channel.query.filter(Channel.id == id).delete()
+    db.session.commit()
+    return str(id), 201
