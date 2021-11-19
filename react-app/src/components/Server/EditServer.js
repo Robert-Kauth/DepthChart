@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getUserServers } from "../../store/user_servers";
 import { editServer } from "../../store/servers";
+import DeleteButton from "./DeleteButton";
 
 export default function EditServer({ setShowModal }) {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function EditServer({ setShowModal }) {
     const [topic, setTopic] = useState("");
     const [icon, setIcon] = useState("");
     const [newIcon, setNewIcon] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     let selectedServer;
     if (serverId) {
@@ -25,6 +27,11 @@ export default function EditServer({ setShowModal }) {
     const setShowField = (e) => {
         e.preventDefault();
         setNewIcon(!newIcon);
+    };
+
+    const renderDelete = (e) => {
+        e.preventDefault();
+        setShowDelete(!showDelete);
     };
 
     const handleSubmit = (e) => {
@@ -131,6 +138,22 @@ export default function EditServer({ setShowModal }) {
                             </div>
                             <div>
                                 <button>Update Server</button>
+                            </div>
+                            <div>
+                                <button
+                                    type="button"
+                                    value={showDelete}
+                                    onClick={renderDelete}>
+                                    Want to Delete Server?
+                                </button>
+                            </div>
+                            <div>
+                                {showDelete && (
+                                    <DeleteButton
+                                        selectedServer={selectedServer}
+                                        setShowModal={setShowModal}
+                                    />
+                                )}
                             </div>
                         </div>
                     )}
