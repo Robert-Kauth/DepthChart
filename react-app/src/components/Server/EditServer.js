@@ -8,10 +8,10 @@ import DeleteButton from "./DeleteButton";
 export default function EditServer({ setShowModal }) {
     const dispatch = useDispatch();
 
-    const user_servers = useSelector((state) => state.user_servers);
+    const servers = useSelector((state) => state.user_servers);
     const user_id = useSelector((state) => state.session.user.id);
 
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
     const [serverId, setServerId] = useState("");
     const [topic, setTopic] = useState("");
@@ -19,9 +19,19 @@ export default function EditServer({ setShowModal }) {
     const [newIcon, setNewIcon] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
 
+    let user_servers;
+    if (servers) {
+        user_servers = Object.values(servers).map((server) => {
+            if (server.owner_id === user_id) {
+                return server;
+            }
+            return user_servers;
+        });
+    }
+
     let selectedServer;
     if (serverId) {
-        selectedServer = user_servers[serverId];
+        selectedServer = servers[serverId];
     }
 
     const setShowField = (e) => {
