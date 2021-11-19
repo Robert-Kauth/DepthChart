@@ -1,6 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Channel
+from app.forms import ChannelForm
 
 
 channel_routes = Blueprint('channels', __name__)
@@ -26,6 +27,25 @@ def loadChanels():
     return {channel.id: channel.to_dict() for channel in Channel.query.all()}
 
 
+@channel_routes.route('/', methods=["POST"])
+@login_required
+def create_channel():
+    '''
+    Creates new channel and assigns it to selected server
+    '''
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        channel = Channel(
+            name=form.data['name'], server_id=form.data['server_id'],
+            topic=form.data['topic'], icon=form.data['icon'],
+            owner_id=current_user.id)
+        db.session.add(channel)
+        db.session.commit()
+        return channel.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
 @channel_routes.route('/<int:id>', methods=['GET'])
 @login_required
 def loadChannel(id):
@@ -36,9 +56,29 @@ def loadChannel(id):
     return channel.to_dict()
 
 
+@channel_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def editChannel(id):
+    '''
+    Edits channel
+    '''
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        channel = Channel.query.get(id)
+        channel.name = form.data['name']
+        channel.server_id = form.data['server_id']
+        channel.topic = form.data['topic']
+        channel.icon = form.data['icon']
+        db.session.commit()
+        return channel.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
 @channel_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
-def destroyServer(id):
+def destroyChannel(id):
     '''
     Deletes a channel
     '''
