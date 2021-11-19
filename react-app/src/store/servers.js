@@ -83,16 +83,18 @@ export const destroyServer = (serverId) => async (dispatch) => {
 const initialState = {};
 
 export default function reducer(state = initialState, action) {
+    const newState = { ...state };
     switch (action.type) {
         case LOAD_ALL:
             return { ...state, ...action.servers };
         case LOAD:
             return { ...state, ...action.server };
         case CREATE:
+            newState[action.server.id] = action.server;
+            return newState;
         case EDIT:
             return { ...state, [action.server.id]: action.server };
         case DESTROY:
-            const newState = { ...state };
             delete newState[action.id];
             return newState;
         default:

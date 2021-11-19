@@ -1,0 +1,5 @@
+.channelsWrapper {
+    display: flex;
+    background-color: aliceblue;
+    min-height: 100%;
+}
