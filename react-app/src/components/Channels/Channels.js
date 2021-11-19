@@ -12,6 +12,7 @@ export default function Channels({ serverId }) {
     const dispatch = useDispatch();
 
     const channels = useSelector((state) => state.channels);
+    const servers = useSelector((state) => state.servers);
 
     let serverChannels;
     if (channels) {
@@ -22,6 +23,8 @@ export default function Channels({ serverId }) {
             return a;
         }, []);
     }
+
+    const currentServer = servers[serverId];
 
     useEffect(() => {
         dispatch(loadChannels());
@@ -40,7 +43,7 @@ export default function Channels({ serverId }) {
                 </div>
             )}
             <div>
-                <AddChannelModal />
+                <AddChannelModal currentServer={currentServer} />
             </div>
         </div>
     );

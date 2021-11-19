@@ -38,8 +38,7 @@ def create_channel():
     if form.validate_on_submit():
         channel = Channel(
             name=form.data['name'], server_id=form.data['server_id'],
-            topic=form.data['topic'], icon=form.data['icon'],
-            owner_id=current_user.id)
+            topic=form.data['topic'], icon=form.data['icon'])
         db.session.add(channel)
         db.session.commit()
         return channel.to_dict()

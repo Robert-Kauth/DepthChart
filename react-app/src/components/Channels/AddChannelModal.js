@@ -15,7 +15,7 @@ const Button = styled.button`
     margin: 0;
     padding-top: 5px;
 `;
-export default function AddChannelModal() {
+export default function AddChannelModal({ currentServer }) {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -25,7 +25,10 @@ export default function AddChannelModal() {
             </Button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <CreateChannel setShowModal={setShowModal} />
+                    <CreateChannel
+                        currentServer={currentServer}
+                        setShowModal={setShowModal}
+                    />
                 </Modal>
             )}
         </div>
