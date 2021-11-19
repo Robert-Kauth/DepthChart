@@ -54,6 +54,9 @@ export const createServer = (payload) => async (dispatch) => {
         body: JSON.stringify(payload),
     });
     const server = await res.json();
+    if (server.errors) {
+        return server.errors;
+    }
     dispatch(create(server));
 };
 

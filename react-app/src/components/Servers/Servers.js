@@ -1,5 +1,8 @@
 import React from "react";
+
 import ServerTile from "./ServerTile";
+import CreateServerModal from "./CreateServerModal";
+
 import styles from "./Servers.module.css";
 // className={styles. }
 
@@ -10,13 +13,7 @@ export default function Servers() {
                 <ServerTile />
             </div>
             <div className={styles.add}>
-                <button className={styles.addButton}>
-                    <img
-                        className={styles.buttonImg}
-                        src="https://fantasydepthchart.s3.us-west-1.amazonaws.com/plus-box.png"
-                        alt="add server"
-                    />
-                </button>
+                <CreateServerModal />
             </div>
         </div>
     );

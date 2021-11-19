@@ -6,5 +6,5 @@ from wtforms.validators import DataRequired
 
 class ServerForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
-    topic = StringField('topic')
+    topic = StringField('topic', validators=[DataRequired()])
     icon = URLField('icon')

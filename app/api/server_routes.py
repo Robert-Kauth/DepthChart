@@ -42,7 +42,7 @@ def create_server():
         db.session.commit()
         user_server = User_server(
             server_id=server.id,
-            user_id=server["owner_id"]
+            user_id=current_user.id
         )
         db.session.add(user_server)
         db.session.commit()
