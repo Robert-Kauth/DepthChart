@@ -8,8 +8,6 @@ import { ModalProvider } from "./Modal";
 import App from "./App";
 import configureStore from "./store";
 
-import * as usersActions from "./store/users";
-
 import "./index.css";
 
 const store = configureStore();
@@ -18,7 +16,6 @@ if (process.env.NODE_ENV !== "production") {
     window.store = store;
     window.getState = store.getState;
     window.dispatch = store.dispatch;
-    window.usersActions = usersActions;
 }
 
 function Root() {
