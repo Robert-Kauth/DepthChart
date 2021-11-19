@@ -1,5 +1,6 @@
 import React from "react";
-
+import Servers from "../Servers";
+import Channels from "../Channels";
 import { useParams } from "react-router-dom";
 
 import styles from "./Server.module.css";
@@ -10,7 +11,12 @@ export default function Server() {
 
     return (
         <div className={styles.wrapper}>
-            <h1>Hello from server</h1>
+            <div className={styles.servers}>
+                <Servers />
+            </div>
+            <div className={styles.channels}>
+                <Channels serverId={serverId} />
+            </div>
         </div>
     );
 }
