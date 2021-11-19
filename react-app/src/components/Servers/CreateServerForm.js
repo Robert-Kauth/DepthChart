@@ -15,9 +15,9 @@ export default function CreateServerForm({ setShowModal }) {
     const [icon, setIcon] = useState("");
 
     function isValidURL(string) {
-        let res = string.match(
-            /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
-        );
+        const regEx =
+            /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
+        let res = string.match(regEx);
         return res !== null;
     }
 
