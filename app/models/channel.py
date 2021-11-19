@@ -11,12 +11,11 @@ class Channel(db.Model):
     topic = db.Column(db.String(255))
     icon = db.Column(db.String(500))
 
-
-def to_dict(self):
-    return {
-        'id': self.id,
-        'server_id': self.server_id,
-        'name': self.name,
-        'topic': self.topic,
-        'icon': self.icon
-    }
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'server_id': self.server_id,
+            'name': self.name,
+            'topic': self.topic,
+            'icon': self.icon
+        }
