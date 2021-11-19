@@ -11,7 +11,7 @@ export default function EditServer({ setShowModal }) {
     const servers = useSelector((state) => state.user_servers);
     const user_id = useSelector((state) => state.session.user.id);
 
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
     const [serverId, setServerId] = useState("");
     const [topic, setTopic] = useState("");
@@ -74,6 +74,14 @@ export default function EditServer({ setShowModal }) {
         <div>
             <form onSubmit={handleSubmit}>
                 <fieldset>
+                    <div>
+                        {errors.map((error, ind) => (
+                            <div>
+                                <legend>Errors:</legend>
+                                <div key={ind}>{error}</div>
+                            </div>
+                        ))}
+                    </div>
                     {!serverId && (
                         <div>
                             <legend>Edit Server</legend>
