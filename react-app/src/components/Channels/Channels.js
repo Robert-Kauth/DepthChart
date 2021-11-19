@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ChannelCard from "./ChannelCard";
-import AddChannel from "./AddChannel";
+import AddChannelModal from "./AddChannelModal";
 import { loadChannels } from "../../store/channels";
 
 import styles from "./Channels.module.css";
@@ -40,7 +40,7 @@ export default function Channels({ serverId }) {
                 </div>
             )}
             <div>
-                <AddChannel />
+                <AddChannelModal />
             </div>
         </div>
     );
