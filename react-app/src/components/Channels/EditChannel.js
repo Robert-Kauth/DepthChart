@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
+import { editChannel } from "../../store/channels";
 import DeleteChannelButton from "./DeleteChannelButton";
 
 import styles from "./EditChannel.module.css";
 // className={styles. }
 
 export default function EditChannel({ channel, setShowModal }) {
+    const dispatch = useDispatch();
+
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
     const [topic, setTopic] = useState("");
@@ -22,15 +26,54 @@ export default function EditChannel({ channel, setShowModal }) {
         setNewIcon(!newIcon);
     };
 
+    const validateEdit = () => {
+        const err = [];
+        if (name.length < 2) {
+            err.push("Name must be at least 2 characters long");
+        }
+        if (topic.length < 5) {
+            err.push("Topic must be at least 5 characters long");
+        }
+        setErrors(err);
+        return err;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const errs = validateEdit();
+        if (!errs.length) {
+            let edit;
+            if (!icon) {
+                edit = {
+                    id: channel.id,
+                    server_id: channel.server_id,
+                    name,
+                    topic,
+                    icon: channel.icon,
+                };
+            } else {
+                edit = {
+                    id: channel.id,
+                    server_id: channel.server_id,
+                    name,
+                    topic,
+                    icon,
+                };
+            }
+            dispatch(editChannel(edit));
+            setShowModal(false);
+        }
+    };
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>Edit Channel Info</legend>
                     <div>
                         {errors.map((error, ind) => (
                             <div>
-                                <legend>Errors:</legend>
+                                <legend>Error:</legend>
                                 <div key={ind}>{error}</div>
                             </div>
                         ))}
@@ -87,7 +130,7 @@ export default function EditChannel({ channel, setShowModal }) {
                     <div className={styles.buttonContainer}>
                         <div>
                             <button className={styles.button} type="submit">
-                                Create
+                                Update
                             </button>
                         </div>
                         <div>
