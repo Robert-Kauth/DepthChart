@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../Modal";
 import { useSelector } from "react-redux";
 import SignupForm from "./SignupForm";
-import styles from "./SignupForm.module.css";
+import styles from "./SignupModal.module.css";
 // className={styles. }
 
 export default function SignupModal() {
