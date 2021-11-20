@@ -1,7 +1,6 @@
 .wrapper {
     display: flex;
-    margin: 5px 0 0 5px;
-    min-height: 100%;
+    margin: 0;
 }
 
 .servers {
