@@ -43,6 +43,7 @@ export default function EditChannel({ channel, setShowModal }) {
 
         const errs = validateEdit();
         if (!errs.length) {
+            setErrors([]);
             let edit;
             if (!icon) {
                 edit = {
@@ -71,10 +72,10 @@ export default function EditChannel({ channel, setShowModal }) {
                 <fieldset>
                     <legend>Edit Channel Info</legend>
                     <div>
-                        {errors.map((error, ind) => (
-                            <div>
+                        {errors.map((error, idx) => (
+                            <div key={idx}>
                                 <legend>Error:</legend>
-                                <div key={ind}>{error}</div>
+                                <div>{error}</div>
                             </div>
                         ))}
                     </div>

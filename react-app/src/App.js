@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from "./components/Nav";
@@ -18,7 +18,6 @@ import styles from "./App.module.css";
 
 export default function App() {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const isOnline = useSelector((state) => state.session.online);
     const user = useSelector((state) => state.session.user);
@@ -26,11 +25,6 @@ export default function App() {
     useEffect(() => {
         dispatch(authenticate());
     }, [dispatch]);
-
-    //TODO fix this redirect so whenever page refreshes user isn't sent to home page
-    if (user && isOnline) {
-        history.push("/");
-    }
 
     return (
         <div className={styles.appContainer}>
