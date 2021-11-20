@@ -8,7 +8,6 @@ import styles from "./DeleteButton.module.css";
 export default function DeleteButton({ selectedServer, setShowModal }) {
     const dispatch = useDispatch();
 
-    console.log(selectedServer.name);
     const [choice, setChoice] = useState("");
     const [errors, setErrors] = useState([]);
 

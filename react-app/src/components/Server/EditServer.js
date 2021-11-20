@@ -11,7 +11,7 @@ export default function EditServer({ setShowModal }) {
     const servers = useSelector((state) => state.user_servers);
     const user_id = useSelector((state) => state.session.user.id);
 
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
     const [serverId, setServerId] = useState("");
     const [topic, setTopic] = useState("");
@@ -44,26 +44,43 @@ export default function EditServer({ setShowModal }) {
         setShowDelete(!showDelete);
     };
 
+    const validateEdit = () => {
+        const err = [];
+        if (name.length < 2) {
+            err.push("Name must be at least 2 characters long");
+        }
+        if (topic.length < 5) {
+            err.push("Topic must be at least 5 characters long");
+        }
+        setErrors(err);
+        return err;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        let edit;
-        if (!icon) {
-            edit = {
-                id: serverId,
-                name: selectedServer.name,
-                topic,
-                icon: selectedServer.icon,
-            };
-        } else {
-            edit = {
-                id: serverId,
-                name: selectedServer.name,
-                topic,
-                icon,
-            };
+        const errs = validateEdit();
+
+        if (!errs.length) {
+            setErrors([]);
+            let edit;
+            if (!icon) {
+                edit = {
+                    id: serverId,
+                    name: selectedServer.name,
+                    topic,
+                    icon: selectedServer.icon,
+                };
+            } else {
+                edit = {
+                    id: serverId,
+                    name: selectedServer.name,
+                    topic,
+                    icon,
+                };
+            }
+            dispatch(editServer(edit));
+            setShowModal(false);
         }
-        dispatch(editServer(edit));
-        setShowModal(false);
     };
 
     useEffect(() => {
@@ -74,6 +91,14 @@ export default function EditServer({ setShowModal }) {
         <div>
             <form onSubmit={handleSubmit}>
                 <fieldset>
+                    <div>
+                        {errors.map((error, ind) => (
+                            <div>
+                                <legend>Errors:</legend>
+                                <div key={ind}>{error}</div>
+                            </div>
+                        ))}
+                    </div>
                     {!serverId && (
                         <div>
                             <legend>Edit Server</legend>
