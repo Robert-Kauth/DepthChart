@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { Modal } from "../../Modal";
 import LoginForm from "./LoginForm";
-import styles from "./LoginForm.module.css";
+import styles from "./LoginModal.module.css";
 
 export default function LoginModal() {
     const [showModal, setShowModal] = useState(false);
