@@ -35,6 +35,7 @@ export const login = (email, password) => async (dispatch) => {
         }),
     });
     const user = await response.json();
+    console.log(user, "THUNK login user");
     if (user.errors) {
         return user.errors;
     } else dispatch(createSession(user));

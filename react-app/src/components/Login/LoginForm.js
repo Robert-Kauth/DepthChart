@@ -19,11 +19,13 @@ export default function LoginForm({ setShowModal }) {
     const handleLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
+        console.log(data, "handlelogin errors");
         if (data) {
             setErrors(data);
+        } else {
+            setShowModal(false);
+            history.push("/");
         }
-        setShowModal(false);
-        history.push("/");
     };
 
     const handleDemoLogin = async (e) => {
@@ -34,10 +36,12 @@ export default function LoginForm({ setShowModal }) {
     };
 
     const updateEmail = (e) => {
+        setErrors([]);
         setEmail(e.target.value);
     };
 
     const updatePassword = (e) => {
+        setErrors([]);
         setPassword(e.target.value);
     };
 
@@ -50,40 +54,56 @@ export default function LoginForm({ setShowModal }) {
             <form className={styles.form}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Login</legend>
-                    <div>
+                    <div className={styles.errors}>
                         {errors.map((error, ind) => (
-                            <div key={ind}>{error}</div>
+                            <div className={styles.error} key={ind}>
+                                {error}
+                            </div>
                         ))}
                     </div>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            name="email"
-                            type="text"
-                            placeholder="Email"
-                            value={email}
-                            onChange={updateEmail}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={updatePassword}
-                        />
-                        <div className={styles.buttonContainer}>
+                    <div className={styles.inputs}>
+                        <div className={styles.emailWrapper}>
+                            <label
+                                htmlFor="email"
+                                className={styles.emailLabel}>
+                                Email:
+                            </label>
+                            <input
+                                className={styles.email}
+                                name="email"
+                                type="text"
+                                placeholder="Email"
+                                value={email}
+                                onChange={updateEmail}
+                            />
+                        </div>
+                        <div className={styles.passwordWrapper}>
+                            <label
+                                className={styles.passwordLabel}
+                                htmlFor="password">
+                                Password:
+                            </label>
+                            <input
+                                name="password"
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={updatePassword}
+                            />
+                        </div>
+                        <div className={styles.loginButtonContainer}>
                             <button
-                                className={styles.button}
+                                className={styles.loginButton}
                                 type="submit"
                                 onClick={handleLogin}>
                                 Login
                             </button>
                         </div>
-                        <div className={styles.buttonContainer}>
-                            <button type="submit" onClick={handleDemoLogin}>
+                        <div className={styles.demoLoginButtonContainer}>
+                            <button
+                                type="submit"
+                                className={styles.demoButton}
+                                onClick={handleDemoLogin}>
                                 Demo Login
                             </button>
                         </div>

@@ -1,22 +1,76 @@
 .form {
-    background-color: darkgreen;
+    background-color: #014421;
     border-radius: 5px;
-    padding: 20px;
+    padding: 10px;
 }
 
 .field {
     color: black;
-    border: 2px solid lightgrey;
-    padding: 50px;
+    border: 4px solid #e5e4e2;
+    padding: 50px 50px 25px 50px;
+    min-height: 385px;
 }
 
 .legend {
-    background-color: lightgray;
+    background-color: #e5e4e2;
     font-size: 50px;
     padding: 10px;
 }
-.buttonContainer {
+
+.errors {
+    padding: 0 0 20px 0;
+}
+
+.error {
+    color: #bfc1c2;
+    font-size: 20px;
+    font-weight: 300px;
+    padding: 2px;
+}
+
+.emailWrapper {
     display: flex;
-    margin-top: 5px;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.emailLabel {
     justify-content: center;
+    color: #f2f3f4;
+    font-size: 25px;
+    padding: 0 5px 0 0;
+}
+
+.passwordWrapper {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.passwordLabel {
+    color: #f2f3f4;
+    font-size: 25px;
+    padding: 0 5px 0 0;
+}
+
+.loginButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.loginButton {
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+}
+
+.demoLoginButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.demoButton {
+    margin: 5px;
+    width: 150px;
+    height: 30px;
 }
