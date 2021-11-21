@@ -1,5 +1,5 @@
-from .db import db
 import datetime
+from .db import db
 from flask_avatars import Identicon
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -22,6 +22,8 @@ class User(db.Model, UserMixin):
         'User_server', back_populates='users', cascade='all,delete')
     server_owner = db.relationship(
         'Server', back_populates='owner', cascade='all,delete')
+    user_messages = db.relationship(
+        'User_message', backpopulates='user_message', cascade='all, delete')
 
     # def __init__():
     #     generate_avatar()
