@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, request, redirect
+from .socket import socketio
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -20,8 +21,9 @@ from .seeds import seed_commands
 
 from .config import Config
 
+# Initialize flask app instance
 app = Flask(__name__)
-avatars = Avatars(app)
+
 
 # Setup login manager
 login = LoginManager(app)
@@ -36,7 +38,10 @@ def load_user(id):
 # Tell flask about seed commands
 app.cli.add_command(seed_commands)
 
+# Initialize app envirionment configuration
 app.config.from_object(Config)
+
+
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(server_routes, url_prefix='/api/servers')
@@ -44,6 +49,12 @@ app.register_blueprint(user_server_routes, url_prefix='/api/user_servers')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 db.init_app(app)
 Migrate(app, db)
+
+# Initialize flask socketio instance
+socketio.init_app(app)
+
+# Initializes flask avatars
+avatars = Avatars(app)
 
 # Application Security
 CORS(app)
@@ -89,3 +100,8 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+
+# Initializes socketio on app startup
+if __name__ == '__main__':
+    socketio.run(app)
