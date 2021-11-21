@@ -37,12 +37,12 @@ export default function Chat() {
 
     return (
         <div>
-            <div>
+            <div className={styles.messagesWrapper}>
                 {messages.map((message, ind) => (
                     <div key={ind}>{`${message.user}: ${message.msg}`}</div>
                 ))}
             </div>
-            <form onSubmit={sendChat}>
+            <form className={styles.chatWrapper} onSubmit={sendChat}>
                 <input value={chatInput} onChange={updateChatInput} />
                 <button type="submit">Send</button>
             </form>
