@@ -14,3 +14,10 @@ class User_message(db.Model):
         'Users', back_populates='user_messages', cascade='all, delete')
     messages = db.relationship(
         'Message', back_populates='message_users', cascade='all, delete')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.users.id,
+            'message_id': self.messages.id
+        }
