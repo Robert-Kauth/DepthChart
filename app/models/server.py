@@ -22,7 +22,7 @@ class Server(db.Model):
             'name': self.name,
             'topic': self.topic,
             'icon': self.icon,
-            'owner_id': self.owner.id,
+            'owner_id': self.users.id,
             'member_ids': [member.id for member in self.members],
             'channel_ids': [channel.id for channel in self.channels]
         }
