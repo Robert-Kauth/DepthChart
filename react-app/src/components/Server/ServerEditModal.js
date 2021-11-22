@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { Modal } from "../../Modal";
+import { Modal } from "../../Context";
 import EditServer from "./EditServer";
 
 import styles from "./ServerEdit.module.css";

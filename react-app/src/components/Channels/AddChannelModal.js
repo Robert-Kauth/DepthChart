@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiPlusBox } from "@mdi/js";
 
-import { Modal } from "../../Modal";
+import { Modal } from "../../Context";
 import CreateChannel from "./CreateChannel";
 
 import styles from "./AddChannelModal.module.css";
