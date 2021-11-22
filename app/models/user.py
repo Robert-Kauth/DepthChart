@@ -19,9 +19,9 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     members = db.relationship(
-        'User_server', back_populates='users', cascade='all,delete')
+        'User_server', backref='users', cascade='all,delete')
     owned_servers = db.relationship(
-        'Server', back_populates='owner', cascade='all,delete')
+        'Server', backref='users', cascade='all,delete')
     sent_messages = db.relationship(
         'Message', backref='users', cascade='all, delete')
     message_recipients = db.relationship(

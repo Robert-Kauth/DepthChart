@@ -15,17 +15,17 @@ class Message(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    message_recipients = db.relationship(
+    recipients = db.relationship(
         'User_message', backref='messages', cascade='all, delete')
 
     def to_dict(self):
         return {
             'id': self.id,
-            'sender_id': self.users.id,
+            'sender_id': self.sender_id,
             'content': self.content,
             'channel_id': self.channels.id,
             'sent_at': self.sent_at,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'message_recipients': [message_recipient.id for message_recipient in self.message_recipients]
+            'recipients': [recipient.id for recipient in self.recipients]
         }
