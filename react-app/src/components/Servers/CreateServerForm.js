@@ -23,11 +23,11 @@ export default function CreateServerForm({ setShowModal }) {
 
     const validateServer = () => {
         const errors = [];
-        if (!name.length) {
-            errors.push("We need to know the name of your server");
+        if (!name.length || name.length < 4) {
+            errors.push("Server name should be at least 5 characters long");
         }
         if (topic.length < 5) {
-            errors.push("Your server needs a topic of at least 5 characters");
+            errors.push("Server topic should be at least 5 characters long");
         }
         if (!isValidURL(icon)) errors.push("Please provide a valid URL");
         setErrors(errors);
@@ -49,18 +49,33 @@ export default function CreateServerForm({ setShowModal }) {
         }
     };
 
+    const updateName = (e) => {
+        setErrors([]);
+        setName(e.target.value);
+    };
+
+    const updateTopic = (e) => {
+        setErrors([]);
+        setTopic(e.target.value);
+    };
+
+    const updateIcon = (e) => {
+        setErrors([]);
+        setIcon(e.target.value);
+    };
+
     return (
         <>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Create New Server</legend>
-                    <div className={styles.errors}>
+                    <ul className={styles.errors}>
                         {errors.map((error, idx) => (
-                            <div className={styles.error} key={idx}>
+                            <li className={styles.error} key={idx}>
                                 {error}
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                     <div className={styles.inputs}>
                         <div className={styles.nameWrapper}>
                             <label className={styles.nameLabel} htmlFor="name">
@@ -69,9 +84,8 @@ export default function CreateServerForm({ setShowModal }) {
                             <input
                                 type="text"
                                 name="name"
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={updateName}
                                 value={name}
-                                required
                             />
                         </div>
                         <div className={styles.topicWrapper}>
@@ -79,9 +93,8 @@ export default function CreateServerForm({ setShowModal }) {
                             <input
                                 type="text"
                                 name="topic"
-                                onChange={(e) => setTopic(e.target.value)}
+                                onChange={updateTopic}
                                 value={topic}
-                                required
                             />
                         </div>
                         <div className={styles.iconWrapper}>
@@ -89,9 +102,8 @@ export default function CreateServerForm({ setShowModal }) {
                             <input
                                 type="url"
                                 name="icon"
-                                onChange={(e) => setIcon(e.target.value)}
+                                onChange={updateIcon}
                                 value={icon}
-                                required
                             />
                         </div>
                     </div>
