@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiCircleEditOutline } from "@mdi/js";
 
-import { Modal } from "../../Modal";
+import { Modal } from "../../Context";
 import EditChannel from "./EditChannel";
 
 import styles from "./EditChannelModal.module.css";

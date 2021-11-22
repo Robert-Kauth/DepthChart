@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "../../Modal";
+import { Modal } from "../../Context";
 import { useSelector } from "react-redux";
 import SignupForm from "./SignupForm";
 import styles from "./SignupModal.module.css";
@@ -28,7 +28,7 @@ export default function SignupModal() {
                 )}
                 {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                        <SignupForm />
+                        <SignupForm setShowModal={setShowModal} />
                     </Modal>
                 )}
             </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { login, demoLogin } from "../../store/session";
 
 import styles from "./LoginForm.module.css";
@@ -8,7 +8,6 @@ import styles from "./LoginForm.module.css";
 
 export default function LoginForm({ setShowModal }) {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const user = useSelector((state) => state.session.user);
 
@@ -19,12 +18,10 @@ export default function LoginForm({ setShowModal }) {
     const handleLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
-        console.log(data, "handlelogin errors");
         if (data) {
             setErrors(data);
         } else {
             setShowModal(false);
-            history.push("/");
         }
     };
 
@@ -32,7 +29,6 @@ export default function LoginForm({ setShowModal }) {
         e.preventDefault();
         await dispatch(demoLogin());
         setShowModal(false);
-        history.push("/");
     };
 
     const updateEmail = (e) => {
@@ -69,6 +65,7 @@ export default function LoginForm({ setShowModal }) {
                                 Email:
                             </label>
                             <input
+                                autocomplete="email"
                                 className={styles.email}
                                 name="email"
                                 type="text"
@@ -84,6 +81,7 @@ export default function LoginForm({ setShowModal }) {
                                 Password:
                             </label>
                             <input
+                                autocomplete="current-password"
                                 name="password"
                                 type="password"
                                 placeholder="Password"

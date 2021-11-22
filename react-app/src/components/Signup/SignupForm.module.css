@@ -41,6 +41,19 @@
     padding: 0 5px 0 0;
 }
 
+.avatarWrapper {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.avatarLabel {
+    justify-content: center;
+    color: #f2f3f4;
+    font-size: 25px;
+    padding: 0 5px 0 0;
+}
+
 .emailWrapper {
     display: flex;
     align-items: flex-end;

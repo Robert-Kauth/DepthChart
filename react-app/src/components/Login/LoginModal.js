@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { Modal } from "../../Modal";
+import { Modal } from "../../Context";
 import LoginForm from "./LoginForm";
 import styles from "./LoginModal.module.css";
 
 export default function LoginModal() {
     const [showModal, setShowModal] = useState(false);
+
     const sessionUser = useSelector((state) => state.session.user);
 
     return (
