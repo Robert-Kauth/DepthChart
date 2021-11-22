@@ -66,11 +66,11 @@ export default function SignupForm({ setShowModal }) {
             <form className={styles.form} onSubmit={onSignUp}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Sign Up</legend>
-                    <div className={styles.errors}>
-                        {errors.map((error, ind) => (
-                            <div key={ind}>{error}</div>
+                    <ul className={styles.errors}>
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
                         ))}
-                    </div>
+                    </ul>
                     <div className={styles.inputs}>
                         <div className={styles.usernameWrapper}>
                             <label className={styles.usernameLabel}>

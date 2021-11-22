@@ -50,13 +50,13 @@ export default function LoginForm({ setShowModal }) {
             <form className={styles.form}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Login</legend>
-                    <div className={styles.errors}>
+                    <ul className={styles.errors}>
                         {errors.map((error, ind) => (
-                            <div className={styles.error} key={ind}>
+                            <li className={styles.error} key={ind}>
                                 {error}
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                     <div className={styles.inputs}>
                         <div className={styles.emailWrapper}>
                             <div className={styles.emailLabelWrapper}>
