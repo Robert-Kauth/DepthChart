@@ -28,7 +28,7 @@ export default function SignupModal() {
                 )}
                 {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                        <SignupForm />
+                        <SignupForm setShowModal={setShowModal} />
                     </Modal>
                 )}
             </div>

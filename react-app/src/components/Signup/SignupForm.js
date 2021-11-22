@@ -6,7 +6,7 @@ import { signUp } from "../../store/session";
 import styles from "./SignupForm.module.css";
 // className={styles. }
 
-export default function SignupForm() {
+export default function SignupForm({ setShowModal }) {
     const dispatch = useDispatch();
 
     const user = useSelector((state) => state.session.user);
@@ -26,6 +26,8 @@ export default function SignupForm() {
             );
             if (data) {
                 setErrors(data);
+            } else {
+                setShowModal(false);
             }
         }
     };
