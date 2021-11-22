@@ -35,7 +35,6 @@ export const login = (email, password) => async (dispatch) => {
         }),
     });
     const user = await response.json();
-    console.log(user, "THUNK login user");
     if (user.errors) {
         return user.errors;
     } else dispatch(createSession(user));
@@ -68,7 +67,6 @@ export const signUp =
             }),
         });
         const user = await response.json();
-        console.log(user, "thunk user");
         if (user.errors) {
             return user.errors;
         } else dispatch(createSession(user));

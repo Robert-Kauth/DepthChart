@@ -24,31 +24,34 @@ export default function SignupForm() {
             const data = await dispatch(
                 signUp(username, avatar, email, password)
             );
-            console.log(data, "errors sent from backend");
             if (data) {
                 setErrors(data);
             }
         }
     };
-    console.log(errors, "errors after bad signup");
 
     const updateUsername = (e) => {
+        setErrors([]);
         setUsername(e.target.value);
     };
 
     const updateEmail = (e) => {
+        setErrors([]);
         setEmail(e.target.value);
     };
 
     const updatePassword = (e) => {
+        setErrors([]);
         setPassword(e.target.value);
     };
 
     const updateRepeatPassword = (e) => {
+        setErrors([]);
         setRepeatPassword(e.target.value);
     };
 
     const updateAvatar = (e) => {
+        setErrors([]);
         setAvatar(e.target.value);
     };
 
