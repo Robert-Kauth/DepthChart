@@ -7,24 +7,30 @@ import styles from "./SignupForm.module.css";
 // className={styles. }
 
 export default function SignupForm() {
+    const dispatch = useDispatch();
+
+    const user = useSelector((state) => state.session.user);
+
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [avatar, setAvatar] = useState("");
-    const user = useSelector((state) => state.session.user);
-    const dispatch = useDispatch();
 
     const onSignUp = async (e) => {
         e.preventDefault();
         if (password === repeatPassword) {
-            const data = await dispatch(signUp(username, email, password));
+            const data = await dispatch(
+                signUp(username, avatar, email, password)
+            );
+            console.log(data, "errors sent from backend");
             if (data) {
                 setErrors(data);
             }
         }
     };
+    console.log(errors, "errors after bad signup");
 
     const updateUsername = (e) => {
         setUsername(e.target.value);
@@ -66,6 +72,7 @@ export default function SignupForm() {
                                 User Name:
                             </label>
                             <input
+                                autocomplete="username"
                                 type="text"
                                 name="username"
                                 onChange={updateUsername}
@@ -76,6 +83,7 @@ export default function SignupForm() {
                                 Upload Avatar:
                             </label>
                             <input
+                                autocomplete="url"
                                 type="url"
                                 name="avatar"
                                 onChange={updateAvatar}
@@ -84,7 +92,8 @@ export default function SignupForm() {
                         <div className={styles.emailWrapper}>
                             <label className={styles.emailLabel}>Email:</label>
                             <input
-                                type="text"
+                                autocomplete="email"
+                                type="email"
                                 name="email"
                                 onChange={updateEmail}
                                 value={email}></input>
@@ -94,6 +103,7 @@ export default function SignupForm() {
                                 Password:
                             </label>
                             <input
+                                autocomplete="new-password"
                                 type="password"
                                 name="password"
                                 onChange={updatePassword}
@@ -104,6 +114,7 @@ export default function SignupForm() {
                                 Repeat Password:
                             </label>
                             <input
+                                autocomplete="new-password"
                                 type="password"
                                 name="repeat_password"
                                 onChange={updateRepeatPassword}

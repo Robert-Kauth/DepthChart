@@ -68,6 +68,7 @@ export default function LoginForm({ setShowModal }) {
                                 Email:
                             </label>
                             <input
+                                autocomplete="email"
                                 className={styles.email}
                                 name="email"
                                 type="text"
@@ -83,6 +84,7 @@ export default function LoginForm({ setShowModal }) {
                                 Password:
                             </label>
                             <input
+                                autocomplete="current-password"
                                 name="password"
                                 type="password"
                                 placeholder="Password"
