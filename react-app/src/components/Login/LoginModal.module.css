@@ -14,3 +14,8 @@
     background-color: green;
     padding: 5px;
 }
+
+.modalButton:hover {
+    font-weight: bold;
+    background-color: #0bda51;
+}

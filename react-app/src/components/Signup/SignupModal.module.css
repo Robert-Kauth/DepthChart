@@ -2,14 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: #1e4d2b;
-    box-shadow: 0 0 2px 1px darkcyan;
-    background-position: center;
-    background-clip: padding-box;
-    background-repeat: no-repeat;
-    max-width: 80%;
-    min-height: 100%;
+    background-color: transparent;
+    position: relative;
+    top: 2px;
 }
 
 .titleContainer {
@@ -17,7 +12,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #1e4d2b;
 }
 
 .title {
@@ -25,8 +19,9 @@
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
     padding: 10px 20px;
-    background-color: darkgreen;
+    background-color: #195905;
     font-size: 80px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     margin: 5px;
 }
 
@@ -39,8 +34,9 @@
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
     padding: 10px 20px;
-    background-color: darkgreen;
+    background-color: #195905;
     font-size: 80px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     margin: 5px;
 }
 
@@ -56,6 +52,7 @@
 .modalContainer {
     display: inline-flex;
     justify-content: center;
+    padding: 5px;
 }
 
 .modalButton {
@@ -67,4 +64,11 @@
     margin-bottom: 5px;
     padding: 15px;
     font-size: 25px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+}
+
+.modalButton:hover {
+    background-color: #0bda51;
+    font-size: 40px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #195905;
 }
