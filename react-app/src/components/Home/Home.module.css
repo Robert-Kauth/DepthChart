@@ -1,11 +1,14 @@
 .homeWrapper {
     display: flex;
-    margin: 5px 0 0 5px;
+    margin: 0;
+    height: 93%;
+    background-color: #1e4d2b;
 }
 
 .servers {
     display: flex;
-    margin: 0 10px 0 0;
+    background-color: #2e8b57;
+    padding: 0 10px;
 }
 
 .messages {
