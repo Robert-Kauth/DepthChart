@@ -18,30 +18,41 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@message_routes.route('/<int:user_id>')
-@login_required
-def load_user_messages(user_id):
+@message_routes.route('/sent/<int:user_id>')
+# @login_required
+def load_sent_messages(user_id):
     '''
-    Gets all messages associated with a particular user_id
+    Gets all messages sent by a particular user_id
     '''
-    user_messages = Message.query.join(User_message).filter(
-        User_message.user_id == user_id).all()
-    return {message.id: message.to_dict() for message in user_messages}
+    sent_messages = Message.query.filter(
+        Message.sender_id == user_id).all()
+    return {message.id: message.to_dict() for message in sent_messages}
 
 
-@message_routes.route('/<int:message_id>')
-@login_required
-def load_message_users(message_id):
+@message_routes.route('/received/<int:user_id>')
+# @login_required
+def load_received_messages(user_id):
+    '''
+    gets all messages received by a particular user_id
+    '''
+    received_messages = Message.query.join(User_message).filter(
+        User_message.recipient_id == user_id)
+    return {message.id: message.to_dict() for message in received_messages}
+
+
+@message_routes.route('/<int:message_id>/recipients')
+# @login_required
+def load_message_recipients(message_id):
     '''
     Gets all users associated with a particular message_id
     '''
-    message_users = User.query.join(User_message).filter(
+    message_recipients = User.query.join(User_message).filter(
         User_message.message_id == message_id)
-    return {user.id: user.to_dict() for user in message_users}
+    return {user.id: user.to_dict() for user in message_recipients}
 
 
 @message_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_message():
     '''
     Creates a new message setting the sender_id
@@ -49,6 +60,7 @@ def create_message():
     '''
     # get all users for form select field
     recipients_list = [(user.id, user.username) for user in User.query.all()]
+    print("\n\n\n", recipients_list, "\n\n\n")
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form.recipients.choices = recipients_list
