@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { loadUserMessages } from "../../store/messages";
+import { loadAllUserMessages } from "../../store/messages";
 
 import styles from "./Messages.module.css";
 // className={styles. }
@@ -12,7 +12,7 @@ export default function Messages() {
     const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
-        dispatch(loadUserMessages(user.id));
+        dispatch(loadAllUserMessages(user.id));
     }, [dispatch, user.id]);
     return (
         <div className={styles.wrapper}>

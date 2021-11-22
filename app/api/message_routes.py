@@ -24,9 +24,14 @@ def load_user_messages(user_id):
     '''
     Returns all messages sent and received by a user
     '''
-    sent_messages = {f"sent {message.id}": message.to_dict()
+    # might be necessary to differentiate between sent and received at a later point in time if there are ID conflicts
+    # sent_messages = {f"sent {message.id}": message.to_dict()
+    #                  for message in Message.query.filter(Message.sender_id == user_id).all()}
+    # received_messages = {f"received {message.id}": message.to_dict() for message in Message.query.join(User_message).filter(
+    #     User_message.recipient_id == user_id).all()}
+    sent_messages = {message.id: message.to_dict()
                      for message in Message.query.filter(Message.sender_id == user_id).all()}
-    received_messages = {f"received {message.id}": message.to_dict() for message in Message.query.join(User_message).filter(
+    received_messages = {message.id: message.to_dict() for message in Message.query.join(User_message).filter(
         User_message.recipient_id == user_id).all()}
     return {**sent_messages, **received_messages}
 
@@ -37,8 +42,7 @@ def load_sent_messages(user_id):
     '''
     Gets all messages sent by a particular user_id
     '''
-    return {message.id: message.to_dict()
-            for message in Message.query.filter(Message.sender_id == user_id).all()}
+    return {message.id: message.to_dict() for message in Message.query.filter(Message.sender_id == user_id).all()}
 
 
 @message_routes.route('/received/<int:user_id>')
