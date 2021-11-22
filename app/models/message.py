@@ -15,8 +15,8 @@ class Message(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    message_users = db.relationship(
-        'User_message', back_populates='messages', cascade='all, delete')
+    user_messages = db.relationship(
+        'User_message', backref='messages', cascade='all, delete')
 
     def to_dict(self):
         return {
@@ -26,5 +26,6 @@ class Message(db.Model):
             'channel_id': self.channels.id,
             'sent_at': self.sent_at,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'user_message_id': [user_message.id for user_message in self.user_messages]
         }

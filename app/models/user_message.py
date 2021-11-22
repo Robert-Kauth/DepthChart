@@ -5,19 +5,16 @@ class User_message(db.Model):
     __tablename__ = 'user_messages'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(
+    recipient_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
     message_id = db.Column(db.Integer, db.ForeignKey(
         'messages.id', ondelete='CASCADE'))
-
-    user_message = db.relationship(
-        'Users', back_populates='user_messages', cascade='all, delete')
-    messages = db.relationship(
-        'Message', back_populates='message_users', cascade='all, delete')
+    is_read = db.Column(db.Boolean)
 
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.users.id,
-            'message_id': self.messages.id
+            'recipient_id': self.recipient_id,
+            'message_id': self.message_id,
+            'is_read': self.is_read
         }

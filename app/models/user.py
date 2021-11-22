@@ -18,12 +18,14 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    member = db.relationship(
+    members = db.relationship(
         'User_server', back_populates='users', cascade='all,delete')
-    server_owner = db.relationship(
+    owned_servers = db.relationship(
         'Server', back_populates='owner', cascade='all,delete')
-    user_messages = db.relationship(
-        'User_message', backpopulates='user_message', cascade='all, delete')
+    sent_messages = db.relationship(
+        'Message', backref='users', cascade='all, delete')
+    message_recipients = db.relationship(
+        'User_message', backref='users', cascade='all, delete')
 
     # def __init__():
     #     generate_avatar()
@@ -50,5 +52,11 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'avatar': self.avatar
+            'avatar': self.avatar,
+            'member_ids': [member.id for member in self.members],
+            'owned_server_ids': [owned_server.id for owned_server in self.owned_servers],
+            'sent_message_ids': [sent_message.id for sent_message in self.sent_messages],
+            'message_recipient_ids': [message_recipient.id for message_recipient in self.message_recipients]
+
+
         }

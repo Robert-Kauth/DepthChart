@@ -12,7 +12,7 @@ class Server(db.Model):
         "users.id", ondelete='CASCADE'))
 
     owner = db.relationship(
-        'User', back_populates='server_owner', cascade='all, delete')
+        'User', back_populates='owned_servers', cascade='all, delete')
     server_users = db.relationship(
         'User_server', back_populates='servers', cascade='all,delete')
     channels = db.relationship(
@@ -24,5 +24,7 @@ class Server(db.Model):
             'name': self.name,
             'topic': self.topic,
             'icon': self.icon,
-            'owner_id': self.owner.id
+            'owner_id': self.owner.id,
+            'server_user_ids': [server_user.id for server_user in self.server_users],
+            'channel_ids': [channel.id for channel in self.channels]
         }

@@ -20,5 +20,6 @@ class Channel(db.Model):
             'server_id': self.server_id,
             'name': self.name,
             'topic': self.topic,
-            'icon': self.icon
+            'icon': self.icon,
+            'message_ids': [message.id for message in self.messages]
         }
