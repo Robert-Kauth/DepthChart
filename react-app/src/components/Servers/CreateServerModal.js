@@ -6,8 +6,6 @@ import { mdiPlusBox } from "@mdi/js";
 import { Modal } from "../../Context";
 import CreateServerForm from "./CreateServerForm";
 
-import styles from "./CreateServerModal.module.css";
-
 const Button = styled.button`
     background-color: #014421;
     color: #029e7e;
