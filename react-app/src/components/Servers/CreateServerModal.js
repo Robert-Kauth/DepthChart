@@ -6,6 +6,8 @@ import { mdiPlusBox } from "@mdi/js";
 import { Modal } from "../../Context";
 import CreateServerForm from "./CreateServerForm";
 
+import styles from "./CreateServerModal.module.css";
+
 const Button = styled.button`
     background-color: #014421;
     color: #029e7e;
@@ -19,19 +21,24 @@ const Button = styled.button`
         color: #014421;
     }
 `;
+
+const StyledIcon = styled(Icon)`
+    width: 2rem;
+    height: 2rem;
+`;
 export default function CreateServerModal() {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <div>
+        <>
             <Button onClick={() => setShowModal(true)}>
-                <Icon path={mdiPlusBox} size={1} />
+                <StyledIcon path={mdiPlusBox} size={1} />
             </Button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <CreateServerForm setShowModal={setShowModal} />
                 </Modal>
             )}
-        </div>
+        </>
     );
 }
