@@ -16,7 +16,7 @@ def seed_messages():
     demo_msg5 = Message(
         sender_id=3, content='I must have missed it...', channel_id=5)
     demo_msg6 = Message(
-        sender_id=3, content='When is our next day to praise bruiser for 3 hours straight?', channel_id=6)
+        sender_id=3, content='When is our next day to praise bruiser for 3 hours straight?', channel_id=5)
     demo_msg7 = Message(
         sender_id=4, content='I found a lost cat in Jersey. Has anyone here lost one?', channel_id=1)
     demo_msg8 = Message(

@@ -6,7 +6,7 @@ class Message(db.Model):
     __tablename__ = 'messages'
 
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Interger, db.ForeignKey(
+    sender_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete="CASCADE"))
     content = db.Column(db.String)
     channel_id = db.Column(db.Integer, db.ForeignKey(
