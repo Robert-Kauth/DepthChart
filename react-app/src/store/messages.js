@@ -26,10 +26,22 @@ const destroy = (id) => ({
 });
 /*-------------THUNK CREATORS-------------*/
 
-export const loadUserMessages = (userId) => async (dispatch) => {
+export const loadAllUserMessages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/messages/${userId}`);
     const messages = await res.json();
     dispatch(load(messages));
+};
+
+export const loadSentMessages = (userId) => async (dispatch) => {
+    const res = await fetch(`/api/messages/sent/${userId}`);
+    const sentMessages = await res.json();
+    dispatch(load(sentMessages));
+};
+
+export const loadReceivedMessages = (userId) => async (dispatch) => {
+    const res = await fetch(`/api/messages/received/${userId}`);
+    const receivedMessages = await res.json();
+    dispatch(load(receivedMessages));
 };
 
 export const createMessage = (payload) => async (dispatch) => {
