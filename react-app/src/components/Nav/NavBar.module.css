@@ -6,7 +6,7 @@
     border-style: solid;
     border-width: 2px;
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Assets/sideline_cropped.jpg);
-    background-size: cover;
+    background-size: 100%;
     position: fixed;
     left: 0;
     right: 0;
@@ -69,7 +69,7 @@
     padding: 5px;
 }
 
-.edit {
+/* .edit {
     display: flex;
     padding: 5px;
-}
+} */
