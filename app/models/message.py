@@ -27,5 +27,5 @@ class Message(db.Model):
             'sent_at': self.sent_at,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'user_message_id': [user_message.id for user_message in self.user_messages]
+            'message_user_id': [user_message.id for user_message in self.user_messages]
         }
