@@ -49,6 +49,7 @@ def create_message():
     '''
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    recipients_list = User
     if form.validate_on_submit():
         message = Message(recipients=form.data['recipients'],
                           sender_id=current_user.id,
