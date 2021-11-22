@@ -53,14 +53,15 @@ def create_message():
     form['csrf_token'].data = request.cookies['csrf_token']
     form.recipients.choices = recipients_list
     if form.validate_on_submit():
-        message = Message(recipients=form.recipients.data,
-                          sender_id=current_user.id,
-                          content=form.data['content'])
+        message = Message(sender_id=current_user.id, content=form.data['content'],
+                          channel_id=form.data['channel_id'])
         db.session.add(message)
         db.session.commit()
-        user_message = User_message(
-            user_id=current_user.id, message_id=message.id)
-        db.session.add(user_message)
-        db.session.commit()
+        if len(form.recipients) >= 1:
+            for recipient in form.recipients:
+                user_message = User_message(
+                    recipient_id=recipient.id, message_id=message.id)
+                db.session.add(user_message)
+            db.session.commit()
         return message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
