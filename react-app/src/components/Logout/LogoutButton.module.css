@@ -14,3 +14,8 @@
     background-color: green;
     padding: 5px;
 }
+
+.button:hover {
+    background-color: aliceblue;
+    font-weight: bold;
+}
