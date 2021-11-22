@@ -43,13 +43,17 @@
     color: black;
     padding: 10px;
 }
+.link:hover {
+    background-color: aliceblue;
+    font-weight: bold;
+}
 
 .active {
     text-decoration: none;
     text-align: center;
     color: black;
     font-weight: bold;
-    background-color: aliceblue;
+    background-color: #0bda51;
 }
 
 .users {
@@ -69,7 +73,7 @@
     padding: 5px;
 }
 
-/* .edit {
+.edit {
     display: flex;
     padding: 5px;
-} */
+}
