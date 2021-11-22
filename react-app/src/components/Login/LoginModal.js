@@ -7,6 +7,7 @@ import styles from "./LoginModal.module.css";
 
 export default function LoginModal() {
     const [showModal, setShowModal] = useState(false);
+
     const sessionUser = useSelector((state) => state.session.user);
 
     return (
