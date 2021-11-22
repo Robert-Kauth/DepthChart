@@ -5,6 +5,6 @@ from app.models import User
 
 
 class MessageForm(FlaskForm):
-    recipient_ids = SelectField('recipient_ids', coerce=int,
-                                validators=[InputRequired()])
-    message = StringField('message', validators=[DataRequired()])
+    recipients = SelectField('recipients', coerce=int,
+                             validators=[InputRequired()])
+    content = StringField('content', validators=[DataRequired()])

@@ -47,13 +47,15 @@ def create_message():
     Creates a new message setting the sender_id
     to current_user.id
     '''
+    # get all users for form select field
+    recipients_list = [(user.id, user.username) for user in User.query.all()]
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    recipients_list = User
+    form.recipients.choices = recipients_list
     if form.validate_on_submit():
-        message = Message(recipients=form.data['recipients'],
+        message = Message(recipients=form.recipients.data,
                           sender_id=current_user.id,
-                          message=form.data['message'])
+                          content=form.data['content'])
         db.session.add(message)
         db.session.commit()
         user_message = User_message(
