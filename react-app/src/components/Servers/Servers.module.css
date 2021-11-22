@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    min-height: 80%;
 }
 
 .tileWrapper {
-    background-color: grey;
+    background-color: black;
 }
 
 .add {
