@@ -54,12 +54,13 @@ export default function CreateServerForm({ setShowModal }) {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Create New Server</legend>
-                    {errors.map((error, ind) => (
-                        <div>
-                            <legend>Errors:</legend>
-                            <div key={ind}>{error}</div>
-                        </div>
-                    ))}
+                    <div className={styles.errors}>
+                        {errors.map((error, idx) => (
+                            <div className={styles.error} key={idx}>
+                                {error}
+                            </div>
+                        ))}
+                    </div>
                     <div className={styles.inputs}>
                         <div className={styles.nameWrapper}>
                             <label className={styles.nameLabel} htmlFor="name">

@@ -83,9 +83,12 @@
 }
 
 .button {
-    margin: 5px;
-    width: 100px;
-    font-size: 20px;
+    padding: 0 10px;
+    font-size: 30px;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     background-color: #029e7e;
+}
+
+.button:hover {
+    background-color: #03b48f;
 }
