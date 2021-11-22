@@ -14,31 +14,31 @@ def seed_servers():
     server_demo = Server(
         name='SirDemsAlot',
         topic='All things demo',
-        icon="https://cdn.discordapp.com/attachments/886336420552269847/903508537798459402/aang-of-avatar-the-last-airbender-wallpaper-2048x1536-6450_26.jpg",
+        icon="https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/American_football_conference.png",
         owner_id=1
     )
     server_demo2 = Server(
         name='Pain of in the seeder',
         topic='How much creating seed data is not that great',
-        icon='https://cdn.discordapp.com/icons/172069829690261504/31089b57cbcdc00edb0798e31fc60bb2.png?size=96',
+        icon='https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/National_football_conference.png',
         owner_id=1
     )
     server_marnie = Server(
         name='Marnie\'s Dungeon',
         topic='A life in the day of Marnie',
-        icon="https://cdn.discordapp.com/attachments/886336420552269847/904401336563535932/istockphoto-1281804798-170667a.jpg",
+        icon="https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Arizona_cardinals.png",
         owner_id=2
     )
     server_bobbie = Server(
         name='Bobbie\'s Playhouse',
         topic='Bobbie',
-        icon="https://cdn.discordapp.com/attachments/886336420552269847/904402317313441862/200.png",
+        icon="https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Atlanta_falcons.png",
         owner_id=3
     )
     server_ashley = Server(
         name='Ashley\'s Arena',
         topic='Fire and Brimstone',
-        icon="https://cdn.discordapp.com/attachments/886336420552269847/904401248051138630/Eren-Jaeger-from-Attack-on-Titan-with-his-long-hair-in-a-bun.jpg",
+        icon="https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/SanFrancisco_49ners.png",
         owner_id=4
     )
     db.session.add(server_demo)
