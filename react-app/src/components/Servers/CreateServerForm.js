@@ -50,7 +50,7 @@ export default function CreateServerForm({ setShowModal }) {
     };
 
     return (
-        <div>
+        <>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Create New Server</legend>
@@ -60,35 +60,39 @@ export default function CreateServerForm({ setShowModal }) {
                             <div key={ind}>{error}</div>
                         </div>
                     ))}
-                    <div>
-                        <label htmlFor="name">Name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Topic</label>
-                        <input
-                            type="text"
-                            name="topic"
-                            onChange={(e) => setTopic(e.target.value)}
-                            value={topic}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Icon</label>
-                        <input
-                            type="url"
-                            name="icon"
-                            onChange={(e) => setIcon(e.target.value)}
-                            value={icon}
-                            required
-                        />
+                    <div className={styles.inputs}>
+                        <div className={styles.nameWrapper}>
+                            <label className={styles.nameLabel} htmlFor="name">
+                                Name:
+                            </label>
+                            <input
+                                type="text"
+                                name="name"
+                                onChange={(e) => setName(e.target.value)}
+                                value={name}
+                                required
+                            />
+                        </div>
+                        <div className={styles.topicWrapper}>
+                            <label className={styles.topicLabel}>Topic:</label>
+                            <input
+                                type="text"
+                                name="topic"
+                                onChange={(e) => setTopic(e.target.value)}
+                                value={topic}
+                                required
+                            />
+                        </div>
+                        <div className={styles.iconWrapper}>
+                            <label className={styles.iconLabel}>Icon:</label>
+                            <input
+                                type="url"
+                                name="icon"
+                                onChange={(e) => setIcon(e.target.value)}
+                                value={icon}
+                                required
+                            />
+                        </div>
                     </div>
                     <div className={styles.buttonContainer}>
                         <button className={styles.button} type="submit">
@@ -97,6 +101,6 @@ export default function CreateServerForm({ setShowModal }) {
                     </div>
                 </fieldset>
             </form>
-        </div>
+        </>
     );
 }
