@@ -12,6 +12,7 @@ export default function SignupForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
+    const [avatar, setAvatar] = useState("");
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
 
@@ -41,6 +42,10 @@ export default function SignupForm() {
         setRepeatPassword(e.target.value);
     };
 
+    const updateAvatar = (e) => {
+        setAvatar(e.target.value);
+    };
+
     if (user) {
         return <Redirect to="/" />;
     }
@@ -65,6 +70,16 @@ export default function SignupForm() {
                                 name="username"
                                 onChange={updateUsername}
                                 value={username}></input>
+                        </div>
+                        <div className={styles.avatarWrapper}>
+                            <label className={styles.avatarLabel}>
+                                Upload Avatar:
+                            </label>
+                            <input
+                                type="url"
+                                name="avatar"
+                                onChange={updateAvatar}
+                                value={avatar}></input>
                         </div>
                         <div className={styles.emailWrapper}>
                             <label className={styles.emailLabel}>Email:</label>

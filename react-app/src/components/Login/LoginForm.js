@@ -19,7 +19,6 @@ export default function LoginForm({ setShowModal }) {
     const handleLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
-        console.log(data, "handlelogin errors");
         if (data) {
             setErrors(data);
         } else {
