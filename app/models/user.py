@@ -18,10 +18,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    joined_servers = db.relationship(
-        'User_server', backref='users', cascade='all,delete')
+    servers = db.relationship(
+        'Servers', secondary='user_servers', back_populates='users', cascade='all,delete')
     owned_servers = db.relationship(
-        'Server', backref='users', cascade='all,delete')
+        'Server', back_populates='owner', cascade='all,delete')
     sent_messages = db.relationship(
         'Message', backref='users', cascade='all, delete')
     received_messages = db.relationship(
@@ -53,7 +53,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'avatar': self.avatar,
-            'joined_servers': [joined_server.id for joined_server in self.joined_servers],
+            'servers': [server.id for server in self.servers],
             'owned_servers': [owned_server.id for owned_server in self.owned_servers],
             'sent_messages': [sent_message.id for sent_message in self.sent_messages],
             'received_messages': [received_message.id for received_message in self.received_messages]

@@ -11,8 +11,10 @@ class Server(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(
         "users.id", ondelete='CASCADE'))
 
-    user_servers = db.relationship(
-        'User_server', back_populates='servers', cascade='all,delete')
+    users = db.relationship(
+        'User', secondary='user_servers', back_populates='servers', cascade='all,delete')
+    owner = db.relationship(
+        'User', back_populates='owned_servers', cascade='all, delete')
     channels = db.relationship(
         'Channel', backref='servers', cascade='all, delete')
 
