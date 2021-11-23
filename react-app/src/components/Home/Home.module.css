@@ -2,7 +2,8 @@
     display: flex;
     margin: 0;
     height: 93%;
-    background-color: #1e4d2b;
+    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Assets/stadium_from_above_horizontal.jpg);
+    background-size: contain;
 }
 
 .servers {

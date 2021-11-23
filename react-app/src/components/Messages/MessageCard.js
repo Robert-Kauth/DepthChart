@@ -9,7 +9,7 @@ import styles from "./MessageCard.module.css";
 
 export default function MessageCard({ message }) {
     const dispatch = useDispatch();
-    console.log(message);
+    // console.log(message);
 
     const channels = useSelector((state) => state.channels);
     const users = useSelector((state) => state.users);
