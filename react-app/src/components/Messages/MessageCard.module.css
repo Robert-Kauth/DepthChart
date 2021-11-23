@@ -14,8 +14,8 @@
 .name {
     font-size: 30px;
     font-weight: 400px;
-    color: #e5e4e2;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px red;
+    color: darkgreen;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
 }
 
 .content {
@@ -23,5 +23,7 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    background-color: grey;
+    background-color: darkgreen;
+    color: aliceblue;
+    border-radius: 5px;
 }

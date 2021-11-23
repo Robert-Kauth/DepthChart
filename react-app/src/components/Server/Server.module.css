@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     margin: 0;
-    height: 93%;
+    height: 100%;
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Assets/stadium_from_above_horizontal.jpg);
     background-size: 100% 93%;
 }
