@@ -85,6 +85,21 @@ export default function EditServer({ setShowModal }) {
         }
     };
 
+    const updateName = (e) => {
+        setErrors([]);
+        setName(e.target.value);
+    };
+
+    const updateTopic = (e) => {
+        setErrors([]);
+        setTopic(e.target.value);
+    };
+
+    const updateIcon = (e) => {
+        setErrors([]);
+        setIcon(e.target.value);
+    };
+
     useEffect(() => {
         dispatch(getUserServers(user_id));
     }, [dispatch, user_id]);
@@ -133,7 +148,7 @@ export default function EditServer({ setShowModal }) {
                                     type="text"
                                     placeholder={selectedServer.name}
                                     value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={updateName}
                                 />
                             </div>
                             <div className={styles.topicWrapper}>
@@ -144,7 +159,7 @@ export default function EditServer({ setShowModal }) {
                                     type="text"
                                     value={topic}
                                     placeholder={selectedServer.topic}
-                                    onChange={(e) => setTopic(e.target.value)}
+                                    onChange={updateTopic}
                                 />
                             </div>
                             <div className={styles.iconInput}>
@@ -173,9 +188,7 @@ export default function EditServer({ setShowModal }) {
                                                 className={styles.newIcon}
                                                 type="url"
                                                 value={icon}
-                                                onChange={(e) =>
-                                                    setIcon(e.target.value)
-                                                }
+                                                onChange={updateIcon}
                                             />
                                         )}
                                     </div>
