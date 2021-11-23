@@ -10,7 +10,7 @@ export default function DeleteButton({ selectedServer, setShowModal }) {
     const dispatch = useDispatch();
 
     const [choice, setChoice] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [error, setError] = useState("");
 
     const deleteServer = (e) => {
         e.preventDefault();
@@ -19,19 +19,16 @@ export default function DeleteButton({ selectedServer, setShowModal }) {
             dispatch(destroyServer(selectedServer.id));
             setShowModal(false);
         } else {
-            setErrors("Must input correct server name to delete");
+            setError("Must input correct server name to delete");
         }
+    };
+    const updateChoice = (e) => {
+        setError("");
+        setChoice(e.target.value);
     };
 
     return (
         <div className={styles.deleteWrapper}>
-            <ul className={styles.errors}>
-                {errors.map((error, idx) => (
-                    <li className={styles.error} key={idx}>
-                        {error}
-                    </li>
-                ))}
-            </ul>
             <div className={styles.warningContainer}>
                 <p className={styles.deleteWarning}>
                     Once you delete a server there is no turning back.
@@ -42,13 +39,16 @@ export default function DeleteButton({ selectedServer, setShowModal }) {
                     Type the servers name and click delete to permanently delete
                     server
                 </label>
+                <ul className={styles.error}>
+                    <li className={styles.indivError}>{error}</li>
+                </ul>
                 <div>
                     <input
                         className={styles.deleteInput}
                         type="text"
                         value={choice}
                         placeholder={selectedServer.name}
-                        onChange={(e) => setChoice(e.target.value)}
+                        onChange={updateChoice}
                     />
                 </div>
                 <div className={styles.buttonContainer}>
