@@ -1,5 +1,8 @@
 /*-------------ACTION.TYPES-------------*/
 const LOAD = "messages/LOAD";
+const GET_USERS = "messages/GET_USERS";
+const GET_SENT = "messages/GET_SENT";
+const GET_RECIEVED = "messages/GET_RECIEVED";
 const CREATE = "messages/CREATE";
 const EDIT = "messages/EDIT";
 const DESTROY = "messages/DESTROY";
@@ -8,6 +11,19 @@ const DESTROY = "messages/DESTROY";
 const load = (messages) => ({
     type: LOAD,
     messages,
+});
+
+const get = (messaged_users) => ({
+    type: GET_USERS,
+    messaged_users,
+});
+const getSent = (sent_messages) => ({
+    type: GET_SENT,
+    sent_messages,
+});
+const getRecieved = (recieved_messages) => ({
+    type: GET_RECIEVED,
+    recieved_messages,
 });
 
 const create = (message) => ({
@@ -32,16 +48,23 @@ export const loadAllUserMessages = (userId) => async (dispatch) => {
     dispatch(load(messages));
 };
 
+export const getMessagedUsers = (message_id) => async (dispatch) => {
+    const res = await fetch(`/api/messages/recipients/${message_id}`);
+    const messaged_users = await res.json();
+    console.log(messaged_users, "messaged users thunk");
+    dispatch(get(messaged_users));
+};
+
 export const loadSentMessages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/messages/sent/${userId}`);
     const sentMessages = await res.json();
-    dispatch(load(sentMessages));
+    dispatch(getSent(sentMessages));
 };
 
 export const loadReceivedMessages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/messages/received/${userId}`);
     const receivedMessages = await res.json();
-    dispatch(load(receivedMessages));
+    dispatch(getRecieved(receivedMessages));
 };
 
 export const createMessage = (payload) => async (dispatch) => {
@@ -76,15 +99,30 @@ export const destroyMessage = (message_id) => async (dispatch) => {
     dispatch(destroy(id));
 };
 /*-------------REDUCER-------------*/
-const initialState = {};
+const initialState = {
+    all_messages: null,
+    messaged_users: null,
+    sent: null,
+    recieved: null,
+};
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
     switch (action.type) {
         case LOAD:
-            return { ...state, ...action.messages };
+            return { ...state, all_messages: action.messages };
+        case GET_USERS:
+            return {
+                ...state,
+                messaged_users: action.messaged_users,
+            };
+        case GET_SENT:
+            return { ...state, sent: action.sent_messages };
+        case GET_RECIEVED:
+            return { ...state, recieved: action.recieved_messages };
         case CREATE:
         case EDIT:
-            return { ...state, [action.message.id]: action.message };
+            newState[action.message.id] = action.message;
+            return newState;
         case DESTROY:
             delete newState[action.id];
             return newState;

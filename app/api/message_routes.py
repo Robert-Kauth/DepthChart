@@ -24,15 +24,10 @@ def load_user_messages(user_id):
     '''
     Returns all messages sent and received by a user
     '''
-    # might be necessary to differentiate between sent and received at a later point in time if there are ID conflicts
-    # sent_messages = {f"sent {message.id}": message.to_dict()
-    #                  for message in Message.query.filter(Message.sender_id == user_id).all()}
-    # received_messages = {f"received {message.id}": message.to_dict() for message in Message.query.join(User_message).filter(
-    #     User_message.recipient_id == user_id).all()}
-    sent_messages = {message.id: message.to_dict()
-                     for message in Message.query.filter(Message.sender_id == user_id).all()}
-    received_messages = {message.id: message.to_dict() for message in Message.query.join(User_message).filter(
-        User_message.recipient_id == user_id).all()}
+    sent_messages = {message.id: message.to_dict(
+    ) for message in Message.query.join(User_message).filter(User_message.sender_id == user_id).all()}
+    received_messages = {message.id: message.to_dict(
+    ) for message in Message.query.join(User_message).filter(User_message.recipient_ids == user_id).all()}
     return {**sent_messages, **received_messages}
 
 
@@ -42,7 +37,7 @@ def load_sent_messages(user_id):
     '''
     Gets all messages sent by a particular user_id
     '''
-    return {message.id: message.to_dict() for message in Message.query.filter(Message.sender_id == user_id).all()}
+    return {message.id: message.to_dict() for message in Message.query.join(User_message, User_message.message_id == Message.id).filter(User_message.sender_id == user_id).all()}
 
 
 @message_routes.route('/received/<int:user_id>')
@@ -51,7 +46,7 @@ def load_received_messages(user_id):
     '''
     gets all messages received by a particular user_id
     '''
-    return {message.id: message.to_dict() for message in Message.query.join(User_message).filter(User_message.recipient_id == user_id).all()}
+    return {message.id: message.to_dict() for message in Message.query.join(User_message, User_message.message_id == Message.id).filter(User_message.recipient_ids == user_id).all()}
 
 
 @message_routes.route('/recipients/<int:message_id>')
@@ -60,7 +55,7 @@ def load_message_recipients(message_id):
     '''
     Gets all users associated with a particular message_id
     '''
-    return {user.id: user.to_dict() for user in User.query.join(User_message).filter(User_message.message_id == message_id)}
+    return {user.id: user.to_dict() for user in User.query.join(User_message, User.id == User_message.recipient_ids).filter(User_message.message_id == message_id).all()}
 
 
 @message_routes.route('/', methods=['POST'])
@@ -72,7 +67,6 @@ def create_message():
     '''
     # get all users for form select field
     recipients_list = [(user.id, user.username) for user in User.query.all()]
-    print("\n\n\n", recipients_list, "\n\n\n")
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form.recipients.choices = recipients_list

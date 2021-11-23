@@ -20,15 +20,12 @@ export default function LoginForm({ setShowModal }) {
         const data = await dispatch(login(email, password));
         if (data) {
             setErrors(data);
-        } else {
-            setShowModal(false);
         }
     };
 
     const handleDemoLogin = async (e) => {
         e.preventDefault();
         await dispatch(demoLogin());
-        setShowModal(false);
     };
 
     const updateEmail = (e) => {
@@ -42,6 +39,7 @@ export default function LoginForm({ setShowModal }) {
     };
 
     if (user) {
+        setShowModal(false);
         return <Redirect to="/" />;
     }
 
