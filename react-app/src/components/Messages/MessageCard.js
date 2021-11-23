@@ -2,17 +2,24 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { loadChannels } from "../../store/channels";
+import { loadUsers } from "../../store/users";
 
 import styles from "./MessageCard.module.css";
 // className={styles. }
 
 export default function MessageCard({ message }) {
     const dispatch = useDispatch();
+    console.log(message);
 
     const channels = useSelector((state) => state.channels);
+    const users = useSelector((state) => state.users);
+
+    const toUserId = message.recipients[0];
+    console.log(toUserId);
 
     useEffect(() => {
         dispatch(loadChannels());
+        dispatch(loadUsers());
     }, [dispatch]);
 
     return (

@@ -18,13 +18,13 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    members = db.relationship(
+    joined_servers = db.relationship(
         'User_server', backref='users', cascade='all,delete')
     owned_servers = db.relationship(
         'Server', backref='users', cascade='all,delete')
     sent_messages = db.relationship(
         'Message', backref='users', cascade='all, delete')
-    message_recipients = db.relationship(
+    received_messages = db.relationship(
         'User_message', backref='users', cascade='all, delete')
 
     # def __init__():
@@ -53,10 +53,8 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'avatar': self.avatar,
-            'member_ids': [member.id for member in self.members],
-            'owned_server_ids': [owned_server.id for owned_server in self.owned_servers],
-            'sent_message_ids': [sent_message.id for sent_message in self.sent_messages],
-            'message_recipient_ids': [message_recipient.id for message_recipient in self.message_recipients]
-
-
+            'joined_servers': [joined_server.id for joined_server in self.joined_servers],
+            'owned_servers': [owned_server.id for owned_server in self.owned_servers],
+            'sent_messages': [sent_message.id for sent_message in self.sent_messages],
+            'received_messages': [received_message.id for received_message in self.received_messages]
         }

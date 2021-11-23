@@ -19,6 +19,7 @@ export default function Messages() {
 
     return (
         <div className={styles.wrapper}>
+            <p className={styles.messages}>Messages</p>
             {messages &&
                 Object.values(messages).map((message) => (
                     <MessageCard key={message.id} message={message} />
