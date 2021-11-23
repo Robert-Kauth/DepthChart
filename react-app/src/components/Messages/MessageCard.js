@@ -14,9 +14,6 @@ export default function MessageCard({ message }) {
     const channels = useSelector((state) => state.channels);
     const users = useSelector((state) => state.users);
 
-    const toUserId = message.recipients[0];
-    console.log(toUserId);
-
     useEffect(() => {
         dispatch(loadChannels());
         dispatch(loadUsers());
