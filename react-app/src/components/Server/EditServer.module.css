@@ -1,0 +1,124 @@
+.form {
+    background-color: #195905;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.field {
+    color: black;
+    border: 4px solid #029e7e;
+    padding: 50px 50px 25px 50px;
+    min-height: 385px;
+}
+
+.legend {
+    background-color: #029e7e;
+    font-size: 50px;
+    padding: 10px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    border-radius: 5px;
+    color: black;
+}
+
+.errors {
+    padding: 0 0 20px 0;
+}
+
+.error {
+    color: #bfc1c2;
+    font-size: 20px;
+    font-weight: 300px;
+    padding: 2px;
+}
+
+.serverSelect {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.serverNameLabelWrapper {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.nameWrapper {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.nameLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.topicWrapper {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.topicLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+.iconInput {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.iconWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.iconLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.newIcon {
+    padding: 0 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button {
+    padding: 0 10px;
+    font-size: 30px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    background-color: #029e7e;
+}
+
+.button:hover {
+    background-color: #03b48f;
+}
+
+.deleteButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.updateContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}

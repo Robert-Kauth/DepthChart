@@ -5,6 +5,8 @@ import { getUserServers } from "../../store/user_servers";
 import { editServer } from "../../store/servers";
 import DeleteButton from "./DeleteButton";
 
+import styles from "./EditServer.module.css";
+
 export default function EditServer({ setShowModal }) {
     const dispatch = useDispatch();
 
@@ -89,21 +91,23 @@ export default function EditServer({ setShowModal }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <div>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <fieldset className={styles.field}>
+                    <legend className={styles.legend}>Edit Server</legend>
+                    <ul className={styles.errors}>
                         {errors.map((error, ind) => (
-                            <div>
-                                <legend>Errors:</legend>
-                                <div key={ind}>{error}</div>
-                            </div>
+                            <li className={styles.error} key={ind}>
+                                {error}
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                     {!serverId && (
-                        <div>
-                            <legend>Edit Server</legend>
-                            <label>Name of server</label>
+                        <div className={styles.selectWrapper}>
+                            <label className={styles.serverNameLabelWrapper}>
+                                Name of server
+                            </label>
                             <select
+                                className={styles.serverSelect}
                                 onChange={(e) => setServerId(e.target.value)}>
                                 <option>
                                     --Please choose a server to edit--
@@ -123,8 +127,8 @@ export default function EditServer({ setShowModal }) {
                     )}
                     {serverId && (
                         <div>
-                            <div>
-                                <label>Name</label>
+                            <div className={styles.nameWrapper}>
+                                <label className={styles.nameLabel}>Name</label>
                                 <input
                                     type="text"
                                     placeholder={selectedServer.name}
@@ -132,8 +136,10 @@ export default function EditServer({ setShowModal }) {
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
-                            <div>
-                                <label>Topic</label>
+                            <div className={styles.topicWrapper}>
+                                <label className={styles.topicLabel}>
+                                    Topic
+                                </label>
                                 <input
                                     type="text"
                                     value={topic}
@@ -141,17 +147,20 @@ export default function EditServer({ setShowModal }) {
                                     onChange={(e) => setTopic(e.target.value)}
                                 />
                             </div>
-                            <div>
-                                <div>
-                                    <label>Current Icon</label>
+                            <div className={styles.iconInput}>
+                                <div className={styles.iconWrapper}>
+                                    <label className={styles.iconLabel}>
+                                        Current Icon
+                                    </label>
                                     <img
                                         src={selectedServer.icon}
                                         alt="Server Icon"
                                     />
                                 </div>
-                                <div>
-                                    <div>
+                                <div className={styles.iconWrapper}>
+                                    <div className={styles.buttonContainer}>
                                         <button
+                                            className={styles.button}
                                             type="button"
                                             value={newIcon}
                                             onClick={setShowField}>
@@ -161,6 +170,7 @@ export default function EditServer({ setShowModal }) {
                                     <div>
                                         {newIcon && (
                                             <input
+                                                className={styles.newIcon}
                                                 type="url"
                                                 value={icon}
                                                 onChange={(e) =>
@@ -172,23 +182,26 @@ export default function EditServer({ setShowModal }) {
                                 </div>
                             </div>
                             <div>
-                                <button>Update Server</button>
-                            </div>
-                            <div>
                                 <button
+                                    className={styles.button}
                                     type="button"
                                     value={showDelete}
                                     onClick={renderDelete}>
                                     Want to Delete Server?
                                 </button>
                             </div>
-                            <div>
+                            <div className={styles.deleteButtonContainer}>
                                 {showDelete && (
                                     <DeleteButton
                                         selectedServer={selectedServer}
                                         setShowModal={setShowModal}
                                     />
                                 )}
+                            </div>
+                            <div className={styles.updateContainer}>
+                                <button className={styles.button}>
+                                    Update Server
+                                </button>
                             </div>
                         </div>
                     )}

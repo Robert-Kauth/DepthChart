@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Modal } from "../../Context";
 import EditServer from "./EditServer";
 
-import styles from "./ServerEdit.module.css";
+import styles from "./ServerEditModal.module.css";
 
 export default function ServerEditModal() {
     const [showModal, setShowModal] = useState(false);

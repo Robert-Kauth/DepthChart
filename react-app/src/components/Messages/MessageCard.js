@@ -28,13 +28,17 @@ export default function MessageCard({ message }) {
         dispatch(getMessagedUsers(message.id));
     }, [dispatch, message.id]);
 
+    if (!users) {
+        return null;
+    }
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.channelInfo}>
                 <div className={styles.name}>
                     {recipient_id && users && recipient_id !== currentUser.id
-                        ? users[recipient_id].username
-                        : users[sender_id].username}
+                        ? users[recipient_id]?.username
+                        : users[sender_id]?.username}
                 </div>
                 <div className={styles.iconWrapper}>
                     {recipient_id &&
@@ -42,12 +46,12 @@ export default function MessageCard({ message }) {
                     recipient_id !== currentUser.id ? (
                         <img
                             className={styles.icon}
-                            src={users[recipient_id].avatar}
+                            src={users[recipient_id]?.avatar}
                             alt="user avatar"
                         />
                     ) : (
                         <img
-                            src={users[sender_id].avatar}
+                            src={users[sender_id]?.avatar}
                             alt="default nfl logo"
                         />
                     )}
