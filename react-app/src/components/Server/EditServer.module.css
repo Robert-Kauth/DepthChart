@@ -92,7 +92,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 0 5px;
 }
 
 .iconLabel {
@@ -114,6 +114,7 @@
 .deleteContainer {
     display: flex;
     justify-content: center;
+    margin: 5px 0 0 0;
 }
 
 .buttonContainer {
