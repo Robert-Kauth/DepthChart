@@ -23,9 +23,11 @@ class User(db.Model, UserMixin):
     owned_servers = db.relationship(
         'Server', back_populates='owner', cascade='all,delete')
     sent_messages = db.relationship(
-        'Message', backref='users', cascade='all, delete')
-    received_messages = db.relationship(
-        'User_message', backref='users', cascade='all, delete')
+        'User_message', back_populates='sender', cascade='all, delete')
+    message_recipients = db.relationship(
+        'User_message', back_populates='recipient', cascade='all, delete')
+    messaged_users = db.relationship(
+        'Message', secondary='user_messages', back_populates='users', cascade='all,delete')
 
     # def __init__():
     #     generate_avatar()
@@ -56,5 +58,6 @@ class User(db.Model, UserMixin):
             'servers': [server.id for server in self.servers],
             'owned_servers': [owned_server.id for owned_server in self.owned_servers],
             'sent_messages': [sent_message.id for sent_message in self.sent_messages],
-            'received_messages': [received_message.id for received_message in self.received_messages]
+            'received_messages': [received_message.id for received_message in self.received_messages],
+            'messaged_users': [messaged_user.id for messaged_user in self.messaged_users]
         }
