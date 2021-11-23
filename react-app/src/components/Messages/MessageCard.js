@@ -9,6 +9,7 @@ import styles from "./MessageCard.module.css";
 export default function MessageCard({ message }) {
     const dispatch = useDispatch();
 
+    const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users);
     const messagedUser = useSelector((state) => state.messages.messaged_users);
 
@@ -16,6 +17,12 @@ export default function MessageCard({ message }) {
     if (messagedUser) {
         recipient_id = messagedUser[message.id].recipient_ids;
     }
+
+    let sender_id;
+    if (messagedUser) {
+        sender_id = messagedUser[message.id].sender_id;
+    }
+    console.log(sender_id, "sender Id");
 
     useEffect(() => {
         dispatch(getMessagedUsers(message.id));
@@ -25,12 +32,14 @@ export default function MessageCard({ message }) {
         <div className={styles.wrapper}>
             <div className={styles.channelInfo}>
                 <div className={styles.name}>
-                    {recipient_id && users
+                    {recipient_id && users && recipient_id !== currentUser.id
                         ? users[recipient_id].username
-                        : null}
+                        : users[sender_id].username}
                 </div>
                 <div className={styles.iconWrapper}>
-                    {recipient_id && users ? (
+                    {recipient_id &&
+                    users &&
+                    recipient_id !== currentUser.id ? (
                         <img
                             className={styles.icon}
                             src={users[recipient_id].avatar}
@@ -38,7 +47,7 @@ export default function MessageCard({ message }) {
                         />
                     ) : (
                         <img
-                            src="https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/nfl.png"
+                            src={users[sender_id].avatar}
                             alt="default nfl logo"
                         />
                     )}
