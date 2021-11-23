@@ -1,0 +1,42 @@
+.deleteWrapper {
+}
+.warningContainer {
+    display: flex;
+    justify-content: center;
+}
+.deleteWarning {
+    color: #e32636;
+    font-size: 25px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.deleteWarningLabel {
+    color: #e32636;
+    font-size: 25px;
+    padding: 10px 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.deleteInput {
+    padding: 5px 50px;
+}
+
+.delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button {
+    padding: 0 10px;
+    font-size: 30px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    background-color: #029e7e;
+}

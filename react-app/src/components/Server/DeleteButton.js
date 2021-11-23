@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { destroyServer } from "../../store/servers";
 
 import styles from "./DeleteButton.module.css";
+// className={styles. }
 
 export default function DeleteButton({ selectedServer, setShowModal }) {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export default function DeleteButton({ selectedServer, setShowModal }) {
     };
 
     return (
-        <div>
+        <div className={styles.deleteWrapper}>
             <ul className={styles.errors}>
                 {errors.map((error, idx) => (
                     <li className={styles.error} key={idx}>
@@ -31,20 +32,31 @@ export default function DeleteButton({ selectedServer, setShowModal }) {
                     </li>
                 ))}
             </ul>
-            <p>Once you delete a server there is no turning back.</p>
-            <div>
-                <label>
+            <div className={styles.warningContainer}>
+                <p className={styles.deleteWarning}>
+                    Once you delete a server there is no turning back.
+                </p>
+            </div>
+            <div className={styles.delete}>
+                <label className={styles.deleteWarningLabel}>
                     Type the servers name and click delete to permanently delete
                     server
                 </label>
-                <input
-                    type="text"
-                    value={choice}
-                    placeholder={selectedServer.name}
-                    onChange={(e) => setChoice(e.target.value)}
-                />
+                <div>
+                    <input
+                        className={styles.deleteInput}
+                        type="text"
+                        value={choice}
+                        placeholder={selectedServer.name}
+                        onChange={(e) => setChoice(e.target.value)}
+                    />
+                </div>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.button} onClick={deleteServer}>
+                        Delete Server
+                    </button>
+                </div>
             </div>
-            <button onClick={deleteServer}>Delete Server</button>
         </div>
     );
 }

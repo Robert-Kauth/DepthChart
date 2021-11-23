@@ -168,11 +168,12 @@ export default function EditServer({ setShowModal }) {
                                         Current Icon
                                     </label>
                                     <img
+                                        className={styles.iconImg}
                                         src={selectedServer.icon}
                                         alt="Server Icon"
                                     />
                                 </div>
-                                <div className={styles.iconWrapper}>
+                                <div className={styles.iconButtonWrapper}>
                                     <div className={styles.buttonContainer}>
                                         <button
                                             className={styles.button}
@@ -194,14 +195,24 @@ export default function EditServer({ setShowModal }) {
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <button
-                                    className={styles.button}
-                                    type="button"
-                                    value={showDelete}
-                                    onClick={renderDelete}>
-                                    Want to Delete Server?
-                                </button>
+                            <div className={styles.deleteContainer}>
+                                {!showDelete ? (
+                                    <button
+                                        className={styles.button}
+                                        type="button"
+                                        value={showDelete}
+                                        onClick={renderDelete}>
+                                        Want to Delete Server?
+                                    </button>
+                                ) : (
+                                    <button
+                                        className={styles.button}
+                                        type="button"
+                                        value={showDelete}
+                                        onClick={renderDelete}>
+                                        Don't Delete Server
+                                    </button>
+                                )}
                             </div>
                             <div className={styles.deleteButtonContainer}>
                                 {showDelete && (
@@ -212,9 +223,11 @@ export default function EditServer({ setShowModal }) {
                                 )}
                             </div>
                             <div className={styles.updateContainer}>
-                                <button className={styles.button}>
-                                    Update Server
-                                </button>
+                                {!showDelete && (
+                                    <button className={styles.button}>
+                                        Update Server
+                                    </button>
+                                )}
                             </div>
                         </div>
                     )}
