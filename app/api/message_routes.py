@@ -29,10 +29,10 @@ def load_user_messages(user_id):
     #                  for message in Message.query.filter(Message.sender_id == user_id).all()}
     # received_messages = {f"received {message.id}": message.to_dict() for message in Message.query.join(User_message).filter(
     #     User_message.recipient_id == user_id).all()}
-    sent_messages = {message.id: message.to_dict()
-                     for message in Message.query.filter(Message.sender_id == user_id).all()}
-    received_messages = {message.id: message.to_dict() for message in Message.query.join(User_message).filter(
-        User_message.recipient_id == user_id).all()}
+    sent_messages = {message.id: message.to_dict(
+    ) for message in Message.query.join(User_message).filter(User_message.sender_id == user_id).all()}
+    received_messages = {message.id: message.to_dict(
+    ) for message in Message.query.join(User_message).filter(User_message.recipient_ids == user_id).all()}
     return {**sent_messages, **received_messages}
 
 
