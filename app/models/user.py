@@ -55,6 +55,6 @@ class User(db.Model, UserMixin):
             'avatar': self.avatar,
             'servers': [server.id for server in self.servers],
             'owned_servers': [owned_server.id for owned_server in self.owned_servers],
-            'sent_messages': [sent_message.id for sent_message in self.sent_messages],
-            'received_messages': [received_message.id for received_message in self.received_messages],
+            'sent_messages': [sent_message.sender_id for sent_message in self.sent_messages],
+            'received_messages': [received_message.recipient_ids for received_message in self.received_messages],
         }

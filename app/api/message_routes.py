@@ -53,7 +53,7 @@ def load_received_messages(user_id):
 # @login_required
 def load_message_recipients(message_id):
     '''
-    Gets all user_message realtionships associated with a particular message_id
+    Gets all users(recipient_ids and sender_id) associated with a particular message_id
     '''
     return{user_message.message_id: user_message.to_dict() for user_message in User_message.query.all()}
 
