@@ -15,6 +15,4 @@ class User_server(db.Model):
             'id': self.id,
             'user_id': self.users.id,
             'server_id': self.servers.id,
-            'user_ids': [user.id for user in self.users],
-            'server_ids': [server.id for server in self.servers]
         }

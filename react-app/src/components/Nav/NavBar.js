@@ -25,15 +25,6 @@ export default function NavBar() {
                                 Home
                             </NavLink>
                         </div>
-                        <div className={styles.users}>
-                            <NavLink
-                                to="/users"
-                                exact={true}
-                                className={styles.link}
-                                activeClassName={styles.active}>
-                                Users
-                            </NavLink>
-                        </div>
                         <div className={styles.edit}>
                             <ServerEditModal />
                         </div>

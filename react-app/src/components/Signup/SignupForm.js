@@ -66,18 +66,18 @@ export default function SignupForm({ setShowModal }) {
             <form className={styles.form} onSubmit={onSignUp}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Sign Up</legend>
-                    <div className={styles.errors}>
-                        {errors.map((error, ind) => (
-                            <div key={ind}>{error}</div>
+                    <ul className={styles.errors}>
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
                         ))}
-                    </div>
+                    </ul>
                     <div className={styles.inputs}>
                         <div className={styles.usernameWrapper}>
                             <label className={styles.usernameLabel}>
                                 User Name:
                             </label>
                             <input
-                                autocomplete="username"
+                                autoComplete="username"
                                 type="text"
                                 name="username"
                                 onChange={updateUsername}
@@ -88,7 +88,7 @@ export default function SignupForm({ setShowModal }) {
                                 Upload Avatar:
                             </label>
                             <input
-                                autocomplete="url"
+                                autoComplete="url"
                                 type="url"
                                 name="avatar"
                                 onChange={updateAvatar}
@@ -97,7 +97,7 @@ export default function SignupForm({ setShowModal }) {
                         <div className={styles.emailWrapper}>
                             <label className={styles.emailLabel}>Email:</label>
                             <input
-                                autocomplete="email"
+                                autoComplete="email"
                                 type="email"
                                 name="email"
                                 onChange={updateEmail}
@@ -108,7 +108,7 @@ export default function SignupForm({ setShowModal }) {
                                 Password:
                             </label>
                             <input
-                                autocomplete="new-password"
+                                autoComplete="new-password"
                                 type="password"
                                 name="password"
                                 onChange={updatePassword}
@@ -119,7 +119,7 @@ export default function SignupForm({ setShowModal }) {
                                 Repeat Password:
                             </label>
                             <input
-                                autocomplete="new-password"
+                                autoComplete="new-password"
                                 type="password"
                                 name="repeat_password"
                                 onChange={updateRepeatPassword}

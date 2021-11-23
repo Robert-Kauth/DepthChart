@@ -1,9 +1,10 @@
 .footerContainer {
-    display: block;
     position: fixed;
     bottom: 0;
-    bottom: 0px;
     width: 100%;
+    border-top-color: aliceblue;
+    border-top-style: solid;
+    border-top-width: 2px;
     background-color: #087830;
 }
 .logoContainer,

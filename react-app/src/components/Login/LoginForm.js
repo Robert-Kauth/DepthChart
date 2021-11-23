@@ -50,45 +50,55 @@ export default function LoginForm({ setShowModal }) {
             <form className={styles.form}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Login</legend>
-                    <div className={styles.errors}>
+                    <ul className={styles.errors}>
                         {errors.map((error, ind) => (
-                            <div className={styles.error} key={ind}>
+                            <li className={styles.error} key={ind}>
                                 {error}
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                     <div className={styles.inputs}>
                         <div className={styles.emailWrapper}>
-                            <label
-                                htmlFor="email"
-                                className={styles.emailLabel}>
-                                Email:
-                            </label>
-                            <input
-                                autocomplete="email"
-                                className={styles.email}
-                                name="email"
-                                type="text"
-                                placeholder="Email"
-                                value={email}
-                                onChange={updateEmail}
-                            />
+                            <div className={styles.emailLabelWrapper}>
+                                <label
+                                    htmlFor="email"
+                                    className={styles.emailLabel}>
+                                    Email:
+                                </label>
+                            </div>
+                            <div className={styles.emailInputWrapper}>
+                                <input
+                                    autoComplete="email"
+                                    className={styles.email}
+                                    name="email"
+                                    type="text"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={updateEmail}
+                                />
+                            </div>
                         </div>
                         <div className={styles.passwordWrapper}>
-                            <label
-                                className={styles.passwordLabel}
-                                htmlFor="password">
-                                Password:
-                            </label>
-                            <input
-                                autocomplete="current-password"
-                                name="password"
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={updatePassword}
-                            />
+                            <div className={styles.passwordLabelWrapper}>
+                                <label
+                                    className={styles.passwordLabel}
+                                    htmlFor="password">
+                                    Password:
+                                </label>
+                            </div>
+                            <div className={styles.passwordInputWrapper}>
+                                <input
+                                    autoComplete="current-password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={updatePassword}
+                                />
+                            </div>
                         </div>
+                    </div>
+                    <div className={styles.buttonWrapper}>
                         <div className={styles.loginButtonContainer}>
                             <button
                                 className={styles.loginButton}

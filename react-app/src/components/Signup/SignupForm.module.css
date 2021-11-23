@@ -1,20 +1,23 @@
 .form {
-    background-color: #014421;
+    background-color: #195905;
     border-radius: 5px;
     padding: 10px;
 }
 
 .field {
     color: black;
-    border: 4px solid #e5e4e2;
+    border: 4px solid #029e7e;
     padding: 50px 50px 25px 50px;
     min-height: 385px;
 }
 
 .legend {
-    background-color: #e5e4e2;
+    background-color: #029e7e;
     font-size: 50px;
     padding: 10px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    border-radius: 5px;
+    color: black;
 }
 
 .errors {
@@ -36,9 +39,10 @@
 
 .usernameLabel {
     justify-content: center;
-    color: #f2f3f4;
-    font-size: 25px;
+    color: #029e7e;
+    font-size: 40px;
     padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .avatarWrapper {
@@ -49,9 +53,10 @@
 
 .avatarLabel {
     justify-content: center;
-    color: #f2f3f4;
-    font-size: 25px;
+    color: #029e7e;
+    font-size: 40px;
     padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .emailWrapper {
@@ -62,9 +67,10 @@
 
 .emailLabel {
     justify-content: center;
-    color: #f2f3f4;
-    font-size: 25px;
+    color: #029e7e;
+    font-size: 40px;
     padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .passwordWrapper {
@@ -74,9 +80,11 @@
 }
 
 .passwordLabel {
-    color: #f2f3f4;
-    font-size: 25px;
+    justify-content: center;
+    color: #029e7e;
+    font-size: 40px;
     padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .buttonContainer {
@@ -88,5 +96,7 @@
 .button {
     margin: 5px;
     width: 150px;
-    height: 30px;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    background-color: #029e7e;
 }

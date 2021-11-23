@@ -36,6 +36,7 @@ const destroy = (id) => ({
 export const loadServers = () => async (dispatch) => {
     const res = await fetch("/api/servers/");
     const servers = await res.json();
+    console.log(servers);
     dispatch(load(servers));
 };
 

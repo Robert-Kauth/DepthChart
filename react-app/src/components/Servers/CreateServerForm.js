@@ -23,11 +23,11 @@ export default function CreateServerForm({ setShowModal }) {
 
     const validateServer = () => {
         const errors = [];
-        if (!name.length) {
-            errors.push("We need to know the name of your server");
+        if (!name.length || name.length < 4) {
+            errors.push("Server name should be at least 5 characters long");
         }
         if (topic.length < 5) {
-            errors.push("Your server needs a topic of at least 5 characters");
+            errors.push("Server topic should be at least 5 characters long");
         }
         if (!isValidURL(icon)) errors.push("Please provide a valid URL");
         setErrors(errors);
@@ -49,46 +49,63 @@ export default function CreateServerForm({ setShowModal }) {
         }
     };
 
+    const updateName = (e) => {
+        setErrors([]);
+        setName(e.target.value);
+    };
+
+    const updateTopic = (e) => {
+        setErrors([]);
+        setTopic(e.target.value);
+    };
+
+    const updateIcon = (e) => {
+        setErrors([]);
+        setIcon(e.target.value);
+    };
+
     return (
-        <div>
+        <>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Create New Server</legend>
-                    {errors.map((error, ind) => (
-                        <div>
-                            <legend>Errors:</legend>
-                            <div key={ind}>{error}</div>
+                    <ul className={styles.errors}>
+                        {errors.map((error, idx) => (
+                            <li className={styles.error} key={idx}>
+                                {error}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className={styles.inputs}>
+                        <div className={styles.nameWrapper}>
+                            <label className={styles.nameLabel} htmlFor="name">
+                                Name:
+                            </label>
+                            <input
+                                type="text"
+                                name="name"
+                                onChange={updateName}
+                                value={name}
+                            />
                         </div>
-                    ))}
-                    <div>
-                        <label htmlFor="name">Name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Topic</label>
-                        <input
-                            type="text"
-                            name="topic"
-                            onChange={(e) => setTopic(e.target.value)}
-                            value={topic}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Icon</label>
-                        <input
-                            type="url"
-                            name="icon"
-                            onChange={(e) => setIcon(e.target.value)}
-                            value={icon}
-                            required
-                        />
+                        <div className={styles.topicWrapper}>
+                            <label className={styles.topicLabel}>Topic:</label>
+                            <input
+                                type="text"
+                                name="topic"
+                                onChange={updateTopic}
+                                value={topic}
+                            />
+                        </div>
+                        <div className={styles.iconWrapper}>
+                            <label className={styles.iconLabel}>Icon:</label>
+                            <input
+                                type="url"
+                                name="icon"
+                                onChange={updateIcon}
+                                value={icon}
+                            />
+                        </div>
                     </div>
                     <div className={styles.buttonContainer}>
                         <button className={styles.button} type="submit">
@@ -97,6 +114,6 @@ export default function CreateServerForm({ setShowModal }) {
                     </div>
                 </fieldset>
             </form>
-        </div>
+        </>
     );
 }

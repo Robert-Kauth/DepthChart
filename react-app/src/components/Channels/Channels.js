@@ -32,14 +32,15 @@ export default function Channels({ serverId }) {
 
     return (
         <div className={styles.channelsWrapper}>
+            <p className={styles.title}>Channels</p>
             {serverChannels.length ? (
                 serverChannels.map((channel) => (
                     <ChannelCard key={channel.id} channel={channel} />
                 ))
             ) : (
-                <div>
-                    <h2>No Channels yet</h2>
-                    <h3>Click + to create one</h3>
+                <div className={styles.msgContainer}>
+                    <p className={styles.msg}>No Channels Exist</p>
+                    <p className={styles.msg}>Click + to create one</p>
                 </div>
             )}
             <div>
