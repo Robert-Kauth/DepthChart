@@ -1,36 +1,38 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { loadChannels } from "../../store/channels";
-import { loadUsers } from "../../store/users";
+import { getMessagedUsers } from "../../store/messages";
 
 import styles from "./MessageCard.module.css";
 // className={styles. }
 
 export default function MessageCard({ message }) {
     const dispatch = useDispatch();
-    // console.log(message);
 
-    const channels = useSelector((state) => state.channels);
-    const users = useSelector((state) => state.users);
+    const messagedUser = useSelector((state) => state.messages.messaged_users);
+    console.log(messagedUser, "messageduser");
 
+    let avatar;
+    if (messagedUser) {
+        avatar = messagedUser[messagedUser.id]?.avatar;
+    }
+    console.log(avatar);
     useEffect(() => {
-        dispatch(loadChannels());
-        dispatch(loadUsers());
-    }, [dispatch]);
+        dispatch(getMessagedUsers(message.id));
+    }, [dispatch, message.id]);
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.channelInfo}>
                 <div className={styles.name}>
-                    {channels ? channels[message.channel_id]?.name : null}
+                    {messagedUser ? messagedUser.username : null}
                 </div>
                 <div className={styles.iconWrapper}>
-                    {channels ? (
+                    {messagedUser ? (
                         <img
                             className={styles.icon}
-                            src={channels[message.channel_id]?.icon}
-                            alt="channel icon"
+                            src={messagedUser[messagedUser.id]?.avatar}
+                            alt="user avatar"
                         />
                     ) : (
                         <img
