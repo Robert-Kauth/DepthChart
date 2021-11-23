@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    max-height: 98%;
+    max-height: 93%;
 }
 
 .messages {
