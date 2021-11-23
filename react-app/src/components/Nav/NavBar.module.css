@@ -44,8 +44,8 @@
     padding: 10px;
 }
 .link:hover {
-    background-color: aliceblue;
     font-weight: bold;
+    background-color: #0bda51;
 }
 
 .active {
