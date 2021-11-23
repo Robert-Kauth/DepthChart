@@ -9,14 +9,14 @@ import styles from "./MessageCard.module.css";
 export default function MessageCard({ message }) {
     const dispatch = useDispatch();
 
+    const users = useSelector((state) => state.users);
     const messagedUser = useSelector((state) => state.messages.messaged_users);
-    console.log(messagedUser, "messageduser");
 
-    let avatar;
+    let recipient_id;
     if (messagedUser) {
-        avatar = messagedUser[messagedUser.id]?.avatar;
+        recipient_id = messagedUser[message.id].recipient_ids;
     }
-    console.log(avatar);
+
     useEffect(() => {
         dispatch(getMessagedUsers(message.id));
     }, [dispatch, message.id]);
@@ -25,13 +25,15 @@ export default function MessageCard({ message }) {
         <div className={styles.wrapper}>
             <div className={styles.channelInfo}>
                 <div className={styles.name}>
-                    {messagedUser ? messagedUser.username : null}
+                    {recipient_id && users
+                        ? users[recipient_id].username
+                        : null}
                 </div>
                 <div className={styles.iconWrapper}>
-                    {messagedUser ? (
+                    {recipient_id && users ? (
                         <img
                             className={styles.icon}
-                            src={messagedUser[messagedUser.id]?.avatar}
+                            src={users[recipient_id].avatar}
                             alt="user avatar"
                         />
                     ) : (

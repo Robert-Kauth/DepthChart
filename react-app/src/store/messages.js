@@ -51,7 +51,6 @@ export const loadAllUserMessages = (userId) => async (dispatch) => {
 export const getMessagedUsers = (message_id) => async (dispatch) => {
     const res = await fetch(`/api/messages/recipients/${message_id}`);
     const messaged_users = await res.json();
-    console.log(messaged_users, "messaged users thunk");
     dispatch(get(messaged_users));
 };
 
