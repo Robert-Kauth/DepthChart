@@ -15,12 +15,17 @@ const Button = styled.button`
     margin: 0;
     padding-top: 5px;
 `;
+
+const StyledIcon = styled(Icon)`
+    width: 1rem;
+    height: 1rem;
+`;
 export default function EditChannelModal({ channel }) {
     const [showModal, setShowModal] = useState(false);
     return (
         <div className={styles.wrapper}>
             <Button onClick={() => setShowModal(true)}>
-                <Icon path={mdiCircleEditOutline} size={1} />
+                <StyledIcon path={mdiCircleEditOutline} size={1} />
             </Button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
