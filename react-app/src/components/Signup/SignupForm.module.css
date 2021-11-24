@@ -37,8 +37,8 @@
 
 .usernameWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .usernameLabel {
@@ -51,8 +51,8 @@
 
 .avatarWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .avatarLabel {
@@ -65,8 +65,8 @@
 
 .emailWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .emailLabel {
@@ -79,8 +79,8 @@
 
 .passwordWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .passwordLabel {
