@@ -53,9 +53,9 @@ def load_received_messages(user_id):
 # @login_required
 def load_message_recipients(message_id):
     '''
-    Gets all users associated with a particular message_id
+    Gets all users(recipient_ids and sender_id) associated with a particular message_id
     '''
-    return {user.id: user.to_dict() for user in User.query.join(User_message, User.id == User_message.recipient_ids).filter(User_message.message_id == message_id).all()}
+    return{user_message.message_id: user_message.to_dict() for user_message in User_message.query.all()}
 
 
 @message_routes.route('/', methods=['POST'])

@@ -4,12 +4,13 @@ import { useDispatch } from "react-redux";
 import { destroyServer } from "../../store/servers";
 
 import styles from "./DeleteButton.module.css";
+// className={styles. }
 
 export default function DeleteButton({ selectedServer, setShowModal }) {
     const dispatch = useDispatch();
 
     const [choice, setChoice] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [error, setError] = useState("");
 
     const deleteServer = (e) => {
         e.preventDefault();
@@ -18,33 +19,44 @@ export default function DeleteButton({ selectedServer, setShowModal }) {
             dispatch(destroyServer(selectedServer.id));
             setShowModal(false);
         } else {
-            setErrors("Must input correct server name to delete");
+            setError("Must input correct server name to delete");
         }
+    };
+    const updateChoice = (e) => {
+        setError("");
+        setChoice(e.target.value);
     };
 
     return (
-        <div>
-            <ul className={styles.errors}>
-                {errors.map((error, idx) => (
-                    <li className={styles.error} key={idx}>
-                        {error}
-                    </li>
-                ))}
-            </ul>
-            <p>Once you delete a server there is no turning back.</p>
-            <div>
-                <label>
+        <div className={styles.deleteWrapper}>
+            <div className={styles.warningContainer}>
+                <p className={styles.deleteWarning}>
+                    Once you delete a server there is no turning back.
+                </p>
+            </div>
+            <div className={styles.delete}>
+                <label className={styles.deleteWarningLabel}>
                     Type the servers name and click delete to permanently delete
                     server
                 </label>
-                <input
-                    type="text"
-                    value={choice}
-                    placeholder={selectedServer.name}
-                    onChange={(e) => setChoice(e.target.value)}
-                />
+                <ul className={styles.error}>
+                    <li className={styles.indivError}>{error}</li>
+                </ul>
+                <div>
+                    <input
+                        className={styles.deleteInput}
+                        type="text"
+                        value={choice}
+                        placeholder={selectedServer.name}
+                        onChange={updateChoice}
+                    />
+                </div>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.button} onClick={deleteServer}>
+                        Delete Server
+                    </button>
+                </div>
             </div>
-            <button onClick={deleteServer}>Delete Server</button>
         </div>
     );
 }

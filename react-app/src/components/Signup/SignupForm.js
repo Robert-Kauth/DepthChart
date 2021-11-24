@@ -26,8 +26,6 @@ export default function SignupForm({ setShowModal }) {
             );
             if (data) {
                 setErrors(data);
-            } else {
-                setShowModal(false);
             }
         }
     };
@@ -58,6 +56,7 @@ export default function SignupForm({ setShowModal }) {
     };
 
     if (user) {
+        setShowModal(false);
         return <Redirect to="/" />;
     }
 
@@ -68,7 +67,9 @@ export default function SignupForm({ setShowModal }) {
                     <legend className={styles.legend}>Sign Up</legend>
                     <ul className={styles.errors}>
                         {errors.map((error, idx) => (
-                            <li key={idx}>{error}</li>
+                            <li className={styles.error} key={idx}>
+                                {error}
+                            </li>
                         ))}
                     </ul>
                     <div className={styles.inputs}>
@@ -124,7 +125,7 @@ export default function SignupForm({ setShowModal }) {
                                 name="repeat_password"
                                 onChange={updateRepeatPassword}
                                 value={repeatPassword}
-                                required={true}></input>
+                            />
                         </div>
                         <div className={styles.buttonContainer}>
                             <button className={styles.button} type="submit">

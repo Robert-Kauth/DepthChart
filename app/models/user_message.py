@@ -4,13 +4,12 @@ from .db import db
 class User_message(db.Model):
     __tablename__ = 'user_messages'
 
-    id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete="CASCADE"))
     recipient_ids = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
     message_id = db.Column(db.Integer, db.ForeignKey(
-        'messages.id', ondelete='CASCADE'))
+        'messages.id', ondelete='CASCADE'), primary_key=True)
     is_read = db.Column(db.Boolean)
 
     sender = db.relationship(
@@ -22,7 +21,6 @@ class User_message(db.Model):
 
     def to_dict(self):
         return {
-            'id': self.id,
             'sender_id': self.sender_id,
             'recipient_ids': self.recipient_ids,
             'message_id': self.message_id,

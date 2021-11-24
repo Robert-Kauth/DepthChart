@@ -21,74 +21,107 @@
 }
 
 .errors {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 0 0 20px 0;
 }
 
 .error {
     color: #bfc1c2;
     font-size: 25px;
-    font-weight: 300px;
+    font-weight: 500px;
     padding: 2px;
 }
 
-.usernameWrapper {
+.serverSelect {
     display: flex;
     align-items: flex-end;
     padding: 5px;
 }
 
-.usernameLabel {
-    justify-content: center;
+.serverNameLabelWrapper {
     color: #029e7e;
     font-size: 40px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
-.avatarWrapper {
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nameWrapper {
     display: flex;
     align-items: flex-end;
     padding: 5px;
 }
 
-.avatarLabel {
-    justify-content: center;
+.nameLabel {
     color: #029e7e;
     font-size: 40px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
-.emailWrapper {
+.topicWrapper {
     display: flex;
     align-items: flex-end;
     padding: 5px;
 }
 
-.emailLabel {
-    justify-content: center;
+.topicLabel {
     color: #029e7e;
     font-size: 40px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
-
-.passwordWrapper {
+.iconInput {
     display: flex;
     align-items: flex-end;
     padding: 5px;
 }
 
-.passwordLabel {
+.iconWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    padding: 10px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    background-color: black;
+}
+.iconButtonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+.iconLabel {
     color: #029e7e;
     font-size: 40px;
     padding: 0 5px 0 0;
-    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+    text-shadow: 1px 1px 1px darkgreen, 2px 2px 2px darkgreen;
+}
+
+.iconImg {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.newIcon {
+    padding: 0 10px;
+}
+
+.deleteContainer {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0 0 0;
 }
 
 .buttonContainer {
@@ -98,9 +131,24 @@
 }
 
 .button {
-    margin: 5px;
-    width: 150px;
-    font-size: 20px;
+    padding: 0 10px;
+    font-size: 30px;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     background-color: #029e7e;
+}
+
+.button:hover {
+    background-color: #03b48f;
+}
+
+.deleteButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.updateContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
