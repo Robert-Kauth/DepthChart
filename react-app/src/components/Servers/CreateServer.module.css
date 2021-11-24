@@ -7,8 +7,7 @@
 .field {
     color: black;
     border: 4px solid #029e7e;
-    padding: 50px 50px 25px 50px;
-    min-height: 385px;
+    padding: 25px;
 }
 
 .legend {
@@ -20,27 +19,23 @@
     color: black;
 }
 
-.errors {
-    padding: 0 0 20px 0;
-}
-
 .error {
     color: #bfc1c2;
     font-size: 20px;
-    font-weight: 300px;
-    padding: 2px;
+    font-weight: 300;
 }
 
 .inputs {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .nameWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .nameLabel {
@@ -52,8 +47,8 @@
 
 .topicWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .topicLabel {
@@ -65,8 +60,8 @@
 
 .iconWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .iconLabel {
@@ -85,7 +80,7 @@
 .button {
     padding: 0 10px;
     font-size: 30px;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    font-weight: 800;
     background-color: #029e7e;
 }
 

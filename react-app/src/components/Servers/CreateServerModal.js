@@ -21,8 +21,8 @@ const Button = styled.button`
 `;
 
 const StyledIcon = styled(Icon)`
-    width: 2rem;
-    height: 2rem;
+    width: 1rem;
+    height: 1rem;
 `;
 export default function CreateServerModal() {
     const [showModal, setShowModal] = useState(false);
