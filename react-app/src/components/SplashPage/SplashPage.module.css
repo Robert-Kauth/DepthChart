@@ -1,9 +1,7 @@
 .splash {
     height: 100%;
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Assets/NFLbackground.jpg);
-    background-size: 100% 95%;
-    background-repeat: no-repeat;
-    background-attachment: scroll, local;
+    background-size: cover;
 }
 
 .modalWrapper {
