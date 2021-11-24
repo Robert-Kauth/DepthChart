@@ -10,10 +10,13 @@ import styles from "./EditChannelModal.module.css";
 // className={styles. }
 
 const Button = styled.button`
-    border-radius: 5px;
-    background-color: aliceblue;
-    margin: 0;
+    background-color: rgb(1, 68, 33);
+    color: rgb(2, 158, 126);
+    margin: 0px;
     padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: lightgreen 0px 0px 5px;
 `;
 
 const StyledIcon = styled(Icon)`

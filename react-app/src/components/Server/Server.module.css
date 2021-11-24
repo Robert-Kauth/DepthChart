@@ -9,11 +9,10 @@
 .servers {
     display: flex;
     background-color: #2e8b57;
-    padding: 0 10px;
+    padding: 5px 10px;
 }
 
 .channels {
     display: flex;
     flex-direction: column;
-    max-height: 98%;
 }

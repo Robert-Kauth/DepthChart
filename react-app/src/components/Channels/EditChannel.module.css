@@ -1,0 +1,116 @@
+.form {
+    background-color: #195905;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.field {
+    color: black;
+    border: 4px solid #029e7e;
+    padding: 25px;
+    min-height: 385px;
+}
+
+.legend {
+    background-color: #029e7e;
+    font-size: 50px;
+    padding: 10px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    border-radius: 5px;
+    color: black;
+}
+
+.error {
+    color: #bfc1c2;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 2px;
+}
+
+.nameWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.nameLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.topicWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.topicLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+.iconInput {
+    display: flex;
+    align-items: center;
+}
+
+.iconWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    background-color: black;
+}
+.iconButtonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+.iconLabel {
+    color: #029e7e;
+    font-size: 40px;
+    text-shadow: 1px 1px 1px darkgreen, 2px 2px 2px darkgreen;
+}
+
+.deleteContainer {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0 0 0;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    padding: 0 10px;
+    font-size: 30px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    background-color: #029e7e;
+}
+
+.button:hover {
+    background-color: #03b48f;
+}
+
+.deleteButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.updateContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
