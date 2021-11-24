@@ -44,6 +44,13 @@
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .nameWrapper {
     display: flex;
     align-items: flex-end;

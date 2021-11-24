@@ -141,7 +141,7 @@ export default function EditServer({ setShowModal }) {
                         </div>
                     )}
                     {serverId && (
-                        <div>
+                        <div className={styles.inputWrapper}>
                             <div className={styles.nameWrapper}>
                                 <label className={styles.nameLabel}>Name</label>
                                 <input
