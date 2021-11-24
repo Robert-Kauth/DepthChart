@@ -20,15 +20,8 @@
     color: black;
 }
 
-.errors {
-    padding: 0 0 20px 0;
-}
-
 .error {
     color: #bfc1c2;
-    font-size: 20px;
-    font-weight: 300px;
-    padding: 2px;
 }
 
 .inputs {
@@ -39,8 +32,8 @@
 
 .emailWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .emailLabel {
@@ -53,8 +46,8 @@
 
 .passwordWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .passwordLabel {
@@ -72,13 +65,12 @@
 .loginButtonContainer {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
 }
 .loginButton {
     margin: 5px;
     width: 100px;
     font-size: 20px;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    font-weight: 800;
     background-color: #029e7e;
 }
 
