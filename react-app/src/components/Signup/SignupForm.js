@@ -26,8 +26,6 @@ export default function SignupForm({ setShowModal }) {
             );
             if (data) {
                 setErrors(data);
-            } else {
-                setShowModal(false);
             }
         }
     };
@@ -58,6 +56,7 @@ export default function SignupForm({ setShowModal }) {
     };
 
     if (user) {
+        setShowModal(false);
         return <Redirect to="/" />;
     }
 
