@@ -101,6 +101,6 @@
     margin: 5px;
     width: 150px;
     font-size: 20px;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    font-weight: 800;
     background-color: #029e7e;
 }
