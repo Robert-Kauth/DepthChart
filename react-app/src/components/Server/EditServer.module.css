@@ -7,7 +7,7 @@
 .field {
     color: black;
     border: 4px solid #029e7e;
-    padding: 50px 50px 25px 50px;
+    padding: 25px;
     min-height: 385px;
 }
 
@@ -20,10 +20,6 @@
     color: black;
 }
 
-.errors {
-    padding: 0 0 20px 0;
-}
-
 .error {
     color: #bfc1c2;
     font-size: 25px;
@@ -33,7 +29,7 @@
 
 .serverSelect {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     padding: 5px;
 }
 
@@ -53,8 +49,7 @@
 
 .nameWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
 }
 
 .nameLabel {
@@ -66,8 +61,7 @@
 
 .topicWrapper {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
 }
 
 .topicLabel {
@@ -78,8 +72,7 @@
 }
 .iconInput {
     display: flex;
-    align-items: flex-end;
-    padding: 5px;
+    align-items: center;
 }
 
 .iconWrapper {
@@ -87,7 +80,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 5px;
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
@@ -105,7 +98,6 @@
 .iconLabel {
     color: #029e7e;
     font-size: 40px;
-    padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px darkgreen, 2px 2px 2px darkgreen;
 }
 
@@ -127,7 +119,6 @@
 .buttonContainer {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
 }
 
 .button {
@@ -150,5 +141,5 @@
 .updateContainer {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
