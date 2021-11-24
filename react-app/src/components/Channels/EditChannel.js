@@ -66,42 +66,58 @@ export default function EditChannel({ channel, setShowModal }) {
             setShowModal(false);
         }
     };
+
+    const updateName = (e) => {
+        setErrors([]);
+        setName(e.target.value);
+    };
+
+    const updateTopic = (e) => {
+        setErrors([]);
+        setTopic(e.target.value);
+    };
+
+    const updateIcon = (e) => {
+        setErrors([]);
+        setIcon(e.target.value);
+    };
+
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <legend>Edit Channel Info</legend>
-                    <div>
-                        {errors.map((error, idx) => (
-                            <div key={idx}>
-                                <legend>Error:</legend>
-                                <div>{error}</div>
-                            </div>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <fieldset className={styles.field}>
+                    <legend className={styles.legend}>Edit Channel Info</legend>
+                    <ul className={styles.errors}>
+                        {errors.map((error, ind) => (
+                            <li className={styles.error} key={ind}>
+                                {error}
+                            </li>
                         ))}
-                    </div>
-                    <div>
-                        <label>Name</label>
+                    </ul>
+                    <div className={styles.nameWrapper}>
+                        <label className={styles.nameLabel}>Name</label>
                         <input
                             type="text"
                             value={name}
                             placeholder={channel.name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={updateName}
                             required
                         />
                     </div>
-                    <div>
-                        <label>Topic</label>
+                    <div className={styles.topicWrapper}>
+                        <label className={styles.topicLabel}>Topic</label>
                         <input
                             type="text"
                             value={topic}
                             placeholder={channel.topic}
-                            onChange={(e) => setTopic(e.target.value)}
+                            onChange={updateTopic}
                             required
                         />
                     </div>
-                    <div>
+                    <div className={styles.iconButtonWrapper}>
                         {!newIcon ? (
                             <button
+                                className={styles.button}
                                 type="button"
                                 value={newIcon}
                                 onClick={setShowField}>
@@ -109,6 +125,7 @@ export default function EditChannel({ channel, setShowModal }) {
                             </button>
                         ) : (
                             <button
+                                className={styles.button}
                                 type="button"
                                 value={newIcon}
                                 onClick={setShowField}>
@@ -118,25 +135,23 @@ export default function EditChannel({ channel, setShowModal }) {
                     </div>
                     <div>
                         {newIcon && (
-                            <div>
-                                <label>New Icon URL</label>
+                            <div className={styles.iconWrapper}>
+                                <label className={styles.iconLabel}>
+                                    New Icon URL
+                                </label>
                                 <input
                                     type="url"
                                     value={icon}
-                                    onChange={(e) => setIcon(e.target.value)}
+                                    onChange={updateIcon}
                                 />
                             </div>
                         )}
                     </div>
                     <div className={styles.buttonContainer}>
-                        <div>
-                            <button className={styles.button} type="submit">
-                                Update
-                            </button>
-                        </div>
-                        <div>
+                        <div className={styles.deleteContainer}>
                             {!showDelete ? (
                                 <button
+                                    className={styles.button}
                                     type="button"
                                     value={showDelete}
                                     onClick={renderDelete}>
@@ -144,6 +159,7 @@ export default function EditChannel({ channel, setShowModal }) {
                                 </button>
                             ) : (
                                 <button
+                                    className={styles.button}
                                     type="button"
                                     value={showDelete}
                                     onClick={renderDelete}>
@@ -151,14 +167,19 @@ export default function EditChannel({ channel, setShowModal }) {
                                 </button>
                             )}
                         </div>
-                        <div>
+                        <div className={styles.deleteButtonContainer}>
                             {showDelete && (
-                                <div className={styles.delete}>
-                                    <DeleteChannelButton
-                                        channel={channel}
-                                        setShowModal={setShowModal}
-                                    />
-                                </div>
+                                <DeleteChannelButton
+                                    channel={channel}
+                                    setShowModal={setShowModal}
+                                />
+                            )}
+                        </div>
+                        <div className={styles.updateContainer}>
+                            {!showDelete && (
+                                <button className={styles.button}>
+                                    Update Channel
+                                </button>
                             )}
                         </div>
                     </div>
