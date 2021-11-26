@@ -44,8 +44,9 @@ export default function CreateServerForm({ setShowModal }) {
             const data = await dispatch(createServer({ name, topic, icon }));
             if (data) {
                 setErrors(data);
+            } else {
+                setShowModal(false);
             }
-            setShowModal(false);
         }
     };
 
