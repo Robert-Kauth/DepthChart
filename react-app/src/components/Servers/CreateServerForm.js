@@ -23,10 +23,10 @@ export default function CreateServerForm({ setShowModal }) {
 
     const validateServer = () => {
         const errors = [];
-        if (!name.length || name.length < 4) {
+        if (name.length <= 5) {
             errors.push("Server name should be at least 5 characters long");
         }
-        if (topic.length < 5) {
+        if (topic.length <= 5) {
             errors.push("Server topic should be at least 5 characters long");
         }
         if (!isValidURL(icon)) errors.push("Please provide a valid URL");
