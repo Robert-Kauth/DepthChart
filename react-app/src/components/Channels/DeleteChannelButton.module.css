@@ -1,3 +1,10 @@
 .wrapper {
     display: flex;
 }
+
+.errors {
+    color: #e32636;
+    font-size: 25px;
+    padding: 10px 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}

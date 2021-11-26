@@ -22,16 +22,10 @@ export default function DeleteChannelButton({ channel, setShowModal }) {
             setErrors("Must input correct channel name to delete");
         }
     };
+    console.log(errors, "delete errors");
 
     return (
         <div>
-            <ul className={styles.errors}>
-                {errors.map((error, idx) => (
-                    <li className={styles.error} key={idx}>
-                        {error}
-                    </li>
-                ))}
-            </ul>
             <p>Once you delete a channel there is no turning back.</p>
             <div>
                 <div>
@@ -40,6 +34,9 @@ export default function DeleteChannelButton({ channel, setShowModal }) {
                         delete channel
                     </label>
                 </div>
+                <ul className={styles.errors}>
+                    <li className={styles.error}>{errors}</li>
+                </ul>
                 <div>
                     <input
                         type="text"
