@@ -20,6 +20,13 @@
     color: black;
 }
 
+.errors {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .error {
     color: #bfc1c2;
     font-size: 25px;

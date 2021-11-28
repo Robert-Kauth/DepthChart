@@ -14,7 +14,7 @@ export default function MessageCard({ message }) {
     const messagedUser = useSelector((state) => state.messages.messaged_users);
 
     let recipient_id;
-    if (messagedUser) {
+    if (messagedUser && message) {
         recipient_id = messagedUser[message.id].recipient_ids;
     }
 
