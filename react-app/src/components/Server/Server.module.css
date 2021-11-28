@@ -11,10 +11,14 @@
     background-color: transparent;
     padding: 5px 10px;
     max-height: 95%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 .channels {
     display: flex;
     flex-direction: column;
     max-height: 95%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 }

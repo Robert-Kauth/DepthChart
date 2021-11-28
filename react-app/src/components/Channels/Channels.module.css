@@ -1,6 +1,7 @@
 .channelsWrapper {
     display: flex;
     flex-direction: column;
+    max-height: 95%;
 }
 
 .title {
