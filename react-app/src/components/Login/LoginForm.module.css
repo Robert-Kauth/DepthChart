@@ -8,7 +8,6 @@
     color: black;
     border: 4px solid #029e7e;
     padding: 25px;
-    min-height: 385px;
 }
 
 .legend {
@@ -20,14 +19,26 @@
     color: black;
 }
 
+.errors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 20px 0;
+}
+
 .error {
     color: #bfc1c2;
+    font-size: 25px;
+    font-weight: 300;
+    padding: 2px;
 }
 
 .inputs {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 5px 0;
 }
 
 .emailWrapper {
