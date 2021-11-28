@@ -95,23 +95,21 @@ export default function EditChannel({ channel, setShowModal }) {
                         ))}
                     </ul>
                     <div className={styles.nameWrapper}>
-                        <label className={styles.nameLabel}>Name</label>
+                        <label className={styles.nameLabel}>Name:</label>
                         <input
                             type="text"
                             value={name}
                             placeholder={channel.name}
                             onChange={updateName}
-                            required
                         />
                     </div>
                     <div className={styles.topicWrapper}>
-                        <label className={styles.topicLabel}>Topic</label>
+                        <label className={styles.topicLabel}>Topic:</label>
                         <input
                             type="text"
                             value={topic}
                             placeholder={channel.topic}
                             onChange={updateTopic}
-                            required
                         />
                     </div>
                     <div className={styles.iconButtonWrapper}>
@@ -121,7 +119,7 @@ export default function EditChannel({ channel, setShowModal }) {
                                 type="button"
                                 value={newIcon}
                                 onClick={setShowField}>
-                                Update Icon
+                                Update Icon?
                             </button>
                         ) : (
                             <button
@@ -137,7 +135,7 @@ export default function EditChannel({ channel, setShowModal }) {
                         {newIcon && (
                             <div className={styles.iconWrapper}>
                                 <label className={styles.iconLabel}>
-                                    New Icon URL
+                                    Icon URL:
                                 </label>
                                 <input
                                     type="url"
@@ -155,7 +153,7 @@ export default function EditChannel({ channel, setShowModal }) {
                                     type="button"
                                     value={showDelete}
                                     onClick={renderDelete}>
-                                    Want to Delete Channel?
+                                    Delete Channel?
                                 </button>
                             ) : (
                                 <button
