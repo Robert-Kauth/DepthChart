@@ -1,3 +1,97 @@
 .form {
+    background-color: #195905;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.field {
+    color: black;
+    border: 4px solid #029e7e;
+    padding: 25px;
+}
+
+.legend {
+    background-color: #029e7e;
+    font-size: 50px;
+    padding: 10px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    border-radius: 5px;
+    color: black;
+}
+
+.errors {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    color: #bfc1c2;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 5px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nameWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nameLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.topicWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topicLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconLabel {
+    color: #029e7e;
+    font-size: 40px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button {
+    padding: 0 10px;
+    font-size: 30px;
+    font-weight: 800;
+    background-color: #029e7e;
+}
+
+.button:hover {
+    background-color: #03b48f;
 }

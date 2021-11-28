@@ -47,7 +47,6 @@ export default function CreateServerForm({ setShowModal }) {
                 setErrors(data);
             } else {
                 setShowModal(false);
-                return <Redirect to="/" />;
             }
         }
     };
