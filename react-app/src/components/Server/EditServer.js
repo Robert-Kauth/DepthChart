@@ -68,14 +68,14 @@ export default function EditServer({ setShowModal }) {
             if (!icon) {
                 edit = {
                     id: serverId,
-                    name: selectedServer.name,
+                    name,
                     topic,
                     icon: selectedServer.icon,
                 };
             } else {
                 edit = {
                     id: serverId,
-                    name: selectedServer.name,
+                    name,
                     topic,
                     icon,
                 };
