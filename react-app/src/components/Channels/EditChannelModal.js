@@ -6,9 +6,6 @@ import { mdiCircleEditOutline } from "@mdi/js";
 import { Modal } from "../../Context";
 import EditChannel from "./EditChannel";
 
-import styles from "./EditChannelModal.module.css";
-// className={styles. }
-
 const Button = styled.button`
     background-color: rgb(1, 68, 33);
     color: rgb(2, 158, 126);
@@ -30,7 +27,7 @@ const StyledIcon = styled(Icon)`
 export default function EditChannelModal({ channel }) {
     const [showModal, setShowModal] = useState(false);
     return (
-        <div className={styles.wrapper}>
+        <>
             <Button onClick={() => setShowModal(true)}>
                 <StyledIcon path={mdiCircleEditOutline} size={1} />
             </Button>
@@ -42,6 +39,6 @@ export default function EditChannelModal({ channel }) {
                     />
                 </Modal>
             )}
-        </div>
+        </>
     );
 }
