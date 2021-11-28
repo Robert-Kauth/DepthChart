@@ -30,11 +30,13 @@
 .nameWrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 .nameLabel {
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
@@ -42,17 +44,22 @@
 .topicWrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 10px 0;
 }
 
 .topicLabel {
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 .iconInput {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 .iconWrapper {
@@ -61,6 +68,7 @@
     align-items: center;
     justify-content: center;
     padding: 5px;
+    margin: 5px 0;
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
@@ -72,13 +80,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 5px;
+    margin: 5px;
 }
 
 .iconLabel {
     color: #029e7e;
-    font-size: 40px;
-    text-shadow: 1px 1px 1px darkgreen, 2px 2px 2px darkgreen;
+    font-size: 30px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.newIconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0 0 0;
+}
+.newIconLabel {
+    color: #029e7e;
+    font-size: 30px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .deleteContainer {
@@ -89,6 +111,8 @@
 
 .buttonContainer {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
@@ -97,6 +121,7 @@
     font-size: 30px;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     background-color: #029e7e;
+    max-height: 50px;
 }
 
 .button:hover {
@@ -106,7 +131,7 @@
 .deleteButtonContainer {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .updateContainer {

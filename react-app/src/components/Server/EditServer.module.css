@@ -8,7 +8,7 @@
     color: black;
     border: 4px solid #029e7e;
     padding: 25px;
-    min-height: 385px;
+    min-width: 50vh;
 }
 
 .legend {
@@ -20,6 +20,13 @@
     color: black;
 }
 
+.errors {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .error {
     color: #bfc1c2;
     font-size: 25px;
@@ -27,9 +34,17 @@
     padding: 2px;
 }
 
+.selectWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .serverSelect {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 5px;
 }
 
@@ -50,11 +65,13 @@
 .nameWrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 .nameLabel {
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
@@ -62,17 +79,22 @@
 .topicWrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 .topicLabel {
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 .iconInput {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 .iconWrapper {
@@ -81,6 +103,7 @@
     align-items: center;
     justify-content: center;
     padding: 5px;
+    margin: 5px 0;
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
@@ -92,13 +115,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 5px;
+    margin: 5px;
 }
 
 .iconLabel {
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     text-shadow: 1px 1px 1px darkgreen, 2px 2px 2px darkgreen;
+}
+.newIconLabel {
+    color: #029e7e;
+    font-size: 30px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.newIconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0 0 0;
 }
 
 .iconImg {
@@ -135,7 +171,7 @@
 .deleteButtonContainer {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .updateContainer {

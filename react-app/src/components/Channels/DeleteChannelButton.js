@@ -10,7 +10,7 @@ export default function DeleteChannelButton({ channel, setShowModal }) {
     const dispatch = useDispatch();
 
     const [choice, setChoice] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [error, setError] = useState("");
 
     const deleteChannel = (e) => {
         e.preventDefault();
@@ -19,34 +19,45 @@ export default function DeleteChannelButton({ channel, setShowModal }) {
             dispatch(destroyChannel(channel.id));
             setShowModal(false);
         } else {
-            setErrors("Must input correct channel name to delete");
+            setError("Must input correct channel name to delete");
         }
     };
-    console.log(errors, "delete errors");
+
+    const updateChoice = (e) => {
+        setError("");
+        setChoice(e.target.value);
+    };
 
     return (
-        <div>
-            <p>Once you delete a channel there is no turning back.</p>
-            <div>
-                <div>
-                    <label>
-                        Type the channel name and click delete to permanently
-                        delete channel
-                    </label>
-                </div>
-                <ul className={styles.errors}>
-                    <li className={styles.error}>{errors}</li>
+        <div className={styles.deleteWrapper}>
+            <div className={styles.warningContainer}>
+                <p className={styles.deleteWarning}>
+                    Once you delete a channel there is no turning back.
+                </p>
+            </div>
+            <div className={styles.delete}>
+                <label className={styles.deleteWarningLabel}>
+                    Type the channels name and click delete to permanently
+                    delete
+                </label>
+                <ul className={styles.error}>
+                    <li className={styles.indivError}>{error}</li>
                 </ul>
                 <div>
                     <input
+                        className={styles.deleteInput}
                         type="text"
                         value={choice}
                         placeholder={channel.name}
-                        onChange={(e) => setChoice(e.target.value)}
+                        onChange={updateChoice}
                     />
                 </div>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.button} onClick={deleteChannel}>
+                        Delete Channel
+                    </button>
+                </div>
             </div>
-            <button onClick={deleteChannel}>Delete Channel</button>
         </div>
     );
 }
