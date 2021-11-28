@@ -56,14 +56,24 @@
 }
 .iconInput {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 .iconWrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 5px;
+    margin: 5px 0;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    background-color: black;
 }
 .iconButtonWrapper {
     display: flex;
@@ -74,6 +84,19 @@
 }
 
 .iconLabel {
+    color: #029e7e;
+    font-size: 30px;
+    padding: 0 5px 0 0;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.newIconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0 0 0;
+}
+.newIconLabel {
     color: #029e7e;
     font-size: 30px;
     padding: 0 5px 0 0;

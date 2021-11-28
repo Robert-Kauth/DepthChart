@@ -112,38 +112,50 @@ export default function EditChannel({ channel, setShowModal }) {
                             onChange={updateTopic}
                         />
                     </div>
-                    <div className={styles.iconButtonWrapper}>
-                        {!newIcon ? (
-                            <button
-                                className={styles.button}
-                                type="button"
-                                value={newIcon}
-                                onClick={setShowField}>
-                                Update Icon?
-                            </button>
-                        ) : (
-                            <button
-                                className={styles.button}
-                                type="button"
-                                value={newIcon}
-                                onClick={setShowField}>
-                                Don't update Icon
-                            </button>
-                        )}
-                    </div>
-                    <div>
-                        {newIcon && (
-                            <div className={styles.iconWrapper}>
-                                <label className={styles.iconLabel}>
-                                    Icon URL:
-                                </label>
-                                <input
-                                    type="url"
-                                    value={icon}
-                                    onChange={updateIcon}
-                                />
-                            </div>
-                        )}
+                    <div className={styles.iconInput}>
+                        <div className={styles.iconWrapper}>
+                            <label className={styles.iconLabel}>
+                                Current Icon
+                            </label>
+                            <img
+                                className={styles.iconImg}
+                                src={channel.icon}
+                                alt="Channel Icon"
+                            />
+                        </div>
+                        <div className={styles.iconButtonWrapper}>
+                            {!newIcon ? (
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    value={newIcon}
+                                    onClick={setShowField}>
+                                    Update Icon?
+                                </button>
+                            ) : (
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    value={newIcon}
+                                    onClick={setShowField}>
+                                    Don't update Icon
+                                </button>
+                            )}
+                        </div>
+                        <div>
+                            {newIcon && (
+                                <div className={styles.newIconWrapper}>
+                                    <label className={styles.newIconLabel}>
+                                        Icon URL:
+                                    </label>
+                                    <input
+                                        type="url"
+                                        value={icon}
+                                        onChange={updateIcon}
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <div className={styles.buttonContainer}>
                         <div className={styles.deleteContainer}>

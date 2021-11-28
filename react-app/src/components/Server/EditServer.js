@@ -143,7 +143,9 @@ export default function EditServer({ setShowModal }) {
                     {serverId && (
                         <div className={styles.inputWrapper}>
                             <div className={styles.nameWrapper}>
-                                <label className={styles.nameLabel}>Name</label>
+                                <label className={styles.nameLabel}>
+                                    Name:
+                                </label>
                                 <input
                                     type="text"
                                     placeholder={selectedServer.name}
@@ -153,7 +155,7 @@ export default function EditServer({ setShowModal }) {
                             </div>
                             <div className={styles.topicWrapper}>
                                 <label className={styles.topicLabel}>
-                                    Topic
+                                    Topic:
                                 </label>
                                 <input
                                     type="text"
@@ -174,7 +176,7 @@ export default function EditServer({ setShowModal }) {
                                     />
                                 </div>
                                 <div className={styles.iconButtonWrapper}>
-                                    <div className={styles.buttonContainer}>
+                                    {!newIcon ? (
                                         <button
                                             className={styles.button}
                                             type="button"
@@ -182,17 +184,30 @@ export default function EditServer({ setShowModal }) {
                                             onClick={setShowField}>
                                             Update Icon?
                                         </button>
-                                    </div>
-                                    <div>
-                                        {newIcon && (
+                                    ) : (
+                                        <button
+                                            className={styles.button}
+                                            type="button"
+                                            value={newIcon}
+                                            onClick={setShowField}>
+                                            Don't update Icon
+                                        </button>
+                                    )}
+                                </div>
+                                <div>
+                                    {newIcon && (
+                                        <div className={styles.newIconWrapper}>
+                                            <label
+                                                className={styles.newIconLabel}>
+                                                Icon URL:
+                                            </label>
                                             <input
-                                                className={styles.newIcon}
                                                 type="url"
                                                 value={icon}
                                                 onChange={updateIcon}
                                             />
-                                        )}
-                                    </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <div className={styles.deleteContainer}>
