@@ -14,7 +14,7 @@ export default function CreateChannel({ setShowModal, currentServer }) {
     const [topic, setTopic] = useState("");
     const [icon, setIcon] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const newChannel = {
             name,
@@ -22,51 +22,70 @@ export default function CreateChannel({ setShowModal, currentServer }) {
             topic,
             icon,
         };
-        const data = dispatch(createChannel(newChannel));
+        const data = await dispatch(createChannel(newChannel));
         if (data) {
-            setErrors(data.errors);
+            setErrors(data);
+        } else {
+            setShowModal(false);
         }
-        setShowModal(false);
+    };
+
+    const updateName = (e) => {
+        setErrors([]);
+        setName(e.target.value);
+    };
+
+    const updateTopic = (e) => {
+        setErrors([]);
+        setTopic(e.target.value);
+    };
+
+    const updateIcon = (e) => {
+        setErrors([]);
+        setIcon(e.target.value);
     };
 
     return (
         <div>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <fieldset>
-                    <legend>Create New Channel</legend>
-                    <div>
-                        {errors.map((error, ind) => (
-                            <div>
-                                <legend>Errors:</legend>
-                                <div key={ind}>{error}</div>
-                            </div>
+                <fieldset className={styles.field}>
+                    <legend className={styles.legend}>
+                        Create New Channel
+                    </legend>
+                    <ul className={styles.errors}>
+                        {errors.map((error, idx) => (
+                            <li className={styles.error} key={idx}>
+                                {error}
+                            </li>
                         ))}
-                    </div>
-                    <div>
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Topic</label>
-                        <input
-                            type="text"
-                            value={topic}
-                            onChange={(e) => setTopic(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Icon</label>
-                        <input
-                            type="url"
-                            value={icon}
-                            onChange={(e) => setIcon(e.target.value)}
-                        />
+                    </ul>
+                    <div className={styles.inputs}>
+                        <div className={styles.nameWrapper}>
+                            <label className={styles.nameLabel} htmlFor="name">
+                                Name:
+                            </label>
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={updateName}
+                            />
+                        </div>
+                        <div className={styles.topicWrapper}>
+                            <label className={styles.topicLabel}>Topic:</label>
+                            <input
+                                type="text"
+                                value={topic}
+                                onChange={updateTopic}
+                            />
+                        </div>
+                        <div className={styles.iconWrapper}>
+                            <label className={styles.iconLabel}>Icon:</label>
+                            <input
+                                type="url"
+                                value={icon}
+                                onChange={updateIcon}
+                            />
+                        </div>
                     </div>
                     <div className={styles.buttonContainer}>
                         <button className={styles.button} type="submit">
