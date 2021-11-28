@@ -22,7 +22,6 @@ export default function MessageCard({ message }) {
     if (messagedUser) {
         sender_id = messagedUser[message.id].sender_id;
     }
-    console.log(sender_id, "sender Id");
 
     useEffect(() => {
         dispatch(getMessagedUsers(message.id));
