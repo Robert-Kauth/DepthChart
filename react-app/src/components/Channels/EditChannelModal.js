@@ -17,6 +17,10 @@ const Button = styled.button`
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: lightgreen 0px 0px 5px;
+    &:hover {
+        background-color: #0bda51;
+        color: #014421;
+    }
 `;
 
 const StyledIcon = styled(Icon)`
