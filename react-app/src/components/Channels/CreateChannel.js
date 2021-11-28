@@ -46,7 +46,7 @@ export default function CreateChannel({ setShowModal, currentServer }) {
     };
 
     return (
-        <div>
+        <>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>
@@ -94,6 +94,6 @@ export default function CreateChannel({ setShowModal, currentServer }) {
                     </div>
                 </fieldset>
             </form>
-        </div>
+        </>
     );
 }
