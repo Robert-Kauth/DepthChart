@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -20,6 +20,7 @@ export default function SignupForm({ setShowModal }) {
 
     const onSignUp = async (e) => {
         e.preventDefault();
+
         if (password === repeatPassword) {
             const data = await dispatch(
                 signUp(username, avatar, email, password)
@@ -55,10 +56,12 @@ export default function SignupForm({ setShowModal }) {
         setAvatar(e.target.value);
     };
 
-    if (user) {
-        setShowModal(false);
-        return <Redirect to="/" />;
-    }
+    useEffect(() => {
+        if (user) {
+            setShowModal(false);
+            <Redirect to="/" />;
+        }
+    }, [setShowModal, user]);
 
     return (
         <div>
@@ -99,10 +102,11 @@ export default function SignupForm({ setShowModal }) {
                             <label className={styles.emailLabel}>Email:</label>
                             <input
                                 autoComplete="email"
-                                type="email"
+                                type="text"
                                 name="email"
                                 onChange={updateEmail}
-                                value={email}></input>
+                                value={email}
+                            />
                         </div>
                         <div className={styles.passwordWrapper}>
                             <label className={styles.passwordLabel}>

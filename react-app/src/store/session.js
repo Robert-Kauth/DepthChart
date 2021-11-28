@@ -54,7 +54,7 @@ export const demoLogin = () => async (dispatch) => {
 
 export const signUp =
     (username, avatar, email, password) => async (dispatch) => {
-        const response = await fetch("/api/auth/signup", {
+        const res = await fetch("/api/auth/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export const signUp =
                 password,
             }),
         });
-        const user = await response.json();
+        const user = await res.json();
         if (user.errors) {
             return user.errors;
         } else dispatch(createSession(user));
