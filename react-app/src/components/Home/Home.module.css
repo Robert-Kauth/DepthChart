@@ -1,10 +1,14 @@
-.homeWrapper {
+.homeBackground {
     display: flex;
     margin: 0;
     min-height: 100%;
     min-width: 100%;
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
     background-size: cover;
+}
+
+.contentWrapper {
+    display: flex;
 }
 
 .homeLeft {
@@ -16,14 +20,13 @@
     display: flex;
     justify-content: center;
     max-height: 95%;
-    width: 20%;
 }
 
 .feed {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70%;
+    width: 60%;
     max-height: 95%;
     margin: 5px;
 }

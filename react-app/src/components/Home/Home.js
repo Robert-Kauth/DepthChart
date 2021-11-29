@@ -9,21 +9,23 @@ import styles from "./Home.module.css";
 
 export default function Home() {
     return (
-        <div className={styles.homeWrapper}>
-            <div className={styles.homeLeft}>
-                <div className={styles.servers}>
-                    <Servers />
+        <div className={styles.homeBackground}>
+            <div className={styles.contentWrapper}>
+                <div className={styles.homeLeft}>
+                    <div className={styles.servers}>
+                        <Servers />
+                    </div>
+                    <div className={styles.messages}>
+                        <Messages />
+                    </div>
                 </div>
-                <div className={styles.messages}>
-                    <Messages />
+                <div className={styles.feed}>
+                    <MessageFeed />
                 </div>
-            </div>
-            <div className={styles.feed}>
-                <MessageFeed />
-            </div>
-            <div className={styles.homeRight}>
-                <div className={styles.friends}>
-                    <Friends />
+                <div className={styles.homeRight}>
+                    <div className={styles.friends}>
+                        <Friends />
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadUsers } from "../../store/users";
 import { loadAllUserMessages } from "../../store/messages";
 import MessageFeedCard from "./MessageFeedCard";
+import NewMessage from "./NewMessage";
 
 import styles from "./MessageFeed.module.css";
 // className={styles. }
@@ -21,10 +22,15 @@ export default function MessageFeed() {
     return (
         <>
             <p className={styles.title}>All Messages</p>
-            {messages &&
-                Object.values(messages).map((message) => (
-                    <MessageFeedCard key={message.id} message={message} />
-                ))}
+            <div>
+                {messages &&
+                    Object.values(messages).map((message) => (
+                        <MessageFeedCard key={message.id} message={message} />
+                    ))}
+                <div>
+                    <NewMessage />
+                </div>
+            </div>
         </>
     );
 }

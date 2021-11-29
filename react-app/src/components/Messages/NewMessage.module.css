@@ -1,0 +1,10 @@
+.newMessageWrapper {
+    display: flex;
+    min-width: 100%;
+}
+
+.newMessage {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
