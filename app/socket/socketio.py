@@ -29,7 +29,7 @@ def on_join(data):
     username = data['username']
     room = data['room']
     join_room(room)
-    send(username + ' has entered the room', t0=room)
+    send(username + ' has entered the room', to=room)
 
 
 @socketio.on('leave')
