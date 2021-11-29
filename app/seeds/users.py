@@ -39,7 +39,7 @@ def seed_users():
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom7.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom8.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom9.png"]
-    for _ in range(0, 15):
+    for _ in range(0, total_users+1):
         avatar = choice(avatars)
         user = User(
             username=fake.user_name(),
