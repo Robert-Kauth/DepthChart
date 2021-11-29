@@ -6,8 +6,9 @@ fake = Faker()
 
 # default number of servers
 default_servers = 5
-total_servers = 30
-total_users = 20
+default_user_servers = 5
+total_servers = 36
+total_users = 25
 
 
 def seed_servers():
@@ -90,7 +91,7 @@ def seed_servers():
             name=fake.text(max_nb_chars=20),
             topic=fake.sentence(nb_words=10),
             icon=icon,
-            owner_id=randint(1, total_users+1)
+            owner_id=randint(1, total_users)
         )
         db.session.add(server)
     db.session.commit()
