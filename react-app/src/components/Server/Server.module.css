@@ -1,24 +1,50 @@
-.wrapper {
-    display: flex;
+.background {
     margin: 0;
     min-height: 100%;
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
     background-size: cover;
 }
 
+.contentWrapper {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 6fr 2fr;
+    grid-template-rows: 100vh;
+    grid-template-areas: "server channels feed friends";
+}
+
 .servers {
-    display: flex;
+    grid-area: server;
     background-color: transparent;
     padding: 5px 10px;
-    max-height: 95%;
     overflow-y: auto;
     scroll-behavior: smooth;
 }
 
 .channels {
-    display: flex;
-    flex-direction: column;
-    max-height: 95%;
+    grid-area: channels;
     overflow-y: auto;
     scroll-behavior: smooth;
+}
+
+.feed {
+    grid-area: feed;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.feed::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.friends {
+    grid-area: friends;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.friends::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }

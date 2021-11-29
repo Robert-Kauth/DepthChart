@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getMessagedUsers } from "../../store/messages";
 
-import styles from "./MessageCard.module.css";
+import styles from "./MessageFeedCard.module.css";
 // className={styles. }
 
-export default function MessageCard({ message }) {
+export default function MessageFeedCard({ message }) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users);
     const messagedUser = useSelector((state) => state.messages.messaged_users);
 
-    const [selection, setSelection] = useState(false);
+    // const [selection, setSelection] = useState(false);
 
     let recipient_id;
     if (messagedUser && message) {
@@ -35,7 +35,7 @@ export default function MessageCard({ message }) {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.channelInfo}>
+            <div className={styles.message}>
                 <div className={styles.name}>
                     {recipient_id && users && recipient_id !== currentUser.id
                         ? users[recipient_id]?.username
@@ -56,11 +56,13 @@ export default function MessageCard({ message }) {
                             alt="default nfl logo"
                         />
                     )}
+                    <div className={styles.messageContent}>
+                        <div className={styles.content}>{message.content}</div>
+                        <div className={styles.updated}>
+                            {message.updated_at}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className={styles.messageInfo}>
-                <div className={styles.content}>{message.content}</div>
-                <div className={styles.updated}>{message.updated_at}</div>
             </div>
         </div>
     );
