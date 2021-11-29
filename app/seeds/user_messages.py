@@ -5,6 +5,8 @@ def seed_user_messages():
     '''
     Seeds user_messages
     '''
+    demo_user_message0 = User_message(sender_id=1,
+                                      recipient_ids=2, message_id=1, is_read=False)
     demo_user_message1 = User_message(sender_id=1,
                                       recipient_ids=2, message_id=1, is_read=False)
     demo_user_message2 = User_message(sender_id=1,
@@ -22,6 +24,7 @@ def seed_user_messages():
     demo_user_message8 = User_message(sender_id=4,
                                       recipient_ids=1, message_id=8, is_read=False)
 
+    db.session.add(demo_user_message0)
     db.session.add(demo_user_message1)
     db.session.add(demo_user_message2)
     db.session.add(demo_user_message3)
