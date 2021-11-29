@@ -5,7 +5,6 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from flask_avatars import Avatars
 
 # Models
 from .models import db, User
@@ -55,8 +54,6 @@ Migrate(app, db)
 # Initialize flask socketio instance
 socketio.init_app(app)
 
-# Initializes flask avatars
-avatars = Avatars(app)
 
 # Application Security
 CORS(app)
