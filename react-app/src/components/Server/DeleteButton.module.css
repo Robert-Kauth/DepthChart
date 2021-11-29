@@ -37,15 +37,14 @@
 }
 
 .button {
-    padding: 0 10px;
-    font-size: 30px;
+    font-size: 25px;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     background-color: #029e7e;
 }
 
 .indivError {
     display: flex;
-    font-size: 25px;
+    font-size: 20px;
     margin: 5px 0;
     color: aliceblue;
     text-shadow: 1px 1px 1px black;
