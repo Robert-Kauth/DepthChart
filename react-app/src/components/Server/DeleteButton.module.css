@@ -4,16 +4,20 @@
 }
 .deleteWarning {
     color: #e32636;
-    font-size: 25px;
-    padding: 0 5px 0 0;
+    font-size: 20px;
+    margin: 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .deleteWarningLabel {
     color: #e32636;
-    font-size: 25px;
-    padding: 10px 0;
+    font-size: 20px;
+    margin: 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+
+.error {
+    margin: 0;
 }
 
 .deleteInput {
@@ -29,7 +33,7 @@
 .buttonContainer {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .button {

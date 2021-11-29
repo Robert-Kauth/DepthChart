@@ -193,21 +193,23 @@ export default function EditServer({ setShowModal }) {
                                             Don't update Icon
                                         </button>
                                     )}
-                                </div>
-                                <div>
-                                    {newIcon && (
-                                        <div className={styles.newIconWrapper}>
-                                            <label
-                                                className={styles.newIconLabel}>
-                                                Icon URL:
-                                            </label>
-                                            <input
-                                                type="url"
-                                                value={icon}
-                                                onChange={updateIcon}
-                                            />
-                                        </div>
-                                    )}
+                                    <div className={styles.newIconWrapper}>
+                                        {newIcon && (
+                                            <>
+                                                <label
+                                                    className={
+                                                        styles.newIconLabel
+                                                    }>
+                                                    Icon URL:
+                                                </label>
+                                                <input
+                                                    type="url"
+                                                    value={icon}
+                                                    onChange={updateIcon}
+                                                />
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                             <div className={styles.deleteContainer}>

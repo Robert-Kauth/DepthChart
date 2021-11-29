@@ -4,16 +4,21 @@
 }
 .deleteWarning {
     color: #e32636;
-    font-size: 25px;
+    font-size: 20px;
     padding: 0 5px 0 0;
+    margin: 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .deleteWarningLabel {
     color: #e32636;
-    font-size: 25px;
+    font-size: 20px;
+    margin: 0;
     padding: 10px 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+}
+error {
+    margin: 0;
 }
 
 .deleteInput {
