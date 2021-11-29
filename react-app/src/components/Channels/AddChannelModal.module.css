@@ -1,6 +1,10 @@
 .wrapper {
     display: flex;
     justify-content: center;
-    background-color: transparent;
+    background-color: rgba(46, 139, 87, 0.8);
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
     padding: 5px;
 }

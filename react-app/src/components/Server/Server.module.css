@@ -16,23 +16,36 @@
     grid-area: server;
     background-color: transparent;
     padding: 5px 10px;
-    max-height: 95%;
     overflow-y: auto;
     scroll-behavior: smooth;
 }
 
 .channels {
     grid-area: channels;
-    max-height: 95%;
     overflow-y: auto;
     scroll-behavior: smooth;
-    max-height: 95%;
 }
 
 .feed {
     grid-area: feed;
+    background-color: rgba(46, 139, 87, 0.8);
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    overflow-y: auto;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }
 
 .friends {
     grid-area: friends;
+    background-color: transparent;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    overflow-y: auto;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }

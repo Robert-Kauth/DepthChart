@@ -6,7 +6,7 @@ import styles from "./Friends.module.css";
 export default function Friends() {
     return (
         <div className={styles.friendsWrapper}>
-            <h1>Hello from friends</h1>
+            <p className={styles.title}>Hello from friends</p>
         </div>
     );
 }
