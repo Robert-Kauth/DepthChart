@@ -5,6 +5,7 @@ from random import choice, randint
 fake = Faker()
 
 # default number of servers
+default_servers = 5
 total_servers = 30
 total_users = 20
 
