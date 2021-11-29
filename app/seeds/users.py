@@ -4,6 +4,9 @@ from random import choice
 
 fake = Faker()
 
+# default number of users
+total_users = 20
+
 
 def seed_users():
     demo = User(
