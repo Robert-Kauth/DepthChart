@@ -24,13 +24,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 0 20px 0;
+    margin: 0;
+    padding: 5px 0;
+    list-style-type: "\1F6AB";
 }
 
 .error {
-    color: #bfc1c2;
+    color: #ff6347;
     font-size: 16px;
     font-weight: 600;
+    padding: 2px 0;
 }
 
 .usernameWrapper {
@@ -97,7 +100,7 @@
 
 .button {
     width: 150px;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 800;
     background-color: #029e7e;
 }

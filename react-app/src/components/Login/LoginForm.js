@@ -40,7 +40,7 @@ export default function LoginForm({ setShowModal }) {
 
     if (user) {
         setShowModal(false);
-        return <Redirect to="/" />;
+        return <Redirect from="/login" to="/" />;
     }
 
     return (

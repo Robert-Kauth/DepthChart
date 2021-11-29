@@ -1,7 +1,13 @@
 from app.models import db, User_server
 from faker import Faker
-
+from random import randint
 faker = Faker()
+
+# default number of servers
+default_servers = 5
+default_user_servers = 5
+total_servers = 36
+total_users = 25
 
 
 def seed_user_servers():
@@ -33,6 +39,19 @@ def seed_user_servers():
     db.session.add(marnie_user_server)
     db.session.add(bobbie_user_server)
     db.session.add(ashley_user_server)
+
+    for server in range(1, total_servers+1):
+        users = []
+        for _ in range(1, 20):
+            user = randint(2, total_users)
+            while user in users:
+                user = randint(2, total_users)
+            user_server = User_server(
+                user_id=user,
+                server_id=server
+            )
+            db.session.add(user_server)
+            users.append(user)
     db.session.commit()
 
 

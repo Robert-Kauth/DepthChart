@@ -1,6 +1,5 @@
 import datetime
 from .db import db
-from flask_avatars import Identicon
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -26,15 +25,6 @@ class User(db.Model, UserMixin):
         'User_message', foreign_keys='User_message.sender_id', back_populates='sender', cascade='all, delete')
     received_messages = db.relationship(
         'User_message', foreign_keys='[User_message.recipient_ids]', back_populates='recipients', cascade='all, delete')
-
-    # def __init__():
-    #     generate_avatar()
-
-    # def generate_avatar(self):
-    #     avatar = Identicon()
-    #     filenames = avatar.generate(text=self.username)
-    #     self.avatar = filenames[1]
-    #     db.session.commit()
 
     @property
     def password(self):
