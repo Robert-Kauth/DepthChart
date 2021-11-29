@@ -1,7 +1,12 @@
 .title {
+    display: flex;
+    justify-content: center;
     font-size: 100px;
     font-weight: 600;
-    border-bottom: 2px solid darkgreen;
-    margin: 0;
+    margin: 0 0 5px 0;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+}
+
+.messages {
+    margin: 0 8px;
 }

@@ -1,10 +1,11 @@
 .newMessageWrapper {
     display: flex;
-    min-width: 100%;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    margin: 5px 0;
 }
 
 .newMessage {
-    position: sticky;
-    bottom: 0;
     width: 100%;
 }

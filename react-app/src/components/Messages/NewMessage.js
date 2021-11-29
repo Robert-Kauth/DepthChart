@@ -13,7 +13,6 @@ const Button = styled.button`
     padding-top: 5px;
     border: 2px solid darkgreen;
     border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
     &:hover {
         background-color: #0bda51;
         color: #014421;
@@ -45,7 +44,6 @@ export default function NewMessage() {
                 <input
                     className={styles.newMessage}
                     type="text"
-                    name="new-message"
                     value={message}
                     onChange={updateMessage}
                 />

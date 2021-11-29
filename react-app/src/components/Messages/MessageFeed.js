@@ -22,14 +22,12 @@ export default function MessageFeed() {
     return (
         <>
             <p className={styles.title}>All Messages</p>
-            <div>
+            <div className={styles.messages}>
                 {messages &&
                     Object.values(messages).map((message) => (
                         <MessageFeedCard key={message.id} message={message} />
                     ))}
-                <div>
-                    <NewMessage />
-                </div>
+                <NewMessage />
             </div>
         </>
     );
