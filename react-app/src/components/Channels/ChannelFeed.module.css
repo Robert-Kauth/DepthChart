@@ -9,4 +9,9 @@
 
 .messages {
     margin: 0 8px;
+    background-color: rgba(46, 139, 87, 0.8);
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
 }
