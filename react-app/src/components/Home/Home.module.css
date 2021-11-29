@@ -25,6 +25,7 @@
     align-items: center;
     width: 70%;
     max-height: 95%;
+    margin: 5px;
 }
 
 .servers {
