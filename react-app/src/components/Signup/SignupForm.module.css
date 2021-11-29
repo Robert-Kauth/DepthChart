@@ -12,7 +12,7 @@
 
 .legend {
     background-color: #029e7e;
-    font-size: 50px;
+    font-size: 40px;
     padding: 10px;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     border-radius: 5px;
@@ -43,7 +43,7 @@
 .usernameLabel {
     justify-content: center;
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
@@ -57,7 +57,7 @@
 .avatarLabel {
     justify-content: center;
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
@@ -71,7 +71,7 @@
 .emailLabel {
     justify-content: center;
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
@@ -85,7 +85,7 @@
 .passwordLabel {
     justify-content: center;
     color: #029e7e;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
