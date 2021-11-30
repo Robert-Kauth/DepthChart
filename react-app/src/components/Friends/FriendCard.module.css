@@ -2,7 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(46, 139, 87, 0.8);
+    background-color: #029e7e;
+    min-width: 100%;
+    padding: 0 100px;
 }
 
 .name {

@@ -20,7 +20,7 @@ export default function Friends() {
             <div className={styles.titleWrapper}>
                 <p className={styles.title}>Users</p>
             </div>
-            <div>
+            <div className={styles.cardWrapper}>
                 <FriendCard users={users} />
             </div>
         </div>
