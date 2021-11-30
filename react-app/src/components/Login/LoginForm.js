@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login, demoLogin } from "../../store/session";
@@ -38,10 +38,12 @@ export default function LoginForm({ setShowModal }) {
         setPassword(e.target.value);
     };
 
-    if (user) {
-        setShowModal(false);
-        return <Redirect from="/login" to="/" />;
-    }
+    useEffect(() => {
+        if (user) {
+            setShowModal(false);
+            <Redirect to="/" />;
+        }
+    }, [setShowModal, user]);
 
     return (
         <div>

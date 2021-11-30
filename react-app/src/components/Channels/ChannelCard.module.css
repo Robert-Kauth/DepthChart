@@ -1,3 +1,11 @@
+.selectButton {
+    background-color: #029e7e;
+}
+.selectButton:hover {
+    background-color: #0bda51;
+    color: #014421;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;

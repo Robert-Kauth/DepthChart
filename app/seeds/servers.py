@@ -4,11 +4,12 @@ from random import choice, randint
 
 fake = Faker()
 
-# default number of servers
+# default numbers
 default_servers = 5
 default_user_servers = 5
 total_servers = 36
 total_users = 25
+default_server_channels = 6
 
 
 def seed_servers():

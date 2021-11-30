@@ -32,6 +32,15 @@ export default function NavBar() {
                 )}
             </div>
             <div className={styles.navRight}>
+                <div className={styles.profileAvatar}>
+                    {sessionUser && (
+                        <img
+                            className={styles.img}
+                            src={sessionUser.avatar}
+                            alt="userAvatar"
+                        />
+                    )}
+                </div>
                 {!sessionUser ? (
                     <div className={styles.login}>
                         <LoginModal />

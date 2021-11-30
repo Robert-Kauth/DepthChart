@@ -24,6 +24,14 @@
     justify-content: space-between;
 }
 
+.profileAvatar {
+    margin: 0;
+}
+.img {
+    height: 40px;
+    width: 40px;
+}
+
 .home {
     display: flex;
     justify-content: center;
