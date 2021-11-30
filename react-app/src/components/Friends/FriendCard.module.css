@@ -1,0 +1,11 @@
+.friendWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(46, 139, 87, 0.8);
+}
+
+.name {
+    font-size: 20px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+}
