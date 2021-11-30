@@ -10,7 +10,6 @@ import styles from "./NavBar.module.css";
 
 export default function NavBar() {
     const sessionUser = useSelector((state) => state.session.user);
-    console.log();
 
     return (
         <nav className={styles.nav}>
