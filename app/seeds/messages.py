@@ -1,4 +1,15 @@
 from app.models import db, Message
+from faker import Faker
+from random import choice, randint
+
+fake = Faker()
+# default numbers
+default_servers = 5
+default_user_servers = 5
+total_servers = 36
+total_users = 25
+default_server_channels = 200
+default_messages_per_channel = 5
 
 
 def seed_messages():
@@ -29,6 +40,16 @@ def seed_messages():
     db.session.add(demo_msg6)
     db.session.add(demo_msg7)
     db.session.add(demo_msg8)
+
+    for _ in range(1, default_server_channels+1):
+        for i in range(1, default_messages_per_channel+1):
+            while i <= default_messages_per_channel:
+                new_message = Message(
+                    content=fake.sentence(nb_words=12),
+                    channel_id=i
+                )
+                break
+            db.session.add(new_message)
     db.session.commit()
 
 

@@ -15,8 +15,8 @@ const Button = styled.button`
     border-radius: 2px;
     box-shadow: lightgreen 0px 0px 5px;
     &:hover {
-        background-color: #0bda51;
-        color: #014421;
+        background-color: rgb(1, 68, 33);
+        color: #0bda51;
     }
 `;
 
