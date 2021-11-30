@@ -10,6 +10,7 @@ import styles from "./NavBar.module.css";
 
 export default function NavBar() {
     const sessionUser = useSelector((state) => state.session.user);
+    console.log();
 
     return (
         <nav className={styles.nav}>
@@ -32,6 +33,15 @@ export default function NavBar() {
                 )}
             </div>
             <div className={styles.navRight}>
+                <div className={styles.profileAvatar}>
+                    {sessionUser && (
+                        <img
+                            className={styles.img}
+                            src={sessionUser.avatar}
+                            alt="userAvatar"
+                        />
+                    )}
+                </div>
                 {!sessionUser ? (
                     <div className={styles.login}>
                         <LoginModal />
