@@ -1,23 +1,38 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import EditChannelModal from "./EditChannelModal";
 
 import styles from "./ChannelCard.module.css";
 // className={styles. }
 
 export default function ChannelCard({ channel }) {
-    const [selection, setSelection] = useState();
+    const dispatch = useDispatch();
 
-    const displayMessages = () => {
-        setSelection();
-        setSelection(channel.id);
+    // const serverChannels = useSelector((state) => state.channels);
+    const [selectedChannel, setSelectedChannel] = useState({ channelId: null });
+
+    const selectChannel = () => {
+        setSelectedChannel({ channelId: channel.id });
     };
+
+    useEffect(() => {
+        setSelectedChannel(
+            JSON.parse(window.localStorage.getItem("selectedChannel"))
+        );
+    }, []);
+
+    useEffect(() => {
+        window.localStorage.setItem(
+            "selectedChannel",
+            JSON.stringify(selectedChannel)
+        );
+    }, [selectedChannel]);
 
     return (
         <div className={styles.wrapper}>
             <div
                 className={styles.selectButton}
-                onClick={displayMessages}
+                onClick={selectChannel}
                 value={channel.id}>
                 <div className={styles.iconWrapper}>
                     <img src={channel.icon} alt="Channel icon" />
