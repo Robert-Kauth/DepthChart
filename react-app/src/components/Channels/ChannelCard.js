@@ -9,10 +9,10 @@ export default function ChannelCard({ channel }) {
     const dispatch = useDispatch();
 
     // const serverChannels = useSelector((state) => state.channels);
-    const [selectedChannel, setSelectedChannel] = useState({ channelId: null });
+    const [selectedChannel, setSelectedChannel] = useState(null);
 
     const selectChannel = () => {
-        setSelectedChannel({ channelId: channel.id });
+        setSelectedChannel(channel.id);
     };
 
     useEffect(() => {
