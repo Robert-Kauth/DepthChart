@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     margin: 0;
+    min-width: 100%;
 }
 
 .titleWrapper {
@@ -22,4 +23,8 @@
     font-weight: 600;
     margin: 0 0 5px 0;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+}
+
+.cardWrapper {
+    min-width: 100%;
 }
