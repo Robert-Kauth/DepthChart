@@ -1,6 +1,8 @@
 import React from "react";
+
 import styles from "./FriendCard.module.css";
 // className={styles. }
+
 export default function FriendCard({ users }) {
     return (
         <div>
