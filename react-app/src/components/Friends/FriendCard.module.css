@@ -1,13 +1,18 @@
-.friendWrapper {
+.name {
+    font-size: 20px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+}
+
+.selectFriend {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #029e7e;
     min-width: 100%;
-    padding: 0 100px;
+    padding: 0 15px;
 }
 
-.name {
-    font-size: 20px;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+.selectFriend:hover {
+    background-color: #0bda51;
+    color: #014421;
 }

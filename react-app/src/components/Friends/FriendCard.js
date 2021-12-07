@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+
+import Chat from "../Chat";
 
 import styles from "./FriendCard.module.css";
 // className={styles. }
 
-export default function FriendCard({ users }) {
+export default function FriendCard({ user }) {
+    const [selectedUser, setSelectedUser] = useState(false);
+    const [selectedId, setSelectedId] = useState("");
+
+    const updateSelected = (e) => {
+        e.preventDefault();
+        setSelectedId(e.target.value);
+        setSelectedUser(!selectedUser);
+    };
+
     return (
-        <div>
-            {users &&
-                Object.values(users).map((user) => (
-                    <div className={styles.friendWrapper} key={user.id}>
-                        <p className={styles.name}>{user.username}</p>
-                        <div className={styles.imgContainer}>
-                            <img src={user.avatar} alt="user avatar" />
-                        </div>
-                    </div>
-                ))}
-        </div>
+        <>
+            <button
+                onClick={updateSelected}
+                className={styles.selectFriend}
+                value={user.id}>
+                <p className={styles.name} value={user.id}>
+                    {user.username}
+                </p>
+                <div className={styles.imgContainer} value={user.id}>
+                    <img src={user.avatar} alt="user avatar" />
+                </div>
+            </button>
+            {selectedUser && selectedId ? <Chat /> : null}
+        </>
     );
 }

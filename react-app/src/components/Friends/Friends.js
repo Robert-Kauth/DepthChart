@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FriendCard from "./FriendCard";
@@ -20,9 +20,10 @@ export default function Friends() {
             <div className={styles.titleWrapper}>
                 <p className={styles.title}>Users</p>
             </div>
-            <div className={styles.cardWrapper}>
-                <FriendCard users={users} />
-            </div>
+            {users &&
+                Object.values(users).map((user) => (
+                    <FriendCard key={user.id} user={user} />
+                ))}
         </div>
     );
 }
