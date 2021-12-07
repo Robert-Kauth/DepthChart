@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EditChannelModal from "./EditChannelModal";
 
+import { loadAllChannelMessages } from "../../store/messages";
+
 import styles from "./ChannelCard.module.css";
 // className={styles. }
 
@@ -14,19 +16,24 @@ export default function ChannelCard({ channel }) {
     const selectChannel = () => {
         setSelectedChannel(channel.id);
     };
+    console.log(selectedChannel, "selected channel");
+
+    // useEffect(() => {
+    //     setSelectedChannel(
+    //         JSON.parse(window.localStorage.getItem("selectedChannel"))
+    //     );
+    // }, []);
+
+    // useEffect(() => {
+    //     window.localStorage.setItem(
+    //         "selectedChannel",
+    //         JSON.stringify(selectedChannel)
+    //     );
+    // }, [selectedChannel]);
 
     useEffect(() => {
-        setSelectedChannel(
-            JSON.parse(window.localStorage.getItem("selectedChannel"))
-        );
-    }, []);
-
-    useEffect(() => {
-        window.localStorage.setItem(
-            "selectedChannel",
-            JSON.stringify(selectedChannel)
-        );
-    }, [selectedChannel]);
+        dispatch(loadAllChannelMessages(selectedChannel));
+    }, [dispatch, selectedChannel]);
 
     return (
         <div className={styles.wrapper}>
