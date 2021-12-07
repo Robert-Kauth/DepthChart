@@ -87,7 +87,7 @@ export default function reducer(state = { user: null, online: false }, action) {
         case CREATE:
             return { ...state, user: action.user, online: true };
         case DESTROY:
-            return { ...state, user: null, online: true };
+            return { ...state, user: true, online: false };
         default:
             return state;
     }

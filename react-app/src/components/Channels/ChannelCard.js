@@ -11,7 +11,7 @@ export default function ChannelCard({ channel }) {
     const dispatch = useDispatch();
 
     // const serverChannels = useSelector((state) => state.channels);
-    const [selectedChannel, setSelectedChannel] = useState(null);
+    const [selectedChannel, setSelectedChannel] = useState();
 
     const selectChannel = () => {
         setSelectedChannel(channel.id);
@@ -32,15 +32,14 @@ export default function ChannelCard({ channel }) {
     // }, [selectedChannel]);
 
     useEffect(() => {
-        dispatch(loadAllChannelMessages(selectedChannel));
+        if (selectedChannel) {
+            dispatch(loadAllChannelMessages(selectedChannel));
+        }
     }, [dispatch, selectedChannel]);
 
     return (
-        <div className={styles.wrapper}>
-            <div
-                className={styles.selectButton}
-                onClick={selectChannel}
-                value={channel.id}>
+        <div className={styles.wrapper} onClick={selectChannel}>
+            <div className={styles.selectButton} value={channel.id}>
                 <div className={styles.iconWrapper}>
                     <img src={channel.icon} alt="Channel icon" />
                 </div>
