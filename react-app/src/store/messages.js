@@ -48,6 +48,12 @@ export const loadAllUserMessages = (userId) => async (dispatch) => {
     dispatch(load(messages));
 };
 
+export const loadAllChannelMessages = (channel_id) => async (dispatch) => {
+    const res = await fetch(`/api/messages/channel/${channel_id}`);
+    const messages = await res.json();
+    dispatch(load(messages));
+};
+
 export const getMessagedUsers = (message_id) => async (dispatch) => {
     const res = await fetch(`/api/messages/recipients/${message_id}`);
     const messaged_users = await res.json();

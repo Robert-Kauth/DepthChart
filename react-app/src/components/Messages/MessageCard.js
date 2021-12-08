@@ -21,12 +21,14 @@ export default function MessageCard({ message }) {
     }
 
     let sender_id;
-    if (messagedUser) {
+    if (messagedUser && message) {
         sender_id = messagedUser[message.id].sender_id;
     }
 
     useEffect(() => {
-        dispatch(getMessagedUsers(message.id));
+        if (message) {
+            dispatch(getMessagedUsers(message.id));
+        }
     }, [dispatch, message.id]);
 
     if (!users) {

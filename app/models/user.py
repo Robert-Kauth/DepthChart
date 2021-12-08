@@ -6,6 +6,12 @@ from flask_login import UserMixin
 # TODO Add default value for Avatar
 
 
+followers = db.Table('followers',
+                     db.Column('follower_id', db.Integer,
+                               db.ForeignKey('users.id')),
+                     db.Column('followed_id', db.Integer, db.ForeignKey('users.id')))
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -25,6 +31,11 @@ class User(db.Model, UserMixin):
         'User_message', foreign_keys='User_message.sender_id', back_populates='sender', cascade='all, delete')
     received_messages = db.relationship(
         'User_message', foreign_keys='[User_message.recipient_ids]', back_populates='recipients', cascade='all, delete')
+    followed = db.relationship(
+        'User', secondary='followers',
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 
     @property
     def password(self):
@@ -36,6 +47,17 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def is_following(self, user):
+        return self.followed.filter(followers.c.followed_id == user.id).count() > 0
 
     def to_dict(self):
         return {

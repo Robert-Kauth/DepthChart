@@ -8,6 +8,7 @@ import styles from "./SignupModal.module.css";
 export default function SignupModal() {
     const [showModal, setShowModal] = useState(false);
     const sessionUser = useSelector((state) => state.session.user);
+    console.log(sessionUser, "sessionuser");
 
     return (
         <div className={styles.wrapper}>
