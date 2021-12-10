@@ -28,7 +28,7 @@ def seed_users():
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom11.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom12.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom13.png",
-               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom14.png"
+               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom14.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom15.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom16.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom2.png",
