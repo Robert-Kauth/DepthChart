@@ -9,7 +9,7 @@ default_servers = 5
 default_user_servers = 5
 total_servers = 36
 total_users = 25
-default_server_channels = 6
+default_server_channels = 5
 
 
 def seed_channels():
@@ -73,7 +73,7 @@ def seed_channels():
                      "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington_redskins.png",
                      "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington.png"]
 
-    for i in range(2, total_servers+1):
+    for i in range(0, total_servers+1):
         current_channels = []
         if i % 2 == 0:
             default_channel = 'Welcome'
@@ -87,11 +87,12 @@ def seed_channels():
             server_id=i
         )
         db.session.add(channel)
-        for _ in range(1, default_server_channels+1):
+        for _ in range(0, default_server_channels+1):
             while True:
                 channel_name = channel_names[randint(1, len(channel_names)-1)]
                 if channel_name not in current_channels:
                     current_channels.append(channel_name)
+                    icon = choice(channel_icons)
                     new_channel = Channel(
                         name=channel_name,
                         topic=fake.sentence(nb_words=10),
