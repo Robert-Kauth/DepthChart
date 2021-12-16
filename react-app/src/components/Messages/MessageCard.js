@@ -34,7 +34,7 @@ export default function MessageCard({ message }) {
     }
 
     return (
-        <div className={styles.wrapper}>
+        <button className={styles.wrapper}>
             <div className={styles.iconWrapper}>
                 {recipient_id && users && recipient_id !== currentUser.id ? (
                     <img
@@ -44,6 +44,7 @@ export default function MessageCard({ message }) {
                     />
                 ) : (
                     <img
+                        className={styles.icon}
                         src={users[sender_id]?.avatar}
                         alt="default nfl logo"
                     />
@@ -54,6 +55,6 @@ export default function MessageCard({ message }) {
                     ? users[recipient_id]?.username
                     : users[sender_id]?.username}
             </div>
-        </div>
+        </button>
     );
 }

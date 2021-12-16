@@ -3,7 +3,14 @@
     justify-content: center;
     align-items: center;
     padding: 0 5px;
+    margin: 0.5px;
+    background-color: #029e7e;
     border-bottom: 2px solid darkgreen;
+}
+
+.icon {
+    height: 50px;
+    width: 50px;
 }
 
 .channelInfo {
