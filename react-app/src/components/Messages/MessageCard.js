@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getMessagedUsers } from "../../store/messages";
@@ -12,8 +12,6 @@ export default function MessageCard({ message }) {
     const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users);
     const messagedUser = useSelector((state) => state.messages.messaged_users);
-
-    const [selection, setSelection] = useState(false);
 
     let recipient_id;
     if (messagedUser && message) {
@@ -29,41 +27,34 @@ export default function MessageCard({ message }) {
         if (message) {
             dispatch(getMessagedUsers(message.id));
         }
-    }, [dispatch, message.id]);
+    }, [dispatch, message, message.id]);
 
     if (!users) {
         return null;
     }
 
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.channelInfo}>
-                <div className={styles.name}>
-                    {recipient_id && users && recipient_id !== currentUser.id
-                        ? users[recipient_id]?.username
-                        : users[sender_id]?.username}
-                </div>
-                <div className={styles.iconWrapper}>
-                    {recipient_id &&
-                    users &&
-                    recipient_id !== currentUser.id ? (
-                        <img
-                            className={styles.icon}
-                            src={users[recipient_id]?.avatar}
-                            alt="user avatar"
-                        />
-                    ) : (
-                        <img
-                            src={users[sender_id]?.avatar}
-                            alt="default nfl logo"
-                        />
-                    )}
-                </div>
+        <button className={styles.wrapper}>
+            <div className={styles.iconWrapper}>
+                {recipient_id && users && recipient_id !== currentUser.id ? (
+                    <img
+                        className={styles.icon}
+                        src={users[recipient_id]?.avatar}
+                        alt="user avatar"
+                    />
+                ) : (
+                    <img
+                        className={styles.icon}
+                        src={users[sender_id]?.avatar}
+                        alt="default nfl logo"
+                    />
+                )}
             </div>
-            <div className={styles.messageInfo}>
-                <div className={styles.content}>{message.content}</div>
-                <div className={styles.updated}>{message.updated_at}</div>
+            <div className={styles.name}>
+                {recipient_id && users && recipient_id !== currentUser.id
+                    ? users[recipient_id]?.username
+                    : users[sender_id]?.username}
             </div>
-        </div>
+        </button>
     );
 }

@@ -46,6 +46,9 @@ def delete_user(id):
 @user_routes.route('/follow/<int:user_id>', methods=["POST"])
 @login_required
 def follow_user(user_id):
+    '''
+    Follows another user
+    '''
     form = FollowForm()
     if form.validate_on_submit():
         user = User.query.filter(User.id == user_id).first()
@@ -64,7 +67,10 @@ def follow_user(user_id):
 
 @user_routes.route('/unfollow/<int:user_id>', methods=["POST"])
 @login_required
-def unollow_user(user_id):
+def unfollow_user(user_id):
+    '''
+    Unfollows another user
+    '''
     form = FollowForm()
     if form.validate_on_submit():
         user = User.query.filter(User.id == user_id).first()
@@ -84,6 +90,9 @@ def unollow_user(user_id):
 @user_routes.route('/<int:id>', methods=["POST"])
 @login_required
 def upload_file():
+    '''
+    Uploads file to AWS
+    '''
     if "file" not in request.files:
         return "No user_file key in request.files"
 
