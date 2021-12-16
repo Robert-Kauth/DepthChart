@@ -8,7 +8,7 @@
 
 .contentWrapper {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 6fr 2fr;
+    grid-template-columns: 0.5fr 1fr 6fr 2fr;
     grid-template-rows: 100vh;
     grid-template-areas: "server messages feed friends";
 }

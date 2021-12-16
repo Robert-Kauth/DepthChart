@@ -35,32 +35,24 @@ export default function MessageCard({ message }) {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.channelInfo}>
-                <div className={styles.name}>
-                    {recipient_id && users && recipient_id !== currentUser.id
-                        ? users[recipient_id]?.username
-                        : users[sender_id]?.username}
-                </div>
-                <div className={styles.iconWrapper}>
-                    {recipient_id &&
-                    users &&
-                    recipient_id !== currentUser.id ? (
-                        <img
-                            className={styles.icon}
-                            src={users[recipient_id]?.avatar}
-                            alt="user avatar"
-                        />
-                    ) : (
-                        <img
-                            src={users[sender_id]?.avatar}
-                            alt="default nfl logo"
-                        />
-                    )}
-                </div>
+            <div className={styles.iconWrapper}>
+                {recipient_id && users && recipient_id !== currentUser.id ? (
+                    <img
+                        className={styles.icon}
+                        src={users[recipient_id]?.avatar}
+                        alt="user avatar"
+                    />
+                ) : (
+                    <img
+                        src={users[sender_id]?.avatar}
+                        alt="default nfl logo"
+                    />
+                )}
             </div>
-            <div className={styles.messageInfo}>
-                <div className={styles.content}>{message.content}</div>
-                <div className={styles.updated}>{message.updated_at}</div>
+            <div className={styles.name}>
+                {recipient_id && users && recipient_id !== currentUser.id
+                    ? users[recipient_id]?.username
+                    : users[sender_id]?.username}
             </div>
         </div>
     );
