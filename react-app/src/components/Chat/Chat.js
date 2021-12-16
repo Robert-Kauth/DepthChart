@@ -7,7 +7,7 @@ import styles from "./Chat.module.css";
 
 let socket;
 
-export default function Chat() {
+export default function Chat({ setShowModal }) {
     const user = useSelector((state) => state.session.user);
 
     const [messages, setMessages] = useState([]);
@@ -52,6 +52,7 @@ export default function Chat() {
                     <input value={chatInput} onChange={updateChatInput} />
                     <button type="submit">Send</button>
                 </form>
+                <button onClick={() => setShowModal(false)}>Close</button>
             </div>
         )
     );
