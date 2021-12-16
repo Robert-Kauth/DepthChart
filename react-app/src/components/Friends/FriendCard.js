@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import Chat from "../Chat";
 
@@ -6,13 +7,17 @@ import styles from "./FriendCard.module.css";
 // className={styles. }
 
 export default function FriendCard({ user }) {
+    const sessionUser = useSelector((state) => state.session.user);
+
     const [selectedUser, setSelectedUser] = useState(false);
     const [selectedId, setSelectedId] = useState("");
 
     const updateSelected = (e) => {
         e.preventDefault();
-        setSelectedId(e.target.value);
-        setSelectedUser(!selectedUser);
+        if (user.id !== sessionUser.id) {
+            setSelectedId(e.target.value);
+            setSelectedUser(!selectedUser);
+        }
     };
 
     return (
