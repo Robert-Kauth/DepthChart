@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Servers from "../Servers";
@@ -11,6 +12,9 @@ import styles from "./Server.module.css";
 
 export default function Server() {
     const { serverId } = useParams();
+
+    const serverChannelIds = useSelector((state) => state.servers.channel_ids);
+    console.log(serverChannelIds, "serverChannelIds");
 
     return (
         <div className={styles.background}>

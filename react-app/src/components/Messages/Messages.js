@@ -6,6 +6,7 @@ import { loadUsers } from "../../store/users";
 import { loadAllUserMessages } from "../../store/messages";
 
 import styles from "./Messages.module.css";
+import CreateMessageModal from "./CreateMessageModal";
 // className={styles. }
 
 export default function Messages() {
@@ -21,7 +22,10 @@ export default function Messages() {
 
     return (
         <div className={styles.wrapper}>
-            <p className={styles.messages}>Messages</p>
+            <div className={styles.topbar}>
+                <div className={styles.title}>Direct Messages</div>
+                <CreateMessageModal />
+            </div>
             {messages &&
                 Object.values(messages).map((message) => (
                     <MessageCard key={message.id} message={message} />

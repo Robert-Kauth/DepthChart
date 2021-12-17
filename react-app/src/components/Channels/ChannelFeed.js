@@ -1,5 +1,4 @@
 import React from "react";
-
 import ChannelMessages from "./ChannelMessages";
 
 import styles from "./ChannelFeed.module.css";

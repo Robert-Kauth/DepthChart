@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import EditChannelModal from "./EditChannelModal";
+
+import { loadAllChannelMessages } from "../../store/messages";
 
 import styles from "./ChannelCard.module.css";
 // className={styles. }
@@ -8,32 +10,21 @@ import styles from "./ChannelCard.module.css";
 export default function ChannelCard({ channel }) {
     const dispatch = useDispatch();
 
-    // const serverChannels = useSelector((state) => state.channels);
-    const [selectedChannel, setSelectedChannel] = useState(null);
+    const [selectedChannel, setSelectedChannel] = useState();
 
     const selectChannel = () => {
         setSelectedChannel(channel.id);
     };
 
     useEffect(() => {
-        setSelectedChannel(
-            JSON.parse(window.localStorage.getItem("selectedChannel"))
-        );
-    }, []);
-
-    useEffect(() => {
-        window.localStorage.setItem(
-            "selectedChannel",
-            JSON.stringify(selectedChannel)
-        );
-    }, [selectedChannel]);
+        if (selectedChannel) {
+            dispatch(loadAllChannelMessages(selectedChannel));
+        }
+    }, [dispatch, selectedChannel]);
 
     return (
-        <div className={styles.wrapper}>
-            <div
-                className={styles.selectButton}
-                onClick={selectChannel}
-                value={channel.id}>
+        <div className={styles.wrapper} onClick={selectChannel}>
+            <div className={styles.selectButton} value={channel.id}>
                 <div className={styles.iconWrapper}>
                     <img src={channel.icon} alt="Channel icon" />
                 </div>

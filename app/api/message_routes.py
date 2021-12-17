@@ -58,6 +58,15 @@ def load_message_recipients(message_id):
     return{user_message.message_id: user_message.to_dict() for user_message in User_message.query.all()}
 
 
+@message_routes.route('/channel/<int:channel_id>')
+# @login_required
+def load_channel_messages(channel_id):
+    '''
+    Loads all messages from specific channel
+    '''
+    return {message.id: message.to_dict() for message in Message.query.filter(Message.channel_id == channel_id).all()}
+
+
 @message_routes.route('/', methods=['POST'])
 # @login_required
 def create_message():

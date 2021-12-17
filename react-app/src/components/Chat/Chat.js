@@ -6,16 +6,21 @@ import styles from "./Chat.module.css";
 // className={styles. }
 
 let socket;
-export default function Chat() {
+
+export default function Chat({ setShowModal }) {
     const user = useSelector((state) => state.session.user);
 
     const [messages, setMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
 
     useEffect(() => {
+        //open socket connection
+        //create websocket
         socket = io();
 
+        // listens for chat events
         socket.on("chat", (chat) => {
+            // When chat is received, add it to local message state
             setMessages((messages) => [...messages, chat]);
         });
 
@@ -31,21 +36,24 @@ export default function Chat() {
     const sendChat = (e) => {
         e.preventDefault();
 
-        socket.emit("chat", { user: user.email, msg: chatInput });
+        socket.emit("chat", { user: user.username, msg: chatInput });
         setChatInput("");
     };
 
     return (
-        <div>
-            <div className={styles.messagesWrapper}>
-                {messages.map((message, ind) => (
-                    <div key={ind}>{`${message.user}: ${message.msg}`}</div>
-                ))}
+        user && (
+            <div>
+                <div className={styles.messagesWrapper}>
+                    {messages.map((message, idx) => (
+                        <div key={idx}>{`${message.user}: ${message.msg}`}</div>
+                    ))}
+                </div>
+                <form className={styles.chatWrapper} onSubmit={sendChat}>
+                    <input value={chatInput} onChange={updateChatInput} />
+                    <button type="submit">Send</button>
+                </form>
+                <button onClick={() => setShowModal(false)}>Close</button>
             </div>
-            <form className={styles.chatWrapper} onSubmit={sendChat}>
-                <input value={chatInput} onChange={updateChatInput} />
-                <button type="submit">Send</button>
-            </form>
-        </div>
+        )
     );
 }
