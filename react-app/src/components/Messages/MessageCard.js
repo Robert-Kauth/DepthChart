@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getMessagedUsers } from "../../store/messages";
@@ -12,6 +12,8 @@ export default function MessageCard({ message }) {
     const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users);
     const messagedUser = useSelector((state) => state.messages.messaged_users);
+
+    const [userId, setUserId] = useState();
 
     let recipient_id;
     if (messagedUser && message) {
@@ -33,8 +35,19 @@ export default function MessageCard({ message }) {
         return null;
     }
 
+    const determineUser = () => {
+        if (recipient_id === currentUser.id) {
+            setUserId(sender_id);
+        } else {
+            setUserId(recipient_id);
+        }
+    };
+
     return (
-        <button className={styles.wrapper}>
+        <button
+            className={styles.wrapper}
+            value={userId}
+            onClick={determineUser}>
             <div className={styles.iconWrapper}>
                 {recipient_id && users && recipient_id !== currentUser.id ? (
                     <img
