@@ -42,6 +42,7 @@ export default function MessageCard({ message }) {
             setUserId(recipient_id);
         }
     };
+    console.log(userId);
 
     return (
         <button

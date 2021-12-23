@@ -2,7 +2,7 @@ import React from "react";
 import Servers from "../Servers";
 import Messages from "../Messages";
 import Friends from "../Friends";
-import MessageFeed from "../Messages/MessageFeed";
+import MessageFeed from "../MessageFeed";
 
 import styles from "./Home.module.css";
 // className={styles. }
