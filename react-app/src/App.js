@@ -30,30 +30,30 @@ export default function App() {
         <div className={styles.appContainer}>
             <NavBar />
             <Switch>
-                {user && isOnline ? (
-                    <Route path="/" exact={true}>
-                        <Home />
-                    </Route>
-                ) : (
-                    <Route path="/" exact={true}>
-                        <SplashPage />
-                    </Route>
-                )}
-                <Route path="/login" exact={true}>
-                    <SplashPage />
-                </Route>
-                <Route path="/sign-up" exact={true}>
-                    <SplashPage />
-                </Route>
-                <ProtectedRoute path="/users" exact={true}>
-                    <UsersList />
-                </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId" exact={true}>
+                <ProtectedRoute path="/users/:userId">
                     <User />
                 </ProtectedRoute>
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
                 </ProtectedRoute>
+                <Route path="/login">
+                    <SplashPage />
+                </Route>
+                <Route path="/sign-up">
+                    <SplashPage />
+                </Route>
+                <ProtectedRoute path="/users">
+                    <UsersList />
+                </ProtectedRoute>
+                {user && isOnline ? (
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                ) : (
+                    <Route path="/">
+                        <SplashPage />
+                    </Route>
+                )}
             </Switch>
             <Footer />
         </div>
