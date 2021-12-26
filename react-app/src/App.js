@@ -30,6 +30,15 @@ export default function App() {
         <div className={styles.appContainer}>
             <NavBar />
             <Switch>
+                {user && isOnline ? (
+                    <Route path="/" exact={true}>
+                        <Home />
+                    </Route>
+                ) : (
+                    <Route path="/" exact={true}>
+                        <SplashPage />
+                    </Route>
+                )}
                 <Route path="/login" exact={true}>
                     <SplashPage />
                 </Route>
@@ -45,13 +54,6 @@ export default function App() {
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
                 </ProtectedRoute>
-                {user && isOnline ? (
-                    <ProtectedRoute path="/" exact={true}>
-                        <Home />
-                    </ProtectedRoute>
-                ) : (
-                    <SplashPage />
-                )}
             </Switch>
             <Footer />
         </div>
