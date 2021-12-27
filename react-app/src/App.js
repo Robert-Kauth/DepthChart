@@ -6,7 +6,7 @@ import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
-import Main from "./components/Main";
+import Home from "./components/Home";
 import Server from "./components/Server";
 
 import { authenticate } from "./store/session";
@@ -39,7 +39,7 @@ export default function App() {
                 </Route>
                 {user && isOnline ? (
                     <Route path="/">
-                        <Main />
+                        <Home />
                     </Route>
                 ) : (
                     <Route path="/">

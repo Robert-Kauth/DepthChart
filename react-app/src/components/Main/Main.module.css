@@ -1,51 +1,31 @@
-.background {
-    margin: 0;
-    min-height: 100%;
-    min-width: 100%;
-    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
-    background-size: cover;
-}
-
 .wrapper {
     display: grid;
-    grid-template-columns: 0.5fr 7.5fr 2fr;
+    grid-template-columns: 1.5fr 6fr;
     grid-template-rows: 100vh;
-    grid-template-areas: "servers children friends";
+    grid-template-areas: "cards feed";
 }
 
-.servers {
-    grid-area: servers;
+.card {
+    grid-area: cards;
     background-color: transparent;
     padding: 5px 10px;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
-.servers::-webkit-scrollbar {
+.card::-webkit-scrollbar {
     width: 0;
     height: 0;
 }
 
-.children {
-    grid-area: children;
+.feed {
+    grid-area: feed;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-.children::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
-.friends {
-    grid-area: friends;
-    overflow-y: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-.friends::-webkit-scrollbar {
+.feed::-webkit-scrollbar {
     width: 0;
     height: 0;
 }

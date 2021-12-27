@@ -15,22 +15,24 @@ export default function NavBar() {
 
     return (
         <nav className={styles.nav}>
-            {user && (
-                <div className={styles.navLeft}>
-                    <div className={styles.home}>
-                        <NavLink
-                            to="/"
-                            exact={true}
-                            className={styles.link}
-                            activeClassName={styles.active}>
-                            Home
-                        </NavLink>
+            <div>
+                {user && (
+                    <div className={styles.navLeft}>
+                        <div className={styles.home}>
+                            <NavLink
+                                to="/"
+                                exact={true}
+                                className={styles.link}
+                                activeClassName={styles.active}>
+                                Home
+                            </NavLink>
+                        </div>
+                        <div className={styles.edit}>
+                            <ServerEditModal />
+                        </div>
                     </div>
-                    <div className={styles.edit}>
-                        <ServerEditModal />
-                    </div>
-                </div>
-            )}
+                )}
+            </div>
             <div className={styles.navRight}>
                 <div className={styles.profileAvatar}>
                     {user && <Avatar user={user} />}
