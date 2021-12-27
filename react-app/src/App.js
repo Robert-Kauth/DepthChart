@@ -9,6 +9,7 @@ import User from "./components/UserProfile";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
+import Main from "./components/Main";
 import Server from "./components/Server";
 
 import { authenticate } from "./store/session";
@@ -47,7 +48,7 @@ export default function App() {
                 </ProtectedRoute>
                 {user && isOnline ? (
                     <Route path="/">
-                        <Home />
+                        <Main />
                     </Route>
                 ) : (
                     <Route path="/">
