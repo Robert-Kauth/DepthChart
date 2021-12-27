@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/UserProfile";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
@@ -30,27 +28,23 @@ export default function App() {
         <div className={styles.appContainer}>
             <NavBar />
             <Switch>
-                <Route path="/login" exact={true}>
-                    <SplashPage />
-                </Route>
-                <Route path="/sign-up" exact={true}>
-                    <SplashPage />
-                </Route>
-                <ProtectedRoute path="/users" exact={true}>
-                    <UsersList />
-                </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId" exact={true}>
-                    <User />
-                </ProtectedRoute>
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
                 </ProtectedRoute>
-                {user && isOnline ? (
-                    <ProtectedRoute path="/" exact={true}>
-                        <Home />
-                    </ProtectedRoute>
-                ) : (
+                <Route path="/login">
                     <SplashPage />
+                </Route>
+                <Route path="/sign-up">
+                    <SplashPage />
+                </Route>
+                {user && isOnline ? (
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                ) : (
+                    <Route path="/">
+                        <SplashPage />
+                    </Route>
                 )}
             </Switch>
             <Footer />

@@ -5,6 +5,7 @@ import { Route, Redirect } from "react-router-dom";
 const ProtectedRoute = (props) => {
     const isOnline = useSelector((state) => state.session.online);
     const user = useSelector((state) => state.session.user);
+
     return (
         <Route {...props}>
             {user && isOnline ? (

@@ -5,6 +5,12 @@
     justify-content: flex-start;
     z-index: 1;
 }
+.tileWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .add {
     display: flex;

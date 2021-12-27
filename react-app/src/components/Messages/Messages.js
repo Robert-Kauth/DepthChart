@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import MessageCard from "./MessageCard";
+import Title from "../Title";
+
 import { loadUsers } from "../../store/users";
 import { loadAllUserMessages } from "../../store/messages";
 
 import styles from "./Messages.module.css";
-import CreateMessageModal from "./CreateMessageModal";
+
 // className={styles. }
 
 export default function Messages() {
@@ -22,10 +24,7 @@ export default function Messages() {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.topbar}>
-                <div className={styles.title}>Direct Messages</div>
-                <CreateMessageModal />
-            </div>
+            <Title title="Direct Messages" />
             {messages &&
                 Object.values(messages).map((message) => (
                     <MessageCard key={message.id} message={message} />

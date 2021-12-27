@@ -1,0 +1,31 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1.5fr 6fr;
+    grid-template-rows: 100vh;
+    grid-template-areas: "cards feed";
+}
+
+.card {
+    grid-area: cards;
+    background-color: transparent;
+    padding: 5px 10px;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.card::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.feed {
+    grid-area: feed;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.feed::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}

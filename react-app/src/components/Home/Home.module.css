@@ -8,13 +8,13 @@
 
 .contentWrapper {
     display: grid;
-    grid-template-columns: 0.5fr 1.5fr 6fr 2fr;
+    grid-template-columns: 0.5fr 7.5fr 2fr;
     grid-template-rows: 100vh;
-    grid-template-areas: "server messages feed friends";
+    grid-template-areas: "servers main friends";
 }
 
 .servers {
-    grid-area: server;
+    grid-area: servers;
     background-color: transparent;
     padding: 5px 10px;
     overflow-y: scroll;
@@ -26,25 +26,16 @@
     height: 0;
 }
 
-.messages {
-    grid-area: messages;
-    background-color: rgba(46, 139, 87, 0.8);
-    border: 2px solid darkgreen;
-    border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
-    border-style: inset;
+.main {
+    grid-area: main;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-.messages::-webkit-scrollbar {
+.main::-webkit-scrollbar {
     width: 0;
     height: 0;
-}
-
-.feed {
-    grid-area: feed;
 }
 
 .friends {
