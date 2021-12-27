@@ -1,8 +1,7 @@
 import React from "react";
+
 import Main from "../Main";
-import Servers from "../Servers";
 import Messages from "../Messages";
-import Friends from "../Friends";
 import MessageFeed from "../MessageFeed";
 
 import styles from "./Home.module.css";
@@ -12,9 +11,6 @@ export default function Home() {
     return (
         <div className={styles.homeBackground}>
             <div className={styles.contentWrapper}>
-                <div className={styles.servers}>
-                    <Servers />
-                </div>
                 <div className={styles.main}>
                     <Main>
                         <div className={styles.messages}>
@@ -24,9 +20,6 @@ export default function Home() {
                             <MessageFeed />
                         </div>
                     </Main>
-                </div>
-                <div className={styles.friends}>
-                    <Friends />
                 </div>
             </div>
         </div>
