@@ -4,11 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/UserProfile";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
 import Main from "./components/Main";
 import Server from "./components/Server";
 
@@ -31,9 +28,6 @@ export default function App() {
         <div className={styles.appContainer}>
             <NavBar />
             <Switch>
-                <ProtectedRoute path="/users/:userId">
-                    <User />
-                </ProtectedRoute>
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
                 </ProtectedRoute>
@@ -43,9 +37,6 @@ export default function App() {
                 <Route path="/sign-up">
                     <SplashPage />
                 </Route>
-                <ProtectedRoute path="/users">
-                    <UsersList />
-                </ProtectedRoute>
                 {user && isOnline ? (
                     <Route path="/">
                         <Main />
