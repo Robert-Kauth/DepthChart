@@ -1,4 +1,5 @@
 import React from "react";
+import Main from "../Main";
 import Servers from "../Servers";
 import Messages from "../Messages";
 import Friends from "../Friends";
@@ -14,11 +15,15 @@ export default function Home() {
                 <div className={styles.servers}>
                     <Servers />
                 </div>
-                <div className={styles.messages}>
-                    <Messages />
-                </div>
-                <div className={styles.feed}>
-                    <MessageFeed />
+                <div className={styles.main}>
+                    <Main>
+                        <div className={styles.messages}>
+                            <Messages />
+                        </div>
+                        <div className={styles.feed}>
+                            <MessageFeed />
+                        </div>
+                    </Main>
                 </div>
                 <div className={styles.friends}>
                     <Friends />
