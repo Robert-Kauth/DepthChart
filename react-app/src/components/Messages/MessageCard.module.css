@@ -25,13 +25,3 @@
     color: darkgreen;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
 }
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
-    background-color: darkgreen;
-    color: aliceblue;
-    border-radius: 2px;
-}

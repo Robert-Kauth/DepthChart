@@ -3,6 +3,7 @@ import React from "react";
 import Servers from "../Servers";
 import Main from "../Main";
 import Messages from "../Messages";
+import MessageFeed from "../MessageFeed";
 import Friends from "../Friends";
 
 import styles from "./Home.module.css";
@@ -16,7 +17,7 @@ export default function Home() {
                     <Servers />
                 </div>
                 <div className={styles.main}>
-                    <Main card={<Messages />} />
+                    <Main card={<Messages />} feed={<MessageFeed />} />
                 </div>
                 <div className={styles.friends}>
                     <Friends />

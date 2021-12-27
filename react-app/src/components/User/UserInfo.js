@@ -5,11 +5,11 @@ import Avatar from "./Avatar";
 import styles from "./User.module.css";
 // className={styles. }
 
-export default function User(props) {
+export default function UserInfo(props) {
     return (
         <div className={styles.wrapper}>
-            <div>{props.user.username}</div>
             <Avatar user={props.user} />
+            <div>{props.user.username}</div>
         </div>
     );
 }
