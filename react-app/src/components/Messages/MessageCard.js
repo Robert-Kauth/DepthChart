@@ -31,10 +31,6 @@ export default function MessageCard({ message }) {
         }
     }, [dispatch, message, message.id]);
 
-    if (!users) {
-        return null;
-    }
-
     const determineUser = () => {
         if (recipient_id === currentUser.id) {
             setUserId(sender_id);
@@ -42,6 +38,10 @@ export default function MessageCard({ message }) {
             setUserId(recipient_id);
         }
     };
+
+    if (!users) {
+        return null;
+    }
 
     return (
         <button

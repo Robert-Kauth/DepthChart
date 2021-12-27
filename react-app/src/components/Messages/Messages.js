@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import Main from "../Main";
 import MessageCard from "./MessageCard";
 import { loadUsers } from "../../store/users";
 import { loadAllUserMessages } from "../../store/messages";
@@ -22,17 +21,15 @@ export default function Messages() {
     }, [dispatch, user.id]);
 
     return (
-        <Main>
-            <div className={styles.wrapper}>
-                <div className={styles.topbar}>
-                    <div className={styles.title}>Direct Messages</div>
-                    <CreateMessageModal />
-                </div>
-                {messages &&
-                    Object.values(messages).map((message) => (
-                        <MessageCard key={message.id} message={message} />
-                    ))}
+        <div className={styles.wrapper}>
+            <div className={styles.topbar}>
+                <div className={styles.title}>Direct Messages</div>
+                <CreateMessageModal />
             </div>
-        </Main>
+            {messages &&
+                Object.values(messages).map((message) => (
+                    <MessageCard key={message.id} message={message} />
+                ))}
+        </div>
     );
 }
