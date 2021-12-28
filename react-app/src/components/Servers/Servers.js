@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import ServerTile from "./ServerTile";
 import CreateServerModal from "./CreateServerModal";
 import { loadServers } from "../../store/servers";
@@ -15,7 +16,7 @@ export default function Servers() {
 
     useEffect(() => {
         dispatch(loadServers());
-    }, [dispatch, user_id]);
+    }, [dispatch]);
 
     let user_servers;
     if (servers) {
