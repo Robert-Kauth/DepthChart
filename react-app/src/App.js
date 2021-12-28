@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Server from "./components/Server";
+import MessageThread from "./components/MessageThread";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import Server from "./components/Server";
 
 import { authenticate } from "./store/session";
 
@@ -30,6 +31,9 @@ export default function App() {
             <Switch>
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
+                </ProtectedRoute>
+                <ProtectedRoute path="/messages/:messageId">
+                    <MessageThread />
                 </ProtectedRoute>
                 <Route path="/login">
                     <SplashPage />

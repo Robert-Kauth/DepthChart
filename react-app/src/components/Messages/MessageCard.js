@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { getMessagedUsers } from "../../store/messages";
 
@@ -44,8 +45,9 @@ export default function MessageCard({ message }) {
     }
 
     return (
-        <button
+        <Link
             className={styles.wrapper}
+            to={`/messages/${message.id}`}
             value={userId}
             onClick={determineUser}>
             <div className={styles.iconWrapper}>
@@ -68,6 +70,6 @@ export default function MessageCard({ message }) {
                     ? users[recipient_id]?.username
                     : users[sender_id]?.username}
             </div>
-        </button>
+        </Link>
     );
 }
