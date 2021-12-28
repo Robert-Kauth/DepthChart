@@ -27,7 +27,9 @@ export default function Messages() {
             </div>
             {messages &&
                 Object.values(messages).map((message) => (
-                    <MessageCard key={message.id} message={message} />
+                    <button>
+                        <MessageCard key={message.id} message={message} />
+                    </button>
                 ))}
         </div>
     );

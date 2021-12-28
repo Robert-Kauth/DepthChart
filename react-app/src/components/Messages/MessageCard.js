@@ -45,9 +45,8 @@ export default function MessageCard({ message }) {
     }
 
     return (
-        <Link
+        <button
             className={styles.wrapper}
-            to={`/messages/${message.id}`}
             value={userId}
             onClick={determineUser}>
             <div className={styles.iconWrapper}>
@@ -70,6 +69,6 @@ export default function MessageCard({ message }) {
                     ? users[recipient_id]?.username
                     : users[sender_id]?.username}
             </div>
-        </Link>
+        </button>
     );
 }
