@@ -8,21 +8,21 @@ def seed_user_messages():
     demo_user_message0 = User_message(sender_id=1,
                                       recipient_ids=2, message_id=1, is_read=False)
     demo_user_message1 = User_message(sender_id=1,
-                                      recipient_ids=2, message_id=1, is_read=False)
+                                      recipient_ids=2, message_id=2, is_read=False)
     demo_user_message2 = User_message(sender_id=1,
-                                      recipient_ids=3, message_id=2, is_read=False)
+                                      recipient_ids=3, message_id=3, is_read=False)
     demo_user_message3 = User_message(sender_id=2,
-                                      recipient_ids=4, message_id=3, is_read=False)
+                                      recipient_ids=4, message_id=4, is_read=False)
     demo_user_message4 = User_message(sender_id=2,
-                                      recipient_ids=1, message_id=4, is_read=False)
+                                      recipient_ids=1, message_id=5, is_read=False)
     demo_user_message5 = User_message(sender_id=3,
-                                      recipient_ids=5, message_id=5, is_read=False)
+                                      recipient_ids=5, message_id=6, is_read=False)
     demo_user_message6 = User_message(sender_id=3,
-                                      recipient_ids=2, message_id=6, is_read=False)
+                                      recipient_ids=2, message_id=7, is_read=False)
     demo_user_message7 = User_message(sender_id=4,
-                                      recipient_ids=1, message_id=7, is_read=False)
-    demo_user_message8 = User_message(sender_id=4,
                                       recipient_ids=1, message_id=8, is_read=False)
+    demo_user_message8 = User_message(sender_id=4,
+                                      recipient_ids=1, message_id=9, is_read=False)
 
     db.session.add(demo_user_message0)
     db.session.add(demo_user_message1)
