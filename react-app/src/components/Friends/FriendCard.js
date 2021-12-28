@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import ChatModal from "../Chat";
+import UserInfo from "../UserInfo";
 
 import styles from "./FriendCard.module.css";
 // className={styles. }
@@ -28,12 +29,7 @@ export default function FriendCard({ user }) {
                 onClick={updateSelected}
                 className={styles.selectFriend}
                 value={user.id}>
-                <div className={styles.name} value={user.id}>
-                    {user.username}
-                </div>
-                <div className={styles.imgContainer} value={user.id}>
-                    <img src={user.avatar} alt="user avatar" />
-                </div>
+                <UserInfo user={user} />
             </button>
             {selectedUser && selectedId ? (
                 <div className={styles.buttons}>

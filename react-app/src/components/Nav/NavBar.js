@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import Avatar from "../User/Avatar";
+import Avatar from "../UserInfo/Avatar";
 import LogoutButton from "../Logout";
 import LoginModal from "../Login";
 import ServerEditModal from "../Server/ServerEditModal";

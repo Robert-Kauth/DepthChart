@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import CreateMessageModal from "../Messages/CreateMessageModal";
-
 import { getMessagedUsers } from "../../store/messages";
 
 import styles from "./MessageCard.module.css";
@@ -69,9 +67,6 @@ export default function MessageCard({ message }) {
                 {recipient_id && users && recipient_id !== currentUser.id
                     ? users[recipient_id]?.username
                     : users[sender_id]?.username}
-            </div>
-            <div className={styles.modal}>
-                <CreateMessageModal />
             </div>
         </button>
     );

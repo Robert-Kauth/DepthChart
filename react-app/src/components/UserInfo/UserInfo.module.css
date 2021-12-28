@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+}
+
+.username {
+    font-size: 30px;
+    font-weight: 600;
+    color: darkgreen;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+}

@@ -24,7 +24,9 @@ export default function Messages() {
 
     return (
         <div className={styles.wrapper}>
-            <Title title="Direct Messages" />
+            <div className={styles.title}>
+                <Title title="Direct Messages" />
+            </div>
             {messages &&
                 Object.values(messages).map((message) => (
                     <MessageCard key={message.id} message={message} />
