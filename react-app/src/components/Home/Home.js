@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import Servers from "../Servers";
 import Main from "../Main";
@@ -10,6 +11,8 @@ import styles from "./Home.module.css";
 // className={styles. }
 
 export default function Home() {
+    const selectedMsg = useSelector((state) => state.messages.message);
+
     return (
         <div className={styles.homeBackground}>
             <div className={styles.contentWrapper}>
@@ -17,7 +20,14 @@ export default function Home() {
                     <Servers />
                 </div>
                 <div className={styles.main}>
-                    <Main card={<Messages />} feed={<MessageFeed />} />
+                    {selectedMsg ? (
+                        <Main
+                            card={<Messages />}
+                            feed={<MessageFeed message={selectedMsg} />}
+                        />
+                    ) : (
+                        <Main card={<Messages />} />
+                    )}
                 </div>
                 <div className={styles.friends}>
                     <Friends />

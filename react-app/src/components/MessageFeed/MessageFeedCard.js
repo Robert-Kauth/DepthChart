@@ -15,12 +15,12 @@ export default function MessageFeedCard({ message }) {
 
     let recipient_id;
     if (messagedUser && message) {
-        recipient_id = messagedUser[message.id].recipient_ids;
+        recipient_id = messagedUser[message.id]?.recipient_ids;
     }
 
     let sender_id;
     if (messagedUser) {
-        sender_id = messagedUser[message.id].sender_id;
+        sender_id = messagedUser[message.id]?.sender_id;
     }
 
     useEffect(() => {
@@ -35,14 +35,12 @@ export default function MessageFeedCard({ message }) {
         <div className={styles.wrapper}>
             <div className={styles.message}>
                 <div className={styles.name}>
-                    {recipient_id && users && recipient_id !== currentUser.id
+                    {recipient_id !== currentUser.id
                         ? users[recipient_id]?.username
                         : users[sender_id]?.username}
                 </div>
                 <div className={styles.iconWrapper}>
-                    {recipient_id &&
-                    users &&
-                    recipient_id !== currentUser.id ? (
+                    {recipient_id !== currentUser.id ? (
                         <img
                             className={styles.icon}
                             src={users[recipient_id]?.avatar}
