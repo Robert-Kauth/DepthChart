@@ -1,33 +1,30 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { getMessagedUsers } from "../../store/messages";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import styles from "./MessageFeedCard.module.css";
 // className={styles. }
 
 export default function MessageFeedCard({ message }) {
-    const dispatch = useDispatch();
-
     const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users);
-    const messagedUser = useSelector((state) => state.messages.messaged_users);
+    const messages = useSelector((state) => state.messages.all_messages);
 
     let recipient_id;
-    if (messagedUser && message) {
-        recipient_id = messagedUser[message.id]?.recipient_ids;
+    if (message) {
+        recipient_id = message.recipient_ids;
     }
 
     let sender_id;
-    if (messagedUser) {
-        sender_id = messagedUser[message.id]?.sender_id;
+    if (message) {
+        sender_id = message.sender_id;
     }
 
-    useEffect(() => {
-        dispatch(getMessagedUsers(message.id));
-    }, [dispatch, message.id]);
+    let indivMessage;
+    if (messages) {
+        indivMessage = messages[message.message_id];
+    }
 
-    if (!users) {
+    if (!message) {
         return null;
     }
 
@@ -53,9 +50,11 @@ export default function MessageFeedCard({ message }) {
                         />
                     )}
                     <div className={styles.messageContent}>
-                        <div className={styles.content}>{message.content}</div>
+                        <div className={styles.content}>
+                            {indivMessage.content}
+                        </div>
                         <div className={styles.updated}>
-                            {message.updated_at}
+                            {indivMessage.updated_at}
                         </div>
                     </div>
                 </div>

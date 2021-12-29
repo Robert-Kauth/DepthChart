@@ -10,7 +10,6 @@ import styles from "./MessageFeed.module.css";
 
 export default function MessageFeed({ message }) {
     const dispatch = useDispatch();
-
     const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
