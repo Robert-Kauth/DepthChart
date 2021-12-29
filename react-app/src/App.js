@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Server from "./components/Server";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import Server from "./components/Server";
 
 import { authenticate } from "./store/session";
 

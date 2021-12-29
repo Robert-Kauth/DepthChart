@@ -6,6 +6,7 @@ import Title from "../Title";
 
 import { loadUsers } from "../../store/users";
 import { loadAllUserMessages } from "../../store/messages";
+import { loadMessage } from "../../store/messages";
 
 import styles from "./Messages.module.css";
 
@@ -14,20 +15,35 @@ import styles from "./Messages.module.css";
 export default function Messages() {
     const dispatch = useDispatch();
 
-    const user = useSelector((state) => state.session.user);
+    const sessionUser = useSelector((state) => state.session.user);
     const messages = useSelector((state) => state.messages.all_messages);
 
     useEffect(() => {
         dispatch(loadUsers());
-        dispatch(loadAllUserMessages(user.id));
-    }, [dispatch, user.id]);
+        dispatch(loadAllUserMessages(sessionUser.id));
+    }, [dispatch, sessionUser]);
+
+    const selectMsg = async (e, message) => {
+        e.preventDefault();
+        if (message) {
+            await dispatch(loadMessage(message.id));
+        }
+    };
 
     return (
         <div className={styles.wrapper}>
-            <Title title="Direct Messages" />
+            <div className={styles.title}>
+                <Title title="Direct Messages" />
+            </div>
             {messages &&
                 Object.values(messages).map((message) => (
-                    <MessageCard key={message.id} message={message} />
+                    <button
+                        className={styles.button}
+                        key={message.id}
+                        value={message.id}
+                        onClick={(e) => selectMsg(e, message)}>
+                        <MessageCard message={message} />
+                    </button>
                 ))}
         </div>
     );
