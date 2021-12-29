@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@message_routes.route('/<int:user_id>')
+@message_routes.route('/users/<int:user_id>')
 # @login_required
 def load_user_messages(user_id):
     '''
@@ -29,6 +29,14 @@ def load_user_messages(user_id):
     received_messages = {message.id: message.to_dict(
     ) for message in Message.query.join(User_message).filter(User_message.recipient_ids == user_id).all()}
     return {**sent_messages, **received_messages}
+
+
+@message_routes.route('/<int:message_id>')
+# @login_required
+def load_message(message_id):
+    message = User_message.query.filter(
+        User_message.message_id == message_id).first()
+    return message.to_dict()
 
 
 @message_routes.route('/sent/<int:user_id>')
