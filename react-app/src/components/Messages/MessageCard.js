@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { getMessagedUsers } from "../../store/messages";
 
@@ -14,7 +13,9 @@ export default function MessageCard({ message }) {
     const users = useSelector((state) => state.users);
     const messagedUser = useSelector((state) => state.messages.messaged_users);
 
-    const [userId, setUserId] = useState();
+    useEffect(() => {
+        dispatch(getMessagedUsers(message.id));
+    }, [dispatch, message]);
 
     let recipient_id;
     if (messagedUser && message) {
@@ -26,31 +27,14 @@ export default function MessageCard({ message }) {
         sender_id = messagedUser[message.id].sender_id;
     }
 
-    useEffect(() => {
-        if (message) {
-            dispatch(getMessagedUsers(message.id));
-        }
-    }, [dispatch, message, message.id]);
-
-    const determineUser = () => {
-        if (recipient_id === currentUser.id) {
-            setUserId(sender_id);
-        } else {
-            setUserId(recipient_id);
-        }
-    };
-
     if (!users) {
         return null;
     }
 
     return (
-        <button
-            className={styles.wrapper}
-            value={userId}
-            onClick={determineUser}>
+        <div className={styles.wrapper}>
             <div className={styles.iconWrapper}>
-                {recipient_id && users && recipient_id !== currentUser.id ? (
+                {recipient_id !== currentUser.id ? (
                     <img
                         className={styles.icon}
                         src={users[recipient_id]?.avatar}
@@ -69,6 +53,6 @@ export default function MessageCard({ message }) {
                     ? users[recipient_id]?.username
                     : users[sender_id]?.username}
             </div>
-        </button>
+        </div>
     );
 }
