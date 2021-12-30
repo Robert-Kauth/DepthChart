@@ -2,11 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
     background-color: rgba(46, 139, 87, 0.8);
     border-radius: 2px;
     border-style: inset;
     min-width: 100%;
+    border: 5px solid darkgreen;
 }
 
 .title {

@@ -43,21 +43,21 @@ export default function MessageFeedCard({ message }) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.message}>
-                <div>
-                    <div>
-                        <ThreadTitleBar user={otherUser} />
-                    </div>
+                <div className={styles.threadTitle}>
+                    <ThreadTitleBar user={otherUser} />
                 </div>
                 <div className={styles.name}>
-                    {recipient_id !== currentUser.id
-                        ? users[recipient_id]?.username
-                        : users[sender_id]?.username}
+                    {sender_id === currentUser.id
+                        ? users[sender_id]?.username
+                        : recipient_id === currentUser.id
+                        ? users[sender_id]?.username
+                        : null}
                 </div>
                 <div className={styles.iconWrapper}>
                     {recipient_id === currentUser.id ? (
                         <img
                             className={styles.icon}
-                            src={users[recipient_id]?.avatar}
+                            src={users[sender_id]?.avatar}
                             alt="user avatar"
                         />
                     ) : (
