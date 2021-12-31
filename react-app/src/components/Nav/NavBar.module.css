@@ -11,6 +11,7 @@
     z-index: 2;
     top: 0;
     max-width: 100%;
+    min-height: 5vh;
 }
 
 .navLeft {
@@ -65,14 +66,17 @@
 
 .loginButton {
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
     font-size: 20px;
-    display: flex;
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
     border-style: inset;
     background-color: green;
+    min-height: 44px;
+    min-width: 112px;
 }
 
 .loginButton:hover {
