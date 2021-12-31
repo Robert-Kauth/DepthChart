@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { showModal, setCurrentModal } from "../../store/modal";
+import EditServerForm from "../Server/EditServerForm";
 import Avatar from "../UserInfo/Avatar";
 import LogoutButton from "../Logout";
 
 import LoginForm from "../Login";
-
-import ServerEditModal from "../Server/ServerEditModal";
 
 import styles from "./NavBar.module.css";
 // className={styles. }
@@ -20,6 +19,11 @@ export default function NavBar() {
 
     const showLogin = () => {
         dispatch(setCurrentModal(LoginForm));
+        dispatch(showModal());
+    };
+
+    const showEditServer = () => {
+        dispatch(setCurrentModal(EditServerForm));
         dispatch(showModal());
     };
 
@@ -37,9 +41,11 @@ export default function NavBar() {
                                 Home
                             </NavLink>
                         </div>
-                        <div className={styles.edit}>
-                            <ServerEditModal />
-                        </div>
+                        <button
+                            className={styles.edit}
+                            onClick={showEditServer}>
+                            Edit Server
+                        </button>
                     </div>
                 )}
             </div>

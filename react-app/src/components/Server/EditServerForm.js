@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getUserServers } from "../../store/user_servers";
 import { editServer } from "../../store/servers";
+import { hideModal } from "../../store/modal";
 import DeleteButton from "./DeleteButton";
 
-import styles from "./EditServer.module.css";
+import styles from "./EditServerForm.module.css";
 
-export default function EditServer({ setShowModal }) {
+export default function EditServerForm() {
     const dispatch = useDispatch();
 
     const servers = useSelector((state) => state.user_servers);
@@ -81,7 +82,7 @@ export default function EditServer({ setShowModal }) {
                 };
             }
             dispatch(editServer(edit));
-            setShowModal(false);
+            dispatch(hideModal());
         }
     };
 
@@ -235,7 +236,6 @@ export default function EditServer({ setShowModal }) {
                                 {showDelete && (
                                     <DeleteButton
                                         selectedServer={selectedServer}
-                                        setShowModal={setShowModal}
                                     />
                                 )}
                             </div>

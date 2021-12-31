@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { destroyServer } from "../../store/servers";
+import { hideModal } from "../../store/modal";
 
 import styles from "./DeleteButton.module.css";
 // className={styles. }
 
-export default function DeleteButton({ selectedServer, setShowModal }) {
+export default function DeleteButton({ selectedServer }) {
     const dispatch = useDispatch();
 
     const [choice, setChoice] = useState("");
@@ -17,7 +18,7 @@ export default function DeleteButton({ selectedServer, setShowModal }) {
         if (choice === selectedServer.name) {
             setChoice("");
             dispatch(destroyServer(selectedServer.id));
-            setShowModal(false);
+            dispatch(hideModal());
         } else {
             setError("Must input correct server name to delete");
         }
