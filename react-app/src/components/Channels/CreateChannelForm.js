@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { createChannel } from "../../store/channels";
+import { hideModal } from "../../store/modal";
 
-import styles from "./CreateChannel.module.css";
+import styles from "./CreateChannelForm.module.css";
 // className={styles. }
 
-export default function CreateChannel({ setShowModal, currentServer }) {
+export default function CreateChannelForm() {
     const dispatch = useDispatch();
+    const { currentServerId } = useParams();
+
+    const currentServer = useSelector(
+        (state) => state.servers[currentServerId]
+    );
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
@@ -26,7 +33,7 @@ export default function CreateChannel({ setShowModal, currentServer }) {
         if (data) {
             setErrors(data);
         } else {
-            setShowModal(false);
+            dispatch(hideModal());
         }
     };
 

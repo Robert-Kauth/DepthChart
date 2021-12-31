@@ -1,17 +1,27 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import { showModal, setCurrentModal } from "../../store/modal";
 import Avatar from "../UserInfo/Avatar";
 import LogoutButton from "../Logout";
-import LoginModal from "../Login";
+
+import LoginForm from "../Login";
+
 import ServerEditModal from "../Server/ServerEditModal";
 
 import styles from "./NavBar.module.css";
 // className={styles. }
 
 export default function NavBar() {
+    const dispatch = useDispatch();
+
     const user = useSelector((state) => state.session.user);
+
+    const showLogin = () => {
+        dispatch(setCurrentModal(LoginForm));
+        dispatch(showModal());
+    };
 
     return (
         <nav className={styles.nav}>
@@ -38,9 +48,9 @@ export default function NavBar() {
                     {user && <Avatar user={user} />}
                 </div>
                 {!user ? (
-                    <div className={styles.login}>
-                        <LoginModal />
-                    </div>
+                    <button className={styles.login} onClick={showLogin}>
+                        Log In
+                    </button>
                 ) : (
                     <div className={styles.logout}>
                         <LogoutButton />

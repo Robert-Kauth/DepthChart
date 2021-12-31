@@ -4,7 +4,6 @@ import { Provider, useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import { setModalMount } from "./store/modal";
-import { ModalProvider } from "./Context";
 
 import App from "./App";
 import configureStore from "./store";
@@ -38,11 +37,9 @@ const Root = () => {
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <ModalProvider>
-                <BrowserRouter>
-                    <Root />
-                </BrowserRouter>
-            </ModalProvider>
+            <BrowserRouter>
+                <Root />
+            </BrowserRouter>
         </Provider>
     </React.StrictMode>,
     document.getElementById("root")

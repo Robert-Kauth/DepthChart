@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ChannelCard from "./ChannelCard";
-import AddChannelModal from "./AddChannelModal";
+import { showModal, setCurrentModal } from "../../store/modal";
+import CreateChannelForm from "../Channels/CreateChannelForm";
+// import AddChannelModal from "./AddChannelModal";
 import { loadChannels } from "../../store/channels";
 
 import styles from "./Channels.module.css";
@@ -12,7 +14,7 @@ export default function Channels({ serverId }) {
     const dispatch = useDispatch();
 
     const channels = useSelector((state) => state.channels);
-    const servers = useSelector((state) => state.servers);
+    // const servers = useSelector((state) => state.servers);
 
     let serverChannels;
     if (channels) {
@@ -24,11 +26,16 @@ export default function Channels({ serverId }) {
         }, []);
     }
 
-    const currentServer = servers[serverId];
+    // const currentServer = servers[serverId];
 
     useEffect(() => {
         dispatch(loadChannels());
     }, [dispatch]);
+
+    const showCreateChannel = () => {
+        dispatch(setCurrentModal(CreateChannelForm));
+        dispatch(showModal());
+    };
 
     return (
         <div className={styles.channelsWrapper}>
@@ -43,9 +50,9 @@ export default function Channels({ serverId }) {
                     <p className={styles.msg}>Click + to create one</p>
                 </div>
             )}
-            <div>
-                <AddChannelModal currentServer={currentServer} />
-            </div>
+            <button className={styles.create} onClick={showCreateChannel}>
+                Add Channel
+            </button>
         </div>
     );
 }
