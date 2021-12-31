@@ -33,12 +33,6 @@ export default function App() {
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
                 </ProtectedRoute>
-                <Route path="/login">
-                    <SplashPage />
-                </Route>
-                <Route path="/sign-up">
-                    <SplashPage />
-                </Route>
                 {user && isOnline ? (
                     <Route path="/">
                         <Home />
