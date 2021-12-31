@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+
+import { hideModal } from "../../store/modal";
 import { login, demoLogin } from "../../store/session";
 
 import styles from "./LoginForm.module.css";
@@ -40,10 +42,10 @@ export default function LoginForm({ setShowModal }) {
 
     useEffect(() => {
         if (user) {
-            setShowModal(false);
+            dispatch(hideModal());
             <Redirect to="/" />;
         }
-    }, [setShowModal, user]);
+    }, [dispatch, user]);
 
     return (
         <form className={styles.form}>
