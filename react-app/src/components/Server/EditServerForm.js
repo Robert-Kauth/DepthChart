@@ -106,150 +106,134 @@ export default function EditServerForm() {
     }, [dispatch, user_id]);
 
     return (
-        <div>
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <fieldset className={styles.field}>
-                    <legend className={styles.legend}>Edit Server</legend>
-                    <ul className={styles.errors}>
-                        {errors.map((error, ind) => (
-                            <li className={styles.error} key={ind}>
-                                {error}
-                            </li>
-                        ))}
-                    </ul>
-                    {!serverId && (
-                        <div className={styles.selectWrapper}>
-                            <label className={styles.serverNameLabelWrapper}>
-                                Name of server
-                            </label>
-                            <select
-                                className={styles.serverSelect}
-                                onChange={(e) => setServerId(e.target.value)}>
-                                <option>
-                                    --Please choose a server to edit--
-                                </option>
-                                {user_servers &&
-                                    Object.values(user_servers).map(
-                                        (server) => (
-                                            <option
-                                                key={server.id}
-                                                value={server.id}>
-                                                {server.name}
-                                            </option>
-                                        )
-                                    )}
-                            </select>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <fieldset className={styles.field}>
+                <legend className={styles.legend}>Edit Server</legend>
+                <ul className={styles.errors}>
+                    {errors.map((error, ind) => (
+                        <li className={styles.error} key={ind}>
+                            {error}
+                        </li>
+                    ))}
+                </ul>
+                {!serverId && (
+                    <div className={styles.selectWrapper}>
+                        <label className={styles.serverNameLabelWrapper}>
+                            Name of server
+                        </label>
+                        <select
+                            className={styles.serverSelect}
+                            onChange={(e) => setServerId(e.target.value)}>
+                            <option>--Please choose a server to edit--</option>
+                            {user_servers &&
+                                Object.values(user_servers).map((server) => (
+                                    <option key={server.id} value={server.id}>
+                                        {server.name}
+                                    </option>
+                                ))}
+                        </select>
+                    </div>
+                )}
+                {serverId && (
+                    <div className={styles.inputWrapper}>
+                        <div className={styles.nameWrapper}>
+                            <label className={styles.nameLabel}>Name:</label>
+                            <input
+                                type="text"
+                                placeholder={selectedServer.name}
+                                value={name}
+                                onChange={updateName}
+                            />
                         </div>
-                    )}
-                    {serverId && (
-                        <div className={styles.inputWrapper}>
-                            <div className={styles.nameWrapper}>
-                                <label className={styles.nameLabel}>
-                                    Name:
+                        <div className={styles.topicWrapper}>
+                            <label className={styles.topicLabel}>Topic:</label>
+                            <input
+                                type="text"
+                                value={topic}
+                                placeholder={selectedServer.topic}
+                                onChange={updateTopic}
+                            />
+                        </div>
+                        <div className={styles.iconInput}>
+                            <div className={styles.iconWrapper}>
+                                <label className={styles.iconLabel}>
+                                    Current Icon
                                 </label>
-                                <input
-                                    type="text"
-                                    placeholder={selectedServer.name}
-                                    value={name}
-                                    onChange={updateName}
+                                <img
+                                    className={styles.iconImg}
+                                    src={selectedServer.icon}
+                                    alt="Server Icon"
                                 />
                             </div>
-                            <div className={styles.topicWrapper}>
-                                <label className={styles.topicLabel}>
-                                    Topic:
-                                </label>
-                                <input
-                                    type="text"
-                                    value={topic}
-                                    placeholder={selectedServer.topic}
-                                    onChange={updateTopic}
-                                />
-                            </div>
-                            <div className={styles.iconInput}>
-                                <div className={styles.iconWrapper}>
-                                    <label className={styles.iconLabel}>
-                                        Current Icon
-                                    </label>
-                                    <img
-                                        className={styles.iconImg}
-                                        src={selectedServer.icon}
-                                        alt="Server Icon"
-                                    />
-                                </div>
-                                <div className={styles.iconButtonWrapper}>
-                                    {!newIcon ? (
-                                        <button
-                                            className={styles.button}
-                                            type="button"
-                                            value={newIcon}
-                                            onClick={setShowField}>
-                                            Update Icon?
-                                        </button>
-                                    ) : (
-                                        <button
-                                            className={styles.button}
-                                            type="button"
-                                            value={newIcon}
-                                            onClick={setShowField}>
-                                            Don't update Icon
-                                        </button>
-                                    )}
-                                    <div className={styles.newIconWrapper}>
-                                        {newIcon && (
-                                            <>
-                                                <label
-                                                    className={
-                                                        styles.newIconLabel
-                                                    }>
-                                                    Icon URL:
-                                                </label>
-                                                <input
-                                                    type="url"
-                                                    value={icon}
-                                                    onChange={updateIcon}
-                                                />
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={styles.deleteContainer}>
-                                {!showDelete ? (
+                            <div className={styles.iconButtonWrapper}>
+                                {!newIcon ? (
                                     <button
                                         className={styles.button}
                                         type="button"
-                                        value={showDelete}
-                                        onClick={renderDelete}>
-                                        Want to Delete Server?
+                                        value={newIcon}
+                                        onClick={setShowField}>
+                                        Update Icon?
                                     </button>
                                 ) : (
                                     <button
                                         className={styles.button}
                                         type="button"
-                                        value={showDelete}
-                                        onClick={renderDelete}>
-                                        Don't Delete Server
+                                        value={newIcon}
+                                        onClick={setShowField}>
+                                        Don't update Icon
                                     </button>
                                 )}
-                            </div>
-                            <div className={styles.deleteButtonContainer}>
-                                {showDelete && (
-                                    <DeleteButton
-                                        selectedServer={selectedServer}
-                                    />
-                                )}
-                            </div>
-                            <div className={styles.updateContainer}>
-                                {!showDelete && (
-                                    <button className={styles.button}>
-                                        Update Server
-                                    </button>
-                                )}
+                                <div className={styles.newIconWrapper}>
+                                    {newIcon && (
+                                        <>
+                                            <label
+                                                className={styles.newIconLabel}>
+                                                Icon URL:
+                                            </label>
+                                            <input
+                                                type="url"
+                                                value={icon}
+                                                onChange={updateIcon}
+                                            />
+                                        </>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    )}
-                </fieldset>
-            </form>
-        </div>
+                        <div className={styles.deleteContainer}>
+                            {!showDelete ? (
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    value={showDelete}
+                                    onClick={renderDelete}>
+                                    Want to Delete Server?
+                                </button>
+                            ) : (
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    value={showDelete}
+                                    onClick={renderDelete}>
+                                    Don't Delete Server
+                                </button>
+                            )}
+                        </div>
+                        <div className={styles.deleteButtonContainer}>
+                            {showDelete && (
+                                <DeleteButton selectedServer={selectedServer} />
+                            )}
+                        </div>
+                        <div className={styles.updateContainer}>
+                            {!showDelete && (
+                                <button className={styles.button}>
+                                    Update Server
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                )}
+            </fieldset>
+        </form>
     );
 }

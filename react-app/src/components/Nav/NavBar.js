@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { showModal, setCurrentModal } from "../../store/modal";
 import EditServerForm from "../Server/EditServerForm";
 import Avatar from "../UserInfo/Avatar";
-import LogoutButton from "../Logout";
+import { logout } from "../../store/session";
 
 import LoginForm from "../Login";
 
@@ -27,22 +27,23 @@ export default function NavBar() {
         dispatch(showModal());
     };
 
+    const onLogout = () => {
+        dispatch(logout());
+    };
+
     return (
         <nav className={styles.nav}>
             <div>
                 {user && (
                     <div className={styles.navLeft}>
-                        <div className={styles.home}>
-                            <NavLink
-                                to="/"
-                                exact={true}
-                                className={styles.link}
-                                activeClassName={styles.active}>
-                                Home
-                            </NavLink>
-                        </div>
+                        <NavLink
+                            to="/"
+                            className={styles.link}
+                            activeClassName={styles.active}>
+                            Home
+                        </NavLink>
                         <button
-                            className={styles.edit}
+                            className={styles.editButton}
                             onClick={showEditServer}>
                             Edit Server
                         </button>
@@ -50,17 +51,15 @@ export default function NavBar() {
                 )}
             </div>
             <div className={styles.navRight}>
-                <div className={styles.profileAvatar}>
-                    {user && <Avatar user={user} />}
-                </div>
+                {user && <Avatar user={user} />}
                 {!user ? (
-                    <button className={styles.login} onClick={showLogin}>
+                    <button className={styles.loginButton} onClick={showLogin}>
                         Log In
                     </button>
                 ) : (
-                    <div className={styles.logout}>
-                        <LogoutButton />
-                    </div>
+                    <button className={styles.logoutButton} onClick={onLogout}>
+                        Logout
+                    </button>
                 )}
             </div>
         </nav>
