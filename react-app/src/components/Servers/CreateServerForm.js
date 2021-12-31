@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { createServer } from "../../store/servers";
+import { hideModal } from "../../store/modal";
 
 import styles from "./CreateServerForm.module.css";
 // className={styles. }
 
-export default function CreateServerForm({ setShowModal }) {
+export default function CreateServerForm() {
     const dispatch = useDispatch();
 
     const [errors, setErrors] = useState([]);
@@ -45,7 +46,7 @@ export default function CreateServerForm({ setShowModal }) {
             if (data) {
                 setErrors(data);
             } else {
-                setShowModal(false);
+                dispatch(hideModal());
             }
         }
     };
