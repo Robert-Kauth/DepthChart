@@ -35,20 +35,17 @@ const StyledIcon = styled(Icon)`
 export default function Channels({ serverId }) {
     const dispatch = useDispatch();
 
-    const channels = useSelector((state) => state.channels);
-    // const servers = useSelector((state) => state.servers);
+    const channels = useSelector((state) => state.channels.all);
 
     let serverChannels;
     if (channels) {
         serverChannels = Object.values(channels).reduce((a, channel) => {
-            if (channel.server_id === +serverId) {
+            if (channel?.server_id === +serverId) {
                 a.push(channel);
             }
             return a;
         }, []);
     }
-
-    // const currentServer = servers[serverId];
 
     useEffect(() => {
         dispatch(loadChannels());
@@ -62,7 +59,7 @@ export default function Channels({ serverId }) {
     return (
         <div className={styles.channelsWrapper}>
             <p className={styles.title}>Channels</p>
-            {serverChannels.length ? (
+            {serverChannels ? (
                 serverChannels.map((channel) => (
                     <ChannelCard key={channel.id} channel={channel} />
                 ))

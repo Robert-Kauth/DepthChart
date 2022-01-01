@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { hideModal } from "../../store/modal";
 import { destroyChannel } from "../../store/channels";
 
 import styles from "./DeleteChannelButton.module.css";
 // className={styles. }
 
-export default function DeleteChannelButton({ channel, setShowModal }) {
+export default function DeleteChannelButton({ channel }) {
     const dispatch = useDispatch();
 
     const [choice, setChoice] = useState("");
@@ -17,7 +18,7 @@ export default function DeleteChannelButton({ channel, setShowModal }) {
         if (choice === channel.name) {
             setChoice("");
             dispatch(destroyChannel(channel.id));
-            setShowModal(false);
+            dispatch(hideModal());
         } else {
             setError("Must input correct channel name to delete");
         }

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { hideModal } from "../../store/modal";
 import { editChannel } from "../../store/channels";
 import DeleteChannelButton from "./DeleteChannelButton";
 
-import styles from "./EditChannel.module.css";
+import styles from "./EditChannelForm.module.css";
 // className={styles. }
 
-export default function EditChannel({ channel, setShowModal }) {
+export default function EditChannelForm() {
     const dispatch = useDispatch();
+
+    const channel = useSelector((state) => state.channels.one);
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
@@ -63,7 +66,7 @@ export default function EditChannel({ channel, setShowModal }) {
                 };
             }
             dispatch(editChannel(edit));
-            setShowModal(false);
+            dispatch(hideModal());
         }
     };
 
@@ -179,10 +182,7 @@ export default function EditChannel({ channel, setShowModal }) {
                         </div>
                         <div className={styles.deleteButtonContainer}>
                             {showDelete && (
-                                <DeleteChannelButton
-                                    channel={channel}
-                                    setShowModal={setShowModal}
-                                />
+                                <DeleteChannelButton channel={channel} />
                             )}
                         </div>
                         <div className={styles.updateContainer}>
