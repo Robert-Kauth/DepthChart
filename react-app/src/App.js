@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import Modal from "./components/Modal";
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Server from "./components/Server";
@@ -27,16 +28,11 @@ export default function App() {
     return (
         <div className={styles.appContainer}>
             <NavBar />
+            <Modal />
             <Switch>
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
                 </ProtectedRoute>
-                <Route path="/login">
-                    <SplashPage />
-                </Route>
-                <Route path="/sign-up">
-                    <SplashPage />
-                </Route>
                 {user && isOnline ? (
                     <Route path="/">
                         <Home />

@@ -29,3 +29,13 @@
     background-color: #2e8b57;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
 }
+.wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(46, 139, 87, 0.8);
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    padding: 5px;
+}

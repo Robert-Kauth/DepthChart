@@ -77,15 +77,15 @@ export const destroyChannel = (channelId) => async (dispatch) => {
     dispatch(destroy(id));
 };
 /*-------------REDUCER-------------*/
-const initialState = {};
+const initialState = { all: null, one: null };
 
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
     switch (action.type) {
         case LOAD_ALL:
-            return { ...state, ...action.channels };
+            return { ...state, all: action.channels };
         case LOAD:
-            return { ...state, [action.channel.id]: action.channel };
+            return { ...state, one: action.channel };
         case CREATE:
             newState[action.channel.id] = action.channel;
             return newState;

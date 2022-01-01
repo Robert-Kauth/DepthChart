@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import { ModalProvider } from "./Context";
+import { setModalMount } from "./store/modal";
 
 import App from "./App";
 import configureStore from "./store";
@@ -18,21 +18,29 @@ if (process.env.NODE_ENV !== "production") {
     window.dispatch = store.dispatch;
 }
 
-function Root() {
+const Root = () => {
+    const dispatch = useDispatch();
+    const modalMooringRef = useRef(null);
+
+    useEffect(() => {
+        dispatch(setModalMount(modalMooringRef.current));
+    }, [dispatch]);
+
     return (
-        <Provider store={store}>
-            <ModalProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </ModalProvider>
-        </Provider>
+        <>
+            <App />
+            <div ref={modalMooringRef} className="modal"></div>
+        </>
     );
-}
+};
 
 ReactDOM.render(
     <React.StrictMode>
-        <Root />
+        <Provider store={store}>
+            <BrowserRouter>
+                <Root />
+            </BrowserRouter>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );
