@@ -35,7 +35,6 @@ export default function ChannelCard({ channel }) {
     const dispatch = useDispatch();
 
     const [selectedChannel, setSelectedChannel] = useState();
-    console.log(selectedChannel, "selected Channel outside of fx");
 
     const selectChannel = () => {
         setSelectedChannel(channel.id);
@@ -48,7 +47,6 @@ export default function ChannelCard({ channel }) {
     }, [dispatch, selectedChannel]);
 
     const showEditChannel = (channel) => {
-        console.log(channel.id, "Channel inside of fx");
         dispatch(loadChannel(channel.id));
         dispatch(setCurrentModal(EditChannelForm));
         dispatch(showModal());

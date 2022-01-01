@@ -102,7 +102,7 @@ export default function EditChannelForm() {
                         <input
                             type="text"
                             value={name}
-                            placeholder={channel.name}
+                            placeholder={channel?.name}
                             onChange={updateName}
                         />
                     </div>
