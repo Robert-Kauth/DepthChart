@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
+
+import { hideModal } from "../../store/modal";
 
 import styles from "./Chat.module.css";
 // className={styles. }
 
 let socket;
 
-export default function Chat({ setShowModal }) {
+export default function Chat() {
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
 
     const [messages, setMessages] = useState([]);
@@ -40,6 +43,10 @@ export default function Chat({ setShowModal }) {
         setChatInput("");
     };
 
+    const hideChat = () => {
+        dispatch(hideModal());
+    };
+
     return (
         user && (
             <div>
@@ -52,7 +59,7 @@ export default function Chat({ setShowModal }) {
                     <input value={chatInput} onChange={updateChatInput} />
                     <button type="submit">Send</button>
                 </form>
-                <button onClick={() => setShowModal(false)}>Close</button>
+                <button onClick={hideChat}>Close Chat</button>
             </div>
         )
     );
