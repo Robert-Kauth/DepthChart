@@ -6,7 +6,7 @@ const EDIT = "chat/EDIT";
 const DESTROY = "chat/DESTROY";
 /*-------------ACTIONS-------------*/
 export const loadChats = () => async (dispatch) => {
-    const res = fetch("/api/chat/");
+    const res = fetch("/api/chats/");
 };
 /*-------------THUNK CREATORS-------------*/
 /*-------------REDUCER-------------*/
