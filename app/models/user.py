@@ -74,4 +74,6 @@ class User(db.Model, UserMixin):
             'owned_servers': [owned_server.id for owned_server in self.owned_servers],
             'sent_messages': [sent_message.sender_id for sent_message in self.sent_messages],
             'received_messages': [received_message.recipient_ids for received_message in self.received_messages],
+            'sent_chats': {sent_chat.chat_id: sent_chat.recipient_id for sent_chat in self.sent_chats},
+            'received_chats': {received_chat.chat_id: received_chat.sender_id for received_chat in self.received_chats}
         }

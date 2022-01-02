@@ -5,3 +5,5 @@ from .user_server import User_server
 from .channel import Channel
 from .message import Message
 from .user_message import User_message
+from .chat import Chat
+from .user_chat import User_chat
