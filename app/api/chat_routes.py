@@ -1,9 +1,25 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Chat, User_chat
+from app.forms.message_form import MessageForm
+from app.models import db, User, Chat, User_chat
 
 
 chat_routes = Blueprint('chats', __name__)
+
+
+@chat_routes.route('/', methods=["POST"])
+@login_required
+def chat():
+    # get all users for form select field
+    recipients_list = [(user.id, user.username) for user in User.query.all()]
+    form = MessageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    form.recipients.choices = recipients_list
+    form = MessageForm()
+    if form.validate_on_submit():
+        chat = User_chat(sender_id=current_user.id,
+                         recipient_ids=form.data['recipient_ids'],
+                         chat_id=form.data['chat_id'], is_read=False)
 
 
 @chat_routes.route('/<int>:chat_id')
@@ -15,7 +31,7 @@ def load_chat(chat_id):
     return {chat.id: chat.to_dict() for chat in Chat.query.join(User_chat).filter(User_chat.chat_id == chat_id).first()}
 
 
-@chat_routes.route('users/<int>:user_id')
+@chat_routes.route('/users/<int>:user_id')
 # @login_required
 def load_chat(user_id):
     '''

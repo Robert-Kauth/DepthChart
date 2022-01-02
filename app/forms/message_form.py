@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired, InputRequired
-from app.models import User
+
+#! can be use for both messages and chats
+#! consider renaming to be something more general when you have the time
 
 
 class MessageForm(FlaskForm):
