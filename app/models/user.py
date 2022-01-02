@@ -29,8 +29,13 @@ class User(db.Model, UserMixin):
         'Server', back_populates='owner', cascade='all,delete')
     sent_messages = db.relationship(
         'User_message', foreign_keys='User_message.sender_id', back_populates='sender', cascade='all, delete')
+    sent_chats = db.relationship(
+        'User_chat', foreign_keys='User_chat.sender_id', back_populates='sender', cascade='all, delete')
     received_messages = db.relationship(
         'User_message', foreign_keys='[User_message.recipient_ids]', back_populates='recipients', cascade='all, delete')
+    received_chats = db.relationship(
+        'User_chat', foreign_keys='[User_chat.recipient_ids]', back_populates='recipients', cascade='all, delete')
+
     followed = db.relationship(
         'User', secondary='followers',
         primaryjoin=(followers.c.follower_id == id),
