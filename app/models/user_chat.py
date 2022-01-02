@@ -9,7 +9,7 @@ class User_chat(db.Model):
     recipient_ids = db.Column(
         db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
     chat_id = db.Column(db.Integer, db.ForeignKey(
-        'chats.id', ondelete='CASCADE'))
+        'chats.id', ondelete='CASCADE'), primary_key=True)
     is_read = db. Column(db.Boolean)
 
     sender = db.relationship(

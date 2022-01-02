@@ -2,7 +2,7 @@ from .db import db
 import datetime
 
 
-class Chat(db.model):
+class Chat(db.Model):
     __tablename__ = 'chats'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,7 +12,7 @@ class Chat(db.model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     user_chats = db.relationship(
-        'User_chats', foreign_keys='User_chat.chat_id', back_populates='chats', cascade='all, delete')
+        'User_chat', foreign_keys='User_chat.chat_id', back_populates='chats', cascade='all, delete')
 
     def to_dict(self):
         return {
@@ -21,5 +21,4 @@ class Chat(db.model):
             'sent_at': self.sent_at,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-
         }
