@@ -26,3 +26,15 @@ def load_chat(user_id):
     received = {chat.id: chat.to_dict() for chat in User_chat.query.filter(
         User_chat.recipient_ids == user_id).all()}
     return {**sent, **received}
+
+
+@chat_routes.route('/<int>:id', methods=['DELETE'])
+@login_required
+def delete_chat(id):
+    '''
+    Delete Chat from database
+    '''
+    chat = Chat.query.get(id)
+    Chat.query.filter(Chat.id == id).delete()
+    db.session.commit()
+    return str(id), 201
