@@ -7,6 +7,7 @@ import user_servers from "./user_servers";
 import channels from "./channels";
 import messages from "./messages";
 import modal from "./modal";
+import chat from "./chat";
 
 const rootReducer = combineReducers({
     session,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     channels,
     messages,
     modal,
+    chat,
 });
 
 let enhancer;
