@@ -1,5 +1,6 @@
 /*-------------ACTION.TYPES-------------*/
 const LOAD = "messages/LOAD";
+const LOAD_ONE = "messages/LOAD_ONE";
 const GET_USERS = "messages/GET_USERS";
 const GET_SENT = "messages/GET_SENT";
 const GET_RECIEVED = "messages/GET_RECIEVED";
@@ -11,6 +12,11 @@ const DESTROY = "messages/DESTROY";
 const load = (messages) => ({
     type: LOAD,
     messages,
+});
+
+const loadOne = (message) => ({
+    type: LOAD_ONE,
+    message,
 });
 
 const get = (messaged_users) => ({
@@ -43,9 +49,17 @@ const destroy = (id) => ({
 /*-------------THUNK CREATORS-------------*/
 
 export const loadAllUserMessages = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/messages/${userId}`);
+    const res = await fetch(`/api/messages/users/${userId}`);
     const messages = await res.json();
     dispatch(load(messages));
+};
+
+export const loadMessage = (message_id) => async (dispatch) => {
+    const res = await fetch(`/api/messages/${message_id}`);
+    if (res.ok) {
+        const message = await res.json();
+        dispatch(loadOne(message));
+    }
 };
 
 export const loadAllChannelMessages = (channel_id) => async (dispatch) => {
@@ -60,12 +74,14 @@ export const getMessagedUsers = (message_id) => async (dispatch) => {
     dispatch(get(messaged_users));
 };
 
+// ! Unused
 export const loadSentMessages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/messages/sent/${userId}`);
     const sentMessages = await res.json();
     dispatch(getSent(sentMessages));
 };
 
+// ! Unused
 export const loadReceivedMessages = (userId) => async (dispatch) => {
     const res = await fetch(`/api/messages/received/${userId}`);
     const receivedMessages = await res.json();
@@ -106,6 +122,7 @@ export const destroyMessage = (message_id) => async (dispatch) => {
 /*-------------REDUCER-------------*/
 const initialState = {
     all_messages: null,
+    message: null,
     messaged_users: null,
     sent: null,
     recieved: null,
@@ -115,6 +132,8 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD:
             return { ...state, all_messages: action.messages };
+        case LOAD_ONE:
+            return { ...state, message: action.message };
         case GET_USERS:
             return {
                 ...state,

@@ -1,3 +1,3 @@
-import ChatModal from "./ChatModal";
+import Chat from "./Chat";
 
-export default ChatModal;
+export default Chat;

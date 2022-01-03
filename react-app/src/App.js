@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import Modal from "./components/Modal";
 import NavBar from "./components/Nav";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/UserProfile";
+import Server from "./components/Server";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import Server from "./components/Server";
 
 import { authenticate } from "./store/session";
 
@@ -29,28 +28,19 @@ export default function App() {
     return (
         <div className={styles.appContainer}>
             <NavBar />
+            <Modal />
             <Switch>
-                <Route path="/login" exact={true}>
-                    <SplashPage />
-                </Route>
-                <Route path="/sign-up" exact={true}>
-                    <SplashPage />
-                </Route>
-                <ProtectedRoute path="/users" exact={true}>
-                    <UsersList />
-                </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId" exact={true}>
-                    <User />
-                </ProtectedRoute>
                 <ProtectedRoute path="/servers/:serverId">
                     <Server />
                 </ProtectedRoute>
                 {user && isOnline ? (
-                    <ProtectedRoute path="/" exact={true}>
+                    <Route path="/">
                         <Home />
-                    </ProtectedRoute>
+                    </Route>
                 ) : (
-                    <SplashPage />
+                    <Route path="/">
+                        <SplashPage />
+                    </Route>
                 )}
             </Switch>
             <Footer />

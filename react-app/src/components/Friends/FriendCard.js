@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import ChatModal from "../Chat";
+import { showModal, setCurrentModal } from "../../store/modal";
+import Chat from "../Chat";
+import UserInfo from "../UserInfo";
 
 import styles from "./FriendCard.module.css";
 // className={styles. }
 
 export default function FriendCard({ user }) {
+    const dispatch = useDispatch();
+
     const sessionUser = useSelector((state) => state.session.user);
 
     const [selectedUser, setSelectedUser] = useState(false);
@@ -22,24 +26,24 @@ export default function FriendCard({ user }) {
 
     const setFollow = () => {};
 
+    const showChat = () => {
+        dispatch(setCurrentModal(Chat));
+        dispatch(showModal());
+    };
+
     return (
         <>
             <button
                 onClick={updateSelected}
                 className={styles.selectFriend}
                 value={user.id}>
-                <div className={styles.name} value={user.id}>
-                    {user.username}
-                </div>
-                <div className={styles.imgContainer} value={user.id}>
-                    <img src={user.avatar} alt="user avatar" />
-                </div>
+                <UserInfo user={user} />
             </button>
             {selectedUser && selectedId ? (
                 <div className={styles.buttons}>
-                    <div className={styles.chatModal}>
-                        <ChatModal />
-                    </div>
+                    <button className={styles.chatModal} onClick={showChat}>
+                        Chat
+                    </button>
                     <div className={styles.follow}>
                         <button onClick={setFollow}>Follow</button>
                     </div>

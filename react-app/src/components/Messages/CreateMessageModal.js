@@ -10,6 +10,7 @@ import { Modal } from "../../Context";
 import styles from "./CreateMessageModal.module.css";
 // className={styles. }
 
+//! will need to be deleted once new modal is implemented
 const Button = styled.button`
     background-color: #014421;
     color: #029e7e;

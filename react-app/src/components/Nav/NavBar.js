@@ -1,54 +1,65 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import LogoutButton from "../Logout";
-import LoginModal from "../Login";
-import ServerEditModal from "../Server/ServerEditModal";
+
+import { showModal, setCurrentModal } from "../../store/modal";
+import EditServerForm from "../Server/EditServerForm";
+import Avatar from "../UserInfo/Avatar";
+import { logout } from "../../store/session";
+
+import LoginForm from "../Login";
 
 import styles from "./NavBar.module.css";
 // className={styles. }
 
 export default function NavBar() {
-    const sessionUser = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
+
+    const user = useSelector((state) => state.session.user);
+
+    const showLogin = () => {
+        dispatch(setCurrentModal(LoginForm));
+        dispatch(showModal());
+    };
+
+    const showEditServer = () => {
+        dispatch(setCurrentModal(EditServerForm));
+        dispatch(showModal());
+    };
+
+    const onLogout = () => {
+        dispatch(logout());
+    };
 
     return (
         <nav className={styles.nav}>
             <div>
-                {sessionUser && (
+                {user && (
                     <div className={styles.navLeft}>
-                        <div className={styles.home}>
-                            <NavLink
-                                to="/"
-                                exact={true}
-                                className={styles.link}
-                                activeClassName={styles.active}>
-                                Home
-                            </NavLink>
-                        </div>
-                        <div className={styles.edit}>
-                            <ServerEditModal />
-                        </div>
+                        <NavLink
+                            to="/"
+                            className={styles.link}
+                            activeClassName={styles.active}>
+                            Home
+                        </NavLink>
+                        <button
+                            className={styles.editButton}
+                            onClick={showEditServer}>
+                            Edit Server
+                        </button>
                     </div>
                 )}
             </div>
             <div className={styles.navRight}>
-                <div className={styles.profileAvatar}>
-                    {sessionUser && (
-                        <img
-                            className={styles.img}
-                            src={sessionUser.avatar}
-                            alt="userAvatar"
-                        />
-                    )}
-                </div>
-                {!sessionUser ? (
-                    <div className={styles.login}>
-                        <LoginModal />
-                    </div>
+                {user && <Avatar user={user} />}
+                {!user ? (
+                    <button className={styles.loginButton} onClick={showLogin}>
+                        Log In
+                    </button>
                 ) : (
-                    <div className={styles.logout}>
-                        <LogoutButton />
-                    </div>
+                    <button className={styles.logoutButton} onClick={onLogout}>
+                        Logout
+                    </button>
                 )}
             </div>
         </nav>

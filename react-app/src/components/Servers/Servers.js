@@ -1,11 +1,36 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ServerTile from "./ServerTile";
-import CreateServerModal from "./CreateServerModal";
+import styled from "styled-components";
+import Icon from "@mdi/react";
+import { mdiPlusBox } from "@mdi/js";
+
+import { showModal, setCurrentModal } from "../../store/modal";
 import { loadServers } from "../../store/servers";
+
+import CreateServerForm from "./CreateServerForm";
+import ServerTile from "./ServerTile";
 
 import styles from "./Servers.module.css";
 // className={styles. }
+
+const Button = styled.button`
+    background-color: #014421;
+    color: #029e7e;
+    margin: 0;
+    padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    &:hover {
+        background-color: #0bda51;
+        color: #014421;
+    }
+`;
+
+const StyledIcon = styled(Icon)`
+    width: 1rem;
+    height: 1rem;
+`;
 
 export default function Servers() {
     const dispatch = useDispatch();
@@ -15,7 +40,12 @@ export default function Servers() {
 
     useEffect(() => {
         dispatch(loadServers());
-    }, [dispatch, user_id]);
+    }, [dispatch]);
+
+    const showCreateServer = () => {
+        dispatch(setCurrentModal(CreateServerForm));
+        dispatch(showModal());
+    };
 
     let user_servers;
     if (servers) {
@@ -30,9 +60,9 @@ export default function Servers() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.tileWrapper}>{user_servers}</div>
-            <div className={styles.add}>
-                <CreateServerModal />
-            </div>
+            <Button className={styles.button} onClick={showCreateServer}>
+                <StyledIcon path={mdiPlusBox} size={1} />
+            </Button>
         </div>
     );
 }
