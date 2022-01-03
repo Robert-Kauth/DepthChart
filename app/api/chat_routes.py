@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.forms.message_form import MessageForm
+from app.forms.communication_form import CommunicationForm
 from app.models import db, User, Chat, User_chat
 
 
@@ -35,10 +35,10 @@ def load_chats(user_id):
 def chat():
     # get all users for form select field
     recipients_list = [(user.id, user.username) for user in User.query.all()]
-    form = MessageForm()
+    form = CommunicationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form.recipients.choices = recipients_list
-    form = MessageForm()
+    form = CommunicationForm()
     if form.validate_on_submit():
         chat = User_chat(sender_id=current_user.id,
                          recipient_ids=form.data['recipient_ids'],

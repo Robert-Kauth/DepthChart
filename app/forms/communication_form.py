@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, InputRequired
 #! consider renaming to be something more general when you have the time
 
 
-class MessageForm(FlaskForm):
+class CommunicationForm(FlaskForm):
     recipients = SelectField('recipients', coerce=int,
                              validators=[InputRequired()])
     content = StringField('content', validators=[DataRequired()])
