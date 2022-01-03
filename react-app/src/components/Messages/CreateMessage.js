@@ -1,8 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CreateMessage() {
-    const user = useSelector((state) => state.session.user.id);
+    const dispatch = useDispatch();
 
     return (
         <div>
