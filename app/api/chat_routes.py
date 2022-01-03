@@ -23,7 +23,7 @@ def chat():
 
 
 @chat_routes.route('/<int>:chat_id')
-# @login_required
+@login_required
 def load_chat(chat_id):
     '''
     Simple function to retreive a single chat and all its associated data
@@ -32,8 +32,8 @@ def load_chat(chat_id):
 
 
 @chat_routes.route('/users/<int>:user_id')
-# @login_required
-def load_chat(user_id):
+@login_required
+def load_chats(user_id):
     '''
     Simple function to retreive all chats associated with a user
     '''
