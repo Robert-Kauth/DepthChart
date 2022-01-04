@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Main from "../Main";
 import Servers from "../Servers";
 import Channels from "../Channels";
-import ChannelFeed from "../Channels/ChannelFeed";
+import ChannelFeed from "../ChannelFeed";
 import Friends from "../Friends";
 
 import styles from "./Server.module.css";
@@ -14,6 +14,8 @@ import styles from "./Server.module.css";
 export default function Server() {
     const { serverId } = useParams();
 
+    const selectedChannel = useSelector((state) => state.channels.channel);
+
     return (
         <div className={styles.background}>
             <div className={styles.contentWrapper}>
@@ -21,12 +23,14 @@ export default function Server() {
                     <Servers />
                 </div>
                 <div className={styles.main}>
-                    {serverId ? (
+                    {selectedChannel ? (
                         <Main
                             card={<Channels serverId={serverId} />}
                             feed={<ChannelFeed />}
                         />
-                    ) : null}
+                    ) : (
+                        <Main card={<Channels serverId={serverId} />} />
+                    )}
                 </div>
                 <div className={styles.friends}>
                     <Friends />

@@ -38,8 +38,6 @@ export default function Channels({ serverId }) {
     const dispatch = useDispatch();
 
     const channels = useSelector((state) => state.channels.all);
-    const selectedChannel = useSelector((state) => state.channels.channel);
-    console.log(selectedChannel);
 
     let serverChannels;
     if (channels) {
@@ -78,10 +76,9 @@ export default function Channels({ serverId }) {
             <p className={styles.title}>Channels</p>
             {serverChannels ? (
                 serverChannels.map((channel) => (
-                    <div className={styles.buttonWrapper}>
+                    <div className={styles.buttonWrapper} key={channel.id}>
                         <button
                             className={styles.button}
-                            key={channel.id}
                             onClick={(e) => selectChannel(e, channel)}>
                             <ChannelCard channel={channel} />
                         </button>
