@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import { showModal, setCurrentModal } from "../../store/modal";
 import EditServerForm from "../Server/EditServerForm";
@@ -14,6 +14,7 @@ import styles from "./NavBar.module.css";
 
 export default function NavBar() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector((state) => state.session.user);
 
@@ -29,6 +30,7 @@ export default function NavBar() {
 
     const onLogout = () => {
         dispatch(logout());
+        history.push("/");
     };
 
     return (

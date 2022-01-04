@@ -85,6 +85,10 @@ export default function EditChannelForm() {
         setIcon(e.target.value);
     };
 
+    if (!channel) {
+        return null;
+    }
+
     return (
         <div>
             <form className={styles.form} onSubmit={handleSubmit}>
