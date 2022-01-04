@@ -15,7 +15,7 @@ export default function ChannelMessages({ message }) {
         (state) =>
             state.messages.channelMsgs[message.id].message_sender[message.id]
     );
-    console.log(msgSenderId, "message sender id");
+
     useEffect(() => {
         dispatch(loadUser(msgSenderId));
     }, [dispatch, msgSenderId]);
@@ -24,14 +24,16 @@ export default function ChannelMessages({ message }) {
     if (users && msgSenderId) {
         messageSender = users[msgSenderId];
     }
-    console.log(messageSender, "message sender");
 
     if (!users && messageSender) {
         return null;
     }
     return (
         <div className={styles.wrapper}>
-            <UserInfo user={messageSender} />
+            <div className={styles.user}>
+                <UserInfo user={messageSender} />
+            </div>
+
             <div className={styles.content}>{message.content}</div>
             <div className={styles.updated}>{message.updated_at}</div>
         </div>
