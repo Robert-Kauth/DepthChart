@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiPlusBox } from "@mdi/js";
+import { mdiCircleEditOutline } from "@mdi/js";
+
+import { showModal, setCurrentModal } from "../../store/modal";
+import EditChannelForm from "./EditChannelForm";
 
 import ChannelCard from "./ChannelCard";
-import { showModal, setCurrentModal } from "../../store/modal";
 import CreateChannelForm from "./CreateChannelForm";
-// import AddChannelModal from "./AddChannelModal";
-import { loadChannels } from "../../store/channels";
+import { loadChannel, loadChannels } from "../../store/channels";
 
 import styles from "./Channels.module.css";
 // className={styles. }
@@ -22,8 +24,8 @@ const Button = styled.button`
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
     &:hover {
-        background-color: #0bda51;
-        color: #014421;
+        background-color: #014421;
+        color: #0bda51;
     }
 `;
 
@@ -36,6 +38,8 @@ export default function Channels({ serverId }) {
     const dispatch = useDispatch();
 
     const channels = useSelector((state) => state.channels.all);
+    const selectedChannel = useSelector((state) => state.channels.channel);
+    console.log(selectedChannel);
 
     let serverChannels;
     if (channels) {
@@ -56,12 +60,42 @@ export default function Channels({ serverId }) {
         dispatch(showModal());
     };
 
+    const selectChannel = (e, channel) => {
+        e.preventDefault();
+
+        if (channel) {
+            dispatch(loadChannel(channel.id));
+        }
+    };
+
+    const showEditChannel = () => {
+        dispatch(setCurrentModal(EditChannelForm));
+        dispatch(showModal());
+    };
+
     return (
         <div className={styles.channelsWrapper}>
             <p className={styles.title}>Channels</p>
             {serverChannels ? (
                 serverChannels.map((channel) => (
-                    <ChannelCard key={channel.id} channel={channel} />
+                    <div className={styles.buttonWrapper}>
+                        <button
+                            className={styles.button}
+                            key={channel.id}
+                            onClick={(e) => selectChannel(e, channel)}>
+                            <ChannelCard channel={channel} />
+                        </button>
+                        <div className={styles.crud}>
+                            <Button
+                                className={styles.edit}
+                                onClick={showEditChannel}>
+                                <StyledIcon
+                                    path={mdiCircleEditOutline}
+                                    size={1}
+                                />
+                            </Button>
+                        </div>
+                    </div>
                 ))
             ) : (
                 <div className={styles.msgContainer}>

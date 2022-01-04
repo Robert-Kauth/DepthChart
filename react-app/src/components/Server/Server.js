@@ -14,9 +14,6 @@ import styles from "./Server.module.css";
 export default function Server() {
     const { serverId } = useParams();
 
-    const selectedServer = useSelector((state) => state.servers.server);
-    //! need to conditionally render channel msgs
-    //! current Main component isn't working
     return (
         <div className={styles.background}>
             <div className={styles.contentWrapper}>
@@ -24,14 +21,12 @@ export default function Server() {
                     <Servers />
                 </div>
                 <div className={styles.main}>
-                    {selectedServer ? (
+                    {serverId ? (
                         <Main
                             card={<Channels serverId={serverId} />}
                             feed={<ChannelFeed />}
                         />
-                    ) : (
-                        <Main card={<Channels serverId={serverId} />} />
-                    )}
+                    ) : null}
                 </div>
                 <div className={styles.friends}>
                     <Friends />

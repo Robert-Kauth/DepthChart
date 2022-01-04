@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import ChannelMessages from "./ChannelMessages";
 
 import styles from "./ChannelFeed.module.css";

@@ -11,7 +11,7 @@ import styles from "./EditChannelForm.module.css";
 export default function EditChannelForm() {
     const dispatch = useDispatch();
 
-    const channel = useSelector((state) => state.channels.one);
+    const channel = useSelector((state) => state.channels.channel);
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
