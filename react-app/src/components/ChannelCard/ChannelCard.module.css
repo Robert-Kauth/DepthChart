@@ -1,20 +1,15 @@
-.selectButton {
+/* .selectButton {
     background-color: #029e7e;
 }
 .selectButton:hover {
     background-color: #0bda51;
     color: #014421;
-}
+} */
 
 .wrapper {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background-color: #029e7e;
-    border: 2px solid darkgreen;
-    border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
-    border-style: inset;
 }
 
 .iconWrapper {
@@ -37,10 +32,6 @@
     display: flex;
     font-size: 18px;
     justify-content: center;
-}
-.crud {
-    display: flex;
-    justify-content: space-between;
 }
 
 .edit {

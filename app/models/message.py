@@ -24,4 +24,5 @@ class Message(db.Model):
             'sent_at': self.sent_at,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'message_sender': {user_message.message_id: user_message.sender_id for user_message in self.user_messages}
         }

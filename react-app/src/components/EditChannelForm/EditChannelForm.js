@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { hideModal } from "../../store/modal";
 import { editChannel } from "../../store/channels";
-import DeleteChannelButton from "./DeleteChannelButton";
+import DeleteChannelButton from "../DeleteChannelButton";
 
 import styles from "./EditChannelForm.module.css";
 // className={styles. }
@@ -11,7 +11,7 @@ import styles from "./EditChannelForm.module.css";
 export default function EditChannelForm() {
     const dispatch = useDispatch();
 
-    const channel = useSelector((state) => state.channels.one);
+    const channel = useSelector((state) => state.channels.channel);
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");

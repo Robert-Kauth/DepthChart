@@ -7,7 +7,7 @@ import styles from "./MessageFeedCard.module.css";
 
 export default function MessageFeedCard({ message }) {
     const currentUser = useSelector((state) => state.session.user);
-    const users = useSelector((state) => state.users);
+    const users = useSelector((state) => state.users.all);
     const messages = useSelector((state) => state.messages.all_messages);
 
     // Get message recipient

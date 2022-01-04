@@ -14,6 +14,36 @@
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
 }
 
+.buttonWrapper {
+    background-color: #029e7e;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+}
+
+.buttonWrapper:hover {
+    background-color: #0bda51;
+    color: #014421;
+}
+
+.button {
+    display: flex;
+    background-color: transparent;
+    border: none;
+}
+
+.button:hover {
+    background-color: #0bda51;
+    color: #014421;
+}
+
+.crud {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+}
+
 .msgContainer {
     display: flex;
     flex-direction: column;

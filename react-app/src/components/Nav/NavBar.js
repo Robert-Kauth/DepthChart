@@ -39,6 +39,7 @@ export default function NavBar() {
                 {user && (
                     <div className={styles.navLeft}>
                         <NavLink
+                            exact
                             to="/"
                             className={styles.link}
                             activeClassName={styles.active}>

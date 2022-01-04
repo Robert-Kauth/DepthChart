@@ -64,14 +64,14 @@ export const destroyUser = (userId) => async (dispatch) => {
 };
 /*-------------REDUCER-------------*/
 
-const initialState = {};
+const initialState = { all: null, user: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_ALL:
-            return { ...state, ...action.users };
+            return { ...state, all: action.users };
         case LOAD_ONE:
-            return { ...state, ...action.user };
+            return { ...state, user: action.user };
         case DESTROY:
             const newState = { ...state };
             delete newState[action.id];

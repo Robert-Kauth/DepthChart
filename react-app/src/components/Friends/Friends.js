@@ -9,7 +9,7 @@ import styles from "./Friends.module.css";
 export default function Friends() {
     const dispatch = useDispatch();
 
-    const users = useSelector((state) => state.users);
+    const users = useSelector((state) => state.users.all);
 
     useEffect(() => {
         dispatch(loadUsers());
