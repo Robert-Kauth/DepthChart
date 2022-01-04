@@ -1,10 +1,21 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.forms.communication_form import CommunicationForm
+from app.forms.chat_form import ChatForm
 from app.models import db, User, Chat, User_chat
 
 
 chat_routes = Blueprint('chats', __name__)
+
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 
 @chat_routes.route('/<int>:chat_id')
@@ -32,18 +43,18 @@ def load_chats(user_id):
 #! Might not be needed due to websockets
 @chat_routes.route('/', methods=["POST"])
 @login_required
-def chat():
-    # get all users for form select field
-    recipients_list = [(user.id, user.username) for user in User.query.all()]
-    form = CommunicationForm()
+def add_chat():
+    '''
+    Function to add chat to database
+    '''
+    form = ChatForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    form.recipients.choices = recipients_list
-    form = CommunicationForm()
     if form.validate_on_submit():
-        chat = User_chat(sender_id=current_user.id,
-                         recipient_ids=form.data['recipient_ids'],
-                         chat_id=form.data['chat_id'], is_read=False)
+        chat = Chat(content=form.data['content'])
+        db.session.add(chat)
+        db.session.commit()
         return chat.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @chat_routes.route('/<int>:id', methods=['DELETE'])
