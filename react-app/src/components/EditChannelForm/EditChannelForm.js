@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { hideModal } from "../../store/modal";
 import { editChannel } from "../../store/channels";
-import DeleteChannelButton from "./DeleteChannelButton";
+import DeleteChannelButton from "../DeleteChannelButton";
 
 import styles from "./EditChannelForm.module.css";
 // className={styles. }

@@ -6,10 +6,10 @@ import { mdiPlusBox } from "@mdi/js";
 import { mdiCircleEditOutline } from "@mdi/js";
 
 import { showModal, setCurrentModal } from "../../store/modal";
-import EditChannelForm from "./EditChannelForm";
+import EditChannelForm from "../EditChannelForm";
 
-import ChannelCard from "./ChannelCard";
-import CreateChannelForm from "./CreateChannelForm";
+import ChannelCard from "../ChannelCard";
+import CreateChannelForm from "../CreateChannelForm";
 import { loadChannel, loadChannels } from "../../store/channels";
 
 import styles from "./Channels.module.css";
