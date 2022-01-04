@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Message, User_message, User
-from app.forms import CommunicationForm
+from app.forms import MessageForm
 
 
 message_routes = Blueprint('messages', __name__)
@@ -84,7 +84,7 @@ def create_message():
     '''
     # get all users for form select field
     recipients_list = [(user.id, user.username) for user in User.query.all()]
-    form = CommunicationForm()
+    form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form.recipients.choices = recipients_list
     if form.validate_on_submit():

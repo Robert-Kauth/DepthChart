@@ -1,7 +1,7 @@
 /*-------------ACTION.TYPES-------------*/
 const LOAD_ALL = "chat/LOAD_ALL";
 const LOAD_ONE = "chat/LOAD_ONE";
-const CREATE = "chat/CREATE";
+const ADD = "chat/ADD";
 const EDIT = "chat/EDIT";
 const DESTROY = "chat/DESTROY";
 /*-------------ACTIONS-------------*/
@@ -16,8 +16,8 @@ const loadOne = (chat) => ({
     chat,
 });
 
-const create = (chat) => ({
-    type: CREATE,
+const add = (chat) => ({
+    type: ADD,
     chat,
 });
 
@@ -34,7 +34,7 @@ const destroy = (id) => ({
 /*-------------THUNK CREATORS-------------*/
 
 export const loadAllChats = (user_id) => async (dispatch) => {
-    const res = fetch(`/api/chats/users/${user_id}`);
+    const res = await fetch(`/api/chats/users/${user_id}`);
     if (res.ok) {
         const chats = await res.json();
         dispatch(loadAll(chats));
@@ -42,29 +42,29 @@ export const loadAllChats = (user_id) => async (dispatch) => {
 };
 
 export const loadChat = (chat_id) => async (dispatch) => {
-    const res = fetch(`/api/chats/${chat_id}`);
+    const res = await fetch(`/api/chats/${chat_id}`);
     if (res.ok) {
         const chat = await res.json();
         dispatch(loadOne(chat));
     }
 };
 
-export const createChat = (payload) => async (dispatch) => {
-    const res = fetch("/api/chats/", {
+export const addChat = (chat_content) => async (dispatch) => {
+    const res = await fetch("/api/chats/", {
         methods: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(chat_content),
     });
     if (res.ok) {
         const chat = await res.json();
-        dispatch(create(chat));
+        dispatch(add(chat));
     }
 };
 
 export const editChat = (payload) => async (dispatch) => {
-    const res = fetch("/api/chats/", {
+    const res = await fetch("/api/chats/", {
         methods: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -85,16 +85,16 @@ export const destroyChat = (chat_id) => async (dispatch) => {
     dispatch(destroy(id));
 };
 /*-------------REDUCER-------------*/
-const initialState = { all_chats: null, chat: null };
+const initialState = {};
 
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
     switch (action.type) {
         case LOAD_ALL:
-            return { ...state, all_chats: action.chats };
+            return { ...state, ...action.chats };
         case LOAD_ONE:
-            return { ...state, chat: action.chat };
-        case CREATE:
+            return { ...state, ...action.chat };
+        case ADD:
         case EDIT:
             newState[action.chat.id] = action.chat;
             return newState;
