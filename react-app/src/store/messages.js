@@ -1,6 +1,7 @@
 /*-------------ACTION.TYPES-------------*/
 const LOAD = "messages/LOAD";
 const LOAD_ONE = "messages/LOAD_ONE";
+const LOAD_CHANNEL = "messages/LOAD_CHANNEL";
 const GET_USERS = "messages/GET_USERS";
 const GET_SENT = "messages/GET_SENT";
 const GET_RECIEVED = "messages/GET_RECIEVED";
@@ -17,6 +18,11 @@ const load = (messages) => ({
 const loadOne = (message) => ({
     type: LOAD_ONE,
     message,
+});
+
+const loadChannel = (channelMsgs) => ({
+    type: LOAD_CHANNEL,
+    channelMsgs,
 });
 
 const get = (messaged_users) => ({
@@ -65,7 +71,7 @@ export const loadMessage = (message_id) => async (dispatch) => {
 export const loadAllChannelMessages = (channel_id) => async (dispatch) => {
     const res = await fetch(`/api/messages/channel/${channel_id}`);
     const messages = await res.json();
-    dispatch(load(messages));
+    dispatch(loadChannel(messages));
 };
 
 export const getMessagedUsers = (message_id) => async (dispatch) => {
@@ -123,6 +129,7 @@ export const destroyMessage = (message_id) => async (dispatch) => {
 const initialState = {
     all_messages: null,
     message: null,
+    channelMsgs: null,
     messaged_users: null,
     sent: null,
     recieved: null,
@@ -134,6 +141,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, all_messages: action.messages };
         case LOAD_ONE:
             return { ...state, message: action.message };
+        case LOAD_CHANNEL:
+            return { ...state, channelMsgs: action.channelMsgs };
         case GET_USERS:
             return {
                 ...state,
