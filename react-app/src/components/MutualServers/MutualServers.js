@@ -1,5 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import styles from "./MutualServers.module.css";
+// className={styles. }
 
 export default function MutualServers({ user }) {
     const sessionUser = useSelector((state) => state.session.user);
@@ -19,15 +23,13 @@ export default function MutualServers({ user }) {
         return acc;
     }, []);
 
-    console.log(mutualServers);
-
     return (
-        <div>
+        <div className={styles.servers}>
             {mutualServers &&
                 mutualServers.map((server) => (
-                    <div key={server.id}>
+                    <Link key={server.id} to={`/servers/${server.id}`}>
                         <img src={server.icon} alt="server icon" />
-                    </div>
+                    </Link>
                 ))}
         </div>
     );
