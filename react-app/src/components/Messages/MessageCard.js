@@ -10,7 +10,7 @@ export default function MessageCard({ message }) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.session.user);
-    const users = useSelector((state) => state.users);
+    const users = useSelector((state) => state.users.all);
     const messagedUser = useSelector((state) => state.messages.messaged_users);
 
     useEffect(() => {
