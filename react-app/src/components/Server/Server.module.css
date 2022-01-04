@@ -7,13 +7,13 @@
 
 .contentWrapper {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 6fr 2fr;
+    grid-template-columns: 0.5fr 7.5fr 2fr;
     grid-template-rows: 100vh;
-    grid-template-areas: "server channels feed friends";
+    grid-template-areas: "servers main friends";
 }
 
 .servers {
-    grid-area: server;
+    grid-area: servers;
     background-color: transparent;
     padding: 5px 10px;
     overflow-y: scroll;
@@ -26,24 +26,13 @@
     height: 0;
 }
 
-.channels {
-    grid-area: channels;
+.main {
+    grid-area: main;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
-.channels::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
-.feed {
-    grid-area: feed;
-    overflow-y: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-.feed::-webkit-scrollbar {
+.main::-webkit-scrollbar {
     width: 0;
     height: 0;
 }

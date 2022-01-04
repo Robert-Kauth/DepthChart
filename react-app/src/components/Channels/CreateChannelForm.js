@@ -13,7 +13,7 @@ export default function CreateChannelForm() {
     const { currentServerId } = useParams();
 
     const currentServer = useSelector(
-        (state) => state.servers[currentServerId]
+        (state) => state.servers.all[currentServerId]
     );
 
     const [errors, setErrors] = useState([]);

@@ -1,6 +1,6 @@
 /*-------------ACTION.TYPES-------------*/
 const LOAD_ALL = "servers/LOAD_ALL";
-const LOAD = "server/LOAD";
+const LOAD_ONE = "server/LOAD_ONE";
 const CREATE = "server/CREATE";
 const EDIT = "server/EDIT";
 const DESTROY = "server/DESTROY";
@@ -12,7 +12,7 @@ const load = (servers) => ({
 });
 
 const loadOne = (server) => ({
-    type: LOAD,
+    type: LOAD_ONE,
     server,
 });
 
@@ -80,15 +80,15 @@ export const destroyServer = (serverId) => async (dispatch) => {
     dispatch(destroy(id));
 };
 /*-------------REDUCER-------------*/
-const initialState = {};
+const initialState = { all: null, server: null };
 
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
     switch (action.type) {
         case LOAD_ALL:
-            return { ...state, ...action.servers };
-        case LOAD:
-            return { ...state, [action.server.id]: action.server };
+            return { ...state, all: action.servers };
+        case LOAD_ONE:
+            return { ...state, server: action.server };
         case CREATE:
             newState[action.server.id] = action.server;
             return newState;
