@@ -1,15 +1,13 @@
 import React from "react";
-import NewMessage from "../Messages/NewMessage";
 
-export default function ChannelMessages() {
+import styles from "./ChannelMessages.module.css";
+// className={styles. }
+
+export default function ChannelMessages({ message }) {
     return (
-        <div>
-            <div>
-                <p>Messages from channel</p>
-            </div>
-            <div>
-                <NewMessage />
-            </div>
+        <div className={styles.wrapper}>
+            <div className={styles.content}>{message.content}</div>
+            <div className={styles.updated}>{message.updated_at}</div>
         </div>
     );
 }

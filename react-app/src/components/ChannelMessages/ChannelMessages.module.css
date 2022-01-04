@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px 0;
+    background-color: rgba(46, 139, 87, 0.8);
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+}
+
+.content {
+}
