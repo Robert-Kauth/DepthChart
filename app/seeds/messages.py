@@ -8,7 +8,7 @@ default_servers = 5
 default_user_servers = 5
 total_servers = 36
 total_users = 25
-default_server_channels = 200
+default_server_channels = 5
 default_messages_per_channel = 5
 
 
