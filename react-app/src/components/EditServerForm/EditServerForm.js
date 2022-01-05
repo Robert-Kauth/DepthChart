@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserServers } from "../../store/user_servers";
 import { editServer } from "../../store/servers";
 import { hideModal } from "../../store/modal";
-import DeleteButton from "./DeleteButton";
+import ServerDeleteButton from "../ServerDeleteButton";
 
 import styles from "./EditServerForm.module.css";
 
@@ -221,7 +221,9 @@ export default function EditServerForm() {
                         </div>
                         <div className={styles.deleteButtonContainer}>
                             {showDelete && (
-                                <DeleteButton selectedServer={selectedServer} />
+                                <ServerDeleteButton
+                                    selectedServer={selectedServer}
+                                />
                             )}
                         </div>
                         <div className={styles.updateContainer}>
