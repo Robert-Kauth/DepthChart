@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { destroyServer } from "../../store/servers";
 import { hideModal } from "../../store/modal";
 
-import styles from "./DeleteButton.module.css";
+import styles from "./ServerDeleteButton.module.css";
 // className={styles. }
 
-export default function DeleteButton({ selectedServer }) {
+export default function ServerDeleteButton({ selectedServer }) {
     const dispatch = useDispatch();
 
     const [choice, setChoice] = useState("");

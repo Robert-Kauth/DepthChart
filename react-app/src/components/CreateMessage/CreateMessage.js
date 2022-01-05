@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiSendCircle } from "@mdi/js";
 
-import styles from "./NewMessage.module.css";
+import styles from "./CreateMessage.module.css";
 // className={styles. }
 
 const Button = styled.button`
@@ -24,7 +24,7 @@ const StyledIcon = styled(Icon)`
     height: 1rem;
 `;
 
-export default function NewMessage() {
+export default function CreateMessage() {
     const [message, setMessage] = useState("");
 
     const updateMessage = (e) => {

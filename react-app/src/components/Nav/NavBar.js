@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 
 import { showModal, setCurrentModal } from "../../store/modal";
-import EditServerForm from "../Server/EditServerForm";
-import Avatar from "../UserInfo/Avatar";
+import EditServerForm from "../EditServerForm";
+import Avatar from "../Avatar";
 import { logout } from "../../store/session";
 
 import LoginForm from "../Login";

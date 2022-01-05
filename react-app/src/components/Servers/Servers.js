@@ -7,8 +7,8 @@ import { mdiPlusBox } from "@mdi/js";
 import { showModal, setCurrentModal } from "../../store/modal";
 import { loadServers, loadServer } from "../../store/servers";
 
-import CreateServerForm from "./CreateServerForm";
-import ServerTile from "./ServerTile";
+import CreateServerForm from "../CreateServerForm";
+import ServerTile from "../ServerTile";
 
 import styles from "./Servers.module.css";
 // className={styles. }
