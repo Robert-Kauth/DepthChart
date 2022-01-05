@@ -6,7 +6,11 @@ import styles from "./Title.module.css";
 export default function Title(props) {
     return (
         <div className={styles.titleWrapper}>
-            <div className={styles.title}>{props.title}</div>
+            {props.title ? (
+                <div className={styles.title}>{props.title}</div>
+            ) : props.name ? (
+                <div className={styles.title}>{props.name}</div>
+            ) : null}
         </div>
     );
 }

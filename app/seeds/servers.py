@@ -87,7 +87,7 @@ def seed_servers():
                     "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington_redskins.png",
                     "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington.png"]
 
-    for _ in range(0, total_servers+1):
+    for _ in range(0, total_servers):
         icon = choice(server_icons)
         server = Server(
             name=fake.text(max_nb_chars=20),

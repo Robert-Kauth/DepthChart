@@ -4,6 +4,7 @@ import { loadAllChannelMessages } from "../../store/messages";
 
 import CreateMessage from "../CreateMessage";
 import ChannelMessages from "../ChannelMessages";
+import Title from "../Title";
 
 import styles from "./ChannelFeed.module.css";
 // className={styles. }
@@ -18,9 +19,10 @@ export default function ChannelFeed() {
         dispatch(loadAllChannelMessages(selectedChannel.id));
     }, [dispatch, selectedChannel]);
 
+    console.log(selectedChannel, "selected channel");
     return (
         <>
-            <p className={styles.title}>{selectedChannel.name}</p>
+            <Title name={selectedChannel.name} />
             <div className={styles.messages}>
                 {channelMsgs &&
                     Object.values(channelMsgs).map((message) => (
