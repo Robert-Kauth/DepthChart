@@ -4,8 +4,13 @@ from random import choice
 
 fake = Faker()
 
-# default number of users
-total_users = 20
+# default numbers
+default_servers = 5
+default_user_servers = 5
+total_servers = 36
+total_users = 25
+default_server_channels = 5
+default_messages_per_channel = 5
 
 
 def seed_users():
@@ -38,7 +43,12 @@ def seed_users():
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom6.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom7.png",
                "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom8.png",
-               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom9.png"]
+               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom9.png",
+               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom17.png",
+               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom18.png",
+               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom19.png",
+               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom20.png",
+               "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/avataaarsrandom21.png"]
     for _ in range(0, total_users+1):
         avatar = choice(avatars)
         user = User(
