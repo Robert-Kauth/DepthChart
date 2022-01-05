@@ -19,9 +19,10 @@ export default function ChannelFeed() {
         dispatch(loadAllChannelMessages(selectedChannel.id));
     }, [dispatch, selectedChannel]);
 
+    console.log(selectedChannel, "selected channel");
     return (
         <>
-            <Title title={selectedChannel} />
+            <Title name={selectedChannel.name} />
             <div className={styles.messages}>
                 {channelMsgs &&
                     Object.values(channelMsgs).map((message) => (

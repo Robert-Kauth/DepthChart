@@ -60,7 +60,6 @@ export default function Channels({ serverId }) {
 
     const selectChannel = (e, channel) => {
         e.preventDefault();
-
         if (channel) {
             dispatch(loadChannel(channel.id));
         }
