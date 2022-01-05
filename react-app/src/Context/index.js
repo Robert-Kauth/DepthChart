@@ -1,3 +1,3 @@
-import { ModalProvider, Modal, useModal } from "./Modal";
+import Formik from "./Formik";
 
-export { ModalProvider, Modal, useModal };
+export default Formik;

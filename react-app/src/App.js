@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "./components/Modal";
 import NavBar from "./components/Nav";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ProtectedRoute from "./components/auth";
 import Server from "./components/Server";
 import SplashPage from "./components/SplashPage";
 import Footer from "./components/Footer";
