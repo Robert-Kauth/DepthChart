@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import FriendCard from "./FriendCard";
+import FriendCard from "../FriendCard";
 import { loadUsers } from "../../store/users";
 import styles from "./Friends.module.css";
 // className={styles. }
