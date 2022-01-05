@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import MessageCard from "./MessageCard";
+import MessageCard from "../MessageCard";
 import Title from "../Title";
 
 import { loadUsers } from "../../store/users";
