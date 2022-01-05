@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import Title from "../Title";
 import FriendCard from "../FriendCard";
 import { loadUsers } from "../../store/users";
 import styles from "./Friends.module.css";
@@ -17,9 +18,7 @@ export default function Friends() {
 
     return (
         <div className={styles.friendsWrapper}>
-            <div className={styles.titleWrapper}>
-                <p className={styles.title}>Users</p>
-            </div>
+            <Title title={"Users"} />
             {users &&
                 Object.values(users).map((user) => (
                     <FriendCard key={user.id} user={user} />
