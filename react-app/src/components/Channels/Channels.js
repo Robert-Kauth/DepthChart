@@ -71,14 +71,10 @@ export default function Channels({ serverId }) {
         dispatch(showModal());
     };
 
-    if (!serverChannels.length) {
-        return null;
-    }
-
     return (
         <div className={styles.channelsWrapper}>
             <p className={styles.title}>Channels</p>
-            {serverChannels ? (
+            {serverChannels.length ? (
                 serverChannels.map((channel) => (
                     <div className={styles.buttonWrapper} key={channel.id}>
                         <button
