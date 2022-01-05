@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { showModal, setCurrentModal } from "../../store/modal";
 import EditServerForm from "../EditServerForm";
-import Avatar from "../UserInfo/Avatar";
+import Avatar from "../Avatar";
 import { logout } from "../../store/session";
 
 import LoginForm from "../Login";
