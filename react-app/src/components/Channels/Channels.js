@@ -74,7 +74,7 @@ export default function Channels({ serverId }) {
     return (
         <div className={styles.channelsWrapper}>
             <p className={styles.title}>Channels</p>
-            {serverChannels.length ? (
+            {serverChannels ? (
                 serverChannels.map((channel) => (
                     <div className={styles.buttonWrapper} key={channel.id}>
                         <button
