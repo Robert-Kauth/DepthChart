@@ -47,10 +47,10 @@ def seed_user_servers():
 
     for server in range(1, total_servers+1):
         users = []
-        for _ in range(1, 20):
-            user = randint(2, total_users)
+        for _ in range(1, 11):
+            user = randint(1, total_users)
             while user in users:
-                user = randint(2, total_users)
+                user = randint(1, total_users)
             user_server = User_server(
                 user_id=user,
                 server_id=server
