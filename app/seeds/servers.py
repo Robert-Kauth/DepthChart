@@ -4,13 +4,16 @@ from random import choice, randint
 
 fake = Faker()
 
-# default numbers
-default_servers = 5
-default_user_servers = 5
-total_servers = 36
+# total numbers
 total_users = 25
-default_server_channels = 5
-default_messages_per_channel = 5
+total_servers = 50
+
+# generated numbers
+generated_users = 21
+generated_servers = 45
+generated_user_servers = 5
+generated_server_channels = 5
+generated_messages_per_channel = 5
 
 
 def seed_servers():
@@ -87,7 +90,7 @@ def seed_servers():
                     "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington_redskins.png",
                     "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington.png"]
 
-    for _ in range(0, total_servers):
+    for _ in range(0, generated_servers):
         icon = choice(server_icons)
         server = Server(
             name=fake.text(max_nb_chars=20),
