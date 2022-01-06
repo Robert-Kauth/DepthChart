@@ -91,7 +91,7 @@ def seed_channels():
             server_id=i
         )
         db.session.add(channel)
-        for _ in range(0, default_server_channels):
+        for _ in range(0, generated_server_channels):
             while True:
                 channel_name = channel_names[randint(1, len(channel_names)-1)]
                 if channel_name not in current_channels:

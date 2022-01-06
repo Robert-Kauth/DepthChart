@@ -45,7 +45,7 @@ def seed_messages():
     db.session.add(demo_msg8)
 
     for _ in range(1, total_servers):
-        for _ in range(1, default_messages_per_channel+1):
+        for _ in range(1, generated_messages_per_channel+1):
             new_message = Message(content=fake.sentence(nb_words=12))
         db.session.add(new_message)
     db.session.commit()
