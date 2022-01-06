@@ -11,8 +11,8 @@ class Channel(db.Model):
     topic = db.Column(db.String(255))
     icon = db.Column(db.String(500))
 
-    messages = db.relationship(
-        'Message', backref='channels', cascade='all, delete')
+    channel_message = db.relationship(
+        'Channel_message', back_populates='channel', cascade='all, delete')
 
     def to_dict(self):
         return {
@@ -21,5 +21,5 @@ class Channel(db.Model):
             'name': self.name,
             'topic': self.topic,
             'icon': self.icon,
-            'message_ids': [message.id for message in self.messages]
+            'channel_messages': self.channel_message
         }

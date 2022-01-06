@@ -3,8 +3,6 @@ const LOAD = "messages/LOAD";
 const LOAD_ONE = "messages/LOAD_ONE";
 const LOAD_CHANNEL = "messages/LOAD_CHANNEL";
 const GET_USERS = "messages/GET_USERS";
-const GET_SENT = "messages/GET_SENT";
-const GET_RECIEVED = "messages/GET_RECIEVED";
 const CREATE = "messages/CREATE";
 const EDIT = "messages/EDIT";
 const DESTROY = "messages/DESTROY";
@@ -28,14 +26,6 @@ const loadChannel = (channelMsgs) => ({
 const get = (messaged_users) => ({
     type: GET_USERS,
     messaged_users,
-});
-const getSent = (sent_messages) => ({
-    type: GET_SENT,
-    sent_messages,
-});
-const getRecieved = (recieved_messages) => ({
-    type: GET_RECIEVED,
-    recieved_messages,
 });
 
 const create = (message) => ({
@@ -80,20 +70,6 @@ export const getMessagedUsers = (message_id) => async (dispatch) => {
     dispatch(get(messaged_users));
 };
 
-// ! Unused
-export const loadSentMessages = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/messages/sent/${userId}`);
-    const sentMessages = await res.json();
-    dispatch(getSent(sentMessages));
-};
-
-// ! Unused
-export const loadReceivedMessages = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/messages/received/${userId}`);
-    const receivedMessages = await res.json();
-    dispatch(getRecieved(receivedMessages));
-};
-
 export const createMessage = (payload) => async (dispatch) => {
     const res = await fetch("/api/messages/", {
         methods: "POST",
@@ -131,8 +107,6 @@ const initialState = {
     message: null,
     channelMsgs: null,
     messaged_users: null,
-    sent: null,
-    recieved: null,
 };
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
@@ -148,10 +122,6 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 messaged_users: action.messaged_users,
             };
-        case GET_SENT:
-            return { ...state, sent: action.sent_messages };
-        case GET_RECIEVED:
-            return { ...state, recieved: action.recieved_messages };
         case CREATE:
         case EDIT:
             newState[action.message.id] = action.message;

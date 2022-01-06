@@ -3,13 +3,16 @@ from faker import Faker
 from random import randint
 faker = Faker()
 
-# default numbers
-default_servers = 5
-default_user_servers = 5
-total_servers = 36
+# total numbers
 total_users = 25
-default_server_channels = 5
-default_messages_per_channel = 5
+total_servers = 50
+
+# generated numbers
+generated_users = 21
+generated_servers = 45
+generated_user_servers = 5
+generated_server_channels = 5
+generated_messages_per_channel = 5
 
 
 def seed_user_servers():

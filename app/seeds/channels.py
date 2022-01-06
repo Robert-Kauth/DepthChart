@@ -4,13 +4,16 @@ from random import choice, randint
 
 fake = Faker()
 
-# default numbers
-default_servers = 5
-default_user_servers = 5
-total_servers = 36
+# total numbers
 total_users = 25
-default_server_channels = 5
-default_messages_per_channel = 5
+total_servers = 50
+
+# generated numbers
+generated_users = 21
+generated_servers = 45
+generated_user_servers = 5
+generated_server_channels = 5
+generated_messages_per_channel = 5
 
 
 def seed_channels():
@@ -88,7 +91,7 @@ def seed_channels():
             server_id=i
         )
         db.session.add(channel)
-        for _ in range(0, default_server_channels):
+        for _ in range(0, generated_server_channels):
             while True:
                 channel_name = channel_names[randint(1, len(channel_names)-1)]
                 if channel_name not in current_channels:
