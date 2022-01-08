@@ -31,10 +31,8 @@ def seed_channel_messages():
     Seeds channel_messages
     '''
     for i in range(101, total_messages+1):
-        new_channel_message = Channel_message(chanel_id=randrange(1, total_channels+1),
-                                              sender_id=randrange(
-                                                  1, total_users+1),
-                                              message_id=i)
+        new_channel_message = Channel_message(channel_id=randrange(1, total_channels+1),
+                                              sender_id=randrange(1, total_users+1), message_id=i)
         db.session.add(new_channel_message)
     db.session.commit()
 
