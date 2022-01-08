@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Message, User_message, User
+from app.models import db, Message, User_message, User, Channel_message
 from app.forms import MessageForm
 
 
@@ -57,7 +57,7 @@ def load_channel_messages(channel_id):
     '''
     Loads all messages from specific channel
     '''
-    return {message.id: message.to_dict() for message in Message.query.filter(Message.channel_id == channel_id).all()}
+    return {message.id: message.to_dict() for message in Message.query.join(Channel_message).filter(Channel_message.channel_id == channel_id).all()}
 
 
 @message_routes.route('/', methods=['POST'])
