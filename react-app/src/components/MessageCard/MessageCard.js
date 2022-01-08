@@ -38,13 +38,13 @@ export default function MessageCard({ message }) {
                     <img
                         className={styles.icon}
                         src={users[recipient_id]?.avatar}
-                        alt="user avatar"
+                        alt="recipient avatar"
                     />
                 ) : (
                     <img
                         className={styles.icon}
                         src={users[sender_id]?.avatar}
-                        alt="default nfl logo"
+                        alt="sender logo"
                     />
                 )}
             </div>
