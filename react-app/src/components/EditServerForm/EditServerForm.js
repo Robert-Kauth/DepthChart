@@ -127,7 +127,7 @@ export default function EditServerForm() {
                             <option>--Please choose a server to edit--</option>
                             {user_servers &&
                                 Object.values(user_servers).map((server) => (
-                                    <option key={server.id} value={server.id}>
+                                    <option key={server.id} value={server?.id}>
                                         {server.name}
                                     </option>
                                 ))}

@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Servers from "../Servers";
 import Main from "../Main";
@@ -8,10 +8,18 @@ import MessageFeed from "../MessageFeed";
 import Friends from "../Friends";
 
 import styles from "./Home.module.css";
+import { loadAllUserMessages } from "../../store/messages";
 // className={styles. }
 
 export default function Home() {
+    const dispatch = useDispatch();
+
+    const sessionUser = useSelector((state) => state.session.user);
     const selectedMsg = useSelector((state) => state.messages.message);
+
+    useEffect(() => {
+        dispatch(loadAllUserMessages(sessionUser.id));
+    }, [dispatch, sessionUser]);
 
     return (
         <div className={styles.homeBackground}>
