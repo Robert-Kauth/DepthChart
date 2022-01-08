@@ -13,7 +13,7 @@ export default function ChannelFeed() {
     const dispatch = useDispatch();
 
     const selectedChannel = useSelector((state) => state.channels.channel);
-    const channelMsgs = useSelector((state) => state.messages.channelMsgs);
+    const channelMsgs = useSelector((state) => state.messages.channel);
 
     useEffect(() => {
         dispatch(loadAllChannelMessages(selectedChannel.id));

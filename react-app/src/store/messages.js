@@ -18,9 +18,9 @@ const loadOne = (message) => ({
     message,
 });
 
-const loadChannel = (channelMsgs) => ({
+const loadChannel = (messages) => ({
     type: LOAD_CHANNEL,
-    channelMsgs,
+    messages,
 });
 
 const get = (messaged_users) => ({
@@ -103,20 +103,20 @@ export const destroyMessage = (message_id) => async (dispatch) => {
 };
 /*-------------REDUCER-------------*/
 const initialState = {
-    all_messages: null,
+    all: null,
     message: null,
-    channelMsgs: null,
+    channel: null,
     messaged_users: null,
 };
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
     switch (action.type) {
         case LOAD:
-            return { ...state, all_messages: action.messages };
+            return { ...state, all: action.messages };
         case LOAD_ONE:
             return { ...state, message: action.message };
         case LOAD_CHANNEL:
-            return { ...state, channelMsgs: action.channelMsgs };
+            return { ...state, channel: action.messages };
         case GET_USERS:
             return {
                 ...state,

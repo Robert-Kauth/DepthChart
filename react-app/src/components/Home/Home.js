@@ -7,8 +7,9 @@ import Messages from "../Messages";
 import MessageFeed from "../MessageFeed";
 import Friends from "../Friends";
 
-import styles from "./Home.module.css";
 import { loadAllUserMessages } from "../../store/messages";
+
+import styles from "./Home.module.css";
 // className={styles. }
 
 export default function Home() {

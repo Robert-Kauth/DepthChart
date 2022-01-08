@@ -12,8 +12,7 @@ export default function ChannelMessages({ message }) {
     const users = useSelector((state) => state.users.all);
     //! Might be good idea to memoize this selector
     const msgSenderId = useSelector(
-        (state) =>
-            state.messages.channelMsgs[message.id].message_sender[message.id]
+        (state) => state.messages.channel[message.id].message_sender[message.id]
     );
 
     useEffect(() => {
