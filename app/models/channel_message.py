@@ -14,6 +14,6 @@ class Channel_message(db.Model):
     user = db.relationship(
         'User', back_populates='channel_message', cascade='all, delete')
     channel = db.relationship(
-        'Channel', back_populates='channel_message', cascade='all, delete')
+        'Channel', back_populates='channel_messages', cascade='all, delete')
     messages = db.relationship(
         'Message', back_populates='channel_messages', cascade='all, delete')
