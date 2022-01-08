@@ -9,6 +9,7 @@ total_channels = 250
 total_channels_per_server = 5
 
 total_messages = 200
+generated_user_messages = 100
 
 # generated numbers
 generated_users = 21
