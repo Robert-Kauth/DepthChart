@@ -15,19 +15,17 @@ import styles from "./Messages.module.css";
 export default function Messages() {
     const dispatch = useDispatch();
 
-    const sessionUser = useSelector((state) => state.session.user);
-    const messages = useSelector((state) => state.messages.all_messages);
+    const user_id = useSelector((state) => state.session.user.id);
+    const messages = useSelector((state) => state.messages.all);
+    console.log(messages, "messages from state");
 
     useEffect(() => {
-        dispatch(loadUsers());
-        dispatch(loadAllUserMessages(sessionUser.id));
-    }, [dispatch, sessionUser]);
+        dispatch(loadAllUserMessages(user_id));
+    }, [dispatch, user_id]);
 
-    const selectMsg = async (e, message) => {
+    const selectMsg = (e, message) => {
         e.preventDefault();
-        if (message) {
-            await dispatch(loadMessage(message.id));
-        }
+        dispatch(loadMessage(message.id));
     };
 
     return (

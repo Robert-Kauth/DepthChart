@@ -1,16 +1,23 @@
 from app.models import db, User_server
 from faker import Faker
 from random import randint
+
 faker = Faker()
 
 # total numbers
 total_users = 25
 total_servers = 50
 
+total_users_servers = 505
+total_users_per_server = 10
+
+total_channels = 250
+total_channels_per_server = 5
+
 # generated numbers
 generated_users = 21
 generated_servers = 45
-generated_user_servers = 5
+generated_user_servers = 500
 generated_server_channels = 5
 generated_messages_per_channel = 5
 
@@ -47,10 +54,10 @@ def seed_user_servers():
 
     for server in range(1, total_servers+1):
         users = []
-        for _ in range(1, 20):
-            user = randint(2, total_users)
+        for _ in range(1, 11):
+            user = randint(1, total_users)
             while user in users:
-                user = randint(2, total_users)
+                user = randint(1, total_users)
             user_server = User_server(
                 user_id=user,
                 server_id=server

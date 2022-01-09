@@ -8,7 +8,7 @@ import styles from "./MessageFeedCard.module.css";
 export default function MessageFeedCard({ message }) {
     const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users.all);
-    const messages = useSelector((state) => state.messages.all_messages);
+    const messages = useSelector((state) => state.messages.all);
 
     // Get message recipient
     let recipient_id;
@@ -62,8 +62,9 @@ export default function MessageFeedCard({ message }) {
                         />
                     ) : (
                         <img
+                            className={styles.icon}
                             src={users[sender_id]?.avatar}
-                            alt="default nfl logo"
+                            alt="user logo"
                         />
                     )}
                     <div className={styles.messageContent}>

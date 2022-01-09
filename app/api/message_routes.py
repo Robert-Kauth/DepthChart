@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Message, User_message, User
+from app.models import db, Message, User_message, User, Channel_message
 from app.forms import MessageForm
 
 
@@ -34,27 +34,12 @@ def load_user_messages(user_id):
 @message_routes.route('/<int:message_id>')
 # @login_required
 def load_message(message_id):
+    '''
+    Loads single user message
+    '''
     message = User_message.query.filter(
         User_message.message_id == message_id).first()
     return message.to_dict()
-
-
-@message_routes.route('/sent/<int:user_id>')
-# @login_required
-def load_sent_messages(user_id):
-    '''
-    Gets all messages sent by a particular user_id
-    '''
-    return {message.id: message.to_dict() for message in Message.query.join(User_message, User_message.message_id == Message.id).filter(User_message.sender_id == user_id).all()}
-
-
-@message_routes.route('/received/<int:user_id>')
-# @login_required
-def load_received_messages(user_id):
-    '''
-    gets all messages received by a particular user_id
-    '''
-    return {message.id: message.to_dict() for message in Message.query.join(User_message, User_message.message_id == Message.id).filter(User_message.recipient_ids == user_id).all()}
 
 
 @message_routes.route('/recipients/<int:message_id>')
@@ -72,7 +57,7 @@ def load_channel_messages(channel_id):
     '''
     Loads all messages from specific channel
     '''
-    return {message.id: message.to_dict() for message in Message.query.filter(Message.channel_id == channel_id).all()}
+    return {message.id: message.to_dict() for message in Message.query.join(Channel_message).filter(Channel_message.channel_id == channel_id).all()}
 
 
 @message_routes.route('/', methods=['POST'])
