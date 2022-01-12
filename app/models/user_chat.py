@@ -10,7 +10,7 @@ class User_chat(db.Model):
         'users.id', ondelete='CASCADE'))
     recipient_ids = db.Column(
         db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
-    is_read = db. Column(db.Boolean)
+    is_read = db. Column(db.Boolean, default=False)
 
     sender = db.relationship(
         'User', foreign_keys='User_chat.sender_id', back_populates='sent_chats', cascade='all, delete')

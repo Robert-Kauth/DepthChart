@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { showModal, setCurrentModal } from "../../store/modal";
+import { loadUser } from "../../store/users";
 import Chat from "../Chat";
 import UserInfo from "../UserInfo";
 
@@ -18,6 +19,7 @@ export default function FriendCard({ user }) {
 
     const updateSelected = (e) => {
         e.preventDefault();
+        //! Might not be needed after changing friends sidebar
         if (user.id !== sessionUser.id) {
             setSelectedId(e.target.value);
             setSelectedUser(!selectedUser);
@@ -26,7 +28,12 @@ export default function FriendCard({ user }) {
 
     const setFollow = () => {};
 
-    const showChat = () => {
+    const showChat = (e) => {
+        e.preventDefault();
+
+        if (selectedId) {
+            dispatch(loadUser(selectedId));
+        }
         dispatch(setCurrentModal(Chat));
         dispatch(showModal());
     };
@@ -34,7 +41,7 @@ export default function FriendCard({ user }) {
     return (
         <>
             <button
-                onClick={updateSelected}
+                onClick={(e) => updateSelected(e)}
                 className={styles.selectFriend}
                 value={user.id}>
                 <UserInfo user={user} />
