@@ -39,6 +39,7 @@ export default function Chat() {
     const sendChat = (e) => {
         e.preventDefault();
 
+        // Emits chat event setting session users as user and msg as chatInput
         socket.emit("chat", { user: user.username, msg: chatInput });
         setChatInput("");
     };
