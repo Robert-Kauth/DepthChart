@@ -17,7 +17,6 @@ export default function Messages() {
 
     const user_id = useSelector((state) => state.session.user.id);
     const messages = useSelector((state) => state.messages.all);
-    console.log(messages, "messages from state");
 
     useEffect(() => {
         dispatch(loadAllUserMessages(user_id));

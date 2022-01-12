@@ -27,7 +27,6 @@ export default function Friends() {
             return acc;
         }, []);
     }
-    console.log(friendCards, "friendcards");
 
     if (!friendCards) {
         return null;
