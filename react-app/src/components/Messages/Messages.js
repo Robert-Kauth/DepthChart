@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import MessageCard from "../MessageCard";
 import Title from "../Title";
 
-import { loadUsers } from "../../store/users";
 import { loadAllUserMessages } from "../../store/messages";
 import { loadMessage } from "../../store/messages";
 
