@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import MessageCard from "../MessageCard";
 import Title from "../Title";
 
-import { loadUsers } from "../../store/users";
 import { loadAllUserMessages } from "../../store/messages";
 import { loadMessage } from "../../store/messages";
 
@@ -17,7 +16,6 @@ export default function Messages() {
 
     const user_id = useSelector((state) => state.session.user.id);
     const messages = useSelector((state) => state.messages.all);
-    console.log(messages, "messages from state");
 
     useEffect(() => {
         dispatch(loadAllUserMessages(user_id));

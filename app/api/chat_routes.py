@@ -40,7 +40,6 @@ def load_chats(user_id):
     return {**sent, **received}
 
 
-#! Might not be needed due to websockets
 @chat_routes.route('/', methods=["POST"])
 @login_required
 def add_chat():
@@ -53,7 +52,16 @@ def add_chat():
         chat = Chat(content=form.data['content'])
         db.session.add(chat)
         db.session.commit()
-        return chat.to_dict()
+        #! chat_id = chat.id might not retrieve the appropiate id from database
+        user_chat = User_chat(chat_id=chat.id,
+                              sender_id=form.data['sender_id'],
+                              recipient_ids=form.data['recipient_ids'])
+        db.session.add(user_chat)
+        db.session.commit()
+        #! needs to be tested, concerned about the format this might return data in
+        new_chat = chat.to_dict()
+        new_user_chat = user_chat.to_dict()
+        return {**new_chat, **new_user_chat}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
@@ -64,6 +72,6 @@ def delete_chat(id):
     Delete Chat from database
     '''
     chat = Chat.query.get(id)
-    Chat.query.filter(Chat.id == id).delete()
+    Chat.query.filter(Chat.id == chat.id).delete()
     db.session.commit()
     return str(id), 201

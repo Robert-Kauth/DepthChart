@@ -49,13 +49,14 @@ export const loadChat = (chat_id) => async (dispatch) => {
     }
 };
 
-export const addChat = (chat_content) => async (dispatch) => {
+export const addChat = (payload) => async (dispatch) => {
+    const { content, sender_id, recipient_ids } = payload;
     const res = await fetch("/api/chats/", {
         methods: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(chat_content),
+        body: JSON.stringify({ content, sender_id, recipient_ids }),
     });
     if (res.ok) {
         const chat = await res.json();
@@ -85,15 +86,15 @@ export const destroyChat = (chat_id) => async (dispatch) => {
     dispatch(destroy(id));
 };
 /*-------------REDUCER-------------*/
-const initialState = {};
+const initialState = { all: null, chat: null };
 
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
     switch (action.type) {
         case LOAD_ALL:
-            return { ...state, ...action.chats };
+            return { ...state, all: action.chats };
         case LOAD_ONE:
-            return { ...state, ...action.chat };
+            return { ...state, chat: action.chat };
         case ADD:
         case EDIT:
             newState[action.chat.id] = action.chat;
