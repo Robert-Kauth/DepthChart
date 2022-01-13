@@ -1,5 +1,5 @@
 from app.models import db, Channel_message
-from defaults import total_messages, total_channels, total_users
+from .defaults import total_messages, total_channels, total_users
 from random import randrange, randint
 from faker import Faker
 

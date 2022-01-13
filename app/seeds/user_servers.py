@@ -10,32 +10,6 @@ def seed_user_servers():
     '''
     Seeds user_servers
     '''
-    demo_user_server = User_server(
-        user_id=1,
-        server_id=1
-    )
-    demo_user_server2 = User_server(
-        user_id=1,
-        server_id=2
-    )
-    marnie_user_server = User_server(
-        user_id=2,
-        server_id=3
-    )
-    bobbie_user_server = User_server(
-        user_id=3,
-        server_id=4
-    )
-    ashley_user_server = User_server(
-        user_id=4,
-        server_id=5
-    )
-    db.session.add(demo_user_server)
-    db.session.add(demo_user_server2)
-    db.session.add(marnie_user_server)
-    db.session.add(bobbie_user_server)
-    db.session.add(ashley_user_server)
-
     for server in range(1, total_servers+1):
         users = []
         for _ in range(1, 11):
