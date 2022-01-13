@@ -1,19 +1,9 @@
 from app.models import db, Server
+from .defaults import generated_servers, total_users
 from faker import Faker
 from random import choice, randint
 
 fake = Faker()
-
-# total numbers
-total_users = 25
-total_servers = 50
-
-# generated numbers
-generated_users = 21
-generated_servers = 45
-generated_user_servers = 5
-generated_server_channels = 5
-generated_messages_per_channel = 5
 
 
 def seed_servers():

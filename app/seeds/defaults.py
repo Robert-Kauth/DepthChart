@@ -1,15 +1,14 @@
 # total numbers
 total_users = 25
 total_servers = 50
+total_channels_per_server = 5
+total_users_per_server = 10
+total_channels = 250
 
 total_users_servers = 505
-total_users_per_server = 10
 
-total_channels = 250
-total_channels_per_server = 5
 
 total_messages = 200
-generated_user_messages = 100
 
 # generated numbers
 generated_users = 21
