@@ -1,5 +1,5 @@
 from app.models import db, User_message
-from .defaults import generated_user_messages, total_users
+from .defaults import total_messages_per_user, total_users, total_messages
 from random import randint, choice
 from faker import Faker
 
@@ -10,11 +10,18 @@ def seed_user_messages():
     '''
     Seeds user_messages
     '''
-    for i in range(1, generated_user_messages+1):
+    for i in range(1, total_users+1):
+        messages = []
         read = choice((True, False))
-        user_message = User_message(sender_id=randint(1, total_users), recipient_ids=randint(1, total_users),
-                                    message_id=i, is_read=read)
-        db.session.add(user_message)
+        msg_id = randint(1, total_messages)
+        for _ in range(1, total_messages_per_user+1):
+            while True:
+                if msg_id not in messages:
+                    messages.append(msg_id)
+                    user_message = User_message(sender_id=i, recipient_ids=randint(1, total_users),
+                                                message_id=msg_id, is_read=read)
+                    break
+            db.session.add(user_message)
     db.session.commit()
 
 
