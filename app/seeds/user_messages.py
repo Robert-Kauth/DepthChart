@@ -6,6 +6,7 @@ from faker import Faker
 faker = Faker()
 
 
+
 def seed_user_messages():
     '''
     Seeds user_messages

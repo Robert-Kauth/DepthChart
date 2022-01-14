@@ -11,16 +11,18 @@ def seed_channel_messages():
     '''
     Seeds channel_messages
     '''
-    for _ in range(1, total_messages_per_channel+1):
-        channelIds = []
-        channelId = randint(1, total_channels)
-        if channelId not in channelIds:
-            channelIds.append(channelId)
-            new_channel_message = Channel_message(channel_id=channelId,
-                                                      sender_id=randint(
-                                                          1, total_users),
-                                                      message_id=randint(1, total_messages))
-        db.session.add(new_channel_message)
+    for i in range(1, total_channels+1):
+        message_ids = []
+        channelId = i
+        for _ in range(1, total_messages_per_channel+1):
+            msg_id = randint(1, total_messages)
+            if msg_id not in message_ids:
+                message_ids.append(msg_id)
+                senderId = randint(1, total_users)
+                new_channel_message = Channel_message(channel_id=channelId,
+                                                      sender_id=senderId,
+                                                      message_id=msg_id)
+            db.session.add(new_channel_message)
     db.session.commit()
 
 
