@@ -1,57 +1,17 @@
 from app.models import db, Channel
+from .defaults import total_servers, generated_server_channels
 from faker import Faker
 from random import choice, randint
 
 fake = Faker()
-
-# total numbers
-total_users = 25
-total_servers = 50
-
-total_users_servers = 505
-total_users_per_server = 10
-
-total_channels = 250
-total_channels_per_server = 5
-
-total_messages = 200
-generated_user_messages = 100
-
-# generated numbers
-generated_users = 21
-generated_servers = 45
-generated_user_servers = 500
-generated_server_channels = 5
-generated_messages_per_channel = 5
 
 
 def seed_channels():
     '''
     Seeds channels
     '''
-    demo_channel1 = Channel(
-        server_id=1, name="All about football",
-        topic="All things football", icon='https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Buffalo_bills.png')
-    demo_channel2 = Channel(
-        server_id=1, name="49's",
-        topic="All things Forty-niners", icon='https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/SanFrancisco_49ners.png')
-    demo_channel3 = Channel(
-        server_id=1, name="Injury Watchlist",
-        topic="All injuries", icon='https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Baltimore_ravens.png')
-    demo_channel4 = Channel(
-        server_id=1, name="Panthers Home",
-        topic="Any thing Carolina Panther Related", icon='https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Carolina_panthers.png')
-    demo_channel5 = Channel(
-        server_id=1, name="Bangals",
-        topic="Home of the Cincinnati Bangals", icon='https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Cincinnati_bengals.png')
-    db.session.add(demo_channel1)
-    db.session.add(demo_channel2)
-    db.session.add(demo_channel3)
-    db.session.add(demo_channel4)
-    db.session.add(demo_channel5)
-
     channel_names = ['Weekely Watchers', 'Busted', 'Hotpick', 'Waiver Watch', 'Too Hot to handle',
-                     'Plague Players', 'Not even for a dollar', 'Team depthcharts', 'Maybe\'s', 'Deal or no Deal', 'On God']
+                     'Plague Players', 'Not even for a dollar', 'Team depthcharts', 'Maybe\'s', 'Deal or no Deal', 'On God', 'Injury Watchlist', 'All about football', 'Advice for the downtrodden']
 
     channel_icons = ["https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/American_football_conference.png",
                      "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Baltimore_ravens.png",
@@ -86,7 +46,7 @@ def seed_channels():
                      "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington_redskins.png",
                      "https://fantasydepthchart.s3.us-west-1.amazonaws.com/NFL_logos/Washington.png"]
 
-    for i in range(1, total_servers):
+    for i in range(1, total_servers+1):
         current_channels = []
         if i % 2 == 0:
             default_channel = 'Welcome'
@@ -100,7 +60,7 @@ def seed_channels():
             server_id=i
         )
         db.session.add(channel)
-        for _ in range(1, generated_server_channels):
+        for _ in range(1, generated_server_channels+1):
             while True:
                 channel_name = channel_names[randint(1, len(channel_names)-1)]
                 if channel_name not in current_channels:
