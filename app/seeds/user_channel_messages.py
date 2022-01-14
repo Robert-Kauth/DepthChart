@@ -1,11 +1,10 @@
 from app.models import db, User_message, Channel_message
-from .defaults import total_messages_per_user, total_users, total_messages,total_channels,total_messages_per_channel
+from .defaults import total_messages_per_user, total_users, total_messages, total_channels, total_messages_per_channel
 from random import randint, choice
 from faker import Faker
 
 faker = Faker()
 message_ids = []
-
 
 
 def seed_user_messages():
