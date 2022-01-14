@@ -11,16 +11,17 @@ def seed_user_messages():
     Seeds user_messages
     '''
     for i in range(1, total_users+1):
-        messages = []
+        message_ids = []
+        senderId = i
         read = choice((True, False))
-        msg_id = randint(1, total_messages)
         for _ in range(1, total_messages_per_user+1):
-            while True:
-                if msg_id not in messages:
-                    messages.append(msg_id)
-                    user_message = User_message(sender_id=i, recipient_ids=randint(1, total_users),
+            msg_id = randint(1, total_messages)
+            if msg_id not in message_ids:
+                message_ids.append(msg_id)
+                recipientId = randint(1, total_users)
+                if recipientId != senderId:
+                    user_message = User_message(sender_id=senderId, recipient_ids=recipientId,
                                                 message_id=msg_id, is_read=read)
-                    break
             db.session.add(user_message)
     db.session.commit()
 

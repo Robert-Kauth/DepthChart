@@ -1,6 +1,6 @@
 from app.models import db, Channel_message
-from .defaults import total_messages, total_channels, total_users
-from random import randrange, randint
+from .defaults import total_messages_per_channel, total_channels, total_users, total_messages
+from random import randint
 from faker import Faker
 
 
@@ -11,17 +11,16 @@ def seed_channel_messages():
     '''
     Seeds channel_messages
     '''
-    for i in range(101, total_messages+1):
+    for _ in range(1, total_messages_per_channel+1):
         channelIds = []
-        for _ in range(1, total_channels+1):
-            channelId = randint(1, total_channels)
-            if channelId not in channelIds:
-                channelIds.append(channelId)
-                new_channel_message = Channel_message(channel_id=channelId,
-                                                      sender_id=randrange(
-                                                          1, total_users+1),
-                                                      message_id=i)
-            db.session.add(new_channel_message)
+        channelId = randint(1, total_channels)
+        if channelId not in channelIds:
+            channelIds.append(channelId)
+            new_channel_message = Channel_message(channel_id=channelId,
+                                                      sender_id=randint(
+                                                          1, total_users),
+                                                      message_id=randint(1, total_messages))
+        db.session.add(new_channel_message)
     db.session.commit()
 
 
