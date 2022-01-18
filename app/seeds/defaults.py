@@ -3,6 +3,8 @@ total_users = 25
 total_servers = 50
 total_channels = 300
 total_messages = 1625
+total_user_messages = 116
+total_channel_messages = 905
 
 total_users_servers = 500
 total_users_per_server = 10
