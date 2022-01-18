@@ -28,7 +28,7 @@ export default function Chat() {
         // listens for chat events
         socket.on("chat", (chat) => {
             // When chat is received, add it to local message state
-            setLocalMessages((messages) => [...messages, chat]);
+            setLocalMessages((localMessages) => [...localMessages, chat]);
         });
 
         return () => {
