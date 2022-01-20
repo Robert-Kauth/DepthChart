@@ -24,12 +24,12 @@ export default function EditServerForm() {
 
     let user_servers;
     if (servers) {
-        user_servers = Object.values(servers).map((server) => {
+        user_servers = Object.values(servers).reduce((a, server) => {
             if (server.owner_id === user_id) {
-                return server;
+                a.push(server);
             }
-            return user_servers;
-        });
+            return a;
+        }, []);
     }
 
     let selectedServer;
