@@ -17,3 +17,10 @@ class Channel_message(db.Model):
         'Channel', back_populates='channel_messages', cascade='all, delete')
     messages = db.relationship(
         'Message', back_populates='channel_messages', cascade='all, delete')
+
+    def to_dict(self):
+        return {
+            "channel_id": self.channel_id,
+            "sender_id": self.sender_id,
+            "message_id": self.message_id
+        }
