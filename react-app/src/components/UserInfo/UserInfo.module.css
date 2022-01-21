@@ -1,6 +1,7 @@
 .wrapper {
     display: flex;
     padding: 5px;
+    pointer-events: none;
 }
 
 .username {
