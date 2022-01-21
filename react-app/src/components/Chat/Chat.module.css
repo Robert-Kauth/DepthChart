@@ -1,7 +1,17 @@
-.messagesWrapper {
+.wrapper {
     display: flex;
+    flex-direction: column;
+    background-color: #195905;
+    border-radius: 5px;
+    padding: 10px;
 }
 
-.chatWrapper {
+.messages {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.chat {
     display: flex;
 }

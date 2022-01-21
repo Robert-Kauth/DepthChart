@@ -50,7 +50,6 @@ export const loadChat = (chat_id) => async (dispatch) => {
 };
 
 export const addChat = (payload) => async (dispatch) => {
-    console.log(payload, "payload in thunk");
     const res = await fetch("/api/chats/", {
         method: "POST",
         headers: {
@@ -58,7 +57,6 @@ export const addChat = (payload) => async (dispatch) => {
         },
         body: JSON.stringify(payload),
     });
-    console.log(res, "res");
     if (res.ok) {
         const chat = await res.json();
         dispatch(add(chat));

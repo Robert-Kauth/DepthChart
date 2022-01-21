@@ -52,13 +52,11 @@ def add_chat():
         chat = Chat(content=form.data['content'])
         db.session.add(chat)
         db.session.commit()
-        #! chat_id = chat.id might not retrieve the appropiate id from database
         user_chat = User_chat(chat_id=chat.id,
                               sender_id=form.data['sender_id'],
                               recipient_ids=form.data['recipient_ids'])
         db.session.add(user_chat)
         db.session.commit()
-        #! needs to be tested, concerned about the format this might return data in
         new_chat = chat.to_dict()
         new_user_chat = user_chat.to_dict()
         return {**new_chat, **new_user_chat}

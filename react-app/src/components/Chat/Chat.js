@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import { addChat } from "../../store/chat";
+import { addChat, loadAllChats } from "../../store/chat";
 
 import { hideModal } from "../../store/modal";
 
@@ -41,7 +41,8 @@ export default function Chat() {
     //! in bottom bar component like gmail
     useEffect(() => {
         dispatch(addChat(newChat));
-    }, [dispatch, newChat]);
+        dispatch(loadAllChats(user.id));
+    }, [dispatch, newChat, user]);
 
     const updateChatInput = (e) => {
         setChatInput(e.target.value);
@@ -52,7 +53,6 @@ export default function Chat() {
 
         // Emits chat event setting session users as user and msg as chatInput
         socket.emit("chat", { user: user.username, msg: chatInput });
-        setChatInput("");
 
         const new_chat = {
             content: chatInput,
@@ -60,6 +60,7 @@ export default function Chat() {
             recipient_ids: chat_recipient.id,
         };
         setNewChat(new_chat);
+        setChatInput("");
     };
 
     const hideChat = () => {
@@ -68,13 +69,13 @@ export default function Chat() {
 
     return (
         user && (
-            <div>
-                <div className={styles.messagesWrapper}>
+            <div className={styles.wrapper}>
+                <div className={styles.messages}>
                     {localMessages.map((message, idx) => (
                         <div key={idx}>{`${message.user}: ${message.msg}`}</div>
                     ))}
                 </div>
-                <form className={styles.chatWrapper} onSubmit={sendChat}>
+                <form className={styles.chat} onSubmit={sendChat}>
                     <input value={chatInput} onChange={updateChatInput} />
                     <button type="submit">Send</button>
                 </form>
