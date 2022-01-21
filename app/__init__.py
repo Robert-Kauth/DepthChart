@@ -42,7 +42,7 @@ app.cli.add_command(seed_commands)
 # Initialize app envirionment configuration
 app.config.from_object(Config)
 
-
+# Register route blueprints
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(server_routes, url_prefix='/api/servers')
@@ -50,6 +50,8 @@ app.register_blueprint(user_server_routes, url_prefix='/api/user_servers')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
 app.register_blueprint(chat_routes, url_prefix='/api/chats')
+
+# Initialize flask-sqlAlchemy database
 db.init_app(app)
 Migrate(app, db)
 

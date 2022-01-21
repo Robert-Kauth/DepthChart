@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.forms.chat_form import ChatForm
+from app.forms import ChatForm
 from app.models import db, User, Chat, User_chat
 
 
@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @chat_routes.route('/<int>:chat_id')
-@login_required
+# @login_required
 def load_chat(chat_id):
     '''
     Simple function to retreive a single chat and all its associated data
@@ -28,7 +28,7 @@ def load_chat(chat_id):
 
 
 @chat_routes.route('/users/<int>:user_id')
-@login_required
+# @login_required
 def load_chats(user_id):
     '''
     Simple function to retreive all chats associated with a user
@@ -37,17 +37,19 @@ def load_chats(user_id):
             for chat in User_chat.query.filter(User_chat.sender_id == user_id).all()}
     received = {chat.id: chat.to_dict() for chat in User_chat.query.filter(
         User_chat.recipient_ids == user_id).all()}
-    return {**sent, **received}
+    messages = {**sent, **received}
+    return messages
 
 
 @chat_routes.route('/', methods=["POST"])
-@login_required
+# @login_required
 def add_chat():
     '''
     Function to add chat to database
     '''
     form = ChatForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data)
     if form.validate_on_submit():
         chat = Chat(content=form.data['content'])
         db.session.add(chat)
@@ -64,7 +66,7 @@ def add_chat():
 
 
 @chat_routes.route('/<int>:id', methods=['DELETE'])
-@login_required
+# @login_required
 def delete_chat(id):
     '''
     Delete Chat from database
