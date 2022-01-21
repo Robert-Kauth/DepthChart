@@ -50,7 +50,7 @@ export const loadChat = (chat_id) => async (dispatch) => {
 };
 
 export const addChat = (payload) => async (dispatch) => {
-    const res = await fetch("/api/chats/", {
+    const res = await fetch("/api/chats/new", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@chat_routes.route('/<int>:chat_id')
+@chat_routes.route('/<int:chat_id>')
 # @login_required
 def load_chat(chat_id):
     '''
@@ -27,21 +27,21 @@ def load_chat(chat_id):
     return {chat.id: chat.to_dict() for chat in Chat.query.join(User_chat).filter(User_chat.chat_id == chat_id).first()}
 
 
-@chat_routes.route('/users/<int>:user_id')
+@chat_routes.route('/users/<int:user_id>')
 # @login_required
 def load_chats(user_id):
     '''
     Simple function to retreive all chats associated with a user
     '''
-    sent = {chat.id: chat.to_dict()
+    sent = {chat.chat_id: chat.to_dict()
             for chat in User_chat.query.filter(User_chat.sender_id == user_id).all()}
-    received = {chat.id: chat.to_dict() for chat in User_chat.query.filter(
+    received = {chat.chat_id: chat.to_dict() for chat in User_chat.query.filter(
         User_chat.recipient_ids == user_id).all()}
     messages = {**sent, **received}
     return messages
 
 
-@chat_routes.route('/', methods=["POST"])
+@chat_routes.route('/new', methods=["POST"])
 # @login_required
 def add_chat():
     '''
@@ -49,7 +49,6 @@ def add_chat():
     '''
     form = ChatForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
     if form.validate_on_submit():
         chat = Chat(content=form.data['content'])
         db.session.add(chat)
@@ -65,7 +64,7 @@ def add_chat():
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@chat_routes.route('/<int>:id', methods=['DELETE'])
+@chat_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_chat(id):
     '''
