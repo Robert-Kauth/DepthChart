@@ -31,7 +31,7 @@ export default function CreateMessage() {
         setMessage(e.target.value);
     };
 
-    const handleSend = async (e) => {
+    const handleSend = (e) => {
         e.preventDefault();
     };
 
