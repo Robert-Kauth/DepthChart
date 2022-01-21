@@ -50,13 +50,12 @@ export const loadChat = (chat_id) => async (dispatch) => {
 };
 
 export const addChat = (payload) => async (dispatch) => {
-    const { content, sender_id, recipient_ids } = payload;
-    const res = await fetch("/api/chats/", {
-        methods: "POST",
+    const res = await fetch("/api/chats/new", {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content, sender_id, recipient_ids }),
+        body: JSON.stringify(payload),
     });
     if (res.ok) {
         const chat = await res.json();
@@ -66,7 +65,7 @@ export const addChat = (payload) => async (dispatch) => {
 
 export const editChat = (payload) => async (dispatch) => {
     const res = await fetch("/api/chats/", {
-        methods: "PUT",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },

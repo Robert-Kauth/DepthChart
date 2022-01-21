@@ -24,5 +24,5 @@ class Message(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'user_messages': {user_message.message_id: user_message.sender_id for user_message in self.user_messages},
-            'channel_messages': {channel_message.message_id: channel_message.channel_id for channel_message in self.channel_messages}
+            'channel_messages': {channel_message.message_id: channel_message.sender_id for channel_message in self.channel_messages}
         }

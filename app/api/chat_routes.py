@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.forms.chat_form import ChatForm
+from app.forms import ChatForm
 from app.models import db, User, Chat, User_chat
 
 
@@ -18,8 +18,8 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@chat_routes.route('/<int>:chat_id')
-@login_required
+@chat_routes.route('/<int:chat_id>')
+# @login_required
 def load_chat(chat_id):
     '''
     Simple function to retreive a single chat and all its associated data
@@ -27,21 +27,22 @@ def load_chat(chat_id):
     return {chat.id: chat.to_dict() for chat in Chat.query.join(User_chat).filter(User_chat.chat_id == chat_id).first()}
 
 
-@chat_routes.route('/users/<int>:user_id')
-@login_required
+@chat_routes.route('/users/<int:user_id>')
+# @login_required
 def load_chats(user_id):
     '''
     Simple function to retreive all chats associated with a user
     '''
-    sent = {chat.id: chat.to_dict()
+    sent = {chat.chat_id: chat.to_dict()
             for chat in User_chat.query.filter(User_chat.sender_id == user_id).all()}
-    received = {chat.id: chat.to_dict() for chat in User_chat.query.filter(
+    received = {chat.chat_id: chat.to_dict() for chat in User_chat.query.filter(
         User_chat.recipient_ids == user_id).all()}
-    return {**sent, **received}
+    messages = {**sent, **received}
+    return messages
 
 
-@chat_routes.route('/', methods=["POST"])
-@login_required
+@chat_routes.route('/new', methods=["POST"])
+# @login_required
 def add_chat():
     '''
     Function to add chat to database
@@ -52,21 +53,19 @@ def add_chat():
         chat = Chat(content=form.data['content'])
         db.session.add(chat)
         db.session.commit()
-        #! chat_id = chat.id might not retrieve the appropiate id from database
         user_chat = User_chat(chat_id=chat.id,
                               sender_id=form.data['sender_id'],
                               recipient_ids=form.data['recipient_ids'])
         db.session.add(user_chat)
         db.session.commit()
-        #! needs to be tested, concerned about the format this might return data in
         new_chat = chat.to_dict()
         new_user_chat = user_chat.to_dict()
         return {**new_chat, **new_user_chat}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@chat_routes.route('/<int>:id', methods=['DELETE'])
-@login_required
+@chat_routes.route('/<int:id>', methods=['DELETE'])
+# @login_required
 def delete_chat(id):
     '''
     Delete Chat from database

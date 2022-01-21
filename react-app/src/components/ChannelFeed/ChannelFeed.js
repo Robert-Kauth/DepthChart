@@ -19,7 +19,6 @@ export default function ChannelFeed() {
         dispatch(loadAllChannelMessages(selectedChannel.id));
     }, [dispatch, selectedChannel]);
 
-    console.log(selectedChannel, "selected channel");
     return (
         <>
             <Title name={selectedChannel.name} />
