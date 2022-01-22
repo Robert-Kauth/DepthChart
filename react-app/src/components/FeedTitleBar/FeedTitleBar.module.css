@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    border-bottom: 4px solid darkgreen;
+    padding-bottom: 5px;
 }
 
 .user {

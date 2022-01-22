@@ -42,10 +42,8 @@ export default function MessageFeedCard({ message }) {
 
     return (
         <div className={styles.wrapper}>
+            <FeedTitleBar user={otherUser} />
             <div className={styles.message}>
-                <div className={styles.threadTitle}>
-                    <FeedTitleBar user={otherUser} />
-                </div>
                 <div className={styles.name}>
                     {sender_id === currentUser.id
                         ? users[sender_id]?.username

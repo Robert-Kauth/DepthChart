@@ -5,7 +5,6 @@
     min-width: 100%;
     border-bottom: 2px solid darkgreen;
     background-color: rgba(46, 139, 87, 0.8);
-    margin: 5px 0;
 }
 
 .message {
@@ -13,13 +12,6 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-}
-
-.threadTitle {
-    display: flex;
-    border-bottom: 4px solid darkgreen;
-    margin: 0 0 10px 0;
-    padding-bottom: 5px;
 }
 
 .name {

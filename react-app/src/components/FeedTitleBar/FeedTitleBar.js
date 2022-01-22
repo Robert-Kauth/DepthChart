@@ -10,9 +10,7 @@ import styles from "./FeedTitleBar.module.css";
 export default function FeedTitleBar(props) {
     return (
         <div className={styles.wrapper}>
-            <div className={styles.user}>
-                <UserInfo user={props.user} />
-            </div>
+            <UserInfo user={props.user} />
             <div className={styles.text}>
                 {`This is the beginning of your direct message history with ${props.user.username}`}
             </div>
