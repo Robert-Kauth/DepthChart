@@ -27,10 +27,11 @@ const StyledIcon = styled(Icon)`
     height: 1rem;
 `;
 
-export default function CreateMessage({ recipient_id }) {
+export default function CreateMessage(props) {
     const dispatch = useDispatch();
 
     const [message, setMessage] = useState("");
+    const [errors, setErrors] = useState([]);
 
     const sessionUser = useSelector((state) => state.session.user);
 
@@ -38,18 +39,35 @@ export default function CreateMessage({ recipient_id }) {
         setMessage(e.target.value);
     };
 
+    //! Will need to check error handling here
     const handleSend = (e) => {
         e.preventDefault();
-        const new_message = {
-            content: message,
-            sender_id: sessionUser.id,
-            recipient_ids: recipient_id,
-        };
-        dispatch(createMessage(new_message));
+
+        if (props.recipient_ids) {
+            const new_user_message = {
+                content: message,
+                sender_id: sessionUser.id,
+                recipient_ids: props.recipient_ids,
+            };
+            dispatch(createMessage(new_user_message));
+        } else if (props.channel_id) {
+            const new_channel_message = {
+                channel_id: props.channel_id,
+                sender_id: sessionUser.id,
+            };
+            dispatch(createMessage(new_channel_message));
+        } else setErrors("Something went wrong please try again");
     };
 
     return (
         <div className={styles.wrapper}>
+            <ul className={styles.errors}>
+                {errors.map((error, idx) => (
+                    <li className={styles.error} key={idx}>
+                        {error}
+                    </li>
+                ))}
+            </ul>
             <form className={styles.newMessage}>
                 <Button onClick={handleSend}>
                     <StyledIcon path={mdiSendCircle} size={1} />
