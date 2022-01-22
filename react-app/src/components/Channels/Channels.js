@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import Icon from "@mdi/react";
 import { mdiPlusBox } from "@mdi/js";
 import { mdiCircleEditOutline } from "@mdi/js";
 
-import { showModal, setCurrentModal } from "../../store/modal";
 import { loadChannel, loadChannels } from "../../store/channels";
 
+import StyledButton from "../StyledButton";
 import EditChannelForm from "../EditChannelForm";
 import Title from "../Title";
 import ChannelCard from "../ChannelCard";
@@ -15,25 +13,6 @@ import CreateChannelForm from "../CreateChannelForm";
 
 import styles from "./Channels.module.css";
 // className={styles. }
-
-const Button = styled.button`
-    background-color: #014421;
-    color: #029e7e;
-    margin: 0;
-    padding-top: 5px;
-    border: 2px solid darkgreen;
-    border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
-    &:hover {
-        background-color: #014421;
-        color: #0bda51;
-    }
-`;
-
-const StyledIcon = styled(Icon)`
-    width: 1rem;
-    height: 1rem;
-`;
 
 export default function Channels({ serverId }) {
     const dispatch = useDispatch();
@@ -54,21 +33,11 @@ export default function Channels({ serverId }) {
         dispatch(loadChannels());
     }, [dispatch]);
 
-    const showCreateChannel = () => {
-        dispatch(setCurrentModal(CreateChannelForm));
-        dispatch(showModal());
-    };
-
     const selectChannel = (e, channel) => {
         e.preventDefault();
         if (channel) {
             dispatch(loadChannel(channel.id));
         }
-    };
-
-    const showEditChannel = () => {
-        dispatch(setCurrentModal(EditChannelForm));
-        dispatch(showModal());
     };
 
     return (
@@ -83,22 +52,16 @@ export default function Channels({ serverId }) {
                               <ChannelCard channel={channel} />
                           </button>
                           <div className={styles.crud}>
-                              <Button
-                                  className={styles.edit}
-                                  onClick={showEditChannel}>
-                                  <StyledIcon
-                                      path={mdiCircleEditOutline}
-                                      size={1}
-                                  />
-                              </Button>
+                              <StyledButton
+                                  icon={mdiCircleEditOutline}
+                                  form={EditChannelForm}
+                              />
                           </div>
                       </div>
                   ))
                 : null}
             <div className={styles.wrapper}>
-                <Button className={styles.button} onClick={showCreateChannel}>
-                    <StyledIcon path={mdiPlusBox} size={1} />
-                </Button>
+                <StyledButton icon={mdiPlusBox} form={CreateChannelForm} />
             </div>
         </div>
     );
