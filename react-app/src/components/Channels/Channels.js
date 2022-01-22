@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mdiPlusBox } from "@mdi/js";
-import { mdiCircleEditOutline } from "@mdi/js";
 
 import { loadChannel, loadChannels } from "../../store/channels";
 
 import StyledButton from "../StyledButton";
-import EditChannelForm from "../EditChannelForm";
 import Title from "../Title";
 import ChannelCard from "../ChannelCard";
 import CreateChannelForm from "../CreateChannelForm";
@@ -42,7 +40,7 @@ export default function Channels({ serverId }) {
 
     return (
         <div className={styles.channelsWrapper}>
-            <Title title={"Channels"} />
+            <Title title="Channels" />
             {serverChannels
                 ? serverChannels.map((channel) => (
                       <div className={styles.buttonWrapper} key={channel.id}>
@@ -51,12 +49,6 @@ export default function Channels({ serverId }) {
                               onClick={(e) => selectChannel(e, channel)}>
                               <ChannelCard channel={channel} />
                           </button>
-                          <div className={styles.crud}>
-                              <StyledButton
-                                  icon={mdiCircleEditOutline}
-                                  form={EditChannelForm}
-                              />
-                          </div>
                       </div>
                   ))
                 : null}
