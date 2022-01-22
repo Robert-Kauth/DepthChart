@@ -22,12 +22,10 @@ export default function ChannelFeed() {
     return (
         <>
             {selectedChannel && <FeedTitleBar channel={selectedChannel} />}
-            <div className={styles.messages}>
-                {channelMsgs &&
-                    Object.values(channelMsgs).map((message) => (
-                        <ChannelMessages key={message.id} message={message} />
-                    ))}
-            </div>
+            {channelMsgs &&
+                Object.values(channelMsgs).map((message) => (
+                    <ChannelMessages key={message.id} message={message} />
+                ))}
             <CreateMessage />
         </>
     );
