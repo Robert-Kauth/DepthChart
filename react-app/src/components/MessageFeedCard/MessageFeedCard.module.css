@@ -12,6 +12,8 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
+    border-bottom: 2px solid darkgreen;
+    padding-bottom: 5px;
 }
 
 .name {
