@@ -1,8 +1,18 @@
 .wrapper {
     display: flex;
+    padding: 0 5px;
 }
 
 .button {
-    display: flex;
-    height: 30px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: inset;
+    background-color: green;
+    font-size: 20px;
+}
+
+.button:hover {
+    font-weight: bold;
+    background-color: #0bda51;
 }
