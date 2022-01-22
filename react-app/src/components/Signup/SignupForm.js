@@ -5,6 +5,7 @@ import { signUp } from "../../store/session";
 import { hideModal } from "../../store/modal";
 
 import styles from "./SignupForm.module.css";
+import Errors from "../Errors";
 // className={styles. }
 
 export default function SignupForm({ setShowModal }) {
@@ -68,13 +69,7 @@ export default function SignupForm({ setShowModal }) {
         <form className={styles.form} onSubmit={onSignUp}>
             <fieldset className={styles.field}>
                 <legend className={styles.legend}>Sign Up</legend>
-                <ul className={styles.errors}>
-                    {errors.map((error, idx) => (
-                        <li className={styles.error} key={idx}>
-                            {error}
-                        </li>
-                    ))}
-                </ul>
+                <Errors errors={errors} />
                 <div className={styles.inputs}>
                     <div className={styles.usernameWrapper}>
                         <label className={styles.usernameLabel}>

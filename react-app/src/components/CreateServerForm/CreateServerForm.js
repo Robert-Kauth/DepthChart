@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import Errors from "../Errors";
+
 import { createServer } from "../../store/servers";
 import { hideModal } from "../../store/modal";
 
@@ -71,13 +73,7 @@ export default function CreateServerForm() {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Create New Server</legend>
-                    <ul className={styles.errors}>
-                        {errors.map((error, idx) => (
-                            <li className={styles.error} key={idx}>
-                                {error}
-                            </li>
-                        ))}
-                    </ul>
+                    <Errors errors={errors} />
                     <div className={styles.inputs}>
                         <div className={styles.nameWrapper}>
                             <label className={styles.nameLabel} htmlFor="name">
