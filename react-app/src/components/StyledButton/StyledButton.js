@@ -5,9 +5,6 @@ import Icon from "@mdi/react";
 
 import { showModal, setCurrentModal } from "../../store/modal";
 
-import styles from "./CreateButton.module.css";
-// className={styles. }
-
 const Button = styled.button`
     background-color: #014421;
     color: #029e7e;
@@ -27,7 +24,7 @@ const StyledIcon = styled(Icon)`
     height: 1rem;
 `;
 
-export default function CreateButton({ icon, form }) {
+export default function StyledButton({ icon, form }) {
     const dispatch = useDispatch();
 
     const showForm = () => {
