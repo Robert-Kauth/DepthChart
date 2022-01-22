@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { createChannel } from "../../store/channels";
@@ -13,10 +13,6 @@ export default function CreateChannelForm() {
     const dispatch = useDispatch();
     const { currentServerId } = useParams();
 
-    const currentServer = useSelector(
-        (state) => state.servers.all[currentServerId]
-    );
-
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
     const [topic, setTopic] = useState("");
@@ -26,7 +22,7 @@ export default function CreateChannelForm() {
         e.preventDefault();
         const newChannel = {
             name,
-            server_id: currentServer.id,
+            server_id: currentServerId,
             topic,
             icon,
         };
