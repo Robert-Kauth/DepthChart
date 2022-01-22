@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiSendCircle } from "@mdi/js";
+
+import { createMessage } from "../../store/messages";
 
 import styles from "./CreateMessage.module.css";
 // className={styles. }
@@ -24,8 +27,12 @@ const StyledIcon = styled(Icon)`
     height: 1rem;
 `;
 
-export default function CreateMessage() {
+export default function CreateMessage({ recipient_id }) {
+    const dispatch = useDispatch();
+
     const [message, setMessage] = useState("");
+
+    const sessionUser = useSelector((state) => state.session.user);
 
     const updateMessage = (e) => {
         setMessage(e.target.value);
@@ -33,21 +40,27 @@ export default function CreateMessage() {
 
     const handleSend = (e) => {
         e.preventDefault();
+        const new_message = {
+            content: message,
+            sender_id: sessionUser.id,
+            recipient_ids: recipient_id,
+        };
+        dispatch(createMessage(new_message));
     };
 
     return (
-        <>
-            <form className={styles.newMessageWrapper}>
+        <div className={styles.wrapper}>
+            <form className={styles.newMessage}>
                 <Button onClick={handleSend}>
                     <StyledIcon path={mdiSendCircle} size={1} />
                 </Button>
                 <input
-                    className={styles.newMessage}
+                    className={styles.messageInput}
                     type="text"
                     value={message}
                     onChange={updateMessage}
                 />
             </form>
-        </>
+        </div>
     );
 }
