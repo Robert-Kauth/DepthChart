@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiSendCircle } from "@mdi/js";
+
+import { createMessage } from "../../store/messages";
 
 import styles from "./CreateMessage.module.css";
 // className={styles. }
@@ -24,30 +27,58 @@ const StyledIcon = styled(Icon)`
     height: 1rem;
 `;
 
-export default function CreateMessage() {
+export default function CreateMessage(props) {
+    const dispatch = useDispatch();
+
     const [message, setMessage] = useState("");
+    const [errors, setErrors] = useState([]);
+
+    const sessionUser = useSelector((state) => state.session.user);
 
     const updateMessage = (e) => {
         setMessage(e.target.value);
     };
 
-    const handleSend = async (e) => {
+    //! Will need to check error handling here
+    const handleSend = (e) => {
         e.preventDefault();
+
+        if (props.recipient_ids) {
+            const new_user_message = {
+                content: message,
+                sender_id: sessionUser.id,
+                recipient_ids: props.recipient_ids,
+            };
+            dispatch(createMessage(new_user_message));
+        } else if (props.channel_id) {
+            const new_channel_message = {
+                channel_id: props.channel_id,
+                sender_id: sessionUser.id,
+            };
+            dispatch(createMessage(new_channel_message));
+        } else setErrors("Something went wrong please try again");
     };
 
     return (
-        <>
-            <form className={styles.newMessageWrapper}>
+        <div className={styles.wrapper}>
+            <ul className={styles.errors}>
+                {errors.map((error, idx) => (
+                    <li className={styles.error} key={idx}>
+                        {error}
+                    </li>
+                ))}
+            </ul>
+            <form className={styles.newMessage}>
                 <Button onClick={handleSend}>
                     <StyledIcon path={mdiSendCircle} size={1} />
                 </Button>
                 <input
-                    className={styles.newMessage}
+                    className={styles.messageInput}
                     type="text"
                     value={message}
                     onChange={updateMessage}
                 />
             </form>
-        </>
+        </div>
     );
 }

@@ -74,32 +74,27 @@ export default function Channels({ serverId }) {
     return (
         <div className={styles.channelsWrapper}>
             <Title title={"Channels"} />
-            {serverChannels ? (
-                serverChannels.map((channel) => (
-                    <div className={styles.buttonWrapper} key={channel.id}>
-                        <button
-                            className={styles.button}
-                            onClick={(e) => selectChannel(e, channel)}>
-                            <ChannelCard channel={channel} />
-                        </button>
-                        <div className={styles.crud}>
-                            <Button
-                                className={styles.edit}
-                                onClick={showEditChannel}>
-                                <StyledIcon
-                                    path={mdiCircleEditOutline}
-                                    size={1}
-                                />
-                            </Button>
-                        </div>
-                    </div>
-                ))
-            ) : (
-                <div className={styles.msgContainer}>
-                    <p className={styles.msg}>No Channels Exist</p>
-                    <p className={styles.msg}>Click + to create one</p>
-                </div>
-            )}
+            {serverChannels
+                ? serverChannels.map((channel) => (
+                      <div className={styles.buttonWrapper} key={channel.id}>
+                          <button
+                              className={styles.button}
+                              onClick={(e) => selectChannel(e, channel)}>
+                              <ChannelCard channel={channel} />
+                          </button>
+                          <div className={styles.crud}>
+                              <Button
+                                  className={styles.edit}
+                                  onClick={showEditChannel}>
+                                  <StyledIcon
+                                      path={mdiCircleEditOutline}
+                                      size={1}
+                                  />
+                              </Button>
+                          </div>
+                      </div>
+                  ))
+                : null}
             <div className={styles.wrapper}>
                 <Button className={styles.button} onClick={showCreateChannel}>
                     <StyledIcon path={mdiPlusBox} size={1} />

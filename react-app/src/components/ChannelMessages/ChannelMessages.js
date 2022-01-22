@@ -32,7 +32,6 @@ export default function ChannelMessages({ message }) {
             <div className={styles.user}>
                 <UserInfo user={messageSender} />
             </div>
-
             <div className={styles.content}>{message.content}</div>
             <div className={styles.updated}>{message.updated_at}</div>
         </div>

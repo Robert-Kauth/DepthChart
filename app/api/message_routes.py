@@ -67,21 +67,26 @@ def create_message():
     Creates a new message setting the sender_id
     to current_user.id
     '''
-    # get all users for form select field
-    recipients_list = [(user.id, user.username) for user in User.query.all()]
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    form.recipients.choices = recipients_list
     if form.validate_on_submit():
-        message = Message(sender_id=current_user.id, content=form.data['content'],
-                          channel_id=form.data['channel_id'])
+        message = Message(content=form.data['content'])
         db.session.add(message)
         db.session.commit()
-        if len(form.recipients) >= 1:
-            for recipient in form.recipients:
-                user_message = User_message(
-                    recipient_id=recipient.id, message_id=message.id)
-                db.session.add(user_message)
+        if (form.data["recipient_ids"]):
+            user_message = User_message(sender_id=form.data['sender_id'],
+                                        recipient_ids=form.data['recipient_ids'],
+                                        message_id=message.id)
+            db.session.add(user_message)
             db.session.commit()
-        return message.to_dict()
+            return {**message.to_dict(), **user_message.to_dict()}
+        elif (form.data['channel_id']):
+            channel_message = Channel_message(channel_id=form.data['channel_id'],
+                                              sender_id=form.data['sender_id'],
+                                              message_id=message.id)
+            db.session.add(channel_message)
+            db.session.commit()
+            return {**message.to_dict(), **channel_message.to_dict()}
+        else:
+            return {'errors': validation_errors_to_error_messages(form.errors)}
     return {'errors': validation_errors_to_error_messages(form.errors)}

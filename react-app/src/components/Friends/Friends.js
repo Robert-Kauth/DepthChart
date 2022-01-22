@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Title from "../Title";
 import FriendCard from "../FriendCard";
 import { loadUsers } from "../../store/users";
-import UserInfo from "../UserInfo";
 
 import styles from "./Friends.module.css";
 // className={styles. }
@@ -36,7 +35,6 @@ export default function Friends() {
     return (
         <div className={styles.friendsWrapper}>
             <Title title={"Users"} />
-            <UserInfo user={sessionUser} />
             {friendCards.map((user) => (
                 <FriendCard key={user.id} user={user} />
             ))}

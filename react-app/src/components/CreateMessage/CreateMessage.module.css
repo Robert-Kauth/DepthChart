@@ -1,11 +1,21 @@
-.newMessageWrapper {
+.wrapper {
+    margin: 0 8px;
+}
+.newMessage {
     display: flex;
     width: 100%;
     position: sticky;
     bottom: 0;
-    margin: 5px 0;
 }
 
-.newMessage {
+.messageInput {
     width: 100%;
+}
+
+.errors {
+    background-color: red;
+}
+
+.error {
+    color: black;
 }

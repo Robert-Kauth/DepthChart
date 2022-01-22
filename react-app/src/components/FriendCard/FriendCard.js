@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { showModal, setCurrentModal } from "../../store/modal";
-import { loadUser } from "../../store/users";
-import Chat from "../Chat";
+import ChatButton from "../ChatButton/ChatButton";
 import UserInfo from "../UserInfo";
+import FollowButton from "../FollowButton";
 
 import styles from "./FriendCard.module.css";
 // className={styles. }
 
 export default function FriendCard({ user }) {
-    const dispatch = useDispatch();
-
     const sessionUser = useSelector((state) => state.session.user);
 
     const [selectedUser, setSelectedUser] = useState(false);
@@ -19,23 +16,11 @@ export default function FriendCard({ user }) {
 
     const updateSelected = (e) => {
         e.preventDefault();
-        //! Might not be needed after changing friends sidebar
+
         if (user.id !== sessionUser.id) {
             setSelectedId(e.target.value);
             setSelectedUser(!selectedUser);
         }
-    };
-
-    const setFollow = () => {};
-
-    const showChat = (e) => {
-        e.preventDefault();
-
-        if (selectedId) {
-            dispatch(loadUser(selectedId));
-        }
-        dispatch(setCurrentModal(Chat));
-        dispatch(showModal());
     };
 
     return (
@@ -46,16 +31,12 @@ export default function FriendCard({ user }) {
                 value={user.id}>
                 <UserInfo user={user} />
             </button>
-            {selectedUser && selectedId ? (
+            {selectedUser && selectedId && (
                 <div className={styles.buttons}>
-                    <button className={styles.chatModal} onClick={showChat}>
-                        Chat
-                    </button>
-                    <div className={styles.follow}>
-                        <button onClick={setFollow}>Follow</button>
-                    </div>
+                    <ChatButton user={user} />
+                    <FollowButton />
                 </div>
-            ) : null}
+            )}
         </>
     );
 }

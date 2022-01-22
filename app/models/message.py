@@ -6,7 +6,7 @@ class Message(db.Model):
     __tablename__ = 'messages'
 
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String)
+    content = db.Column(db.String, nullable=False)
     sent_at = db.Column(db.DateTime, default=datetime.datetime.now())
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())

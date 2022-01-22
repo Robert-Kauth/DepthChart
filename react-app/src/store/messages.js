@@ -79,7 +79,9 @@ export const createMessage = (payload) => async (dispatch) => {
         body: JSON.stringify(payload),
     });
     const message = await res.json();
-    dispatch(create(message));
+    if (message.errors) {
+        return message.errors;
+    } else dispatch(create(message));
 };
 
 export const editMessage = (payload) => async (dispatch) => {
