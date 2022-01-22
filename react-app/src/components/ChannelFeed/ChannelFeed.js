@@ -6,9 +6,6 @@ import CreateMessage from "../CreateMessage";
 import ChannelMessages from "../ChannelMessages";
 import FeedTitleBar from "../FeedTitleBar";
 
-import styles from "./ChannelFeed.module.css";
-// className={styles. }
-
 export default function ChannelFeed() {
     const dispatch = useDispatch();
 
