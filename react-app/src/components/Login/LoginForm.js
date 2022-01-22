@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import Errors from "../Errors";
+
 import { hideModal } from "../../store/modal";
 import { login, demoLogin } from "../../store/session";
 
@@ -51,13 +53,7 @@ export default function LoginForm({ setShowModal }) {
         <form className={styles.form}>
             <fieldset className={styles.field}>
                 <legend className={styles.legend}>Login</legend>
-                <ul className={styles.errors}>
-                    {errors.map((error, ind) => (
-                        <li className={styles.error} key={ind}>
-                            {error}
-                        </li>
-                    ))}
-                </ul>
+                <Errors errors={errors} />
                 <div className={styles.inputs}>
                     <div className={styles.emailWrapper}>
                         <div className={styles.emailLabelWrapper}>

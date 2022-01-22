@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiSendCircle } from "@mdi/js";
 
+import Errors from "../Errors";
+
 import { createMessage } from "../../store/messages";
 
 import styles from "./CreateMessage.module.css";
@@ -61,13 +63,7 @@ export default function CreateMessage(props) {
 
     return (
         <div className={styles.wrapper}>
-            <ul className={styles.errors}>
-                {errors.map((error, idx) => (
-                    <li className={styles.error} key={idx}>
-                        {error}
-                    </li>
-                ))}
-            </ul>
+            <Errors errors={errors} />
             <form className={styles.newMessage}>
                 <Button onClick={handleSend}>
                     <StyledIcon path={mdiSendCircle} size={1} />

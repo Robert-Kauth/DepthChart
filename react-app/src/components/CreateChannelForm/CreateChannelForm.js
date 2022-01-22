@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { createChannel } from "../../store/channels";
 import { hideModal } from "../../store/modal";
+import Errors from "../Errors";
 
 import styles from "./CreateChannelForm.module.css";
 // className={styles. }
@@ -11,10 +12,6 @@ import styles from "./CreateChannelForm.module.css";
 export default function CreateChannelForm() {
     const dispatch = useDispatch();
     const { currentServerId } = useParams();
-
-    const currentServer = useSelector(
-        (state) => state.servers.all[currentServerId]
-    );
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
@@ -25,7 +22,7 @@ export default function CreateChannelForm() {
         e.preventDefault();
         const newChannel = {
             name,
-            server_id: currentServer.id,
+            server_id: currentServerId,
             topic,
             icon,
         };
@@ -59,13 +56,7 @@ export default function CreateChannelForm() {
                     <legend className={styles.legend}>
                         Create New Channel
                     </legend>
-                    <ul className={styles.errors}>
-                        {errors.map((error, idx) => (
-                            <li className={styles.error} key={idx}>
-                                {error}
-                            </li>
-                        ))}
-                    </ul>
+                    <Errors errors={errors} />
                     <div className={styles.inputs}>
                         <div className={styles.nameWrapper}>
                             <label className={styles.nameLabel} htmlFor="name">

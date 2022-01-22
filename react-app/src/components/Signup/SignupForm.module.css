@@ -19,23 +19,6 @@
     color: black;
 }
 
-.errors {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 5px 0;
-    list-style-type: "\1F6AB";
-}
-
-.error {
-    color: #ff6347;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 2px 0;
-}
-
 .usernameWrapper {
     display: flex;
     align-items: center;

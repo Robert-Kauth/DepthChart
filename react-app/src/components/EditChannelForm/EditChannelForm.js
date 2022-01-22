@@ -6,6 +6,7 @@ import { editChannel } from "../../store/channels";
 import DeleteChannelButton from "../DeleteChannelButton";
 
 import styles from "./EditChannelForm.module.css";
+import Errors from "../Errors";
 // className={styles. }
 
 export default function EditChannelForm() {
@@ -94,13 +95,7 @@ export default function EditChannelForm() {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Edit Channel Info</legend>
-                    <ul className={styles.errors}>
-                        {errors.map((error, ind) => (
-                            <li className={styles.error} key={ind}>
-                                {error}
-                            </li>
-                        ))}
-                    </ul>
+                    <Errors errors={errors} />
                     <div className={styles.nameWrapper}>
                         <label className={styles.nameLabel}>Name:</label>
                         <input

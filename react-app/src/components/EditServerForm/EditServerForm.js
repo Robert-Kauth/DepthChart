@@ -7,6 +7,7 @@ import { hideModal } from "../../store/modal";
 import ServerDeleteButton from "../ServerDeleteButton";
 
 import styles from "./EditServerForm.module.css";
+import Errors from "../Errors";
 
 export default function EditServerForm() {
     const dispatch = useDispatch();
@@ -109,13 +110,7 @@ export default function EditServerForm() {
         <form className={styles.form} onSubmit={handleSubmit}>
             <fieldset className={styles.field}>
                 <legend className={styles.legend}>Edit Server</legend>
-                <ul className={styles.errors}>
-                    {errors.map((error, ind) => (
-                        <li className={styles.error} key={ind}>
-                            {error}
-                        </li>
-                    ))}
-                </ul>
+                <Errors errors={errors} />
                 {!serverId && (
                     <div className={styles.selectWrapper}>
                         <label className={styles.serverNameLabelWrapper}>

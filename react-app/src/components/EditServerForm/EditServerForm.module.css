@@ -20,20 +20,6 @@
     color: black;
 }
 
-.errors {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.error {
-    color: #bfc1c2;
-    font-size: 20px;
-    font-weight: 500;
-    padding: 2px;
-}
-
 .selectWrapper {
     display: flex;
     flex-direction: column;
