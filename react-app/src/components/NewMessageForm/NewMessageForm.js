@@ -34,12 +34,20 @@ const StyledIcon = styled(Icon)`
 export default function NewMessageForm() {
     const dispatch = useDispatch();
 
+    const sessionUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users.all);
     const selectedUser = useSelector((state) => state.users.user);
 
     const [errors, setErrors] = useState([]);
     const [userId, setUserId] = useState(null);
     const [content, setContent] = useState("");
+
+    const otherUsers = Object.values(users).reduce((a, user) => {
+        if (user.id !== sessionUser.id) {
+            a.push(user);
+        }
+        return a;
+    }, []);
 
     const selectedUserId = (e) => {
         e.preventDefault();
@@ -84,9 +92,9 @@ export default function NewMessageForm() {
                         <select
                             className={styles.select}
                             onChange={selectedUserId}>
-                            <option>--Please select a user to message</option>
-                            {users &&
-                                Object.values(users).map((user) => (
+                            <option>--Please select a user to message--</option>
+                            {otherUsers &&
+                                otherUsers.map((user) => (
                                     <option key={user.id} value={user.id}>
                                         {user.username}
                                     </option>

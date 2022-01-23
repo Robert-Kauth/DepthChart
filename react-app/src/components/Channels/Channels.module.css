@@ -79,6 +79,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    right: 55px;
+    left: -60px;
     z-index: 1;
 }
