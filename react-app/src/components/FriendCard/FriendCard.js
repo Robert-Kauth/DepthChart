@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import ChatButton from "../ChatButton/ChatButton";
@@ -22,6 +22,19 @@ export default function FriendCard({ user }) {
             setSelectedUser(!selectedUser);
         }
     };
+
+    useEffect(() => {
+        let hideButton;
+        if (selectedUser) {
+            hideButton = setTimeout(() => {
+                setSelectedUser(!selectedUser);
+            }, 5000);
+        }
+
+        return () => {
+            clearTimeout(hideButton);
+        };
+    }, [selectedUser]);
 
     return (
         <>

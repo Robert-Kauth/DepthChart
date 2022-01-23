@@ -29,7 +29,7 @@ export default function Messages() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.title}>
-                <Title title={"Direct Messages"} />
+                <Title title="Direct Messages" />
             </div>
             {messages &&
                 Object.values(messages).map((message) => (

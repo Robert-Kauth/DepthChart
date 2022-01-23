@@ -23,7 +23,9 @@ export default function ChatButton({ user }) {
     };
     return (
         <div className={styles.wrapper}>
-            <button onClick={showChat}>Chat</button>
+            <button className={styles.button} onClick={showChat}>
+                Chat
+            </button>
         </div>
     );
 }

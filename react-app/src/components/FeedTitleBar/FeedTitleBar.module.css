@@ -2,6 +2,21 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    border-bottom: 4px solid darkgreen;
+    padding-bottom: 5px;
+}
+
+.channelWrapper {
+    display: flex;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 75px;
+    z-index: 1;
 }
 
 .user {
