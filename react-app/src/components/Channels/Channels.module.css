@@ -69,3 +69,16 @@
     border-style: inset;
     padding: 5px;
 }
+
+.titleWrapper {
+    display: flex;
+}
+
+.createButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 55px;
+    z-index: 1;
+}

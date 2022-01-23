@@ -40,7 +40,12 @@ export default function Channels({ serverId }) {
 
     return (
         <div className={styles.channelsWrapper}>
-            <Title title="Channels" />
+            <div className={styles.titleWrapper}>
+                <Title title="Channels" />
+                <div className={styles.createButton}>
+                    <StyledButton icon={mdiPlusBox} form={CreateChannelForm} />
+                </div>
+            </div>
             {serverChannels
                 ? serverChannels.map((channel) => (
                       <div className={styles.buttonWrapper} key={channel.id}>
@@ -52,9 +57,6 @@ export default function Channels({ serverId }) {
                       </div>
                   ))
                 : null}
-            <div className={styles.wrapper}>
-                <StyledButton icon={mdiPlusBox} form={CreateChannelForm} />
-            </div>
         </div>
     );
 }
