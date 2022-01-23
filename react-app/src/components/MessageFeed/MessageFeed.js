@@ -20,7 +20,7 @@ export default function MessageFeed({ message }) {
 
     return (
         <div className={styles.wrapper}>
-            <Title title="All Messages" />
+            <Title title="User Messages" />
             <MessageFeedCard message={message} />
             <CreateMessageBar />
         </div>
