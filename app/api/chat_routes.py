@@ -33,10 +33,10 @@ def load_chats(user_id):
     '''
     Simple function to retreive all chats associated with a user
     '''
-    sent = {chat.chat_id: chat.to_dict()
-            for chat in User_chat.query.filter(User_chat.sender_id == user_id).all()}
-    received = {chat.chat_id: chat.to_dict() for chat in User_chat.query.filter(
-        User_chat.recipient_ids == user_id).all()}
+    sent = {chat.id: chat.to_dict()
+            for chat in Chat.query.join(User_chat, User_chat.chat_id == Chat.id).filter(User_chat.sender_id == user_id).order_by(Chat.sent_at).all()}
+    received = {chat.id: chat.to_dict() for chat in Chat.query.join(User_chat, User_chat.chat_id == Chat.id).filter(
+        User_chat.recipient_ids == user_id).order_by(Chat.sent_at).all()}
     messages = {**sent, **received}
     return messages
 
