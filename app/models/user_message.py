@@ -6,7 +6,7 @@ class User_message(db.Model):
 
     sender_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete="CASCADE"))
-    recipient_ids = db.Column(db.Integer, db.ForeignKey(
+    recipient_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
     message_id = db.Column(db.Integer, db.ForeignKey(
         'messages.id', ondelete='CASCADE'), primary_key=True)
@@ -15,14 +15,14 @@ class User_message(db.Model):
     sender = db.relationship(
         'User', foreign_keys='User_message.sender_id', back_populates='sent_messages', cascade='all, delete')
     recipients = db.relationship(
-        'User', foreign_keys='[User_message.recipient_ids]', back_populates='received_messages', cascade='all, delete')
+        'User', foreign_keys='User_message.recipient_id', back_populates='received_messages', cascade='all, delete')
     messages = db.relationship(
         'Message', back_populates='user_messages', cascade='all, delete')
 
     def to_dict(self):
         return {
             'sender_id': self.sender_id,
-            'recipient_ids': self.recipient_ids,
+            'recipient_id': self.recipient_id,
             'message_id': self.message_id,
             'is_read': self.is_read
         }

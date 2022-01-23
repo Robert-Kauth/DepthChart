@@ -45,11 +45,11 @@ export default function CreateMessageBar(props) {
     const handleSend = (e) => {
         e.preventDefault();
 
-        if (props.recipient_ids) {
+        if (props.recipient_id) {
             const new_user_message = {
                 content: message,
                 sender_id: sessionUser.id,
-                recipient_ids: props.recipient_ids,
+                recipient_id: props.recipient_id,
             };
             dispatch(createMessage(new_user_message));
         } else if (props.channel_id) {

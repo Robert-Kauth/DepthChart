@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import { addChat, loadAllChats } from "../../store/chat";
+import { addChat, loadAllChats } from "../../store/chats";
 
 import { hideModal } from "../../store/modal";
 
@@ -13,12 +13,15 @@ let socket;
 export default function Chat() {
     const dispatch = useDispatch();
 
-    const user = useSelector((state) => state.session.user);
-    const chat_recipient = useSelector((state) => state.users.user);
+    const sessionUser = useSelector((state) => state.session.user);
+    const user = useSelector((state) => state.users.user);
+    const allChats = useSelector((state) => state.chat.all);
 
+    // const [errors, setErrors] = useState([]);
+    const [chatRecipient, setChatRecipient] = useState(null);
     const [localMessages, setLocalMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
-    const [newChat, setNewChat] = useState({});
+    const [newChat, setNewChat] = useState(null);
 
     useEffect(() => {
         //open socket connection
@@ -36,13 +39,14 @@ export default function Chat() {
         };
     }, []);
 
-    //! might be better to add newChats to user messages?
-    //! need to test and see if this allows me to presist instance chat messages
-    //! in bottom bar component like gmail
     useEffect(() => {
-        dispatch(addChat(newChat));
-        dispatch(loadAllChats(user.id));
-    }, [dispatch, newChat, user]);
+        if (newChat) {
+            dispatch(addChat(newChat));
+        }
+        if (user) {
+            dispatch(loadAllChats(sessionUser.id));
+        }
+    }, [dispatch, newChat, sessionUser, user]);
 
     const updateChatInput = (e) => {
         setChatInput(e.target.value);
@@ -52,14 +56,16 @@ export default function Chat() {
         e.preventDefault();
 
         // Emits chat event setting session users as user and msg as chatInput
-        socket.emit("chat", { user: user.username, msg: chatInput });
+        socket.emit("chat", { user: sessionUser.username, msg: chatInput });
 
-        const new_chat = {
-            content: chatInput,
-            sender_id: user.id,
-            recipient_ids: chat_recipient.id,
-        };
-        setNewChat(new_chat);
+        if (chatInput) {
+            const new_chat = {
+                content: chatInput,
+                sender_id: sessionUser.id,
+                recipient_id: user.id,
+            };
+            setNewChat(new_chat);
+        }
         setChatInput("");
     };
 
@@ -67,10 +73,28 @@ export default function Chat() {
         dispatch(hideModal());
     };
 
+    let dbChats;
+    if (allChats) {
+        dbChats = Object.values(allChats).map((chat, idx) => {
+            if (chat.sender_recipient[sessionUser.id]) {
+                return (
+                    <div key={idx}>
+                        {`${sessionUser.username}: ${chat.content}`}
+                    </div>
+                );
+            } else {
+                return (
+                    <div key={idx}>{`${user.username}: ${chat.content}`}</div>
+                );
+            }
+        });
+    }
+
     return (
         user && (
             <div className={styles.wrapper}>
                 <div className={styles.messages}>
+                    {dbChats ? dbChats.map((chat) => chat) : null}
                     {localMessages.map((message, idx) => (
                         <div key={idx}>{`${message.user}: ${message.msg}`}</div>
                     ))}

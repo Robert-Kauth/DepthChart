@@ -27,7 +27,7 @@ def load_user_messages(user_id):
     sent_messages = {message.id: message.to_dict(
     ) for message in Message.query.join(User_message).filter(User_message.sender_id == user_id).all()}
     received_messages = {message.id: message.to_dict(
-    ) for message in Message.query.join(User_message).filter(User_message.recipient_ids == user_id).all()}
+    ) for message in Message.query.join(User_message).filter(User_message.recipient_id == user_id).all()}
     return {**sent_messages, **received_messages}
 
 
@@ -46,7 +46,7 @@ def load_message(message_id):
 # @login_required
 def load_message_recipients(message_id):
     '''
-    Gets all users(recipient_ids and sender_id) associated with a particular message_id
+    Gets all users(recipient_id and sender_id) associated with a particular message_id
     '''
     return{user_message.message_id: user_message.to_dict() for user_message in User_message.query.all()}
 
@@ -73,9 +73,9 @@ def create_message():
         message = Message(content=form.data['content'])
         db.session.add(message)
         db.session.commit()
-        if (form.data["recipient_ids"]):
+        if (form.data["recipient_id"]):
             user_message = User_message(sender_id=form.data['sender_id'],
-                                        recipient_ids=form.data['recipient_ids'],
+                                        recipient_id=form.data['recipient_id'],
                                         message_id=message.id)
             db.session.add(user_message)
             db.session.commit()

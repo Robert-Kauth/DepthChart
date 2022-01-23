@@ -34,9 +34,11 @@ def load_chats(user_id):
     Simple function to retreive all chats associated with a user
     '''
     sent = {chat.id: chat.to_dict()
-            for chat in Chat.query.join(User_chat, User_chat.chat_id == Chat.id).filter(User_chat.sender_id == user_id).order_by(Chat.sent_at).all()}
-    received = {chat.id: chat.to_dict() for chat in Chat.query.join(User_chat, User_chat.chat_id == Chat.id).filter(
-        User_chat.recipient_ids == user_id).order_by(Chat.sent_at).all()}
+            for chat in Chat.query.join(User_chat, User_chat.chat_id == Chat.id)
+            .filter(User_chat.sender_id == user_id).order_by(Chat.sent_at).all()}
+    received = {chat.id: chat.to_dict()
+                for chat in Chat.query.join(User_chat, User_chat.chat_id == Chat.id)
+                .filter(User_chat.recipient_id == user_id).order_by(Chat.sent_at).all()}
     messages = {**sent, **received}
     return messages
 
@@ -55,7 +57,7 @@ def add_chat():
         db.session.commit()
         user_chat = User_chat(chat_id=chat.id,
                               sender_id=form.data['sender_id'],
-                              recipient_ids=form.data['recipient_ids'])
+                              recipient_id=form.data['recipient_id'])
         db.session.add(user_chat)
         db.session.commit()
         new_chat = chat.to_dict()

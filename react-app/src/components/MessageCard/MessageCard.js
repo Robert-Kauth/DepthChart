@@ -19,7 +19,7 @@ export default function MessageCard({ message }) {
 
     let recipient_id;
     if (messagedUser && message) {
-        recipient_id = messagedUser[message.id].recipient_ids;
+        recipient_id = messagedUser[message.id].recipient_id;
     }
 
     let sender_id;

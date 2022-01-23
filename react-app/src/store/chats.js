@@ -35,10 +35,11 @@ const destroy = (id) => ({
 
 export const loadAllChats = (user_id) => async (dispatch) => {
     const res = await fetch(`/api/chats/users/${user_id}`);
-    if (res.ok) {
-        const chats = await res.json();
-        dispatch(loadAll(chats));
-    }
+
+    const chats = await res.json();
+    if (chats.error) {
+        return chats.error;
+    } else dispatch(loadAll(chats));
 };
 
 export const loadChat = (chat_id) => async (dispatch) => {
@@ -95,6 +96,7 @@ export default function reducer(state = initialState, action) {
         case LOAD_ONE:
             return { ...state, chat: action.chat };
         case ADD:
+            return { ...state, chat: action.chat };
         case EDIT:
             newState[action.chat.id] = action.chat;
             return newState;

@@ -2,8 +2,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired
 
+#! removed validators=[DataRequired()] should be added back on once loading chats from DB is worked out
+
 
 class ChatForm(FlaskForm):
-    content = StringField('content', validators=[DataRequired()])
-    sender_id = IntegerField('sender_id', validators=[DataRequired()])
-    recipient_ids = IntegerField('recipient_ids', validators=[DataRequired()])
+    content = StringField('content')
+    sender_id = IntegerField('sender_id')
+    recipient_id = IntegerField('recipient_id')

@@ -34,9 +34,9 @@ class User(db.Model, UserMixin):
     sent_chats = db.relationship(
         'User_chat', foreign_keys='User_chat.sender_id', back_populates='sender', cascade='all, delete')
     received_messages = db.relationship(
-        'User_message', foreign_keys='[User_message.recipient_ids]', back_populates='recipients', cascade='all, delete')
+        'User_message', foreign_keys='User_message.recipient_id', back_populates='recipients', cascade='all, delete')
     received_chats = db.relationship(
-        'User_chat', foreign_keys='[User_chat.recipient_ids]', back_populates='recipients', cascade='all, delete')
+        'User_chat', foreign_keys='User_chat.recipient_id', back_populates='recipients', cascade='all, delete')
 
     followed = db.relationship(
         'User', secondary='followers',
@@ -74,7 +74,7 @@ class User(db.Model, UserMixin):
             'avatar': self.avatar,
             'servers': [server.id for server in self.servers],
             'owned_servers': [owned_server.id for owned_server in self.owned_servers],
-            'msgId_senderId': {sent_message.message_id: sent_message.recipient_ids for sent_message in self.sent_messages},
+            'msgId_senderId': {sent_message.message_id: sent_message.recipient_id for sent_message in self.sent_messages},
             'msgId_recipientId': {received_message.message_id: received_message.sender_id for received_message in self.received_messages},
             'follows': [follow.id for follow in self.followed]
         }

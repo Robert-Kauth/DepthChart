@@ -21,4 +21,5 @@ class Chat(db.Model):
             'sent_at': self.sent_at,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            "sender_recipient": {user_chats.sender_id: user_chats.recipient_id for user_chats in self.user_chats}
         }
