@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllChannelMessages } from "../../store/messages";
 
-import CreateMessage from "../CreateMessage";
+import CreateMessageBar from "../CreateMessageBar";
 import ChannelMessages from "../ChannelMessages";
 import FeedTitleBar from "../FeedTitleBar";
 
@@ -23,7 +23,7 @@ export default function ChannelFeed() {
                 Object.values(channelMsgs).map((message) => (
                     <ChannelMessages key={message.id} message={message} />
                 ))}
-            <CreateMessage />
+            <CreateMessageBar />
         </>
     );
 }

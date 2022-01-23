@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import MessageFeedCard from "../MessageFeedCard";
 import Title from "../Title";
-import CreateMessage from "../CreateMessage";
+import CreateMessageBar from "../CreateMessageBar";
 
 import { loadAllUserMessages } from "../../store/messages";
 
@@ -22,7 +22,7 @@ export default function MessageFeed({ message }) {
         <div className={styles.wrapper}>
             <Title title="All Messages" />
             <MessageFeedCard message={message} />
-            <CreateMessage />
+            <CreateMessageBar />
         </div>
     );
 }

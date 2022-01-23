@@ -8,7 +8,7 @@ import Errors from "../Errors";
 
 import { createMessage } from "../../store/messages";
 
-import styles from "./CreateMessage.module.css";
+import styles from "./CreateMessageBar.module.css";
 // className={styles. }
 
 const Button = styled.button`
@@ -29,7 +29,7 @@ const StyledIcon = styled(Icon)`
     height: 1rem;
 `;
 
-export default function CreateMessage(props) {
+export default function CreateMessageBar(props) {
     const dispatch = useDispatch();
 
     const [message, setMessage] = useState("");
