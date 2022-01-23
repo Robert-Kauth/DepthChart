@@ -45,30 +45,47 @@ export default function NewMessageForm() {
 
     return (
         <form className={styles.form}>
-            <legend>Create New Message</legend>
-            <Errors errors={errors} />
-            <div className={styles.selectWrapper}>
-                <label>Message User</label>
-                <select className={styles.select} onChange={selectedUserId}>
-                    <option>--Please select a user to message</option>
-                    {users &&
-                        Object.values(users).map((user) => (
-                            <option key={user.id} value={user.id}>
-                                {user.username}
-                            </option>
-                        ))}
-                </select>
-            </div>
-            <div className={styles.userInfo}>
-                {userId && <UserInfo user={selectedUser} />}
-            </div>
-            <div className={styles.contentWrapper}>
-                <textarea
-                    className={styles.content}
-                    value={content}
-                    onChange={setMessage}
-                />
-            </div>
+            <fieldset className={styles.field}>
+                <legend className={styles.legend}>Create New Message</legend>
+                <Errors errors={errors} />
+                {!userId && (
+                    <div className={styles.selectWrapper}>
+                        <label className={styles.selectLabel}>
+                            Message User:
+                        </label>
+                        <select
+                            className={styles.select}
+                            onChange={selectedUserId}>
+                            <option>--Please select a user to message</option>
+                            {users &&
+                                Object.values(users).map((user) => (
+                                    <option key={user.id} value={user.id}>
+                                        {user.username}
+                                    </option>
+                                ))}
+                        </select>
+                    </div>
+                )}
+                {userId && (
+                    <>
+                        <div className={styles.userInfo}>
+                            <div className={styles.user}>
+                                <UserInfo user={selectedUser} />
+                            </div>
+                        </div>
+                        <div className={styles.contentWrapper}>
+                            <label className={styles.contentLabel}>
+                                Message:
+                            </label>
+                            <textarea
+                                className={styles.content}
+                                value={content}
+                                onChange={setMessage}
+                            />
+                        </div>
+                    </>
+                )}
+            </fieldset>
         </form>
     );
 }
