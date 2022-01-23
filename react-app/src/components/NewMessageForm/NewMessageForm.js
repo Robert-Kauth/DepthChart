@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { mdiArrowLeftCircle } from "@mdi/js";
+import styled from "styled-components";
+import Icon from "@mdi/react";
 
 import Errors from "../Errors";
 import UserInfo from "../UserInfo";
@@ -8,6 +11,26 @@ import { loadUsers, loadUser } from "../../store/users";
 import styles from "./NewMessageForm.module.css";
 // className={styles. }
 
+const Button = styled.button`
+    background-color: #014421;
+    color: #029e7e;
+    margin: 0 5px;
+    height: 74px;
+    padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    &:hover {
+        background-color: #0bda51;
+        color: #014421;
+    }
+`;
+
+const StyledIcon = styled(Icon)`
+    width: 1rem;
+    height: 1rem;
+`;
+
 export default function NewMessageForm() {
     const dispatch = useDispatch();
 
@@ -15,7 +38,7 @@ export default function NewMessageForm() {
     const selectedUser = useSelector((state) => state.users.user);
 
     const [errors, setErrors] = useState([]);
-    const [userId, setUserId] = useState("");
+    const [userId, setUserId] = useState(null);
     const [content, setContent] = useState("");
 
     const selectedUserId = (e) => {
@@ -33,6 +56,11 @@ export default function NewMessageForm() {
             setErrors([]);
             setContent(e.target.value);
         }
+    };
+
+    const goBack = (e) => {
+        e.preventDefault();
+        setUserId(null);
     };
 
     useEffect(() => {
@@ -71,6 +99,14 @@ export default function NewMessageForm() {
                         <div className={styles.userInfo}>
                             <div className={styles.user}>
                                 <UserInfo user={selectedUser} />
+                            </div>
+                            <div className={styles.button}>
+                                <Button onClick={goBack}>
+                                    <StyledIcon
+                                        path={mdiArrowLeftCircle}
+                                        size={1}
+                                    />
+                                </Button>
                             </div>
                         </div>
                         <div className={styles.contentWrapper}>
