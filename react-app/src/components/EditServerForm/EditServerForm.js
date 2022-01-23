@@ -1,13 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { mdiArrowLeftCircle } from "@mdi/js";
+import styled from "styled-components";
+import Icon from "@mdi/react";
 
 import { getUserServers } from "../../store/user_servers";
 import { editServer } from "../../store/servers";
 import { hideModal } from "../../store/modal";
 import ServerDeleteButton from "../ServerDeleteButton";
+import Errors from "../Errors";
 
 import styles from "./EditServerForm.module.css";
-import Errors from "../Errors";
+
+const Button = styled.button`
+    background-color: #014421;
+    color: #029e7e;
+    margin: 0 5px;
+    height: 74px;
+    padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    &:hover {
+        background-color: #0bda51;
+        color: #014421;
+    }
+`;
+
+const StyledIcon = styled(Icon)`
+    width: 1rem;
+    height: 1rem;
+`;
 
 export default function EditServerForm() {
     const dispatch = useDispatch();
@@ -17,7 +40,7 @@ export default function EditServerForm() {
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
-    const [serverId, setServerId] = useState("");
+    const [serverId, setServerId] = useState(null);
     const [topic, setTopic] = useState("");
     const [icon, setIcon] = useState("");
     const [newIcon, setNewIcon] = useState(false);
@@ -100,6 +123,11 @@ export default function EditServerForm() {
     const updateIcon = (e) => {
         setErrors([]);
         setIcon(e.target.value);
+    };
+
+    const goBack = (e) => {
+        e.preventDefault();
+        setServerId(null);
     };
 
     useEffect(() => {
@@ -227,6 +255,12 @@ export default function EditServerForm() {
                                     Update Server
                                 </button>
                             )}
+                            <Button onClick={goBack}>
+                                <StyledIcon
+                                    path={mdiArrowLeftCircle}
+                                    size={1}
+                                />
+                            </Button>
                         </div>
                     </div>
                 )}
