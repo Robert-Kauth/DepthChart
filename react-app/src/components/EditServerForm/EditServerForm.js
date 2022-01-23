@@ -251,16 +251,18 @@ export default function EditServerForm() {
                         </div>
                         <div className={styles.updateContainer}>
                             {!showDelete && (
-                                <button className={styles.button}>
-                                    Update Server
-                                </button>
+                                <>
+                                    <Button onClick={goBack}>
+                                        <StyledIcon
+                                            path={mdiArrowLeftCircle}
+                                            size={1}
+                                        />
+                                    </Button>
+                                    <button className={styles.button}>
+                                        Update Server
+                                    </button>
+                                </>
                             )}
-                            <Button onClick={goBack}>
-                                <StyledIcon
-                                    path={mdiArrowLeftCircle}
-                                    size={1}
-                                />
-                            </Button>
                         </div>
                     </div>
                 )}
