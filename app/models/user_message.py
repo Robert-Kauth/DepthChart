@@ -14,7 +14,7 @@ class User_message(db.Model):
 
     sender = db.relationship(
         'User', foreign_keys='User_message.sender_id', back_populates='sent_messages', cascade='all, delete')
-    recipients = db.relationship(
+    recipient = db.relationship(
         'User', foreign_keys='User_message.recipient_id', back_populates='received_messages', cascade='all, delete')
     messages = db.relationship(
         'Message', back_populates='user_messages', cascade='all, delete')
