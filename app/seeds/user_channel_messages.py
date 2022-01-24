@@ -20,7 +20,7 @@ def seed_user_messages():
                 message_ids.append(msg_id)
                 recipientId = randint(1, total_users)
                 if recipientId != senderId:
-                    user_message = User_message(sender_id=senderId, recipient_ids=recipientId,
+                    user_message = User_message(sender_id=senderId, recipient_id=recipientId,
                                                 message_id=msg_id, is_read=read)
             db.session.add(user_message)
     db.session.commit()

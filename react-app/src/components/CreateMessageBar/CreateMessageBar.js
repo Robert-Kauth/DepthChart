@@ -8,7 +8,7 @@ import Errors from "../Errors";
 
 import { createMessage } from "../../store/messages";
 
-import styles from "./CreateMessage.module.css";
+import styles from "./CreateMessageBar.module.css";
 // className={styles. }
 
 const Button = styled.button`
@@ -29,7 +29,7 @@ const StyledIcon = styled(Icon)`
     height: 1rem;
 `;
 
-export default function CreateMessage(props) {
+export default function CreateMessageBar(props) {
     const dispatch = useDispatch();
 
     const [message, setMessage] = useState("");
@@ -45,11 +45,11 @@ export default function CreateMessage(props) {
     const handleSend = (e) => {
         e.preventDefault();
 
-        if (props.recipient_ids) {
+        if (props.recipient_id) {
             const new_user_message = {
                 content: message,
                 sender_id: sessionUser.id,
-                recipient_ids: props.recipient_ids,
+                recipient_id: props.recipient_id,
             };
             dispatch(createMessage(new_user_message));
         } else if (props.channel_id) {

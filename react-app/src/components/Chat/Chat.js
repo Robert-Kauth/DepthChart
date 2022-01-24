@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import { addChat, loadAllChats } from "../../store/chat";
+import { addChat } from "../../store/chats";
 
 import { hideModal } from "../../store/modal";
+import Errors from "../Errors";
 
 import styles from "./Chat.module.css";
 // className={styles. }
@@ -13,12 +14,17 @@ let socket;
 export default function Chat() {
     const dispatch = useDispatch();
 
-    const user = useSelector((state) => state.session.user);
-    const chat_recipient = useSelector((state) => state.users.user);
+    const sessionUser = useSelector((state) => state.session.user);
+    const user = useSelector((state) => state.users.user);
+    const allChats = useSelector((state) => state.chats.all);
 
+    const [errors, setErrors] = useState([]);
     const [localMessages, setLocalMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
-    const [newChat, setNewChat] = useState({});
+    const [newChat, setNewChat] = useState(null);
+    const [selectedId] = useState(
+        JSON.parse(window.localStorage.getItem("id"))
+    );
 
     useEffect(() => {
         //open socket connection
@@ -36,50 +42,91 @@ export default function Chat() {
         };
     }, []);
 
-    //! might be better to add newChats to user messages?
-    //! need to test and see if this allows me to presist instance chat messages
-    //! in bottom bar component like gmail
     useEffect(() => {
-        dispatch(addChat(newChat));
-        dispatch(loadAllChats(user.id));
-    }, [dispatch, newChat, user]);
+        if (newChat) {
+            dispatch(addChat(newChat));
+        }
+    }, [dispatch, newChat]);
 
     const updateChatInput = (e) => {
+        setErrors([]);
         setChatInput(e.target.value);
     };
 
     const sendChat = (e) => {
         e.preventDefault();
+        if (chatInput) {
+            // Emits chat event setting session users as user and msg as chatInput
+            socket.emit("chat", { user: sessionUser.username, msg: chatInput });
 
-        // Emits chat event setting session users as user and msg as chatInput
-        socket.emit("chat", { user: user.username, msg: chatInput });
-
-        const new_chat = {
-            content: chatInput,
-            sender_id: user.id,
-            recipient_ids: chat_recipient.id,
-        };
-        setNewChat(new_chat);
-        setChatInput("");
+            const new_chat = {
+                content: chatInput,
+                sender_id: sessionUser.id,
+                recipient_id: user.id,
+            };
+            setNewChat(new_chat);
+            setChatInput("");
+        } else {
+            setErrors(["You can not send an empty chat"]);
+        }
     };
 
     const hideChat = () => {
         dispatch(hideModal());
     };
 
+    let dbChats;
+    if (allChats) {
+        dbChats = Object.values(allChats).map((chat, idx) => {
+            if (chat.sender_recipient[sessionUser.id]) {
+                return (
+                    <div className={styles.chat} key={idx}>
+                        {`${sessionUser.username}: ${chat.content}`}
+                    </div>
+                );
+            } else {
+                return (
+                    <div
+                        className={styles.chat}
+                        key={idx}>{`${user.username}: ${chat.content}`}</div>
+                );
+            }
+        });
+    }
+
     return (
         user && (
             <div className={styles.wrapper}>
-                <div className={styles.messages}>
+                <div className={styles.chats}>
+                    {selectedId === user.id
+                        ? dbChats.map((chat) => chat)
+                        : null}
                     {localMessages.map((message, idx) => (
-                        <div key={idx}>{`${message.user}: ${message.msg}`}</div>
+                        <div
+                            className={styles.chat}
+                            key={idx}>{`${message.user}: ${message.msg}`}</div>
                     ))}
                 </div>
-                <form className={styles.chat} onSubmit={sendChat}>
-                    <input value={chatInput} onChange={updateChatInput} />
-                    <button type="submit">Send</button>
+                {errors && <Errors errors={errors} />}
+                <form className={styles.form} onSubmit={sendChat}>
+                    <div className={styles.inputWrapper}>
+                        <input
+                            className={styles.input}
+                            value={chatInput}
+                            onChange={updateChatInput}
+                        />
+                    </div>
+                    <div className={styles.inputButtonWrapper}>
+                        <button className={styles.inputButton} type="submit">
+                            Send
+                        </button>
+                    </div>
                 </form>
-                <button onClick={hideChat}>Close Chat</button>
+                <div className={styles.buttonWrapper}>
+                    <button className={styles.button} onClick={hideChat}>
+                        Close Chat
+                    </button>
+                </div>
             </div>
         )
     );

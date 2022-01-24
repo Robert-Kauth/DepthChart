@@ -8,21 +8,21 @@ class User_chat(db.Model):
         'chats.id', ondelete='CASCADE'), primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
-    recipient_ids = db.Column(
+    recipient_id = db.Column(
         db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
     is_read = db. Column(db.Boolean, default=False)
 
     sender = db.relationship(
         'User', foreign_keys='User_chat.sender_id', back_populates='sent_chats', cascade='all, delete')
-    recipients = db.relationship(
-        'User', foreign_keys='[User_chat.recipient_ids]', back_populates='received_chats', cascade='all, delete')
+    recipient = db.relationship(
+        'User', foreign_keys='User_chat.recipient_id', back_populates='received_chats', cascade='all, delete')
     chats = db.relationship(
         'Chat', back_populates='user_chats', cascade='all, delete')
 
     def to_dict(self):
         return {
             'sender_id': self.sender_id,
-            'recipient_ids': self.recipient_ids,
+            'recipient_id': self.recipient_id,
             'chat_id': self.chat_id,
-            'is_read': self.is_read
+            'is_read': self.is_read,
         }

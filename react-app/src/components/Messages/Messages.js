@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import MessageCard from "../MessageCard";
 import Title from "../Title";
+import CreateMessageButton from "../CreateMessageButton";
 
 import { loadAllUserMessages } from "../../store/messages";
 import { loadMessage } from "../../store/messages";
@@ -30,6 +31,9 @@ export default function Messages() {
         <div className={styles.wrapper}>
             <div className={styles.title}>
                 <Title title="Direct Messages" />
+                <div className={styles.createMessage}>
+                    <CreateMessageButton />
+                </div>
             </div>
             {messages &&
                 Object.values(messages).map((message) => (

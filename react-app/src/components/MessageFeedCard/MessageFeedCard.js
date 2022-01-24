@@ -13,7 +13,7 @@ export default function MessageFeedCard({ message }) {
     // Get message recipient
     let recipient_id;
     if (message) {
-        recipient_id = message.recipient_ids;
+        recipient_id = message.recipient_id;
     }
 
     // Get message sender

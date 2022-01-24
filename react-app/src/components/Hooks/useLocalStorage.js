@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useLocalStorageState(key, defaultValue) {
+export default function useLocalStorage(key, defaultValue) {
     const [state, setState] = useState(() => {
         let val;
         try {
@@ -12,13 +12,10 @@ export default function useLocalStorageState(key, defaultValue) {
         }
         return val;
     });
-    const toggle = () => {
-        setState(!state);
-    };
 
     useEffect(() => {
         window.localStorage.setItem(key, JSON.stringify(state));
     }, [state, key]);
 
-    return [state, toggle];
+    return [state, setState];
 }

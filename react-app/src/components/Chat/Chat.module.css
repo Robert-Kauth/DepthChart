@@ -1,17 +1,72 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     background-color: #195905;
     border-radius: 5px;
     padding: 10px;
+    min-width: 25rem;
+    min-height: 10rem;
 }
 
-.messages {
+.chats {
     display: flex;
+    min-height: 5rem;
+    background-color: #029e7e;
+    border: 2px solid black;
     flex-direction: column;
-    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.chats::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .chat {
     display: flex;
+    font-size: 25px;
+    font-weight: 600;
+    color: black;
+    text-shadow: 1px 1px 1px darkgreen;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.input {
+    min-width: 15rem;
+    min-height: 2rem;
+    border: 2px solid black;
+}
+
+.inputButtonWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.inputButton {
+    min-width: 5rem;
+    min-height: 2rem;
+    border: 2px solid black;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.button {
+    width: 6rem;
 }
