@@ -19,6 +19,8 @@ class Chat(db.Model):
         return {
             'id': self.id,
             'content': self.content,
+            'sender_id': self.sender_id,
+            'recipient_id': self.recipient_id,
             'sent_at': self.sent_at,
             'created_at': self.created_at,
             'updated_at': self.updated_at

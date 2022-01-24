@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { addChat } from "../../store/chats";
 
-import { useFocus } from "../Hooks";
 import { hideModal } from "../../store/modal";
 import Errors from "../Errors";
 
@@ -14,17 +13,13 @@ let socket;
 
 export default function Chat() {
     const dispatch = useDispatch();
-    // const chatRef = useRef(null);
-    // useFocus(chatRef);
 
     const sessionUser = useSelector((state) => state.session.user);
     const user = useSelector((state) => state.users.user);
     const allChats = useSelector((state) => state.chats.all);
-    console.log(allChats, "!!!!!!!allChats!!!!!!!!!");
 
     const [errors, setErrors] = useState([]);
     const [localMessages, setLocalMessages] = useState([]);
-    console.log(localMessages, "$$$$$$$$localMessages$$$$$$$$");
     const [chatInput, setChatInput] = useState("");
     const [newChat, setNewChat] = useState(null);
     const [selectedId] = useState(
@@ -48,9 +43,7 @@ export default function Chat() {
     }, []);
 
     useEffect(() => {
-        if (newChat) {
-            dispatch(addChat(newChat));
-        }
+        dispatch(addChat(newChat));
     }, [dispatch, newChat]);
 
     const updateChatInput = (e) => {
@@ -83,10 +76,10 @@ export default function Chat() {
     let dbChats;
     if (allChats) {
         dbChats = Object.values(allChats).map((chat, idx) => {
-            if (chat.sender_recipient[sessionUser?.id]) {
+            if (chat.sender_id === sessionUser.id) {
                 return (
                     <div className={styles.chat} key={idx}>
-                        {`${sessionUser.username}: ${chat.content}`}
+                        {sessionUser.username}: {chat.content}
                     </div>
                 );
             } else {
@@ -98,13 +91,12 @@ export default function Chat() {
             }
         });
     }
-    console.log(dbChats, "#######dbChats#####");
 
     return (
         <div className={styles.wrapper}>
             {dbChats && dbChats.length && localMessages ? (
                 <div className={styles.chats}>
-                    {selectedId === user?.id && dbChats
+                    {selectedId === user.id && dbChats
                         ? dbChats.map((chat) => <div>{chat}</div>)
                         : null}
                     {localMessages.map((message, idx) => (
