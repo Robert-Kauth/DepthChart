@@ -43,7 +43,9 @@ export default function Chat() {
     }, []);
 
     useEffect(() => {
-        dispatch(addChat(newChat));
+        if (newChat) {
+            dispatch(addChat(newChat));
+        }
     }, [dispatch, newChat]);
 
     const updateChatInput = (e) => {
@@ -94,18 +96,19 @@ export default function Chat() {
 
     return (
         <div className={styles.wrapper}>
-            {dbChats && dbChats.length && localMessages ? (
+            {
                 <div className={styles.chats}>
                     {selectedId === user.id && dbChats
                         ? dbChats.map((chat) => <div>{chat}</div>)
                         : null}
-                    {localMessages.map((message, idx) => (
-                        <div className={styles.chat} key={idx}>
-                            {`${message.user}: ${message.msg}`}
-                        </div>
-                    ))}
+                    {localMessages &&
+                        localMessages.map((message, idx) => (
+                            <div className={styles.chat} key={idx}>
+                                {`${message.user}: ${message.msg}`}
+                            </div>
+                        ))}
                 </div>
-            ) : null}
+            }
             {errors && <Errors errors={errors} />}
             <form className={styles.form} onSubmit={sendChat}>
                 <div className={styles.inputWrapper}>
