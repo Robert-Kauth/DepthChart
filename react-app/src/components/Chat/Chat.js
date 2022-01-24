@@ -95,10 +95,10 @@ export default function Chat() {
     }
 
     return (
-        user && (
-            <div className={styles.wrapper}>
+        <div className={styles.wrapper}>
+            {dbChats.length && localMessages ? (
                 <div className={styles.chats}>
-                    {selectedId === user.id
+                    {selectedId === user.id && dbChats
                         ? dbChats.map((chat) => chat)
                         : null}
                     {localMessages.map((message, idx) => (
@@ -107,27 +107,27 @@ export default function Chat() {
                             key={idx}>{`${message.user}: ${message.msg}`}</div>
                     ))}
                 </div>
-                {errors && <Errors errors={errors} />}
-                <form className={styles.form} onSubmit={sendChat}>
-                    <div className={styles.inputWrapper}>
-                        <input
-                            className={styles.input}
-                            value={chatInput}
-                            onChange={updateChatInput}
-                        />
-                    </div>
-                    <div className={styles.inputButtonWrapper}>
-                        <button className={styles.inputButton} type="submit">
-                            Send
-                        </button>
-                    </div>
-                </form>
-                <div className={styles.buttonWrapper}>
-                    <button className={styles.button} onClick={hideChat}>
-                        Close Chat
+            ) : null}
+            {errors && <Errors errors={errors} />}
+            <form className={styles.form} onSubmit={sendChat}>
+                <div className={styles.inputWrapper}>
+                    <input
+                        className={styles.input}
+                        value={chatInput}
+                        onChange={updateChatInput}
+                    />
+                </div>
+                <div className={styles.inputButtonWrapper}>
+                    <button className={styles.inputButton} type="submit">
+                        Send
                     </button>
                 </div>
+            </form>
+            <div className={styles.buttonWrapper}>
+                <button className={styles.button} onClick={hideChat}>
+                    Close Chat
+                </button>
             </div>
-        )
+        </div>
     );
 }
