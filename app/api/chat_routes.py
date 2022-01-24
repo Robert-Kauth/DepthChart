@@ -24,7 +24,9 @@ def load_chat(chat_id):
     '''
     Simple function to retreive a single chat and all its associated data
     '''
-    return {chat.id: chat.to_dict() for chat in Chat.query.join(User_chat).filter(User_chat.chat_id == chat_id).first()}
+    chat = Chat.query.join(User_chat).filter(
+        User_chat.chat_id == chat_id).first()
+    return chat.to_dict()
 
 
 @chat_routes.route('/users/<int:user_id>')
