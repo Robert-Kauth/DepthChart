@@ -22,6 +22,9 @@ export default function Chat() {
     const [localMessages, setLocalMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
     const [newChat, setNewChat] = useState(null);
+    const [selectedId] = useState(
+        JSON.parse(window.localStorage.getItem("id"))
+    );
 
     useEffect(() => {
         //open socket connection
@@ -43,10 +46,7 @@ export default function Chat() {
         if (newChat) {
             dispatch(addChat(newChat));
         }
-        if (user) {
-            dispatch(loadAllChats(user.id));
-        }
-    }, [dispatch, newChat, user]);
+    }, [dispatch, newChat]);
 
     const updateChatInput = (e) => {
         setErrors([]);
@@ -97,7 +97,9 @@ export default function Chat() {
             <div className={styles.wrapper}>
                 {errors && <Errors errors={errors} />}
                 <div className={styles.messages}>
-                    {dbChats ? dbChats.map((chat) => chat) : null}
+                    {selectedId === user.id
+                        ? dbChats.map((chat) => chat)
+                        : null}
                     {localMessages.map((message, idx) => (
                         <div key={idx}>{`${message.user}: ${message.msg}`}</div>
                     ))}

@@ -12,13 +12,10 @@ export default function useLocalStorage(key, defaultValue) {
         }
         return val;
     });
-    const toggle = () => {
-        setState(!state);
-    };
 
     useEffect(() => {
         window.localStorage.setItem(key, JSON.stringify(state));
     }, [state, key]);
 
-    return [state, toggle];
+    return [state, setState];
 }

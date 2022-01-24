@@ -9,18 +9,14 @@ import styles from "./FriendCard.module.css";
 // className={styles. }
 
 export default function FriendCard({ user }) {
-    const sessionUser = useSelector((state) => state.session.user);
-
     const [selectedUser, setSelectedUser] = useState(false);
     const [selectedId, setSelectedId] = useState("");
 
     const updateSelected = (e) => {
         e.preventDefault();
-
-        if (user.id !== sessionUser.id) {
-            setSelectedId(e.target.value);
-            setSelectedUser(!selectedUser);
-        }
+        setSelectedId(e.target.value);
+        window.localStorage.setItem("id", JSON.stringify(+e.target.value));
+        setSelectedUser(!selectedUser);
     };
 
     useEffect(() => {
@@ -39,7 +35,7 @@ export default function FriendCard({ user }) {
     return (
         <>
             <button
-                onClick={(e) => updateSelected(e)}
+                onClick={updateSelected}
                 className={styles.selectFriend}
                 value={user.id}>
                 <UserInfo user={user} />
