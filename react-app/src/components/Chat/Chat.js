@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import { addChat, loadAllChats } from "../../store/chats";
 
 import { hideModal } from "../../store/modal";
+import Errors from "../Errors";
 
 import styles from "./Chat.module.css";
 // className={styles. }
@@ -15,10 +16,9 @@ export default function Chat() {
 
     const sessionUser = useSelector((state) => state.session.user);
     const user = useSelector((state) => state.users.user);
-    const allChats = useSelector((state) => state.chat.all);
+    const allChats = useSelector((state) => state.chats.all);
 
-    // const [errors, setErrors] = useState([]);
-    const [chatRecipient, setChatRecipient] = useState(null);
+    const [errors, setErrors] = useState([]);
     const [localMessages, setLocalMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
     const [newChat, setNewChat] = useState(null);
@@ -44,29 +44,31 @@ export default function Chat() {
             dispatch(addChat(newChat));
         }
         if (user) {
-            dispatch(loadAllChats(sessionUser.id));
+            dispatch(loadAllChats(user.id));
         }
-    }, [dispatch, newChat, sessionUser, user]);
+    }, [dispatch, newChat, user]);
 
     const updateChatInput = (e) => {
+        setErrors([]);
         setChatInput(e.target.value);
     };
 
     const sendChat = (e) => {
         e.preventDefault();
-
-        // Emits chat event setting session users as user and msg as chatInput
-        socket.emit("chat", { user: sessionUser.username, msg: chatInput });
-
         if (chatInput) {
+            // Emits chat event setting session users as user and msg as chatInput
+            socket.emit("chat", { user: sessionUser.username, msg: chatInput });
+
             const new_chat = {
                 content: chatInput,
                 sender_id: sessionUser.id,
                 recipient_id: user.id,
             };
             setNewChat(new_chat);
+            setChatInput("");
+        } else {
+            setErrors(["You can not send an empty chat"]);
         }
-        setChatInput("");
     };
 
     const hideChat = () => {
@@ -93,6 +95,7 @@ export default function Chat() {
     return (
         user && (
             <div className={styles.wrapper}>
+                {errors && <Errors errors={errors} />}
                 <div className={styles.messages}>
                     {dbChats ? dbChats.map((chat) => chat) : null}
                     {localMessages.map((message, idx) => (

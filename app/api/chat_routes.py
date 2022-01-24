@@ -39,8 +39,8 @@ def load_chats(user_id):
     received = {chat.id: chat.to_dict()
                 for chat in Chat.query.join(User_chat, User_chat.chat_id == Chat.id)
                 .filter(User_chat.recipient_id == user_id).order_by(Chat.sent_at).all()}
-    messages = {**sent, **received}
-    return messages
+    chats = {**sent, **received}
+    return chats
 
 
 @chat_routes.route('/new', methods=["POST"])
