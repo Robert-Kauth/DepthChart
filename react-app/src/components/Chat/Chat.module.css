@@ -11,7 +11,7 @@
 
 .chats {
     display: flex;
-    min-height: 5rem;
+    max-height: 10rem;
     background-color: #029e7e;
     border: 2px solid black;
     flex-direction: column;
