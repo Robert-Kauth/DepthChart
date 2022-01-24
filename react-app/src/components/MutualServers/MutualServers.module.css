@@ -2,4 +2,16 @@
     display: flex;
     gap: 5px;
     padding: 0 5px;
+    overflow-x: scroll;
+    scrollbar-width: auto; /* Firefox */
+    -ms-overflow-style: auto; /* Internet Explorer 10+ */
+}
+.servers::-webkit-scrollbar {
+    width: auto;
+    height: auto;
+}
+
+.img {
+    height: 50px;
+    width: 65px;
 }

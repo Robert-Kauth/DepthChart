@@ -28,7 +28,11 @@ export default function MutualServers({ user }) {
             {mutualServers &&
                 mutualServers.map((server) => (
                     <Link key={server.id} to={`/servers/${server.id}`}>
-                        <img src={server.icon} alt="server icon" />
+                        <img
+                            className={styles.img}
+                            src={server.icon}
+                            alt="server icon"
+                        />
                     </Link>
                 ))}
         </div>
