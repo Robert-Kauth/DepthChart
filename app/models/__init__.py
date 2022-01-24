@@ -6,5 +6,4 @@ from .channel import Channel
 from .message import Message
 from .user_message import User_message
 from .chat import Chat
-from .user_chat import User_chat
 from .channel_message import Channel_message
