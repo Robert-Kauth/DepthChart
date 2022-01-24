@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import { addChat, loadAllChats } from "../../store/chats";
+import { addChat } from "../../store/chats";
 
 import { hideModal } from "../../store/modal";
 import Errors from "../Errors";
