@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 
 import ChatButton from "../ChatButton/ChatButton";
 import UserInfo from "../UserInfo";
