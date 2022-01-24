@@ -80,13 +80,15 @@ export default function Chat() {
         dbChats = Object.values(allChats).map((chat, idx) => {
             if (chat.sender_recipient[sessionUser.id]) {
                 return (
-                    <div key={idx}>
+                    <div className={styles.chat} key={idx}>
                         {`${sessionUser.username}: ${chat.content}`}
                     </div>
                 );
             } else {
                 return (
-                    <div key={idx}>{`${user.username}: ${chat.content}`}</div>
+                    <div
+                        className={styles.chat}
+                        key={idx}>{`${user.username}: ${chat.content}`}</div>
                 );
             }
         });
@@ -95,20 +97,36 @@ export default function Chat() {
     return (
         user && (
             <div className={styles.wrapper}>
-                {errors && <Errors errors={errors} />}
-                <div className={styles.messages}>
+                <div className={styles.chats}>
                     {selectedId === user.id
                         ? dbChats.map((chat) => chat)
                         : null}
                     {localMessages.map((message, idx) => (
-                        <div key={idx}>{`${message.user}: ${message.msg}`}</div>
+                        <div
+                            className={styles.chat}
+                            key={idx}>{`${message.user}: ${message.msg}`}</div>
                     ))}
                 </div>
-                <form className={styles.chat} onSubmit={sendChat}>
-                    <input value={chatInput} onChange={updateChatInput} />
-                    <button type="submit">Send</button>
+                {errors && <Errors errors={errors} />}
+                <form className={styles.form} onSubmit={sendChat}>
+                    <div className={styles.inputWrapper}>
+                        <input
+                            className={styles.input}
+                            value={chatInput}
+                            onChange={updateChatInput}
+                        />
+                    </div>
+                    <div className={styles.inputButtonWrapper}>
+                        <button className={styles.inputButton} type="submit">
+                            Send
+                        </button>
+                    </div>
                 </form>
-                <button onClick={hideChat}>Close Chat</button>
+                <div className={styles.buttonWrapper}>
+                    <button className={styles.button} onClick={hideChat}>
+                        Close Chat
+                    </button>
+                </div>
             </div>
         )
     );
