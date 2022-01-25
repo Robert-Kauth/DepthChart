@@ -78,17 +78,17 @@ export default function Chat() {
     let dbChats;
     if (allChats) {
         dbChats = Object.values(allChats).map((chat, idx) => {
-            if (chat.sender_recipient[sessionUser.id]) {
+            if (chat.sender_id === sessionUser.id) {
                 return (
                     <div className={styles.chat} key={idx}>
-                        {`${sessionUser.username}: ${chat.content}`}
+                        {sessionUser.username}: {chat.content}
                     </div>
                 );
             } else {
                 return (
-                    <div
-                        className={styles.chat}
-                        key={idx}>{`${user.username}: ${chat.content}`}</div>
+                    <div className={styles.chat} key={idx}>
+                        {`${user.username}: ${chat.content}`}
+                    </div>
                 );
             }
         });
@@ -96,18 +96,19 @@ export default function Chat() {
 
     return (
         <div className={styles.wrapper}>
-            {dbChats.length && localMessages ? (
+            {
                 <div className={styles.chats}>
                     {selectedId === user.id && dbChats
-                        ? dbChats.map((chat) => chat)
+                        ? dbChats.map((chat) => <div>{chat}</div>)
                         : null}
-                    {localMessages.map((message, idx) => (
-                        <div
-                            className={styles.chat}
-                            key={idx}>{`${message.user}: ${message.msg}`}</div>
-                    ))}
+                    {localMessages &&
+                        localMessages.map((message, idx) => (
+                            <div className={styles.chat} key={idx}>
+                                {`${message.user}: ${message.msg}`}
+                            </div>
+                        ))}
                 </div>
-            ) : null}
+            }
             {errors && <Errors errors={errors} />}
             <form className={styles.form} onSubmit={sendChat}>
                 <div className={styles.inputWrapper}>
