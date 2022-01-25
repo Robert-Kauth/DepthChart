@@ -9,6 +9,13 @@ def is_channel_message_default(context):
         return False
 
 
+def recipient_default(context):
+    if context.get_current_parameters()['is_channel_message'] == True:
+        return None
+    else:
+        return context.get_current_parameters()['recipient_id']
+
+
 class Message(db.Model):
     __tablename__ = 'messages'
 
@@ -20,7 +27,7 @@ class Message(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete="CASCADE"))
     recipient_id = db.Column(db.Integer, db.ForeignKey(
-        'users.id', ondelete='CASCADE'))
+        'users.id', ondelete='CASCADE'), default=recipient_default, onupdate=recipient_default)
     content = db.Column(db.String, nullable=False)
     sent_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime,
