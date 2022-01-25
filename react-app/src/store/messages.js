@@ -96,7 +96,6 @@ const initialState = {
     all: null,
     message: null,
     channel: null,
-    messaged_users: null,
 };
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
