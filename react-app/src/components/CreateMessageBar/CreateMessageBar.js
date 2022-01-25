@@ -54,6 +54,7 @@ export default function CreateMessageBar(props) {
             dispatch(createMessage(new_user_message));
         } else if (props.channel_id) {
             const new_channel_message = {
+                content: message,
                 channel_id: props.channel_id,
                 sender_id: sessionUser.id,
             };
