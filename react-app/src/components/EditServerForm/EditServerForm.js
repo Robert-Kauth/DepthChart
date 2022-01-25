@@ -35,7 +35,7 @@ const StyledIcon = styled(Icon)`
 export default function EditServerForm() {
     const dispatch = useDispatch();
 
-    const servers = useSelector((state) => state.user_servers);
+    const servers = useSelector((state) => state.servers.all);
     const user_id = useSelector((state) => state.session.user.id);
 
     const [errors, setErrors] = useState([]);
@@ -130,9 +130,9 @@ export default function EditServerForm() {
         setServerId(null);
     };
 
-    useEffect(() => {
-        dispatch(getUserServers(user_id));
-    }, [dispatch, user_id]);
+    // useEffect(() => {
+    //     dispatch(getUserServers(user_id));
+    // }, [dispatch, user_id]);
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>

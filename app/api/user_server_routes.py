@@ -9,7 +9,7 @@ user_server_routes = Blueprint('user_servers', __name__)
 @login_required
 def loadUserServers(user_id):
     '''
-    Gets user servers
+    Gets users servers
     '''
     user_servers = Server.query.join(
         User_server).filter(User_server.user_id == user_id).all()
