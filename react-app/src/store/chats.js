@@ -96,10 +96,12 @@ export default function reducer(state = initialState, action) {
         case LOAD_ONE:
             return { ...state, chat: action.chat };
         case ADD:
-            return { ...state, chat: action.chat };
         case EDIT:
-            newState[action.chat.id] = action.chat;
-            return newState;
+            return {
+                ...state,
+                all: { ...state.all, [action.chat.id]: action.chat },
+                chat: action.chat,
+            };
         case DESTROY:
             delete newState[action.id];
             return newState;

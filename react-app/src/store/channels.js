@@ -87,10 +87,12 @@ export default function reducer(state = initialState, action) {
         case LOAD:
             return { ...state, channel: action.channel };
         case CREATE:
-            newState[action.channel.id] = action.channel;
-            return newState;
         case EDIT:
-            return { ...state, [action.channel.id]: action.channel };
+            return {
+                ...state,
+                all: { ...state.all, [action.channel.id]: action.channel },
+                channel: action.channel,
+            };
         case DESTROY:
             delete newState[action.id];
             return newState;
