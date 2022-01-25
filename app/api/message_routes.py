@@ -35,19 +35,10 @@ def load_user_messages(user_id):
 # @login_required
 def load_message(message_id):
     '''
-    Loads single user message
+    Loads single message by id
     '''
     message = Message.query.filter(Message.id == message_id).first()
     return message.to_dict()
-
-
-@message_routes.route('/recipients/<int:message_id>')
-# @login_required
-def load_message_recipients(message_id):
-    '''
-    Gets all recipient_id associated with a particular message_id
-    '''
-    return{message.id: message.recipient_id for message in Message.query.all()}
 
 
 @message_routes.route('/channel/<int:channel_id>')
