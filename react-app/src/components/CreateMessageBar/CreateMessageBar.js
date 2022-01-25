@@ -42,7 +42,6 @@ export default function CreateMessageBar(props) {
         setMessage(e.target.value);
     };
 
-    //! Will need to check error handling here
     const handleSend = async (e) => {
         e.preventDefault();
 
