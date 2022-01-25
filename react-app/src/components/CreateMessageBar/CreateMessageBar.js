@@ -38,11 +38,12 @@ export default function CreateMessageBar(props) {
     const sessionUser = useSelector((state) => state.session.user);
 
     const updateMessage = (e) => {
+        setErrors([]);
         setMessage(e.target.value);
     };
 
     //! Will need to check error handling here
-    const handleSend = (e) => {
+    const handleSend = async (e) => {
         e.preventDefault();
 
         if (props.recipient_id) {
@@ -51,20 +52,30 @@ export default function CreateMessageBar(props) {
                 sender_id: sessionUser.id,
                 recipient_id: props.recipient_id,
             };
-            dispatch(createMessage(new_user_message));
+            const errors = await dispatch(createMessage(new_user_message));
+            if (errors) {
+                setErrors(errors);
+            } else {
+                setMessage("");
+            }
         } else if (props.channel_id) {
             const new_channel_message = {
                 content: message,
                 channel_id: props.channel_id,
                 sender_id: sessionUser.id,
             };
-            dispatch(createMessage(new_channel_message));
-        } else setErrors("Something went wrong please try again");
+            const errors = await dispatch(createMessage(new_channel_message));
+            if (errors) {
+                setErrors(errors);
+            } else {
+                setMessage("");
+            }
+        } else setErrors(["Something went wrong please try again"]);
     };
 
     return (
         <div className={styles.wrapper}>
-            <Errors errors={errors} />
+            {errors.length > 0 && <Errors errors={errors} />}
             <form className={styles.newMessage}>
                 <Button onClick={handleSend}>
                     <StyledIcon path={mdiSendCircle} size={1} />

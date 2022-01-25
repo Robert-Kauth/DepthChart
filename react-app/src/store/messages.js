@@ -60,7 +60,7 @@ export const loadAllChannelMessages = (channel_id) => async (dispatch) => {
 
 export const createMessage = (payload) => async (dispatch) => {
     const res = await fetch("/api/messages/", {
-        methods: "POST",
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
@@ -108,8 +108,22 @@ export default function reducer(state = initialState, action) {
             return { ...state, channel: action.messages };
         case CREATE:
         case EDIT:
-            newState[action.message.id] = action.message;
-            return newState;
+            if (action.message.channel_id) {
+                return {
+                    ...state,
+                    all: { ...state.all, [action.message.id]: action.message },
+                    channel: {
+                        ...state.channel,
+                        [action.message.id]: action.message,
+                    },
+                };
+            } else {
+                return {
+                    ...state,
+                    all: { ...state.all, [action.message.id]: action.message },
+                    message: action.message,
+                };
+            }
         case DESTROY:
             delete newState[action.id];
             return newState;

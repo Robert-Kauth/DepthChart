@@ -18,11 +18,18 @@ export default function MessageFeed({ message }) {
         dispatch(loadAllUserMessages(user.id));
     }, [dispatch, user.id]);
 
+    let other_user;
+    if (message.recipient_id === user.id) {
+        other_user = message.sender_id;
+    } else {
+        other_user = message.recipient_id;
+    }
+
     return (
         <div className={styles.wrapper}>
             <Title title="User Messages" />
             <MessageFeedCard message={message} />
-            <CreateMessageBar />
+            <CreateMessageBar recipient_id={other_user} />
         </div>
     );
 }

@@ -23,7 +23,7 @@ export default function ChannelFeed() {
                 Object.values(channelMsgs).map((message) => (
                     <ChannelMessages key={message.id} message={message} />
                 ))}
-            <CreateMessageBar />
+            <CreateMessageBar channel_id={selectedChannel.id} />
         </>
     );
 }
