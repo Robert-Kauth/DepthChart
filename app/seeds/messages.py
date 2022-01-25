@@ -7,21 +7,6 @@ fake = Faker()
 message_ids = []
 
 
-# def seed_messages():
-#     '''
-#     Seeds messages
-#     '''
-#     for _ in range(1, total_messages+1):
-#         new_message = Message(content=fake.sentence(nb_words=12))
-#         db.session.add(new_message)
-#     db.session.commit()
-
-
-# def undo_messages():
-#     db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
-#     db.session.commit()
-
-
 def seed_user_messages():
     '''
     Seeds user messages
