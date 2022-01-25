@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { createChannel } from "../../store/channels";
 import { hideModal } from "../../store/modal";
@@ -11,7 +11,8 @@ import styles from "./CreateChannelForm.module.css";
 
 export default function CreateChannelForm() {
     const dispatch = useDispatch();
-    const { currentServerId } = useParams();
+    const location = useLocation();
+    const server_id = location.pathname[location.pathname.length - 1];
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState("");
@@ -22,7 +23,7 @@ export default function CreateChannelForm() {
         e.preventDefault();
         const newChannel = {
             name,
-            server_id: currentServerId,
+            server_id: server_id,
             topic,
             icon,
         };
