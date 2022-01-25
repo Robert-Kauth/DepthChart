@@ -22,10 +22,10 @@ def validation_errors_to_error_messages(validation_errors):
 # @login_required
 def load_user_messages(user_id):
     '''
-    Returns all messages sent and received by a user
+    Returns all messages sent to and received by a user
     '''
     sent_messages = {message.id: message.to_dict(
-    ) for message in Message.query.filter(Message.sender_id == user_id).all()}
+    ) for message in Message.query.filter(Message.is_channel_message == False, Message.sender_id == user_id).all()}
     received_messages = {message.id: message.to_dict(
     ) for message in Message.query.filter(Message.is_channel_message == False, Message.recipient_id == user_id).all()}
     return {**sent_messages, **received_messages}

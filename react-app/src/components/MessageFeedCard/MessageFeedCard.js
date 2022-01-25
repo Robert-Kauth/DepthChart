@@ -8,7 +8,6 @@ import styles from "./MessageFeedCard.module.css";
 export default function MessageFeedCard({ message }) {
     const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users.all);
-    const messages = useSelector((state) => state.messages.all);
 
     // Get message recipient
     let recipient_id;
@@ -20,12 +19,6 @@ export default function MessageFeedCard({ message }) {
     let sender_id;
     if (message) {
         sender_id = message.sender_id;
-    }
-
-    // Get individual message that contains content of message
-    let indivMessage;
-    if (messages) {
-        indivMessage = messages[message.message_id];
     }
 
     // Determine other messaged user
@@ -66,11 +59,9 @@ export default function MessageFeedCard({ message }) {
                         />
                     )}
                     <div className={styles.messageContent}>
-                        <div className={styles.content}>
-                            {indivMessage.content}
-                        </div>
+                        <div className={styles.content}>{message.content}</div>
                         <div className={styles.updated}>
-                            {indivMessage.updated_at}
+                            {message.updated_at}
                         </div>
                     </div>
                 </div>

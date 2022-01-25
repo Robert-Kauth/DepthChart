@@ -1,30 +1,18 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { getMessagedUsers } from "../../store/messages";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import styles from "./MessageCard.module.css";
 // className={styles. }
 
 export default function MessageCard({ message }) {
-    const dispatch = useDispatch();
-
     const currentUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users.all);
-    const messagedUser = useSelector((state) => state.messages.messaged_users);
-
-    useEffect(() => {
-        dispatch(getMessagedUsers(message.id));
-    }, [dispatch, message]);
 
     let recipient_id;
-    if (messagedUser && message) {
-        recipient_id = messagedUser[message.id].recipient_id;
-    }
-
     let sender_id;
-    if (messagedUser && message) {
-        sender_id = messagedUser[message.id].sender_id;
+    if (message) {
+        recipient_id = message.recipient_id;
+        sender_id = message.sender_id;
     }
 
     if (!users) {
@@ -34,17 +22,17 @@ export default function MessageCard({ message }) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.iconWrapper}>
-                {recipient_id !== currentUser.id ? (
-                    <img
-                        className={styles.icon}
-                        src={users[recipient_id]?.avatar}
-                        alt="recipient avatar"
-                    />
-                ) : (
+                {recipient_id === currentUser.id ? (
                     <img
                         className={styles.icon}
                         src={users[sender_id]?.avatar}
                         alt="sender logo"
+                    />
+                ) : (
+                    <img
+                        className={styles.icon}
+                        src={users[recipient_id]?.avatar}
+                        alt="recipient avatar"
                     />
                 )}
             </div>
