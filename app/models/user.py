@@ -27,12 +27,6 @@ class User(db.Model, UserMixin):
         'Server', secondary='user_servers', back_populates='users', cascade='all,delete')
     owned_servers = db.relationship(
         'Server', back_populates='owner', cascade='all,delete')
-    sent_messages = db.relationship(
-        'User_message', foreign_keys='User_message.sender_id', back_populates='sender', cascade='all, delete')
-    channel_message = db.relationship(
-        'Channel_message', back_populates='user', cascade='all, delete')
-    received_messages = db.relationship(
-        'User_message', foreign_keys='User_message.recipient_id', back_populates='recipient', cascade='all, delete')
 
     followed = db.relationship(
         'User', secondary='followers',
@@ -70,7 +64,5 @@ class User(db.Model, UserMixin):
             'avatar': self.avatar,
             'servers': [server.id for server in self.servers],
             'owned_servers': [owned_server.id for owned_server in self.owned_servers],
-            'msgId_senderId': {sent_message.message_id: sent_message.recipient_id for sent_message in self.sent_messages},
-            'msgId_recipientId': {received_message.message_id: received_message.sender_id for received_message in self.received_messages},
             'follows': [follow.id for follow in self.followed]
         }
