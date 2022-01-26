@@ -2,6 +2,7 @@
 const LOAD = "messages/LOAD";
 const LOAD_ONE = "messages/LOAD_ONE";
 const LOAD_CHANNEL = "messages/LOAD_CHANNEL";
+const LOAD_BETWEEN = " messages/LOAD_BETWEEN";
 const CREATE = "messages/CREATE";
 const EDIT = "messages/EDIT";
 const DESTROY = "messages/DESTROY";
@@ -19,6 +20,11 @@ const loadOne = (message) => ({
 
 const loadChannel = (messages) => ({
     type: LOAD_CHANNEL,
+    messages,
+});
+
+const loadBetween = (messages) => ({
+    type: LOAD_BETWEEN,
     messages,
 });
 
@@ -56,6 +62,14 @@ export const loadAllChannelMessages = (channel_id) => async (dispatch) => {
     const res = await fetch(`/api/messages/channel/${channel_id}`);
     const messages = await res.json();
     dispatch(loadChannel(messages));
+};
+
+export const loadMessagesBetween = (user1_id, user2_id) => async (dispatch) => {
+    const res = await fetch(`/api/messages/users/DM/${user1_id}/${user2_id}`);
+    if (res.ok) {
+        const messages = await res.json();
+        dispatch(loadBetween(messages));
+    }
 };
 
 export const createMessage = (payload) => async (dispatch) => {
@@ -96,6 +110,7 @@ const initialState = {
     all: null,
     message: null,
     channel: null,
+    between: null,
 };
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
@@ -106,6 +121,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, message: action.message };
         case LOAD_CHANNEL:
             return { ...state, channel: action.messages };
+        case LOAD_BETWEEN:
+            return { ...state, between: action.messages };
         case CREATE:
         case EDIT:
             if (action.message.channel_id) {
@@ -122,6 +139,10 @@ export default function reducer(state = initialState, action) {
                     ...state,
                     all: { ...state.all, [action.message.id]: action.message },
                     message: action.message,
+                    between: {
+                        ...state.between,
+                        [action.message.id]: action.message,
+                    },
                 };
             }
         case DESTROY:

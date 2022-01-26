@@ -1,4 +1,7 @@
 .wrapper {
-    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    min-width: 100%;
+    border-bottom: 2px solid darkgreen;
+    background-color: rgba(46, 139, 87, 0.8);
 }

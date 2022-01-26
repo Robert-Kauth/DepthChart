@@ -7,7 +7,7 @@ import styles from "./MutualServers.module.css";
 
 export default function MutualServers({ user }) {
     const sessionUser = useSelector((state) => state.session.user);
-    const servers = useSelector((state) => state.servers);
+    const servers = useSelector((state) => state.servers.all);
 
     const mutualServersIds = user.servers.reduce((acc, serverId) => {
         if (sessionUser.servers.includes(serverId)) {

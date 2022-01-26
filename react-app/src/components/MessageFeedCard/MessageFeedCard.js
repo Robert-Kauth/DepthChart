@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import FeedTitleBar from "../FeedTitleBar";
 
 import styles from "./MessageFeedCard.module.css";
 // className={styles. }
@@ -21,21 +20,12 @@ export default function MessageFeedCard({ message }) {
         sender_id = message.sender_id;
     }
 
-    // Determine other messaged user
-    let otherUser;
-    if (sender_id === currentUser.id) {
-        otherUser = users[recipient_id];
-    } else {
-        otherUser = users[sender_id];
-    }
-
     if (!message) {
         return null;
     }
 
     return (
         <div className={styles.wrapper}>
-            <FeedTitleBar user={otherUser} />
             <div className={styles.message}>
                 <div className={styles.name}>
                     {sender_id === currentUser.id
