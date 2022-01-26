@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mdiArrowLeftCircle } from "@mdi/js";
 import styled from "styled-components";
 import Icon from "@mdi/react";
 
-import { getUserServers } from "../../store/user_servers";
 import { editServer } from "../../store/servers";
 import { hideModal } from "../../store/modal";
 import ServerDeleteButton from "../ServerDeleteButton";
@@ -35,7 +34,7 @@ const StyledIcon = styled(Icon)`
 export default function EditServerForm() {
     const dispatch = useDispatch();
 
-    const servers = useSelector((state) => state.user_servers);
+    const servers = useSelector((state) => state.servers.all);
     const user_id = useSelector((state) => state.session.user.id);
 
     const [errors, setErrors] = useState([]);
@@ -129,10 +128,6 @@ export default function EditServerForm() {
         e.preventDefault();
         setServerId(null);
     };
-
-    useEffect(() => {
-        dispatch(getUserServers(user_id));
-    }, [dispatch, user_id]);
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>

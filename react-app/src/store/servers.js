@@ -90,10 +90,12 @@ export default function reducer(state = initialState, action) {
         case LOAD_ONE:
             return { ...state, server: action.server };
         case CREATE:
-            newState[action.server.id] = action.server;
-            return newState;
         case EDIT:
-            return { ...state, [action.server.id]: action.server };
+            return {
+                ...state,
+                all: { ...state.all, [action.server.id]: action.server },
+                server: action.server,
+            };
         case DESTROY:
             delete newState[action.id];
             return newState;

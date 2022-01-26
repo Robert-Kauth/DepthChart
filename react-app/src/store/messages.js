@@ -2,7 +2,7 @@
 const LOAD = "messages/LOAD";
 const LOAD_ONE = "messages/LOAD_ONE";
 const LOAD_CHANNEL = "messages/LOAD_CHANNEL";
-const GET_USERS = "messages/GET_USERS";
+const LOAD_BETWEEN = " messages/LOAD_BETWEEN";
 const CREATE = "messages/CREATE";
 const EDIT = "messages/EDIT";
 const DESTROY = "messages/DESTROY";
@@ -23,9 +23,9 @@ const loadChannel = (messages) => ({
     messages,
 });
 
-const get = (messaged_users) => ({
-    type: GET_USERS,
-    messaged_users,
+const loadBetween = (messages) => ({
+    type: LOAD_BETWEEN,
+    messages,
 });
 
 const create = (message) => ({
@@ -44,8 +44,8 @@ const destroy = (id) => ({
 });
 /*-------------THUNK CREATORS-------------*/
 
-export const loadAllUserMessages = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/messages/users/${userId}`);
+export const loadAllUserMessages = (user_id) => async (dispatch) => {
+    const res = await fetch(`/api/messages/users/${user_id}`);
     const messages = await res.json();
     dispatch(load(messages));
 };
@@ -64,15 +64,17 @@ export const loadAllChannelMessages = (channel_id) => async (dispatch) => {
     dispatch(loadChannel(messages));
 };
 
-export const getMessagedUsers = (message_id) => async (dispatch) => {
-    const res = await fetch(`/api/messages/recipients/${message_id}`);
-    const messaged_users = await res.json();
-    dispatch(get(messaged_users));
+export const loadMessagesBetween = (user1_id, user2_id) => async (dispatch) => {
+    const res = await fetch(`/api/messages/users/DM/${user1_id}/${user2_id}`);
+    if (res.ok) {
+        const messages = await res.json();
+        dispatch(loadBetween(messages));
+    }
 };
 
 export const createMessage = (payload) => async (dispatch) => {
     const res = await fetch("/api/messages/", {
-        methods: "POST",
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
@@ -108,7 +110,7 @@ const initialState = {
     all: null,
     message: null,
     channel: null,
-    messaged_users: null,
+    between: null,
 };
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
@@ -119,15 +121,30 @@ export default function reducer(state = initialState, action) {
             return { ...state, message: action.message };
         case LOAD_CHANNEL:
             return { ...state, channel: action.messages };
-        case GET_USERS:
-            return {
-                ...state,
-                messaged_users: action.messaged_users,
-            };
+        case LOAD_BETWEEN:
+            return { ...state, between: action.messages };
         case CREATE:
         case EDIT:
-            newState[action.message.id] = action.message;
-            return newState;
+            if (action.message.channel_id) {
+                return {
+                    ...state,
+                    all: { ...state.all, [action.message.id]: action.message },
+                    channel: {
+                        ...state.channel,
+                        [action.message.id]: action.message,
+                    },
+                };
+            } else {
+                return {
+                    ...state,
+                    all: { ...state.all, [action.message.id]: action.message },
+                    message: action.message,
+                    between: {
+                        ...state.between,
+                        [action.message.id]: action.message,
+                    },
+                };
+            }
         case DESTROY:
             delete newState[action.id];
             return newState;

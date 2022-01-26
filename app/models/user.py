@@ -9,7 +9,8 @@ from flask_login import UserMixin
 followers = db.Table('followers',
                      db.Column('follower_id', db.Integer,
                                db.ForeignKey('users.id')),
-                     db.Column('followed_id', db.Integer, db.ForeignKey('users.id')))
+                     db.Column('followed_id', db.Integer,
+                               db.ForeignKey('users.id')))
 
 
 class User(db.Model, UserMixin):
@@ -23,22 +24,33 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    servers = db.relationship(
-        'Server', secondary='user_servers', back_populates='users', cascade='all,delete')
-    owned_servers = db.relationship(
-        'Server', back_populates='owner', cascade='all,delete')
-    sent_messages = db.relationship(
-        'User_message', foreign_keys='User_message.sender_id', back_populates='sender', cascade='all, delete')
-    channel_message = db.relationship(
-        'Channel_message', back_populates='user', cascade='all, delete')
-    received_messages = db.relationship(
-        'User_message', foreign_keys='User_message.recipient_id', back_populates='recipient', cascade='all, delete')
+    servers = db.relationship('Server',
+                              secondary='user_servers',
+                              back_populates='users',
+                              cascade='all,delete')
 
-    followed = db.relationship(
-        'User', secondary='followers',
-        primaryjoin=(followers.c.follower_id == id),
-        secondaryjoin=(followers.c.followed_id == id),
-        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+    owned_servers = db.relationship('Server',
+                                    back_populates='owner',
+                                    cascade='all,delete')
+
+    sent_messages = db.relationship('Message',
+                                    foreign_keys='Message.sender_id',
+                                    backref='sender',
+                                    lazy='dynamic',
+                                    cascade='all, delete')
+
+    received_messages = db.relationship('Message',
+                                        foreign_keys='Message.recipient_id',
+                                        backref='recipient',
+                                        lazy='dynamic',
+                                        cascade='all, delete')
+
+    followed = db.relationship('User',
+                               secondary='followers',
+                               primaryjoin=(followers.c.follower_id == id),
+                               secondaryjoin=(followers.c.followed_id == id),
+                               backref=db.backref('followers', lazy='dynamic'),
+                               lazy='dynamic')
 
     @property
     def password(self):
@@ -70,7 +82,5 @@ class User(db.Model, UserMixin):
             'avatar': self.avatar,
             'servers': [server.id for server in self.servers],
             'owned_servers': [owned_server.id for owned_server in self.owned_servers],
-            'msgId_senderId': {sent_message.message_id: sent_message.recipient_id for sent_message in self.sent_messages},
-            'msgId_recipientId': {received_message.message_id: received_message.sender_id for received_message in self.received_messages},
             'follows': [follow.id for follow in self.followed]
         }

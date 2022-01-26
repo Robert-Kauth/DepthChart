@@ -4,6 +4,4 @@ from .server import Server
 from .user_server import User_server
 from .channel import Channel
 from .message import Message
-from .user_message import User_message
 from .chat import Chat
-from .channel_message import Channel_message

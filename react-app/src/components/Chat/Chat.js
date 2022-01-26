@@ -98,7 +98,7 @@ export default function Chat() {
         <div className={styles.wrapper}>
             {
                 <div className={styles.chats}>
-                    {selectedId === user.id && dbChats
+                    {user && selectedId === user.id && dbChats
                         ? dbChats.map((chat) => <div>{chat}</div>)
                         : null}
                     {localMessages &&

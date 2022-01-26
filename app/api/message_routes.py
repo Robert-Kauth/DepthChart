@@ -1,6 +1,7 @@
 from flask import Blueprint, request
+from sqlalchemy import or_
 from flask_login import login_required, current_user
-from app.models import db, Message, User_message, User, Channel_message
+from app.models import db, Message, User
 from app.forms import MessageForm
 
 
@@ -18,16 +19,27 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+@message_routes.route('/users/DM/<int:user1_id>/<int:user2_id>')
+# @login_required
+def load_messages_for_users(user1_id, user2_id):
+    '''
+    Returns all messsages between two users
+    '''
+    messages = Message.query.filter(((Message.sender_id == user1_id) & (Message.recipient_id == user2_id)) | (
+        (Message.sender_id == user2_id) & (Message.recipient_id == user1_id))).all()
+    return {message.id: message.to_dict() for message in messages}
+
+
 @message_routes.route('/users/<int:user_id>')
 # @login_required
 def load_user_messages(user_id):
     '''
-    Returns all messages sent and received by a user
+    Returns all messages sent to and received by a user
     '''
     sent_messages = {message.id: message.to_dict(
-    ) for message in Message.query.join(User_message).filter(User_message.sender_id == user_id).all()}
+    ) for message in Message.query.filter(Message.is_channel_message == False, Message.sender_id == user_id).all()}
     received_messages = {message.id: message.to_dict(
-    ) for message in Message.query.join(User_message).filter(User_message.recipient_id == user_id).all()}
+    ) for message in Message.query.filter(Message.is_channel_message == False, Message.recipient_id == user_id).all()}
     return {**sent_messages, **received_messages}
 
 
@@ -35,20 +47,10 @@ def load_user_messages(user_id):
 # @login_required
 def load_message(message_id):
     '''
-    Loads single user message
+    Loads single message by id
     '''
-    message = User_message.query.filter(
-        User_message.message_id == message_id).first()
+    message = Message.query.filter(Message.id == message_id).first()
     return message.to_dict()
-
-
-@message_routes.route('/recipients/<int:message_id>')
-# @login_required
-def load_message_recipients(message_id):
-    '''
-    Gets all users(recipient_id and sender_id) associated with a particular message_id
-    '''
-    return{user_message.message_id: user_message.to_dict() for user_message in User_message.query.all()}
 
 
 @message_routes.route('/channel/<int:channel_id>')
@@ -57,7 +59,7 @@ def load_channel_messages(channel_id):
     '''
     Loads all messages from specific channel
     '''
-    return {message.id: message.to_dict() for message in Message.query.join(Channel_message).filter(Channel_message.channel_id == channel_id).all()}
+    return {message.id: message.to_dict() for message in Message.query.filter(Message.channel_id == channel_id).all()}
 
 
 @message_routes.route('/', methods=['POST'])
@@ -70,23 +72,20 @@ def create_message():
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        message = Message(content=form.data['content'])
-        db.session.add(message)
-        db.session.commit()
-        if (form.data["recipient_id"]):
-            user_message = User_message(sender_id=form.data['sender_id'],
-                                        recipient_id=form.data['recipient_id'],
-                                        message_id=message.id)
-            db.session.add(user_message)
+        if form.data['channel_id'] == True:
+            message = Message(channel_id=form.data['channel_id'],
+                              sender_id=form.data['sender_id'],
+                              recipient_id=form.data['recipient_id'],
+                              content=form.data['content'])
+            db.session.add(message)
             db.session.commit()
-            return {**message.to_dict(), **user_message.to_dict()}
-        elif (form.data['channel_id']):
-            channel_message = Channel_message(channel_id=form.data['channel_id'],
-                                              sender_id=form.data['sender_id'],
-                                              message_id=message.id)
-            db.session.add(channel_message)
-            db.session.commit()
-            return {**message.to_dict(), **channel_message.to_dict()}
+            return message.to_dict()
         else:
-            return {'errors': validation_errors_to_error_messages(form.errors)}
+            message = Message(channel_id=None,
+                              sender_id=form.data['sender_id'],
+                              recipient_id=form.data['recipient_id'],
+                              content=form.data['content'])
+            db.session.add(message)
+            db.session.commit()
+            return message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}

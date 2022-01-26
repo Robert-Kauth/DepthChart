@@ -10,21 +10,17 @@ export default function ChannelMessages({ message }) {
     const dispatch = useDispatch();
 
     const users = useSelector((state) => state.users.all);
-    const msgSenderId = useSelector(
-        (state) =>
-            state.messages.channel[message.id].channel_messages[message.id]
-    );
 
     useEffect(() => {
-        dispatch(loadUser(msgSenderId));
-    }, [dispatch, msgSenderId]);
+        dispatch(loadUser(message.sender_id));
+    }, [dispatch, message]);
 
     let messageSender;
-    if (users && msgSenderId) {
-        messageSender = users[msgSenderId];
+    if (users) {
+        messageSender = users[message.sender_id];
     }
 
-    if (!users && messageSender) {
+    if (!users) {
         return null;
     }
     return (
