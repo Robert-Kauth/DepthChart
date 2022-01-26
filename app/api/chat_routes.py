@@ -7,6 +7,13 @@ from app.models import db, User, Chat
 chat_routes = Blueprint('chats', __name__)
 
 
+@chat_routes.route('/test')
+def test_route():
+    '''
+    Function to test and debug routes
+    '''
+
+
 def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
@@ -19,7 +26,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @chat_routes.route('/<int:chat_id>')
-# @login_required
+@login_required
 def load_chat(chat_id):
     '''
     Simple function to retreive a single chat and all its associated data
@@ -30,7 +37,7 @@ def load_chat(chat_id):
 
 
 @chat_routes.route('/users/<int:user_id>')
-# @login_required
+@login_required
 def load_chats(user_id):
     '''
     Simple function to retreive all chats associated with a user
@@ -44,7 +51,7 @@ def load_chats(user_id):
 
 
 @chat_routes.route('/new', methods=["POST"])
-# @login_required
+@login_required
 def add_chat():
     '''
     Function to add chat to database
@@ -63,7 +70,7 @@ def add_chat():
 
 
 @chat_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_chat(id):
     '''
     Delete Chat from database
