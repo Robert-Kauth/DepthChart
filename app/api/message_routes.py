@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from sqlalchemy import or_
 from flask_login import login_required, current_user
 from app.models import db, Message, User
 from app.forms import MessageForm
@@ -16,6 +17,17 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
+
+
+@message_routes.route('/users/DM/<int:user1_id>/<int:user2_id>')
+# @login_required
+def load_messages_for_users(user1_id, user2_id):
+    '''
+    Returns all messsages between two users
+    '''
+    messages = Message.query.filter(((Message.sender_id == user1_id) & (Message.recipient_id == user2_id)) | (
+        (Message.sender_id == user2_id) & (Message.recipient_id == user1_id))).all()
+    return {message.id: message.to_dict() for message in messages}
 
 
 @message_routes.route('/users/<int:user_id>')
