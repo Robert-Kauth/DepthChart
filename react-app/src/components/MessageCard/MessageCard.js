@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./MessageCard.module.css";
@@ -14,7 +14,6 @@ export default function MessageCard({ message }) {
         recipient_id = message.recipient_id;
         sender_id = message.sender_id;
     }
-
     if (!users) {
         return null;
     }
