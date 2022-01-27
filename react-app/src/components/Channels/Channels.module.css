@@ -15,11 +15,15 @@
 }
 
 .buttonWrapper {
+    display: flex;
     background-color: #029e7e;
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
     border-style: inset;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttonWrapper:hover {
