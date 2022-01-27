@@ -19,19 +19,46 @@ export default function CreateChannelForm() {
     const [topic, setTopic] = useState("");
     const [icon, setIcon] = useState("");
 
+    function isValidURL(string) {
+        const regEx =
+            /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
+        let res = string.match(regEx);
+        return res !== null;
+    }
+
+    const validateChannel = () => {
+        const errors = [];
+        if (name.length <= 5) {
+            errors.push("Channel name should be at least 5 characters long");
+        }
+        if (topic.length <= 5) {
+            errors.push("Channel topic should be at least 5 characters long");
+        }
+        if (!isValidURL(icon)) errors.push("Please provide a valid URL");
+
+        setErrors(errors);
+        return errors;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newChannel = {
-            name,
-            server_id: server_id,
-            topic,
-            icon,
-        };
-        const data = await dispatch(createChannel(newChannel));
-        if (data) {
-            setErrors(data);
-        } else {
-            dispatch(hideModal());
+
+        const errors = validateChannel();
+
+        if (!errors.length) {
+            setErrors([]);
+            const newChannel = {
+                name,
+                server_id: server_id,
+                topic,
+                icon,
+            };
+            const data = await dispatch(createChannel(newChannel));
+            if (data) {
+                setErrors(data);
+            } else {
+                dispatch(hideModal());
+            }
         }
     };
 
@@ -57,7 +84,7 @@ export default function CreateChannelForm() {
                     <legend className={styles.legend}>
                         Create New Channel
                     </legend>
-                    <Errors errors={errors} />
+                    {errors.length > 0 && <Errors errors={errors} />}
                     <div className={styles.inputs}>
                         <div className={styles.nameWrapper}>
                             <label className={styles.nameLabel} htmlFor="name">
