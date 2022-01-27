@@ -4,11 +4,11 @@ import { mdiArrowLeftCircle } from "@mdi/js";
 import styled from "styled-components";
 import Icon from "@mdi/react";
 
-import Errors from "../Errors";
 import UserInfo from "../UserInfo";
-import { loadUsers, loadUser } from "../../store/users";
+import { loadUsers } from "../../store/users";
 
 import styles from "./NewMessageForm.module.css";
+import CreateMessageBar from "../CreateMessageBar/CreateMessageBar";
 // className={styles. }
 
 const Button = styled.button`
@@ -36,11 +36,8 @@ export default function NewMessageForm() {
 
     const sessionUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state.users.all);
-    const selectedUser = useSelector((state) => state.users.user);
 
-    const [errors, setErrors] = useState([]);
     const [userId, setUserId] = useState(null);
-    const [content, setContent] = useState("");
 
     const otherUsers = Object.values(users).reduce((a, user) => {
         if (user.id !== sessionUser.id) {
@@ -49,22 +46,17 @@ export default function NewMessageForm() {
         return a;
     }, []);
 
+    let selectedUser;
+    if (userId) {
+        selectedUser = users[userId];
+    }
+
     const selectedUserId = (e) => {
         e.preventDefault();
-
         setUserId(e.target.value);
     };
 
-    const setMessage = (e) => {
-        const err = [];
-        if (content.length <= 5) {
-            err.push("Message must be at least 5 characters long");
-            setErrors(err);
-        } else {
-            setErrors([]);
-            setContent(e.target.value);
-        }
-    };
+    const sendMessage = (e) => {};
 
     const goBack = (e) => {
         e.preventDefault();
@@ -73,17 +65,12 @@ export default function NewMessageForm() {
 
     useEffect(() => {
         dispatch(loadUsers());
-
-        if (userId) {
-            dispatch(loadUser(userId));
-        }
-    }, [dispatch, userId]);
+    }, [dispatch]);
 
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={sendMessage}>
             <fieldset className={styles.field}>
                 <legend className={styles.legend}>Create New Message</legend>
-                <Errors errors={errors} />
                 {!userId && (
                     <div className={styles.selectWrapper}>
                         <label className={styles.selectLabel}>
@@ -117,16 +104,7 @@ export default function NewMessageForm() {
                                 </Button>
                             </div>
                         </div>
-                        <div className={styles.contentWrapper}>
-                            <label className={styles.contentLabel}>
-                                Message:
-                            </label>
-                            <textarea
-                                className={styles.content}
-                                value={content}
-                                onChange={setMessage}
-                            />
-                        </div>
+                        <CreateMessageBar recipient_id={userId} />
                     </>
                 )}
             </fieldset>

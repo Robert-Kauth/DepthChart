@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Servers from "../Servers";
 import Main from "../Main";
@@ -7,7 +7,7 @@ import Messages from "../Messages";
 import MessageFeed from "../MessageFeed";
 import Friends from "../Friends";
 
-import { loadMessagesBetween } from "../../store/messages";
+import { loadAllUserMessages } from "../../store/messages";
 
 import styles from "./Home.module.css";
 // className={styles. }
@@ -15,19 +15,12 @@ import styles from "./Home.module.css";
 export default function Home() {
     const dispatch = useDispatch();
 
+    const sessionUser = useSelector((state) => state.session.user);
     const messages = useSelector((state) => state.messages.between);
-    const selectedMsg = useSelector((state) => state.messages.message);
-
-    let user1_id;
-    let user2_id;
-    if (selectedMsg) {
-        user1_id = selectedMsg.recipient_id;
-        user2_id = selectedMsg.sender_id;
-    }
 
     useEffect(() => {
-        dispatch(loadMessagesBetween(user1_id, user2_id));
-    }, [dispatch, user1_id, user2_id]);
+        dispatch(loadAllUserMessages(sessionUser.id));
+    }, [dispatch, sessionUser.id]);
 
     return (
         <div className={styles.homeBackground}>
@@ -36,16 +29,10 @@ export default function Home() {
                     <Servers />
                 </div>
                 <div className={styles.main}>
-                    {selectedMsg && messages ? (
+                    {messages ? (
                         <Main
                             card={<Messages />}
-                            feed={
-                                <MessageFeed
-                                    messages={messages}
-                                    recipient_id={user1_id}
-                                    sender_id={user2_id}
-                                />
-                            }
+                            feed={<MessageFeed messages={messages} />}
                         />
                     ) : (
                         <Main card={<Messages />} />

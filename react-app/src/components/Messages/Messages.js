@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import MessageCard from "../MessageCard";
+import UserInfo from "../UserInfo";
+
 import Title from "../Title";
 import CreateMessageButton from "../CreateMessageButton";
 
-import { loadAllUserMessages, loadMessagesBetween } from "../../store/messages";
-import { loadMessage } from "../../store/messages";
+import { loadMessagesBetween } from "../../store/messages";
+import { loadUser } from "../../store/users";
 
 import styles from "./Messages.module.css";
 
@@ -24,32 +25,25 @@ export default function Messages() {
         Object.values(messages).forEach((message) => {
             let recipient_id = message.recipient_id;
             let sender_id = message.sender_id;
+
             messagedUserIds.add(recipient_id);
             messagedUserIds.add(sender_id);
         });
     }
 
-    console.log(messagedUserIds, "messagedUsers");
     let messagedUsers;
     if (users) {
         messagedUsers = Object.values(users).reduce((acc, user) => {
-            if (messagedUserIds.has(user.id)) acc.push(user);
+            if (messagedUserIds.has(user.id) && user.id !== sessionUserId) {
+                acc.push(user);
+            }
             return acc;
         }, []);
     }
-    console.log(messagedUsers);
 
-    useEffect(() => {
-        dispatch(loadAllUserMessages(sessionUserId));
-    }, [dispatch, sessionUserId]);
-
-    const selectMsg = (e, message) => {
-        e.preventDefault();
-        dispatch(loadMessage(message.id)).then(
-            dispatch(
-                loadMessagesBetween(message.sender_id, message.recipient_id)
-            )
-        );
+    const selectUser = (e) => {
+        dispatch(loadMessagesBetween(sessionUserId, e.target.value));
+        dispatch(loadUser(e.target.value));
     };
 
     return (
@@ -60,14 +54,14 @@ export default function Messages() {
                     <CreateMessageButton />
                 </div>
             </div>
-            {messages &&
-                Object.values(messages).map((message) => (
+            {messagedUsers &&
+                messagedUsers.map((user) => (
                     <button
                         className={styles.button}
-                        key={message.id}
-                        value={message.id}
-                        onClick={(e) => selectMsg(e, message)}>
-                        <MessageCard message={message} />
+                        key={user.id}
+                        value={user.id}
+                        onClick={selectUser}>
+                        <UserInfo user={user} />
                     </button>
                 ))}
         </div>

@@ -8,6 +8,13 @@ from app.forms import MessageForm
 message_routes = Blueprint('messages', __name__)
 
 
+@message_routes.route('/test')
+def test_route():
+    '''
+    Function to test and debug routes
+    '''
+
+
 def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
@@ -20,7 +27,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @message_routes.route('/users/DM/<int:user1_id>/<int:user2_id>')
-# @login_required
+@login_required
 def load_messages_for_users(user1_id, user2_id):
     '''
     Returns all messsages between two users
@@ -31,7 +38,7 @@ def load_messages_for_users(user1_id, user2_id):
 
 
 @message_routes.route('/users/<int:user_id>')
-# @login_required
+@login_required
 def load_user_messages(user_id):
     '''
     Returns all messages sent to and received by a user
@@ -44,7 +51,7 @@ def load_user_messages(user_id):
 
 
 @message_routes.route('/<int:message_id>')
-# @login_required
+@login_required
 def load_message(message_id):
     '''
     Loads single message by id
@@ -54,7 +61,7 @@ def load_message(message_id):
 
 
 @message_routes.route('/channel/<int:channel_id>')
-# @login_required
+@login_required
 def load_channel_messages(channel_id):
     '''
     Loads all messages from specific channel
@@ -63,7 +70,7 @@ def load_channel_messages(channel_id):
 
 
 @message_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def create_message():
     '''
     Creates a new message setting the sender_id
