@@ -20,7 +20,7 @@ export default function MessageFeed({ messages }) {
                 Object.values(messages).map((message) => (
                     <MessageFeedCard key={message.id} message={message} />
                 ))}
-            {user2.id && <CreateMessageBar recipient_id={user2.id} />}
+            {user2 && <CreateMessageBar recipient_id={user2.id} />}
         </div>
     );
 }
