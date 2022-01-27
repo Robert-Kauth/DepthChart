@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import UserInfo from "../UserInfo";
@@ -6,7 +6,7 @@ import UserInfo from "../UserInfo";
 import Title from "../Title";
 import CreateMessageButton from "../CreateMessageButton";
 
-import { loadAllUserMessages, loadMessagesBetween } from "../../store/messages";
+import { loadMessagesBetween } from "../../store/messages";
 import { loadUser } from "../../store/users";
 
 import styles from "./Messages.module.css";
@@ -40,10 +40,6 @@ export default function Messages() {
             return acc;
         }, []);
     }
-
-    useEffect(() => {
-        dispatch(loadAllUserMessages(sessionUserId));
-    }, [dispatch, sessionUserId]);
 
     const selectUser = (e) => {
         dispatch(loadMessagesBetween(sessionUserId, e.target.value));

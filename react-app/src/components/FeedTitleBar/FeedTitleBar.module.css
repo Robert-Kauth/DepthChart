@@ -3,7 +3,9 @@
     flex-direction: column;
     width: 100%;
     border-bottom: 4px solid darkgreen;
+    background-color: rgba(46, 139, 87, 0.8);
     padding-bottom: 5px;
+    margin-bottom: 0.5px;
 }
 
 .channelWrapper {

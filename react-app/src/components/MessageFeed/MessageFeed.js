@@ -10,17 +10,17 @@ import styles from "./MessageFeed.module.css";
 // className={styles. }
 
 export default function MessageFeed({ messages }) {
-    const user2_id = useSelector((state) => state.users.user);
+    const user2 = useSelector((state) => state.users.user);
 
     return (
         <div className={styles.wrapper}>
             <Title title="User Messages" />
-            <FeedTitleBar user={user2_id} />
+            <FeedTitleBar user={user2} />
             {messages &&
                 Object.values(messages).map((message) => (
                     <MessageFeedCard key={message.id} message={message} />
                 ))}
-            <CreateMessageBar recipient_id={user2_id.id} />
+            {user2.id && <CreateMessageBar recipient_id={user2.id} />}
         </div>
     );
 }

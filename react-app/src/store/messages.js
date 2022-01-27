@@ -1,5 +1,5 @@
 /*-------------ACTION.TYPES-------------*/
-const LOAD = "messages/LOAD";
+const LOAD_ALL = "messages/LOAD_ALL";
 const LOAD_ONE = "messages/LOAD_ONE";
 const LOAD_CHANNEL = "messages/LOAD_CHANNEL";
 const LOAD_BETWEEN = " messages/LOAD_BETWEEN";
@@ -8,8 +8,8 @@ const EDIT = "messages/EDIT";
 const DESTROY = "messages/DESTROY";
 /*-------------ACTIONS-------------*/
 
-const load = (messages) => ({
-    type: LOAD,
+const loadAll = (messages) => ({
+    type: LOAD_ALL,
     messages,
 });
 
@@ -47,7 +47,7 @@ const destroy = (id) => ({
 export const loadAllUserMessages = (user_id) => async (dispatch) => {
     const res = await fetch(`/api/messages/users/${user_id}`);
     const messages = await res.json();
-    dispatch(load(messages));
+    dispatch(loadAll(messages));
 };
 
 export const loadMessage = (message_id) => async (dispatch) => {
@@ -115,7 +115,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     const newState = { ...state };
     switch (action.type) {
-        case LOAD:
+        case LOAD_ALL:
             return { ...state, all: action.messages };
         case LOAD_ONE:
             return { ...state, message: action.message };
