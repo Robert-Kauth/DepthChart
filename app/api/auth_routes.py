@@ -3,6 +3,7 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from random import choice
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -39,7 +40,7 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
+        user = User.query.filter(User.email == form.email.data).first()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -62,24 +63,32 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        if form.data['avatar'] == '':
-            avatar = "https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/defaultAvatar.png"
+        avatar = form.avatar.data
+        if avatar == '':
+            avatars = [
+                'https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/defaults/yellow-discord-icon.png',
+                'https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/defaults/red-discord-icon.png',
+                'https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/defaults/orange-discord-icon.png',
+                'https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/defaults/green-discord-icon.png',
+                'https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/defaults/gray-discord-icon.png',
+                'https://fantasydepthchart.s3.us-west-1.amazonaws.com/Avatars/defaults/blue-discord-icon.png']
             user = User(
-                username=form.data['username'],
-                email=form.data['email'],
-                password=form.data['password'],
-                avatar=avatar
+                username=form.username.data,
+                email=form.email.data,
+                password=form.password.data,
+                avatar=choice(avatars)
             )
             db.session.add(user)
             db.session.commit()
             login_user(user)
             return user.to_dict()
         else:
+            print(avatar)
             user = User(
-                username=form.data['username'],
-                email=form.data['email'],
-                password=form.data['password'],
-                avatar=form.data['avatar']
+                username=form.username.data,
+                email=form.email.data,
+                password=form.password.data,
+                avatar=form.avatar.data
             )
             db.session.add(user)
             db.session.commit()

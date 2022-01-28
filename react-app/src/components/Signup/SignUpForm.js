@@ -1,6 +1,29 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+/*
+validationSchema: Yup.object({
+        email: Yup.string()
+            .min(8, 'Must be at least 8 characters')
+            .max(20, 'Must be less  than 20 characters')
+            .required('Email is required')
+            .test('Unique Email', 'Email already in use', // <- key, message
+                function (value) {
+                    return new Promise((resolve, reject) => {
+                        axios.get(`http://localhost:8003/api/u/user/${value}/available`)
+                            .then((res) => {
+                                resolve(true)
+                            })
+                            .catch((error) => {
+                                if (error.response.data.content === "The email has already been taken.") {
+                                    resolve(false);
+                                }
+                            })
+                    })
+                }
+            ),
+    }),
+*/
 
 export default function SignupForm() {
     const validationSchema = Yup.object().shape({
