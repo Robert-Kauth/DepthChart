@@ -31,8 +31,7 @@ def load_chat(chat_id):
     '''
     Simple function to retreive a single chat and all its associated data
     '''
-    chat = Chat.query.filter(
-        Chat.id == chat_id).first()
+    chat = Chat.query.filter(Chat.id == chat_id).first()
     return chat.to_dict()
 
 
@@ -59,13 +58,12 @@ def add_chat():
     form = ChatForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        chat = Chat(content=form.data['content'],
-                    sender_id=form.data['sender_id'],
-                    recipient_id=form.data['recipient_id'])
+        chat = Chat(content=form.content.data,
+                    sender_id=form.sender_id.data,
+                    recipient_id=form.recipient_id.data)
         db.session.add(chat)
         db.session.commit()
-        new_chat = chat.to_dict()
-        return new_chat
+        return chat.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
@@ -75,7 +73,6 @@ def delete_chat(id):
     '''
     Delete Chat from database
     '''
-    chat = Chat.query.get(id)
-    Chat.query.filter(Chat.id == chat.id).delete()
+    Chat.query.filter(Chat.id == id).delete()
     db.session.commit()
     return str(id), 201

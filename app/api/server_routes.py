@@ -36,8 +36,8 @@ def create_server():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         server = Server(
-            name=form.data['name'], topic=form.data['topic'],
-            icon=form.data['icon'], owner_id=current_user.id)
+            name=form.name.data, topic=form.topic.data,
+            icon=form.icon.data, owner_id=current_user.id)
         db.session.add(server)
         db.session.commit()
         user_server = User_server(
@@ -70,9 +70,9 @@ def editServer(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         server = Server.query.get(id)
-        server.name = form.data['name']
-        server.topic = form.data['topic']
-        server.icon = form.data['icon']
+        server.name = form.name.data
+        server.topic = form.topic.data
+        server.icon = form.icon.data
         db.session.commit()
         return server.to_dict()
     else:
