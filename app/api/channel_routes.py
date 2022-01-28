@@ -37,8 +37,8 @@ def create_channel():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         channel = Channel(
-            name=form.data['name'], server_id=form.data['server_id'],
-            topic=form.data['topic'], icon=form.data['icon'])
+            name=form.name.data, server_id=form.server_id.data,
+            topic=form.topic.data, icon=form.icon.data)
         db.session.add(channel)
         db.session.commit()
         return channel.to_dict()
@@ -65,10 +65,10 @@ def editChannel(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         channel = Channel.query.get(id)
-        channel.name = form.data['name']
-        channel.server_id = form.data['server_id']
-        channel.topic = form.data['topic']
-        channel.icon = form.data['icon']
+        channel.name = form.name.data
+        channel.server_id = form.server_id.data
+        channel.topic = form.topic.data
+        channel.icon = form.icon.data
         db.session.commit()
         return channel.to_dict()
     else:
@@ -81,7 +81,6 @@ def destroyChannel(id):
     '''
     Deletes a channel
     '''
-    channel = Channel.query.get(id)
     Channel.query.filter(Channel.id == id).delete()
     db.session.commit()
     return str(id), 201
