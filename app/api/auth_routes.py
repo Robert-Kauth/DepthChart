@@ -83,7 +83,6 @@ def sign_up():
             login_user(user)
             return user.to_dict()
         else:
-            print(avatar)
             user = User(
                 username=form.username.data,
                 email=form.email.data,
