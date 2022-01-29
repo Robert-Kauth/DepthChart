@@ -1,138 +1,112 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { signUp } from "../../store/session";
-import { hideModal } from "../../store/modal";
+import React from "react";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { TextInput, isValidUrl } from "../Formik";
 
 import styles from "./SignupForm.module.css";
-import Errors from "../Errors";
-// className={styles. }
 
-export default function SignupForm({ setShowModal }) {
-    const dispatch = useDispatch();
-
-    const user = useSelector((state) => state.session.user);
-
-    const [errors, setErrors] = useState([]);
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [repeatPassword, setRepeatPassword] = useState("");
-    const [avatar, setAvatar] = useState("");
-
-    const onSignUp = async (e) => {
-        e.preventDefault();
-
-        if (password === repeatPassword) {
-            const data = await dispatch(
-                signUp(username, avatar, email, password)
-            );
-            if (data) {
-                setErrors(data);
+export default function SignupForm() {
+    const validationSchema = Yup.object().shape({
+        username: Yup.string()
+            .required("Required")
+            .test("Unique Username", "Username is already in use", (value) => {
+                fetch(`/api/auth/validate_username/${value}`).then(
+                    async (res) => {
+                        const { is_username_unique } = await res.json();
+                        return is_username_unique;
+                    }
+                );
+            }),
+        avatar: Yup.string().test(
+            "Validate URL",
+            "URL is not valid",
+            (value) => {
+                return isValidUrl(value);
             }
-        }
-    };
+        ),
+        email: Yup.string()
+            .email("Invalid email address")
+            .required("Required")
+            .test("Unique Email", "Email is already in use", (value) => {
+                fetch(`/api/auth/validate_email/${value}`).then(async (res) => {
+                    const { is_email_unique } = await res.json();
+                    return is_email_unique;
+                });
+            }),
+        password: Yup.string()
+            .min(8, "Password needs to be at least 8 characters")
+            .required("Password is required"),
+        confirm_password: Yup.string()
+            .required("Must provide password confirmation")
+            .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    });
 
-    const updateUsername = (e) => {
-        setErrors([]);
-        setUsername(e.target.value);
+    const handleSubmit = async (values, { setSubmitting }) => {
+        await new Promise((r) => setTimeout(r, 500));
+        setSubmitting(false);
     };
-
-    const updateEmail = (e) => {
-        setErrors([]);
-        setEmail(e.target.value);
-    };
-
-    const updatePassword = (e) => {
-        setErrors([]);
-        setPassword(e.target.value);
-    };
-
-    const updateRepeatPassword = (e) => {
-        setErrors([]);
-        setRepeatPassword(e.target.value);
-    };
-
-    const updateAvatar = (e) => {
-        setErrors([]);
-        setAvatar(e.target.value);
-    };
-
-    useEffect(() => {
-        if (user) {
-            dispatch(hideModal());
-            <Redirect to="/" />;
-        }
-    }, [dispatch, user]);
 
     return (
-        <form className={styles.form} onSubmit={onSignUp}>
-            <fieldset className={styles.field}>
-                <legend className={styles.legend}>Sign Up</legend>
-                <Errors errors={errors} />
-                <div className={styles.inputs}>
-                    <div className={styles.usernameWrapper}>
-                        <label className={styles.usernameLabel}>
-                            User Name:
-                        </label>
-                        <input
-                            autoComplete="username"
-                            type="text"
-                            name="username"
-                            onChange={updateUsername}
-                            value={username}></input>
-                    </div>
-                    <div className={styles.avatarWrapper}>
-                        <label className={styles.avatarLabel}>
-                            Upload Avatar:
-                        </label>
-                        <input
-                            autoComplete="url"
-                            type="url"
-                            name="avatar"
-                            onChange={updateAvatar}
-                            value={avatar}></input>
-                    </div>
-                    <div className={styles.emailWrapper}>
-                        <label className={styles.emailLabel}>Email:</label>
-                        <input
-                            autoComplete="email"
-                            type="text"
-                            name="email"
-                            onChange={updateEmail}
-                            value={email}
-                        />
-                    </div>
-                    <div className={styles.passwordWrapper}>
-                        <label className={styles.passwordLabel}>
-                            Password:
-                        </label>
-                        <input
-                            autoComplete="new-password"
-                            type="password"
-                            name="password"
-                            onChange={updatePassword}
-                            value={password}></input>
-                    </div>
-                    <div className={styles.passwordWrapper}>
-                        <label className={styles.passwordLabel}>
-                            Repeat Password:
-                        </label>
-                        <input
-                            autoComplete="new-password"
-                            type="password"
-                            name="repeat_password"
-                            onChange={updateRepeatPassword}
-                            value={repeatPassword}
-                        />
+        <Formik
+            initialValues={{
+                username: "",
+                avatar: "",
+                email: "",
+                password: "",
+                confirm_password: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}>
+            <Form className={styles.form}>
+                <fieldset className={styles.field}>
+                    <legend className={styles.legend}>Sign Up</legend>
+                    <div className={styles.inputs}>
+                        <div className={styles.usernameWrapper}>
+                            <TextInput
+                                label="User Name:"
+                                name="username"
+                                type="text"
+                            />
+                        </div>
+                        <div className={styles.avatarWrapper}>
+                            <TextInput
+                                label="Avatar:"
+                                name="avatar"
+                                type="url"
+                            />
+                        </div>
+                        <div className={styles.emailWrapper}>
+                            <TextInput
+                                label="Email:"
+                                name="email"
+                                type="email"
+                            />
+                        </div>
+                        <div className={styles.passwordWrapper}>
+                            <TextInput
+                                label="Password:"
+                                name="password"
+                                type="password"
+                            />
+                        </div>
+                        <div className={styles.passwordWrapper}>
+                            <TextInput
+                                label="Confirm Password:"
+                                name="confirm_password"
+                                type="password"
+                            />
+                        </div>
                     </div>
                     <div className={styles.buttonContainer}>
-                        <button className={styles.button} type="submit">
+                        <button
+                            className={styles.button}
+                            disabled={Formik.isSubmitting}
+                            type="submit">
                             Sign Up
                         </button>
                     </div>
-                </div>
-            </fieldset>
-        </form>
+                </fieldset>
+            </Form>
+        </Formik>
     );
 }
