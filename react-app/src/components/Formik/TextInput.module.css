@@ -1,0 +1,36 @@
+.input-feedback {
+    color: red;
+    margin-top: 0.25rem;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.form-control {
+    margin-top: 1rem;
+}
+
+.valid input[type="email"],
+.valid input[type="text"],
+.valid input[type="number"] {
+    border-color: green;
+}
+
+.valid .feedback {
+    color: green;
+}
+
+.invalid input[type="email"],
+.invalid input[type="text"],
+.invalid input[type="number"] {
+    border-color: red;
+}
+
+.invalid .feedback {
+    color: red;
+}

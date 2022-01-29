@@ -64,7 +64,7 @@ def user_exists(email):
     if user:
         return {'is_email_unique': False}
     else:
-        return {'is_email_unique': True}
+        return {'is_email_unique': email}
 
 
 @auth_routes.route('/validate_username/<string:username>')
@@ -76,7 +76,7 @@ def username_exists(username):
     if user:
         return {'is_username_unique': False}
     else:
-        return {'is_username_unique': True}
+        return {'is_username_unique': username}
 
 
 @auth_routes.route('/signup', methods=['POST'])
