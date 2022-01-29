@@ -7,16 +7,7 @@ import styles from "./SignupForm.module.css";
 
 export default function SignupForm() {
     const validationSchema = Yup.object().shape({
-        username: Yup.string()
-            .required("Required")
-            .test("Unique Username", "Username is already in use", (value) => {
-                fetch(`/api/auth/validate_username/${value}`).then(
-                    async (res) => {
-                        const { is_username_unique } = await res.json();
-                        return is_username_unique;
-                    }
-                );
-            }),
+        username: Yup.string(),
         avatar: Yup.string().test(
             "Validate URL",
             "URL is not valid",
@@ -26,13 +17,9 @@ export default function SignupForm() {
         ),
         email: Yup.string()
             .email("Invalid email address")
-            .required("Required")
-            .test("Unique Email", "Email is already in use", (value) => {
-                fetch(`/api/auth/validate_email/${value}`).then(async (res) => {
-                    const { is_email_unique } = await res.json();
-                    return is_email_unique;
-                });
-            }),
+            .required("Email Required")
+            .min(6, "Must be at least 6 characters")
+            .max(20, "Must be at least 20 characters"),
         password: Yup.string()
             .min(8, "Password needs to be at least 8 characters")
             .required("Password is required"),
