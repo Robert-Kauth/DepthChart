@@ -55,6 +55,30 @@ def logout():
     return {'message': 'User logged out'}
 
 
+@auth_routes.route('/validate_email/<string:email>')
+def user_exists(email):
+    '''
+    Checks if user email already exists in database
+    '''
+    user = User.query.filter(User.email == email).first()
+    if user:
+        return {'is_email_unique': False}
+    else:
+        return {'is_email_unique': True}
+
+
+@auth_routes.route('/validate_username/<string:username>')
+def username_exists(username):
+    '''
+    Checks if username already exists in database
+    '''
+    user = User.query.filter(User.username == username).first()
+    if user:
+        return {'is_username_unique': False}
+    else:
+        return {'is_username_unique': True}
+
+
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
     """

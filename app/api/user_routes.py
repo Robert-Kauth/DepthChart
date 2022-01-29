@@ -53,15 +53,11 @@ def follow_user(user_id):
     if form.validate_on_submit():
         user = User.query.filter(User.id == user_id).first()
         if user is None:
-            flash(f"User {user_id} not found")
             return {'errors': "User Not Found"}
         if user == current_user.id:
-            flash(f"You can not follow your self")
             return {'errors': "You can not follow yourself"}
         current_user.follow(user)
         db.session.commit()
-        username = user.username
-        flash(f'You are now following {username}')
         return {user.id: user.to_dict()}
 
 
@@ -75,15 +71,11 @@ def unfollow_user(user_id):
     if form.validate_on_submit():
         user = User.query.filter(User.id == user_id).first()
         if user is None:
-            flash(f"User {user_id} not found")
             return {'errors': "User Not Found"}
         if user == current_user:
-            flash(f"You can not follow your self")
             return {'errors': "You can not follow yourself"}
         current_user.unfollow(user)
         db.session.commit()
-        username = user.username
-        flash(f"You stopped being friends with {username} ")
         return str(user_id)
 
 
@@ -94,7 +86,7 @@ def upload_file():
     Uploads file to AWS
     '''
     if "file" not in request.files:
-        return "No user_file key in request.files"
+        return {'errors': "No user_file key in request.files"}
 
     file = request.files["file"]
 

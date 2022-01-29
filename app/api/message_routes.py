@@ -79,19 +79,19 @@ def create_message():
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        if form.data['channel_id'] == True:
-            message = Message(channel_id=form.data['channel_id'],
-                              sender_id=form.data['sender_id'],
-                              recipient_id=form.data['recipient_id'],
-                              content=form.data['content'])
+        if form.channel_id.data == True:
+            message = Message(channel_id=form.channel_id.data,
+                              sender_id=form.sender_id.data,
+                              recipient_id=form.recipient_id.data,
+                              content=form.content.data)
             db.session.add(message)
             db.session.commit()
             return message.to_dict()
         else:
             message = Message(channel_id=None,
-                              sender_id=form.data['sender_id'],
-                              recipient_id=form.data['recipient_id'],
-                              content=form.data['content'])
+                              sender_id=form.sender_id.data,
+                              recipient_id=form.recipient_id.data,
+                              content=form.content.data)
             db.session.add(message)
             db.session.commit()
             return message.to_dict()

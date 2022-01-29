@@ -35,10 +35,10 @@ def joinServer():
     '''
     data = request.json
     user_server = User_server(
-        server_id=data['server_id'], user_id=data['user_id'])
+        server_id=data.server_id, user_id=data.user_id)
     db.session.add(user_server)
     db.session.commit()
-    new_server = Server.query.get(data['server_id'])
+    new_server = Server.query.get(data.server_id)
     return {new_server.id: new_server.to_dict()}
 
 
