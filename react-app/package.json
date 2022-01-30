@@ -51,6 +51,7 @@
         "@babel/core": "^7.16.0",
         "@babel/preset-env": "^7.16.4",
         "@babel/preset-react": "^7.16.0",
-        "babel-plugin-styled-components": "^1.13.3"
+        "babel-plugin-styled-components": "^1.13.3",
+        "dotenv-quokka-plugin": "^1.0.0"
     }
 }
