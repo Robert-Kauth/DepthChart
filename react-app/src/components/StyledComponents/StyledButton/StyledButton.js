@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Icon from "@mdi/react";
 
-import { showModal, setCurrentModal } from "../../store/modal";
+import { showModal, setCurrentModal } from "../../../store/modal";
 
 const Button = styled.button`
     background-color: #014421;
