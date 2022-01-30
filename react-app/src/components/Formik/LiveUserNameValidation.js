@@ -9,7 +9,7 @@ import styles from "./Formik.module.css";
  *if true => returns username
  *if false => returns false
  */
-export async function validateUsername(username) {
+async function validateUsername(username) {
     const res = await fetch(`/api/auth/validate_username/${username}`);
 
     const { is_username_unique } = await res.json();
@@ -17,7 +17,7 @@ export async function validateUsername(username) {
     return is_username_unique;
 }
 
-export function LiveUsernameValidation({ label, ...props }) {
+export default function LiveUsernameValidation({ label, ...props }) {
     const {
         values: { username },
         setFieldValue,

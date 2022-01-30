@@ -4,7 +4,7 @@ import { mdiPlusBox } from "@mdi/js";
 
 import { loadChannel, loadChannels } from "../../store/channels";
 
-import StyledButton from "../StyledButton";
+import StyledButton from "../StyledComponents/StyledButton";
 import Title from "../Title";
 import ChannelCard from "../ChannelCard";
 import CreateChannelForm from "../CreateChannelForm";

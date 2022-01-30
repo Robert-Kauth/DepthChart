@@ -4,7 +4,7 @@ import Title from "../Title";
 import UserInfo from "../UserInfo";
 import FollowButton from "../FollowButton";
 import MutualServers from "../MutualServers";
-import StyledButton from "../StyledButton";
+import StyledButton from "../StyledComponents/StyledButton";
 import EditChannelForm from "../EditChannelForm";
 
 import { mdiCircleEditOutline } from "@mdi/js";
