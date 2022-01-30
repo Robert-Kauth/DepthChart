@@ -52,34 +52,51 @@ export default function SignupForm() {
               <div className={styles.usernameWrapper}>
                 <LiveUsernameValidation
                   label="User Name:"
-                  id='username'
+                  id="username"
                   name="username"
                   type="text"
+                  autocomplete="username"
                 />
               </div>
               <div className={styles.avatarWrapper}>
-                <TextInput label="Avatar:" name="avatar" type="url" />
+                <TextInput
+                  label="Avatar:"
+                  id="avatar"
+                  name="avatar"
+                  type="url"
+                  helpText="Upload a optional custom avatar to avoid getting default"
+                />
               </div>
               <div className={styles.emailWrapper}>
-                <LiveEmailValidation label="Email:" id='email' name="email" type="email" />
+                <LiveEmailValidation
+                  label="Email:"
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                />
               </div>
               <div className={styles.passwordWrapper}>
-                <TextInput label="Password:" name="password" type="password" />
+                <TextInput
+                  label="Password:"
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="new-password"
+                />
               </div>
               <div className={styles.passwordWrapper}>
                 <TextInput
                   label="Confirm Password:"
+                  id="confirm_password"
                   name="confirm_password"
                   type="password"
+                  autocomplete="new-password"
                 />
               </div>
             </div>
             <div className={styles.buttonContainer}>
-              <button
-                className={styles.button}
-                disabled={Formik.isSubmitting}
-                type="submit"
-              >
+              <button className={styles.button} type="submit">
                 Sign Up
               </button>
             </div>
