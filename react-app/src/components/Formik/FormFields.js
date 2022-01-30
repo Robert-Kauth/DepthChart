@@ -98,7 +98,7 @@ export async function validateEmail(email) {
 export function LiveEmailValidation({ label, ...props }) {
     const {
         values: { email },
-        setFieldValue,
+        setFieldValue,setFieldError
     } = useFormikContext();
 
     const [field, meta] = useField(props);
@@ -114,15 +114,17 @@ export function LiveEmailValidation({ label, ...props }) {
         let isCurrent = true;
         if (email.trim() !== "" && email.includes("@")) {
             validateEmail(email).then((validEmail) => {
-                if (isCurrent) {
+                if (isCurrent && validEmail !== false) {
                     setFieldValue(props.name, validEmail);
+                }else{
+                    setFieldError(props.name, "Email is already in use");
                 }
             });
         }
         return () => {
             isCurrent = false;
         };
-    }, [email, props.name, setFieldValue]);
+    }, [email, props.name, setFieldError, setFieldValue]);
 
     return (
         <div
@@ -139,7 +141,7 @@ export function LiveEmailValidation({ label, ...props }) {
                 </div>
             ) : null}
             <input {...props} {...field} onFocus={handleFocus} />
-            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+            {/* {meta.touched && meta.error ? <div>{meta.error}</div> : null} */}
         </div>
     );
 }
@@ -160,30 +162,49 @@ export async function validateUsername(username) {
 export function LiveUsernameValidation({ label, ...props }) {
     const {
         values: { username },
-        setFieldValue,
+        setFieldValue, setFieldError
     } = useFormikContext();
 
     const [field, meta] = useField(props);
+    const [didFocus, setDidFocus] = useState(false);
+
+    const handleFocus = () => setDidFocus(true);
+
+    const showFeedback =
+      (didFocus && field.value.trim().length > 2) || meta.touched;
 
     useEffect(() => {
         let isCurrent = true;
-        if (username.trim() !== "" && field.value.trim().length > 2) {
+        if (username.trim() !== "" && username.trim().length > 2) {
             validateUsername(username).then((validUsername) => {
-                if (isCurrent) {
+                if (isCurrent && validUsername !== false) {
                     setFieldValue(props.name, validUsername);
+                }else{
+                    setFieldError(props.name, "Username is already in use")
                 }
             });
         }
         return () => {
             isCurrent = false;
         };
-    }, [field.value, props.name, setFieldValue, username]);
+    }, [ props.name, setFieldError, setFieldValue, username]);
 
     return (
-        <>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <input {...props} {...field} />
-            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
-        </>
+      <div
+            className={`form-control ${
+                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            }`}>
+        <label htmlFor={props.id || props.name}>{label}</label>
+        {showFeedback ? (
+          <div
+            id={`${props.id}-feedback`}
+            aria-live="polite"
+            className="feedback text-sm"
+          >
+            {meta.error ? meta.error : "✓"}
+          </div>
+        ) : null}
+        <input {...props} {...field} onFocus={handleFocus} />
+      </div>
     );
 }

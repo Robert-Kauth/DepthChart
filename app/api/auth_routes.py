@@ -73,6 +73,7 @@ def username_exists(username):
     Checks if username already exists in database
     '''
     user = User.query.filter(User.username == username).first()
+    print('\n\n\n',user.to_dict(),'\n\n\n')
     if user:
         return {'is_username_unique': False}
     else:

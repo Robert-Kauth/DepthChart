@@ -8,7 +8,7 @@
 }
 
 .success {
-    color: green;
+    color: #0bda51;
 }
 
 .form-control {
@@ -18,11 +18,11 @@
 .valid input[type="email"],
 .valid input[type="text"],
 .valid input[type="number"] {
-    border-color: green;
+    border-color:#0bda51;
 }
 
 .valid .feedback {
-    color: green;
+    color: #0bda51;
 }
 
 .invalid input[type="email"],
