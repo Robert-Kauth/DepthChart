@@ -53,9 +53,9 @@ export function TextInput({ label, helpText, ...props }) {
           {...props}
           onFocus={handleFocus}
         />
-        <div className="text-xs" id={`${props.id}-help`} tabIndex="-1">
+        <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">
           {helpText}
-        </div>
+        </p>
       </div>
     );
 }
@@ -106,6 +106,7 @@ export function LiveTextInput({ label, helpText, ...props }) {
           ) : null}
         </div>
         <input
+          className={styles.textInput}
           {...props}
           {...field}
           aria-describedby={`${props.id}-feedback ${props.id}-help`}
@@ -182,7 +183,12 @@ export function LiveEmailValidation({ label, ...props }) {
             )}
           </div>
         ) : null}
-        <input {...props} {...field} onFocus={handleFocus} />
+        <input
+          {...props}
+          {...field}
+          onFocus={handleFocus}
+          className={styles.textInput}
+        />
       </div>
     );
 }
@@ -250,7 +256,12 @@ export function LiveUsernameValidation({ label, ...props }) {
             )}
           </div>
         ) : null}
-        <input {...props} {...field} onFocus={handleFocus} />
+        <input
+          {...props}
+          {...field}
+          onFocus={handleFocus}
+          className={styles.textInput}
+        />
       </div>
     );
 }
