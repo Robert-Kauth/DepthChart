@@ -3,6 +3,7 @@ import { useField, useFormikContext } from "formik";
 import styled from "styled-components";
 
 import styles from "./TextInput.module.css";
+import { useLocalStorage } from "../Hooks";
 
 const StyledErrorMessage = styled.div`
     font-size: 12px;
@@ -25,38 +26,36 @@ export function TextInput({ label, helpText, ...props }) {
     const handleFocus = () => setDidFocus(true);
 
     const showFeedback =
-      (didFocus && field.value.trim().length > 2) || meta.touched;
+        (didFocus && field.value.trim().length > 2) || meta.touched;
 
     return (
-      <div
-        className={`form-control ${
-          showFeedback ? (meta.error ? "invalid" : "valid") : ""
-        }`}
-      >
-        <label htmlFor={props.id || props.name}>{label}</label>
-        {showFeedback ? (
-          <div
-            id={`${props.id}-feedback`}
-            aria-live="polite"
-            className="feedback text-sm"
-          >
-            {meta.error ? (
-              <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-            ) : (
-              "✓"
-            )}
-          </div>
-        ) : null}
-        <input
-          className={styles.textInput}
-          {...field}
-          {...props}
-          onFocus={handleFocus}
-        />
-        <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">
-          {helpText}
-        </p>
-      </div>
+        <div
+            className={`form-control ${
+                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            }`}>
+            <label htmlFor={props.id || props.name}>{label}</label>
+            {showFeedback ? (
+                <div
+                    id={`${props.id}-feedback`}
+                    aria-live="polite"
+                    className="feedback text-sm">
+                    {meta.error ? (
+                        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+                    ) : (
+                        "✓"
+                    )}
+                </div>
+            ) : null}
+            <input
+                className={styles.textInput}
+                {...field}
+                {...props}
+                onFocus={handleFocus}
+            />
+            <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">
+                {helpText}
+            </p>
+        </div>
     );
 }
 
@@ -73,6 +72,78 @@ export function MultiSelect({ label, ...props }) {
     );
 }
 
+//! Need to debug and validate
+export function LiveAvatarUpload({ label, helpText, ...props }) {
+    const [field, meta] = useField(props);
+
+    const [didFocus, setDidFocus] = useState(false);
+    const [avatarSelection, setAvatarSelection] = useState(false);
+    const [ls_Avatar, setls_Avatar] = useLocalStorage("avatar", {
+        avatar: false,
+    });
+    console.log(ls_Avatar, setls_Avatar, "uselocal storage state and fx");
+
+    const handleFocus = () => setDidFocus(true);
+    const showAvatar = didFocus && avatarSelection;
+
+    const showFeedback =
+        (didFocus && field.value.trim().length > 2) || meta.touched;
+
+    return (
+        <div
+            className={`form-control ${
+                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            }`}>
+            <div>
+                <label htmlFor={props.id}>{label}</label>
+                <input
+                    type="checkbox"
+                    id={props.id}
+                    name={props.id}
+                    value={avatarSelection}
+                    onChange={() => setAvatarSelection(!avatarSelection)}
+                />
+            </div>
+            <div className="flex items-center space-between">
+                <label htmlFor={props.id}>{label}</label>
+                {showFeedback && showAvatar ? (
+                    <div
+                        id={`${props.id}-feedback`}
+                        aria-live="polite"
+                        className="feedback text-sm">
+                        {meta.error ? (
+                            <StyledErrorMessage>
+                                {meta.error}
+                            </StyledErrorMessage>
+                        ) : (
+                            "✓"
+                        )}
+                    </div>
+                ) : null}
+            </div>
+            {showAvatar ? (
+                <>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        className={styles.textInput}
+                        {...props}
+                        {...field}
+                        aria-describedby={`${props.id}-feedback ${props.id}-help`}
+                        onFocus={handleFocus}
+                    />
+                    <div
+                        className="text-xs"
+                        id={`${props.id}-help`}
+                        tabIndex="-1">
+                        {helpText}
+                    </div>
+                </>
+            ) : null}
+        </div>
+    );
+}
+
 // Uses CSS to provide visual feedback to the user
 export function LiveTextInput({ label, helpText, ...props }) {
     const [field, meta] = useField(props);
@@ -84,38 +155,38 @@ export function LiveTextInput({ label, helpText, ...props }) {
     const showFeedback =
         (didFocus && field.value.trim().length > 2) || meta.touched;
     return (
-      <div
-        className={`form-control ${
-          showFeedback ? (meta.error ? "invalid" : "valid") : ""
-        }`}
-      >
-        <div className="flex items-center space-between">
-          <label htmlFor={props.id}>{label}</label>
-          {showFeedback ? (
-            <div
-              id={`${props.id}-feedback`}
-              aria-live="polite"
-              className="feedback text-sm"
-            >
-              {meta.error ? (
-                <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-              ) : (
-                "✓"
-              )}
+        <div
+            className={`form-control ${
+                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            }`}>
+            <div className="flex items-center space-between">
+                <label htmlFor={props.id}>{label}</label>
+                {showFeedback ? (
+                    <div
+                        id={`${props.id}-feedback`}
+                        aria-live="polite"
+                        className="feedback text-sm">
+                        {meta.error ? (
+                            <StyledErrorMessage>
+                                {meta.error}
+                            </StyledErrorMessage>
+                        ) : (
+                            "✓"
+                        )}
+                    </div>
+                ) : null}
             </div>
-          ) : null}
+            <input
+                className={styles.textInput}
+                {...props}
+                {...field}
+                aria-describedby={`${props.id}-feedback ${props.id}-help`}
+                onFocus={handleFocus}
+            />
+            <div className="text-xs" id={`${props.id}-help`} tabIndex="-1">
+                {helpText}
+            </div>
         </div>
-        <input
-          className={styles.textInput}
-          {...props}
-          {...field}
-          aria-describedby={`${props.id}-feedback ${props.id}-help`}
-          onFocus={handleFocus}
-        />
-        <div className="text-xs" id={`${props.id}-help`} tabIndex="-1">
-          {helpText}
-        </div>
-      </div>
     );
 }
 
@@ -135,7 +206,8 @@ export async function validateEmail(email) {
 export function LiveEmailValidation({ label, ...props }) {
     const {
         values: { email },
-        setFieldValue,setFieldError
+        setFieldValue,
+        setFieldError,
     } = useFormikContext();
 
     const [field, meta] = useField(props);
@@ -153,7 +225,7 @@ export function LiveEmailValidation({ label, ...props }) {
             validateEmail(email).then((validEmail) => {
                 if (isCurrent && validEmail !== false) {
                     setFieldValue(props.name, validEmail);
-                }else{
+                } else {
                     setFieldError(props.name, "Email is already in use");
                 }
             });
@@ -164,32 +236,30 @@ export function LiveEmailValidation({ label, ...props }) {
     }, [email, props.name, setFieldError, setFieldValue]);
 
     return (
-      <div
-        className={`form-control ${
-          showFeedback ? (meta.error ? "invalid" : "valid") : ""
-        }`}
-      >
-        <label htmlFor={props.id || props.name}>{label}</label>
-        {showFeedback ? (
-          <div
-            id={`${props.id}-feedback`}
-            aria-live="polite"
-            className="feedback text-sm"
-          >
-            {meta.error ? (
-              <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-            ) : (
-              "✓"
-            )}
-          </div>
-        ) : null}
-        <input
-          {...props}
-          {...field}
-          onFocus={handleFocus}
-          className={styles.textInput}
-        />
-      </div>
+        <div
+            className={`form-control ${
+                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            }`}>
+            <label htmlFor={props.id || props.name}>{label}</label>
+            {showFeedback ? (
+                <div
+                    id={`${props.id}-feedback`}
+                    aria-live="polite"
+                    className="feedback text-sm">
+                    {meta.error ? (
+                        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+                    ) : (
+                        "✓"
+                    )}
+                </div>
+            ) : null}
+            <input
+                {...props}
+                {...field}
+                onFocus={handleFocus}
+                className={styles.textInput}
+            />
+        </div>
     );
 }
 
@@ -209,7 +279,8 @@ export async function validateUsername(username) {
 export function LiveUsernameValidation({ label, ...props }) {
     const {
         values: { username },
-        setFieldValue, setFieldError
+        setFieldValue,
+        setFieldError,
     } = useFormikContext();
 
     const [field, meta] = useField(props);
@@ -218,7 +289,7 @@ export function LiveUsernameValidation({ label, ...props }) {
     const handleFocus = () => setDidFocus(true);
 
     const showFeedback =
-      (didFocus && field.value.trim().length > 2) || meta.touched;
+        (didFocus && field.value.trim().length > 2) || meta.touched;
 
     useEffect(() => {
         let isCurrent = true;
@@ -226,42 +297,40 @@ export function LiveUsernameValidation({ label, ...props }) {
             validateUsername(username).then((validUsername) => {
                 if (isCurrent && validUsername !== false) {
                     setFieldValue(props.name, validUsername);
-                }else{
-                    setFieldError(props.name, "Username is already in use")
+                } else {
+                    setFieldError(props.name, "Username is already in use");
                 }
             });
         }
         return () => {
             isCurrent = false;
         };
-    }, [ props.name, setFieldError, setFieldValue, username]);
+    }, [props.name, setFieldError, setFieldValue, username]);
 
     return (
-      <div
-        className={`form-control ${
-          showFeedback ? (meta.error ? "invalid" : "valid") : ""
-        }`}
-      >
-        <label htmlFor={props.id || props.name}>{label}</label>
-        {showFeedback ? (
-          <div
-            id={`${props.id}-feedback`}
-            aria-live="polite"
-            className="feedback text-sm"
-          >
-            {meta.error ? (
-              <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-            ) : (
-              "✓"
-            )}
-          </div>
-        ) : null}
-        <input
-          {...props}
-          {...field}
-          onFocus={handleFocus}
-          className={styles.textInput}
-        />
-      </div>
+        <div
+            className={`form-control ${
+                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            }`}>
+            <label htmlFor={props.id || props.name}>{label}</label>
+            {showFeedback ? (
+                <div
+                    id={`${props.id}-feedback`}
+                    aria-live="polite"
+                    className="feedback text-sm">
+                    {meta.error ? (
+                        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+                    ) : (
+                        "✓"
+                    )}
+                </div>
+            ) : null}
+            <input
+                {...props}
+                {...field}
+                onFocus={handleFocus}
+                className={styles.textInput}
+            />
+        </div>
     );
 }
