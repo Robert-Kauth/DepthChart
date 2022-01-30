@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
@@ -7,14 +7,33 @@ import {
   LiveEmailValidation,
 } from "../Formik";
 
+import "./optional"
 import styles from "./SignupForm.module.css";
 
 export default function SignupForm() {
+
+    const [avatar, setAvatar] = useState({avatar: false, count:null})
+
+    // Gets avatar value from browser local storage
+    useEffect(() => {
+        setAvatar(
+            JSON.parse(window.localStorage.getItem("avatar"))
+        );
+    },[]);
+
+    //Updates browsers stored value of avatar upon changes
+    useEffect(() => {
+        window.localStorage.setItem(
+            "avatar",
+            JSON.stringify(avatar)
+        );
+    }, [avatar]);
+    // Validation schema- Provides livefeed back to user.
     const validationSchema = Yup.object().shape({
       username: Yup.string()
         .min(4, "Must be at least 4 characters")
         .max(20, "Must be at least 20 characters").required("Username is Required"),
-      avatar: Yup.string().url(),
+      avatar: Yup.string().url().optional(),
       email: Yup.string()
         .email("Invalid email address")
         .required("Email Required")
@@ -28,7 +47,9 @@ export default function SignupForm() {
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
     });
 
+
     const handleSubmit = async (values, { setSubmitting }) => {
+
         await new Promise((r) => setTimeout(r, 500));
         setSubmitting(false);
     };
@@ -64,7 +85,7 @@ export default function SignupForm() {
                   id="avatar"
                   name="avatar"
                   type="url"
-                  helpText="Upload a optional custom avatar to avoid getting default"
+                  helpText="Upload (optional) custom avatar"
                 />
               </div>
               <div className={styles.emailWrapper}>

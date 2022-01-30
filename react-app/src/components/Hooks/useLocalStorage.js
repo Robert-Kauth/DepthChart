@@ -7,9 +7,12 @@ export default function useLocalStorage(key, defaultValue) {
             val = JSON.parse(
                 window.localStorage.getItem(key) || String(defaultValue)
             );
+            console.log(val, "@@@@@VAL@@@@@@");
         } catch (e) {
             val = defaultValue;
+            console.log(val, "!!!!!!!!VAL in catch block!!!!!");
         }
+        console.log(val, "***********VAL in success*****");
         return val;
     });
 
