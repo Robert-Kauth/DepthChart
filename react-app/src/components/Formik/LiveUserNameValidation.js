@@ -28,6 +28,7 @@ export default function LiveUsernameValidation({ label, ...props }) {
     const [didFocus, setDidFocus] = useState(false);
 
     const handleFocus = () => setDidFocus(true);
+    const handleBlur = () => setDidFocus(false);
 
     const showFeedback =
         (didFocus && field.value.trim().length > 2) || meta.touched;
@@ -36,9 +37,10 @@ export default function LiveUsernameValidation({ label, ...props }) {
         let isCurrent = true;
         if (username.trim() !== "" && username.trim().length > 2) {
             validateUsername(username).then((validUsername) => {
-                if (isCurrent && validUsername !== false) {
+                if (isCurrent && validUsername) {
                     setFieldValue(props.name, validUsername);
-                } else {
+                }
+                if (isCurrent && !validUsername) {
                     setFieldError(props.name, "Username is already in use");
                 }
             });
@@ -66,6 +68,7 @@ export default function LiveUsernameValidation({ label, ...props }) {
                 {...props}
                 {...field}
                 onFocus={handleFocus}
+                onBlur={handleBlur}
                 className={styles.textInput}
             />
         </div>
