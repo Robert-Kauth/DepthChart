@@ -45,11 +45,7 @@ export default function LiveAvatarUpload({ label, helpText, ...props }) {
                         id={`${props.id}-feedback`}
                         aria-live="polite"
                         className="feedback text-sm">
-                        {meta.error ? (
-                            <StyledError>{meta.error}</StyledError>
-                        ) : (
-                            "✓"
-                        )}
+                        {meta.error ? <StyledError error={meta.error} /> : "✓"}
                     </div>
                 ) : null}
             </div>
