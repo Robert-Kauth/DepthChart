@@ -26,29 +26,44 @@ export default function LiveUsernameValidation({ label, ...props }) {
 
     const [field, meta] = useField(props);
     const [didFocus, setDidFocus] = useState(false);
+    const [previous, setPrevious] = useState("");
 
     const handleFocus = () => setDidFocus(true);
-    const handleBlur = () => setDidFocus(false);
+    const handleBlur = () => setDidFocus(true);
 
     const showFeedback =
         (didFocus && field.value.trim().length > 2) || meta.touched;
 
     useEffect(() => {
-        let isCurrent = true;
+        let isCurrent;
+
+        if (username.trim() !== previous) {
+            isCurrent = true;
+        }
+
         if (username.trim() !== "" && username.trim().length > 2) {
             validateUsername(username).then((validUsername) => {
                 if (isCurrent && validUsername) {
                     setFieldValue(props.name, validUsername);
+                    setPrevious(username);
                 }
                 if (isCurrent && !validUsername) {
                     setFieldError(props.name, "Username is already in use");
+                    setPrevious(field.value.trim());
                 }
             });
         }
         return () => {
             isCurrent = false;
         };
-    }, [props.name, setFieldError, setFieldValue, username]);
+    }, [
+        field.value,
+        previous,
+        props.name,
+        setFieldError,
+        setFieldValue,
+        username,
+    ]);
 
     return (
         <div

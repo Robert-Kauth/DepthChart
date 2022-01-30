@@ -73,7 +73,7 @@ def username_exists(username):
     Checks if username already exists in database
     '''
     user = User.query.filter(User.username == username).first()
-    if user:
+    if user is not None:
         return {'is_username_unique': False}
     else:
         return {'is_username_unique': username}
