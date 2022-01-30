@@ -8,29 +8,50 @@
 }
 
 .success {
-    color: green;
+    color: #0bda51;
 }
 
 .form-control {
     margin-top: 1rem;
+    width: 250px;
 }
 
 .valid input[type="email"],
 .valid input[type="text"],
-.valid input[type="number"] {
-    border-color: green;
+.valid input[type="url"],
+.valid input[type="password"] {
+    border-color:#0bda51;
+    font-size: 1rem;
+
 }
 
 .valid .feedback {
-    color: green;
+    color: #0bda51;
 }
 
 .invalid input[type="email"],
 .invalid input[type="text"],
-.invalid input[type="number"] {
+.invalid input[type="url"], 
+.invalid input[type="password"] {
     border-color: red;
+    width: 250px;
+    font-size: 1rem;
 }
 
 .invalid .feedback {
     color: red;
+}
+
+.textXs{
+    overflow-wrap: break-word;
+    word-break: break-word;
+    width: 216px;
+    color:black;
+    font-weight: 600;
+    font-size: 15px;
+    padding-top:5px;
+}
+
+.textInput{
+    width: 270px;
 }
