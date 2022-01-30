@@ -14,6 +14,6 @@ const StyledErrorMessage = styled.div`
     }
 `;
 
-export default function StyledError() {
-    return <StyledErrorMessage />;
+export default function StyledError({ error }) {
+    return <StyledErrorMessage>{error}</StyledErrorMessage>;
 }

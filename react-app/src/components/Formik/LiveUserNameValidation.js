@@ -59,7 +59,7 @@ export default function LiveUsernameValidation({ label, ...props }) {
                     id={`${props.id}-feedback`}
                     aria-live="polite"
                     className="feedback text-sm">
-                    {meta.error ? <StyledError>{meta.error}</StyledError> : "✓"}
+                    {meta.error ? <StyledError error={meta.error} /> : "✓"}
                 </div>
             ) : null}
             <input
