@@ -4,16 +4,13 @@ import { useField, useFormikContext } from "formik";
 import StyledError from "../StyledComponents/StyledError";
 import styles from "./Formik.module.css";
 
-/*
- *Checks if username is available.
- *if true => returns username
- *if false => returns false
- */
+// Function that checks if username is already in use
 async function validateUsername(username) {
     const res = await fetch(`/api/auth/validate_username/${username}`);
 
     const { is_username_unique } = await res.json();
-
+    // is_username_unique = false if already in use
+    // is_username_unique = username (true) if not
     return is_username_unique;
 }
 
@@ -26,7 +23,7 @@ export default function LiveUsernameValidation({ label, ...props }) {
 
     const [field, meta] = useField(props);
     const [didFocus, setDidFocus] = useState(false);
-    const [previous, setPrevious] = useState("");
+    const [prev, setprev] = useState("");
 
     const handleFocus = () => setDidFocus(true);
     const handleBlur = () => setDidFocus(true);
@@ -37,7 +34,7 @@ export default function LiveUsernameValidation({ label, ...props }) {
     useEffect(() => {
         let isCurrent;
 
-        if (username.trim() !== previous) {
+        if (username.trim() !== prev) {
             isCurrent = true;
         }
 
@@ -45,25 +42,18 @@ export default function LiveUsernameValidation({ label, ...props }) {
             validateUsername(username).then((validUsername) => {
                 if (isCurrent && validUsername) {
                     setFieldValue(props.name, validUsername);
-                    setPrevious(username);
+                    setprev(username);
                 }
                 if (isCurrent && !validUsername) {
                     setFieldError(props.name, "Username is already in use");
-                    setPrevious(field.value.trim());
+                    setprev(field.value.trim());
                 }
             });
         }
         return () => {
             isCurrent = false;
         };
-    }, [
-        field.value,
-        previous,
-        props.name,
-        setFieldError,
-        setFieldValue,
-        username,
-    ]);
+    }, [field.value, prev, props.name, setFieldError, setFieldValue, username]);
 
     return (
         <div
