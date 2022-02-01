@@ -4,7 +4,7 @@ import { mdiPlusBox } from "@mdi/js";
 
 import { loadServers, loadServer } from "../../store/servers";
 
-import StyledButton from "../StyledButton";
+import StyledButton from "../StyledComponents/StyledButton";
 import CreateServerForm from "../CreateServerForm";
 import ServerTile from "../ServerTile";
 
