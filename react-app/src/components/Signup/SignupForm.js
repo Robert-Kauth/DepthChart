@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
+import { signUp } from "../../store/session";
 import * as Yup from "yup";
 import {
     TextInput,
@@ -10,8 +12,11 @@ import {
 import "./optional";
 import styles from "./SignupForm.module.css";
 
-export default function SignupForm() {
+export default function SignupForm({ setShowModal }) {
+    const dispatch = useDispatch();
+
     const [avatar, setAvatar] = useState({ avatar: false, count: null });
+    const [errors, setErrors] = useState([]);
 
     // Gets avatar value from browser local storage
     useEffect(() => {
@@ -23,8 +28,8 @@ export default function SignupForm() {
         window.localStorage.setItem("avatar", JSON.stringify(avatar));
     }, [avatar]);
 
-    // Validation schema- Provides livefeed back to user.
-    const validationSchema = Yup.object().shape({
+    // Validation schema- Provides livefeed back to user. Generates error message (strings)
+    const SignupFormSchema = Yup.object().shape({
         username: Yup.string()
             .min(4, "Must be at least 4 characters")
             .max(20, "Must be at least 20 characters")
@@ -44,8 +49,25 @@ export default function SignupForm() {
     });
 
     const handleSubmit = async (values, { setSubmitting }) => {
-        await new Promise((r) => setTimeout(r, 500));
-        setSubmitting(false);
+        //?Promise triggers setSubmitting(false) when it resolves
+        await new Promise((res) => setTimeout(res, 500));
+
+        await SignupFormSchema.validate(values)
+            .then((formValues) => {
+                console.log(
+                    formValues,
+                    "RESSS!!!!!!!!!!!!!",
+                    typeof formValues
+                );
+                const data = dispatch(signUp(formValues));
+                if (data.errors) {
+                    setErrors(data.errors);
+                }
+                return;
+            })
+            .catch((e) => console.log(e.name, e.errors));
+
+        // setSubmitting(false);
     };
 
     return (
@@ -57,8 +79,8 @@ export default function SignupForm() {
                 password: "",
                 confirm_password: "",
             }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            validationSchema={SignupFormSchema}
+            onSubmit={(values) => handleSubmit(values)}
             // initialStatus={{success:false}}
         >
             <Form className={styles.form}>
@@ -80,7 +102,7 @@ export default function SignupForm() {
                                 id="avatar"
                                 name="avatar"
                                 type="url"
-                                helpText="Upload (optional) custom avatar"
+                                helpText="Upload custom avatar -optional"
                             />
                         </div>
                         <div className={styles.emailWrapper}>
