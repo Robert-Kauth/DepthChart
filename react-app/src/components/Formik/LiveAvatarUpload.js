@@ -29,16 +29,17 @@ const StyledIcon = styled(Icon)`
 
 //! Need to debug and validate
 export default function LiveAvatarUpload({ label, helpText, ...props }) {
-    const { setFieldError } = useFormikContext();
-    const [field, meta] = useField(props);
     const fileUpload = useRef();
 
+    const { setFieldError } = useFormikContext();
+    const [field, meta] = useField(props);
+
     const [didFocus, setDidFocus] = useState(false);
-    const [avatarSelection, setAvatarSelection] = useState(false);
     const [fileName, setFileName] = useState("");
-    const [fileURL, setFileURL] = useState("");
+    const [fileURL, setFileURL] = useState();
     // console.log(fileName, "fileName");
     // console.log(fileURL, "fileURL");
+
     const supportedFormats = [
         "image/jpg",
         "image/jpeg",
@@ -86,20 +87,8 @@ export default function LiveAvatarUpload({ label, helpText, ...props }) {
             className={`form-control ${
                 showFeedback ? (meta.error ? "invalid" : "valid") : ""
             }`}>
-            {!avatarSelection ? (
-                <div>
-                    <label htmlFor={props.id}>{label}</label>
-                    <input
-                        type="checkbox"
-                        id={props.id}
-                        name={props.id}
-                        value={avatarSelection}
-                        onChange={() => setAvatarSelection(!avatarSelection)}
-                    />
-                </div>
-            ) : null}
             <div className="flex items-center space-between">
-                {showFeedback && avatarSelection ? (
+                {showFeedback ? (
                     <div
                         id={`${props.id}-feedback`}
                         aria-live="polite"
@@ -108,42 +97,31 @@ export default function LiveAvatarUpload({ label, helpText, ...props }) {
                     </div>
                 ) : null}
             </div>
-            {avatarSelection ? (
-                <>
-                    <label htmlFor={props.id}>{label}</label>
-                    {fileName && fileURL ? (
-                        <span>
-                            <label htmlFor="customAvatar">{fileName}</label>
-                            <img
-                                id="customAvatar"
-                                src={fileURL}
-                                alt="Custom Avatar"
-                            />
-                        </span>
-                    ) : null}
-                    <input
-                        type="file"
-                        accept="image/*"
-                        style={{ display: "none" }}
-                        className={styles.textInput}
-                        {...props}
-                        {...field}
-                        aria-describedby={`${props.id}-feedback ${props.id}-help`}
-                        onFocus={handleFocus}
-                        onChange={handleFile}
-                        ref={fileUpload}
-                    />
-                    <Button onClick={handleClick}>
-                        <StyledIcon path={mdiCloudUpload} size={1} />
-                    </Button>
-                    <div
-                        className="text-xs"
-                        id={`${props.id}-help`}
-                        tabIndex="-1">
-                        {helpText}
-                    </div>
-                </>
+            <label htmlFor={props.id}>{label}</label>
+            {fileName && fileURL ? (
+                <span>
+                    <label htmlFor="customAvatar">{fileName}</label>
+                    <img id="customAvatar" src={fileURL} alt="Custom Avatar" />
+                </span>
             ) : null}
+            <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                className={styles.textInput}
+                {...props}
+                {...field}
+                aria-describedby={`${props.id}-feedback ${props.id}-help`}
+                onFocus={handleFocus}
+                onChange={handleFile}
+                ref={fileUpload}
+            />
+            <Button onClick={handleClick}>
+                <StyledIcon path={mdiCloudUpload} size={1} />
+            </Button>
+            <div className="text-xs" id={`${props.id}-help`} tabIndex="-1">
+                {helpText}
+            </div>
         </div>
     );
 }

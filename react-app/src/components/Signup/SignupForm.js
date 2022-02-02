@@ -9,7 +9,6 @@ import {
     TextInput,
     LiveUsernameValidation,
     LiveEmailValidation,
-    LiveAvatarUpload,
 } from "../Formik";
 
 import "./optional";
@@ -24,7 +23,6 @@ export default function SignupForm() {
             .min(4, "Must be at least 4 characters")
             .max(20, "Must be at least 20 characters")
             .required("Username is Required"),
-        avatar: Yup.mixed().optional(),
         email: Yup.string()
             .email("Invalid email address")
             .required("Email Required")
@@ -55,7 +53,6 @@ export default function SignupForm() {
         <Formik
             initialValues={{
                 username: "",
-                avatar: "",
                 email: "",
                 password: "",
                 confirm_password: "",
@@ -73,15 +70,6 @@ export default function SignupForm() {
                                 name="username"
                                 type="text"
                                 autoComplete="username"
-                            />
-                        </div>
-                        <div className={styles.avatarWrapper}>
-                            <LiveAvatarUpload
-                                label="Avatar:"
-                                id="avatar"
-                                name="avatar"
-                                type="file"
-                                helpText="Upload custom avatar -optional"
                             />
                         </div>
                         <div className={styles.emailWrapper}>
@@ -115,7 +103,7 @@ export default function SignupForm() {
                     <div className={styles.buttonContainer}>
                         <button
                             className={styles.button}
-                            disabled={Formik.isSubmitting}
+                            // disabled={isSubmitting}
                             type="submit">
                             Sign Up
                         </button>

@@ -35,6 +35,7 @@ export default function LiveEmailValidation({ label, ...props }) {
 
     useEffect(() => {
         let isCurrent;
+
         if (email.trim() !== prev) {
             isCurrent = true;
         }
@@ -44,7 +45,8 @@ export default function LiveEmailValidation({ label, ...props }) {
                 if (isCurrent && validEmail) {
                     setFieldValue(props.name, validEmail);
                     setPrev(email);
-                } else {
+                }
+                if (isCurrent && !validEmail) {
                     setFieldError(props.name, "Email is already in use");
                     setPrev(field.value.trim());
                 }
