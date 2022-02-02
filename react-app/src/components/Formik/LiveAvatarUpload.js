@@ -1,9 +1,31 @@
 import React, { useState, useRef } from "react";
 import { useField, useFormikContext } from "formik";
+import styled from "styled-components";
+import Icon from "@mdi/react";
+import { mdiCloudUpload } from "@mdi/js";
 
 import StyledError from "../StyledComponents/StyledError";
 
 import styles from "./Formik.module.css";
+
+const Button = styled.button`
+    background-color: #014421;
+    color: #029e7e;
+    margin: 0;
+    padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    &:hover {
+        background-color: #0bda51;
+        color: #014421;
+    }
+`;
+
+const StyledIcon = styled(Icon)`
+    width: 1rem;
+    height: 1rem;
+`;
 
 //! Need to debug and validate
 export default function LiveAvatarUpload({ label, helpText, ...props }) {
@@ -26,10 +48,13 @@ export default function LiveAvatarUpload({ label, helpText, ...props }) {
 
     const handleFocus = () => setDidFocus(true);
 
-    console.log(field.value, "field value");
-
     const showFeedback =
         (didFocus && field.value.trim().length > 2) || meta.touched;
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        fileUpload.current.click();
+    };
 
     const handleFile = (e) => {
         e.preventDefault();
@@ -99,6 +124,7 @@ export default function LiveAvatarUpload({ label, helpText, ...props }) {
                     <input
                         type="file"
                         accept="image/*"
+                        style={{ display: "none" }}
                         className={styles.textInput}
                         {...props}
                         {...field}
@@ -107,6 +133,9 @@ export default function LiveAvatarUpload({ label, helpText, ...props }) {
                         onChange={handleFile}
                         ref={fileUpload}
                     />
+                    <Button onClick={handleClick}>
+                        <StyledIcon path={mdiCloudUpload} size={1} />
+                    </Button>
                     <div
                         className="text-xs"
                         id={`${props.id}-help`}
