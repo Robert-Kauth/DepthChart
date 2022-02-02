@@ -2,6 +2,7 @@ import TextInput from "./TextInput";
 import MultiSelect from "./MultiSelect";
 import LiveEmailValidation from "./LiveEmailValidation";
 import LiveUsernameValidation from "./LiveUserNameValidation";
+import LiveAvatarUpload from "./LiveAvatarUpload";
 import isValidUrl from "./isValidUrl";
 
 export {
@@ -10,4 +11,5 @@ export {
     LiveEmailValidation,
     LiveUsernameValidation,
     isValidUrl,
+    LiveAvatarUpload,
 };
