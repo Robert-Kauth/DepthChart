@@ -3,22 +3,22 @@ import { useState, useEffect } from "react";
 export default function useLocalStorage(key, defaultValue) {
     const [state, setState] = useState(() => {
         let val;
-        try {
-            val = JSON.parse(
-                window.localStorage.getItem(key) || String(defaultValue)
-            );
-            console.log(val, "@@@@@VAL@@@@@@");
-        } catch (e) {
-            val = defaultValue;
-            console.log(val, "!!!!!!!!VAL in catch block!!!!!");
-        }
-        console.log(val, "***********VAL in success*****");
+        // Gets avatar value from browser local storage or assigns defaultValue
+        val =
+            JSON.parse(window.localStorage.getItem(key)) ||
+            JSON.stringify(defaultValue);
         return val;
     });
 
+    // used to update state
+    const updateLS = () => {
+        setState(window.localStorage.setItem(key, JSON.stringify(state)));
+    };
+
+    //Updates browsers stored value of avatar upon changes
     useEffect(() => {
         window.localStorage.setItem(key, JSON.stringify(state));
     }, [state, key]);
 
-    return [state, setState];
+    return [state, updateLS];
 }

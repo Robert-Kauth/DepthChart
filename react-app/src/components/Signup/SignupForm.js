@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { signUp } from "../../store/session";
+import { hideModal } from "../../store/modal";
+import { Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import {
     TextInput,
     LiveUsernameValidation,
     LiveEmailValidation,
+    LiveAvatarUpload,
 } from "../Formik";
 
 import "./optional";
 import styles from "./SignupForm.module.css";
 
-export default function SignupForm({ setShowModal }) {
+export default function SignupForm() {
     const dispatch = useDispatch();
-
-    const [avatar, setAvatar] = useState({ avatar: false, count: null });
-    const [errors, setErrors] = useState([]);
-
-    // Gets avatar value from browser local storage
-    useEffect(() => {
-        setAvatar(JSON.parse(window.localStorage.getItem("avatar")));
-    }, []);
-
-    //Updates browsers stored value of avatar upon changes
-    useEffect(() => {
-        window.localStorage.setItem("avatar", JSON.stringify(avatar));
-    }, [avatar]);
 
     // Validation schema- Provides livefeed back to user. Generates error message (strings)
     const SignupFormSchema = Yup.object().shape({
@@ -34,7 +24,7 @@ export default function SignupForm({ setShowModal }) {
             .min(4, "Must be at least 4 characters")
             .max(20, "Must be at least 20 characters")
             .required("Username is Required"),
-        avatar: Yup.string().url().optional(),
+        avatar: Yup.mixed().optional(),
         email: Yup.string()
             .email("Invalid email address")
             .required("Email Required")
@@ -48,26 +38,17 @@ export default function SignupForm({ setShowModal }) {
             .oneOf([Yup.ref("password"), null], "Passwords must match"),
     });
 
-    const handleSubmit = async (values, { setSubmitting }) => {
-        //?Promise triggers setSubmitting(false) when it resolves
-        await new Promise((res) => setTimeout(res, 500));
+    const handleSubmit = async (values) => {
+        console.log("Start Submission", values);
 
-        await SignupFormSchema.validate(values)
-            .then((formValues) => {
-                console.log(
-                    formValues,
-                    "RESSS!!!!!!!!!!!!!",
-                    typeof formValues
-                );
-                const data = dispatch(signUp(formValues));
-                if (data.errors) {
-                    setErrors(data.errors);
-                }
-                return;
-            })
-            .catch((e) => console.log(e.name, e.errors));
+        const validValues = await SignupFormSchema.validate(values);
 
-        // setSubmitting(false);
+        console.log(validValues, "validValues");
+
+        dispatch(signUp(validValues)).then(() => {
+            dispatch(hideModal());
+            return <Redirect to="/" />;
+        });
     };
 
     return (
@@ -80,9 +61,7 @@ export default function SignupForm({ setShowModal }) {
                 confirm_password: "",
             }}
             validationSchema={SignupFormSchema}
-            onSubmit={(values) => handleSubmit(values)}
-            // initialStatus={{success:false}}
-        >
+            onSubmit={(values) => handleSubmit(values)}>
             <Form className={styles.form}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Sign Up</legend>
@@ -97,11 +76,11 @@ export default function SignupForm({ setShowModal }) {
                             />
                         </div>
                         <div className={styles.avatarWrapper}>
-                            <TextInput
+                            <LiveAvatarUpload
                                 label="Avatar:"
                                 id="avatar"
                                 name="avatar"
-                                type="url"
+                                type="file"
                                 helpText="Upload custom avatar -optional"
                             />
                         </div>
@@ -134,7 +113,10 @@ export default function SignupForm({ setShowModal }) {
                         </div>
                     </div>
                     <div className={styles.buttonContainer}>
-                        <button className={styles.button} type="submit">
+                        <button
+                            className={styles.button}
+                            disabled={Formik.isSubmitting}
+                            type="submit">
                             Sign Up
                         </button>
                     </div>
