@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useField } from "formik";
 
 import StyledError from "../StyledComponents/StyledError";
+import StyledCheckmark from "../StyledComponents/StyledCheckmark";
 import styles from "./Formik.module.css";
 
 // Uses CSS to provide visual feedback to the user
@@ -16,30 +17,27 @@ export default function LiveTextInput({ label, helpText, ...props }) {
         (didFocus && field.value.trim().length > 2) || meta.touched;
     return (
         <div
-            className={`form-control ${
-                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            className={`${styles.formControl} ${
+                showFeedback
+                    ? meta.error
+                        ? `${styles.invalid}`
+                        : `${styles.valid}`
+                    : ""
             }`}>
-            <div className="flex items-center space-between">
-                <label htmlFor={props.id}>{label}</label>
-                {showFeedback ? (
-                    <div
-                        id={`${props.id}-feedback`}
-                        aria-live="polite"
-                        className="feedback text-sm">
-                        {meta.error ? <StyledError error={meta.error} /> : "✓"}
-                    </div>
-                ) : null}
-            </div>
-            <input
-                className={styles.textInput}
-                {...props}
-                {...field}
-                aria-describedby={`${props.id}-feedback ${props.id}-help`}
-                onFocus={handleFocus}
-            />
-            <div className="text-xs" id={`${props.id}-help`} tabIndex="-1">
+            <label htmlFor={props.id || props.name}>{label}</label>
+            {showFeedback ? (
+                <div aria-live="polite">
+                    {meta.error ? (
+                        <StyledError error={meta.error} />
+                    ) : (
+                        <StyledCheckmark />
+                    )}
+                </div>
+            ) : null}
+            <input {...props} {...field} onFocus={handleFocus} />
+            <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">
                 {helpText}
-            </div>
+            </p>
         </div>
     );
 }

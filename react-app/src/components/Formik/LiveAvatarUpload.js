@@ -84,8 +84,12 @@ export default function LiveAvatarUpload({ label, helpText, ...props }) {
 
     return (
         <div
-            className={`form-control ${
-                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            className={`${styles.formControl} ${
+                showFeedback
+                    ? meta.error
+                        ? `${styles.invalid}`
+                        : `${styles.valid}`
+                    : ""
             }`}>
             <div className="flex items-center space-between">
                 {showFeedback ? (

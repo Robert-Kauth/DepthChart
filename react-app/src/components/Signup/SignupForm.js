@@ -62,49 +62,44 @@ export default function SignupForm() {
             <Form className={styles.form}>
                 <fieldset className={styles.field}>
                     <legend className={styles.legend}>Sign Up</legend>
-                    <div className={styles.inputs}>
-                        <div className={styles.usernameWrapper}>
-                            <LiveUsernameValidation
-                                label="User Name:"
-                                id="username"
-                                name="username"
-                                type="text"
-                                autoComplete="username"
-                            />
-                        </div>
-                        <div className={styles.emailWrapper}>
-                            <LiveEmailValidation
-                                label="Email:"
-                                id="email"
-                                name="email"
-                                type="email"
-                                autoComplete="email"
-                            />
-                        </div>
-                        <div className={styles.passwordWrapper}>
-                            <TextInput
-                                label="Password:"
-                                id="password"
-                                name="password"
-                                type="password"
-                                autoComplete="new-password"
-                            />
-                        </div>
-                        <div className={styles.passwordWrapper}>
-                            <TextInput
-                                label="Confirm Password:"
-                                id="confirm_password"
-                                name="confirm_password"
-                                type="password"
-                                autoComplete="new-password"
-                            />
-                        </div>
+                    <div className={styles.usernameWrapper}>
+                        <LiveUsernameValidation
+                            label="User Name:"
+                            id="username"
+                            name="username"
+                            type="text"
+                            autoComplete="username"
+                        />
+                    </div>
+                    <div className={styles.emailWrapper}>
+                        <LiveEmailValidation
+                            label="Email:"
+                            id="email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                        />
+                    </div>
+                    <div className={styles.passwordWrapper}>
+                        <TextInput
+                            label="Password:"
+                            id="password"
+                            name="password"
+                            type="password"
+                            autoComplete="new-password"
+                        />
+                    </div>
+                    <div className={styles.passwordWrapper}>
+                        <TextInput
+                            label="Confirm Password:"
+                            id="confirm_password"
+                            name="confirm_password"
+                            type="password"
+                            autoComplete="new-password"
+                        />
                     </div>
                     <div className={styles.buttonContainer}>
-                        <button
-                            className={styles.button}
-                            // disabled={isSubmitting}
-                            type="submit">
+                        <button className={styles.button} type="submit">
                             Sign Up
                         </button>
                     </div>

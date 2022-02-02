@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useField, useFormikContext } from "formik";
 
 import StyledError from "../StyledComponents/StyledError";
+import StyledCheckmark from "../StyledComponents/StyledCheckmark";
 import styles from "./Formik.module.css";
 
 // Function to check if email is already in use
@@ -59,16 +60,21 @@ export default function LiveEmailValidation({ label, ...props }) {
 
     return (
         <div
-            className={`form-control ${
-                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            className={`${styles.formControl} ${
+                showFeedback
+                    ? meta.error
+                        ? `${styles.invalid}`
+                        : `${styles.valid}`
+                    : ""
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
             {showFeedback ? (
-                <div
-                    id={`${props.id}-feedback`}
-                    aria-live="polite"
-                    className="feedback text-sm">
-                    {meta.error ? <StyledError error={meta.error} /> : "✓"}
+                <div aria-live="polite">
+                    {meta.error ? (
+                        <StyledError error={meta.error} />
+                    ) : (
+                        <StyledCheckmark />
+                    )}
                 </div>
             ) : null}
             <input
@@ -76,7 +82,6 @@ export default function LiveEmailValidation({ label, ...props }) {
                 {...field}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                className={styles.textInput}
             />
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useField } from "formik";
 
 import StyledError from "../StyledComponents/StyledError";
+import StyledCheckmark from "../StyledComponents/StyledCheckmark";
 import styles from "./Formik.module.css";
 
 export default function TextInput({ label, helpText, ...props }) {
@@ -16,24 +17,24 @@ export default function TextInput({ label, helpText, ...props }) {
 
     return (
         <div
-            className={`form-control ${
-                showFeedback ? (meta.error ? "invalid" : "valid") : ""
+            className={`${styles.formControl} ${
+                showFeedback
+                    ? meta.error
+                        ? `${styles.invalid}`
+                        : `${styles.valid}`
+                    : ""
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
             {showFeedback ? (
-                <div
-                    id={`${props.id}-feedback`}
-                    aria-live="polite"
-                    className="feedback text-sm">
-                    {meta.error ? <StyledError error={meta.error} /> : "✓"}
+                <div aria-live="polite">
+                    {meta.error ? (
+                        <StyledError error={meta.error} />
+                    ) : (
+                        <StyledCheckmark />
+                    )}
                 </div>
             ) : null}
-            <input
-                className={styles.textInput}
-                {...field}
-                {...props}
-                onFocus={handleFocus}
-            />
+            <input {...field} {...props} onFocus={handleFocus} />
             <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">
                 {helpText}
             </p>
