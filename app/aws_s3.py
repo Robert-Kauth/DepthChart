@@ -3,7 +3,7 @@ import botocore
 from .config import Config
 
 # These are the allowed file types, edit this part to fit your needs
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'svg'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'svg', 'gif'}
 
 s3 = boto3.client(
     "s3",

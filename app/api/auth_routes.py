@@ -61,7 +61,7 @@ def user_exists(email):
     Checks if user email already exists in database
     '''
     user = User.query.filter(User.email == email).first()
-    if user:
+    if user is not None:
         return {'is_email_unique': False}
     else:
         return {'is_email_unique': email}

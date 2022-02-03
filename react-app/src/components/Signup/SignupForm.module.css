@@ -13,12 +13,14 @@ input[type="password"] {
 } */
 
 .form {
+    position: relative;
     box-sizing: border-box;
     background-color: #195905;
     border-radius: 5px;
-    padding: 10px;
-    width: 600px;
-    height: 700px;
+    padding: 5px;
+    width: 32vw;
+    height: 46vh;
+    margin: 0;
 }
 
 .field {
@@ -26,8 +28,9 @@ input[type="password"] {
     color: black;
     border: 4px solid #029e7e;
     padding: 25px;
-    width: 580px;
-    height: 680px;
+    width: 31vw;
+    height: 44vh;
+    margin: 2px;
 }
 
 .legend {
@@ -39,15 +42,12 @@ input[type="password"] {
     color: black;
 }
 
-.inputs{
-    width:100%;
-}
-
 .usernameWrapper {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .avatarWrapper {
@@ -55,6 +55,7 @@ input[type="password"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .emailWrapper {
@@ -62,6 +63,7 @@ input[type="password"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .passwordWrapper {
@@ -69,11 +71,13 @@ input[type="password"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .buttonContainer {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .button {
