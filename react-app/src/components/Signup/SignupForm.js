@@ -29,7 +29,7 @@ export default function SignupForm() {
             .min(6, "Must be at least 6 characters")
             .max(20, "Must be at least 20 characters"),
         password: Yup.string()
-            .min(8, "Password needs to be at least 8 characters")
+            .min(8, "Password must be at least 8 characters")
             .required("Password is required"),
         confirm_password: Yup.string()
             .required("Must provide password confirmation")

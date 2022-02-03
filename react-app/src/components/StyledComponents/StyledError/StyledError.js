@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledErrorMessage = styled.div`
+    position: absolute;
+    top: 84px;
     font-size: 12px;
     font-weight: 600;
     color: var(--red-800);
