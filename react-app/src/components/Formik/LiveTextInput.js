@@ -27,13 +27,11 @@ export default function LiveTextInput({ label, helpText, ...props }) {
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
             {showFeedback ? (
-                <div aria-live="polite">
-                    {meta.error ? (
-                        <StyledError error={meta.error} />
-                    ) : (
-                        <StyledIcon icon={mdiCheckBold} color="green" />
-                    )}
-                </div>
+                meta.error ? (
+                    <StyledError error={meta.error} />
+                ) : (
+                    <StyledIcon icon={mdiCheckBold} color="green" />
+                )
             ) : null}
             <input {...props} {...field} onFocus={handleFocus} />
             <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">

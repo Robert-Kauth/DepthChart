@@ -7,7 +7,6 @@
 }
 
 .formControl {
-    margin-top: 1rem;
     width: 100%;
 }
 
@@ -15,7 +14,7 @@ input[type="email"],
 input[type="text"],
 input[type="url"],
 input[type="password"] {
-    width: 100%;
+    width: 90%;
 }
 
 .valid input[type="email"],
@@ -23,7 +22,7 @@ input[type="password"] {
 .valid input[type="url"],
 .valid input[type="password"] {
     border-color: #0bda51;
-    width: 100%;
+    width: 90%;
     font-size: 1rem;
 }
 
@@ -36,7 +35,7 @@ input[type="password"] {
 .invalid input[type="url"],
 .invalid input[type="password"] {
     border-color: red;
-    width: 100%;
+    width: 90%;
     font-size: 1rem;
 }
 

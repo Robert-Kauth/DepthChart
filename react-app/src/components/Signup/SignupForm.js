@@ -85,7 +85,7 @@ export default function SignupForm() {
                             autoComplete="new-password"
                         />
                     </div>
-                    <div className={styles.passwordWrapper}>
+                    <div className={styles.confirm_passwordWrapper}>
                         <TextInput
                             label="Confirm Password:"
                             id="confirm_password"

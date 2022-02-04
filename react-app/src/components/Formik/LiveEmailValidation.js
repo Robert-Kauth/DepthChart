@@ -70,13 +70,11 @@ export default function LiveEmailValidation({ label, ...props }) {
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
             {showFeedback ? (
-                <div aria-live="polite">
-                    {meta.error ? (
-                        <StyledError error={meta.error} />
-                    ) : (
-                        <StyledIcon icon={mdiCheckBold} color="green" />
-                    )}
-                </div>
+                meta.error ? (
+                    <StyledError error={meta.error} />
+                ) : (
+                    <StyledIcon icon={mdiCheckBold} color="green" />
+                )
             ) : null}
             <input
                 {...props}

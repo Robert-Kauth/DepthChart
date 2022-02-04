@@ -5,22 +5,14 @@ label {
     padding: 0 5px 0 0;
     text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
-/* input[type="text"],
-input[type="url"],
-input[type="email"],
-input[type="password"] {
-    font-size: 1rem;
-} */
 
 .form {
-    position: relative;
     box-sizing: border-box;
     background-color: #195905;
     border-radius: 5px;
     padding: 5px;
-    width: 32vw;
-    height: 46vh;
     margin: 0;
+    min-width: 30vw;
 }
 
 .field {
@@ -28,9 +20,16 @@ input[type="password"] {
     color: black;
     border: 4px solid #029e7e;
     padding: 25px;
-    width: 31vw;
-    height: 44vh;
     margin: 2px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+        "username"
+        "email"
+        "password"
+        "confirm_password"
+        "button";
 }
 
 .legend {
@@ -43,41 +42,44 @@ input[type="password"] {
 }
 
 .usernameWrapper {
-    position: relative;
+    grid-area: username;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
 }
 
 .avatarWrapper {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
 }
 
 .emailWrapper {
-    position: relative;
+    grid-area: email;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
 }
 
 .passwordWrapper {
-    position: relative;
+    grid-area: password;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+}
+
+.confirm_passwordWrapper {
+    grid-area: confirm_password;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttonContainer {
+    grid-area: button;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
 }
 
 .button {
