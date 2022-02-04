@@ -74,7 +74,7 @@ export default function LiveEmailValidation({ label, ...props }) {
                     {meta.error ? (
                         <StyledError error={meta.error} />
                     ) : (
-                        <StyledIcon icon={mdiCheckBold} />
+                        <StyledIcon icon={mdiCheckBold} color="green" />
                     )}
                 </div>
             ) : null}

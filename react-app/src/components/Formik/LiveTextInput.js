@@ -31,7 +31,7 @@ export default function LiveTextInput({ label, helpText, ...props }) {
                     {meta.error ? (
                         <StyledError error={meta.error} />
                     ) : (
-                        <StyledIcon icon={mdiCheckBold} />
+                        <StyledIcon icon={mdiCheckBold} color="green" />
                     )}
                 </div>
             ) : null}

@@ -5,9 +5,9 @@ import Icon from "@mdi/react";
 const CustomIcon = styled(Icon)`
     width: 1rem;
     height: 1rem;
-    color: green;
+    color: ${(props) => props.color || "black"};
 `;
 
-export default function StyledIcon({ icon }) {
-    return <CustomIcon path={icon} size={1} />;
+export default function StyledIcon(props) {
+    return <CustomIcon path={props.icon} size={1} />;
 }
