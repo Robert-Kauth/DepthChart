@@ -66,20 +66,25 @@ export default function LiveUsernameValidation({ label, ...props }) {
                         : `${styles.valid}`
                     : ""
             }`}>
-            <label htmlFor={props.id || props.name}>{label}</label>
+            <label className={styles.label} htmlFor={props.id || props.name}>
+                {label}
+            </label>
             <input
                 {...props}
                 {...field}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                className={styles.input}
             />
-            {showFeedback ? (
-                meta.error ? (
-                    <StyledError error={meta.error} />
-                ) : (
-                    <StyledIcon icon={mdiCheckBold} color="green" />
-                )
-            ) : null}
+            <div className={styles.feedback}>
+                {showFeedback ? (
+                    meta.error ? (
+                        <StyledError error={meta.error} />
+                    ) : (
+                        <StyledIcon icon={mdiCheckBold} color="green" />
+                    )
+                ) : null}
+            </div>
         </div>
     );
 }

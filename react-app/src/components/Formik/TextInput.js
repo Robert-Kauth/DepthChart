@@ -27,13 +27,15 @@ export default function TextInput({ label, helpText, ...props }) {
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
             <input {...field} {...props} onFocus={handleFocus} />
-            {showFeedback ? (
-                meta.error ? (
-                    <StyledError error={meta.error} />
-                ) : (
-                    <StyledIcon icon={mdiCheckBold} color="green" />
-                )
-            ) : null}
+            <div className={styles.feedback}>
+                {showFeedback ? (
+                    meta.error ? (
+                        <StyledError error={meta.error} />
+                    ) : (
+                        <StyledIcon icon={mdiCheckBold} color="green" />
+                    )
+                ) : null}
+            </div>
         </div>
     );
 }
