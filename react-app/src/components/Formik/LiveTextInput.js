@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useField } from "formik";
 
 import StyledError from "../StyledComponents/StyledError";
-import StyledCheckmark from "../StyledComponents/StyledCheckmark";
+import StyledIcon from "../StyledComponents/StyledIcon";
+import { mdiCheckBold } from "@mdi/js";
 import styles from "./Formik.module.css";
 
 // Uses CSS to provide visual feedback to the user
@@ -30,7 +31,7 @@ export default function LiveTextInput({ label, helpText, ...props }) {
                     {meta.error ? (
                         <StyledError error={meta.error} />
                     ) : (
-                        <StyledCheckmark />
+                        <StyledIcon icon={mdiCheckBold} />
                     )}
                 </div>
             ) : null}

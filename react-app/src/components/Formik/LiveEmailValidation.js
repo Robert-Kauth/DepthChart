@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useField, useFormikContext } from "formik";
 
 import StyledError from "../StyledComponents/StyledError";
-import StyledCheckmark from "../StyledComponents/StyledCheckmark";
+import StyledIcon from "../StyledComponents/StyledIcon";
 import styles from "./Formik.module.css";
+import { mdiCheckBold } from "@mdi/js";
 
 // Function to check if email is already in use
 async function validateEmail(email) {
@@ -73,7 +74,7 @@ export default function LiveEmailValidation({ label, ...props }) {
                     {meta.error ? (
                         <StyledError error={meta.error} />
                     ) : (
-                        <StyledCheckmark />
+                        <StyledIcon icon={mdiCheckBold} />
                     )}
                 </div>
             ) : null}

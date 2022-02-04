@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useField } from "formik";
 
 import StyledError from "../StyledComponents/StyledError";
-import StyledCheckmark from "../StyledComponents/StyledCheckmark";
+import StyledIcon from "../StyledComponents/StyledIcon";
 import styles from "./Formik.module.css";
+import { mdiCheckBold } from "@mdi/js";
 
 export default function TextInput({ label, helpText, ...props }) {
     const [field, meta] = useField(props);
@@ -30,7 +31,7 @@ export default function TextInput({ label, helpText, ...props }) {
                     {meta.error ? (
                         <StyledError error={meta.error} />
                     ) : (
-                        <StyledCheckmark />
+                        <StyledIcon icon={mdiCheckBold} />
                     )}
                 </div>
             ) : null}

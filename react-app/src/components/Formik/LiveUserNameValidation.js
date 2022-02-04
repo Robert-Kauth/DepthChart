@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useField, useFormikContext } from "formik";
-import StyledCheckmark from "../StyledComponents/StyledCheckmark";
+import StyledIcon from "../StyledComponents/StyledIcon";
+import { mdiCheckBold } from "@mdi/js";
 
 import StyledError from "../StyledComponents/StyledError";
 import styles from "./Formik.module.css";
@@ -71,7 +72,7 @@ export default function LiveUsernameValidation({ label, ...props }) {
                     {meta.error ? (
                         <StyledError error={meta.error} />
                     ) : (
-                        <StyledCheckmark />
+                        <StyledIcon icon={mdiCheckBold} />
                     )}
                 </div>
             ) : null}
