@@ -1,5 +1,4 @@
 label {
-    display: flex;
     color: #029e7e;
     font-size: 30px;
     padding: 0 5px 0 0;
@@ -22,6 +21,7 @@ label {
     padding: 25px;
     margin: 2px;
     display: grid;
+    row-gap: 1rem;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
     grid-template-areas:

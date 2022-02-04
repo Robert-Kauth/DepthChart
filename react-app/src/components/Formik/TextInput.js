@@ -26,6 +26,7 @@ export default function TextInput({ label, helpText, ...props }) {
                     : ""
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
+            <input {...field} {...props} onFocus={handleFocus} />
             {showFeedback ? (
                 meta.error ? (
                     <StyledError error={meta.error} />
@@ -33,10 +34,6 @@ export default function TextInput({ label, helpText, ...props }) {
                     <StyledIcon icon={mdiCheckBold} color="green" />
                 )
             ) : null}
-            <input {...field} {...props} onFocus={handleFocus} />
-            <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">
-                {helpText}
-            </p>
         </div>
     );
 }

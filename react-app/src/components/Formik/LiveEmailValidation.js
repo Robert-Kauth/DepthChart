@@ -69,6 +69,12 @@ export default function LiveEmailValidation({ label, ...props }) {
                     : ""
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
+            <input
+                {...props}
+                {...field}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+            />
             {showFeedback ? (
                 meta.error ? (
                     <StyledError error={meta.error} />
@@ -76,12 +82,6 @@ export default function LiveEmailValidation({ label, ...props }) {
                     <StyledIcon icon={mdiCheckBold} color="green" />
                 )
             ) : null}
-            <input
-                {...props}
-                {...field}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-            />
         </div>
     );
 }

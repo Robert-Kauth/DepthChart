@@ -7,7 +7,12 @@
 }
 
 .formControl {
-    width: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "label" "error" "input";
+    align-items: center;
 }
 
 input[type="email"],

@@ -12,7 +12,5 @@
 }
 
 .modalContent {
-    min-height: 50vh;
-    min-width: 30vw;
     border-radius: 5px;
 }

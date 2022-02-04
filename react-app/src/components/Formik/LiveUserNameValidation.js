@@ -67,6 +67,12 @@ export default function LiveUsernameValidation({ label, ...props }) {
                     : ""
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
+            <input
+                {...props}
+                {...field}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+            />
             {showFeedback ? (
                 meta.error ? (
                     <StyledError error={meta.error} />
@@ -74,12 +80,6 @@ export default function LiveUsernameValidation({ label, ...props }) {
                     <StyledIcon icon={mdiCheckBold} color="green" />
                 )
             ) : null}
-            <input
-                {...props}
-                {...field}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-            />
         </div>
     );
 }
