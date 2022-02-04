@@ -27,7 +27,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "lint:css": "stylelint './src/**/*.js'",
+        "stylelint-check": "stylelint-config-prettier-check"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -52,7 +54,19 @@
         "@babel/plugin-proposal-export-default-from": "^7.16.7",
         "@babel/preset-env": "^7.16.4",
         "@babel/preset-react": "^7.16.0",
+        "@stylelint/postcss-css-in-js": "^0.37.2",
         "babel-plugin-styled-components": "^1.13.3",
-        "dotenv-quokka-plugin": "^1.0.0"
+        "dotenv-quokka-plugin": "^1.0.0",
+        "postcss-jsx": "^0.36.4",
+        "postcss-styled": "^0.34.0",
+        "postcss-syntax": "^0.36.2",
+        "stylelint": "^14.3.0",
+        "stylelint-config-prettier": "^9.0.3",
+        "stylelint-config-recommended": "^6.0.0",
+        "stylelint-config-standard": "^24.0.0",
+        "stylelint-config-styled-components": "^0.1.1",
+        "stylelint-css-modules": "^1.2.1",
+        "stylelint-prettier": "^2.0.0",
+        "stylelint-processor-styled-components": "^1.10.0"
     }
 }
