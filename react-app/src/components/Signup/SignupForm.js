@@ -37,16 +37,12 @@ export default function SignupForm() {
     });
 
     const handleSubmit = async (values) => {
-        console.log("Start Submission", values);
-
         const validValues = await SignupFormSchema.validate(values);
-
-        console.log(validValues, "validValues");
 
         dispatch(signUp(validValues)).then(() => {
             dispatch(hideModal());
             return <Redirect to="/" />;
-        });
+        })
     };
 
     return (
