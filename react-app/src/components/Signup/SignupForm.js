@@ -42,7 +42,7 @@ export default function SignupForm() {
         dispatch(signUp(validValues)).then(() => {
             dispatch(hideModal());
             return <Redirect to="/" />;
-        })
+        });
     };
 
     return (
@@ -65,6 +65,7 @@ export default function SignupForm() {
                             name="username"
                             type="text"
                             autoComplete="username"
+                            signup="true"
                         />
                     </div>
                     <div className={styles.emailWrapper}>
@@ -74,6 +75,7 @@ export default function SignupForm() {
                             name="email"
                             type="email"
                             autoComplete="email"
+                            signup="true"
                         />
                     </div>
                     <div className={styles.passwordWrapper}>

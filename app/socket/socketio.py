@@ -20,15 +20,6 @@ def handle_chat(data):
     '''
     emit("chat", data, broadcast=True)
 
-@sio.on('validate_email', namespace='/is_email')
-def validate_email(data):
-    '''
-    validates email against users in the database
-    '''
-    print(data, "data")
-    emit(data,)
-
-
 
 @sio.on('join')
 def on_join(data):
