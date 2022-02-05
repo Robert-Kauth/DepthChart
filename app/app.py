@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, redirect
-from app.socket import socketio
+from app.socket import sio
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -56,7 +56,7 @@ db.init_app(app)
 Migrate(app, db)
 
 # Initialize flask socketio instance
-socketio.init_app(app)
+sio.init_app(app)
 
 
 # Application Security

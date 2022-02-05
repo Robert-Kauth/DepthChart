@@ -4,6 +4,7 @@ from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from random import choice
+from email_validator import validate_email
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -60,11 +61,15 @@ def user_exists(email):
     '''
     Checks if user email already exists in database
     '''
-    user = User.query.filter(User.email == email).first()
-    if user is not None:
-        return {'is_email_unique': False}
-    else:
-        return {'is_email_unique': email}
+    valid_email = validate_email(email)
+    if validate_email:
+        user = User.query.filter(User.email == email).first()
+        
+        if user is not None:
+            return {'is_email_unique': email, 'is_user': user.to_dict()}
+        else:
+            return {'is_email_unique': email, 'is_user': False}
+    
 
 
 @auth_routes.route('/validate_username/<string:username>')
@@ -74,9 +79,9 @@ def username_exists(username):
     '''
     user = User.query.filter(User.username == username).first()
     if user is not None:
-        return {'is_username_unique': False}
+        return {'is_username_unique': False, 'is_user': True}
     else:
-        return {'is_username_unique': username}
+        return {'is_username_unique': username, 'is_user': False}
 
 
 @auth_routes.route('/signup', methods=['POST'])
