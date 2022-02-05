@@ -1,119 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 
-import Errors from "../Errors";
-
-import { hideModal } from "../../store/modal";
+import { TextInput, LiveEmailValidation } from "../Formik";
 import { login, demoLogin } from "../../store/session";
+import { hideModal } from "../../store/modal";
 
 import styles from "./LoginForm.module.css";
 // className={styles. }
 
-export default function LoginForm({ setShowModal }) {
+export default function LoginForm() {
     const dispatch = useDispatch();
 
-    const user = useSelector((state) => state.session.user);
+    const LoginFormSchema = Yup.object().shape({
+        email: Yup.string()
+            .email("Invalid email address")
+            .required("Email Required")
+            .min(6, "Must be at least 6 characters")
+            .max(20, "Must be at least 20 characters"),
+        password: Yup.string()
+            .min(8, "Password must be at least 8 characters")
+            .required("Password is required"),
+    });
 
-    const [errors, setErrors] = useState([]);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleLogin = async (e) => {
+    const handleSubmit = async (e, values) => {
         e.preventDefault();
-        const data = await dispatch(login(email, password));
-        if (data) {
-            setErrors(data);
-        }
-    };
-
-    const handleDemoLogin = async (e) => {
-        e.preventDefault();
-        await dispatch(demoLogin());
-    };
-
-    const updateEmail = (e) => {
-        setErrors([]);
-        setEmail(e.target.value);
-    };
-
-    const updatePassword = (e) => {
-        setErrors([]);
-        setPassword(e.target.value);
-    };
-
-    useEffect(() => {
-        if (user) {
+        const validUser = await LoginFormSchema.validate(values);
+        dispatch(login(validUser)).then(() => {
             dispatch(hideModal());
-            <Redirect to="/" />;
-        }
-    }, [dispatch, user]);
+            return <Redirect to="/" />;
+        });
+    };
+
+    const handleDemoLogin = (e) => {
+        e.preventDefault();
+        dispatch(demoLogin()).then(() => {
+            dispatch(hideModal());
+            return <Redirect to="/" />;
+        });
+    };
 
     return (
-        <form className={styles.form}>
-            <fieldset className={styles.field}>
-                <legend className={styles.legend}>Login</legend>
-                <Errors errors={errors} />
-                <div className={styles.inputs}>
+        <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={LoginFormSchema}
+            onSubmit={(values) => handleSubmit(values)}>
+            <Form className={styles.form}>
+                <fieldset className={styles.field}>
+                    <legend className={styles.legend}>Login</legend>
                     <div className={styles.emailWrapper}>
-                        <div className={styles.emailLabelWrapper}>
-                            <label
-                                htmlFor="email"
-                                className={styles.emailLabel}>
-                                Email:
-                            </label>
-                        </div>
-                        <div className={styles.emailInputWrapper}>
-                            <input
-                                autoComplete="email"
-                                className={styles.email}
-                                name="email"
-                                type="text"
-                                placeholder="Email"
-                                value={email}
-                                onChange={updateEmail}
-                            />
-                        </div>
+                        <LiveEmailValidation
+                            label="Email:"
+                            id="email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                        />
                     </div>
                     <div className={styles.passwordWrapper}>
-                        <div className={styles.passwordLabelWrapper}>
-                            <label
-                                className={styles.passwordLabel}
-                                htmlFor="password">
-                                Password:
-                            </label>
-                        </div>
-                        <div className={styles.passwordInputWrapper}>
-                            <input
-                                autoComplete="current-password"
-                                name="password"
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={updatePassword}
-                            />
-                        </div>
+                        <TextInput
+                            label="Password:"
+                            id="password"
+                            name="password"
+                            type="text"
+                            autoComplete="password"
+                        />
                     </div>
-                </div>
-                <div className={styles.buttonWrapper}>
-                    <div className={styles.loginButtonContainer}>
-                        <button
-                            className={styles.loginButton}
-                            type="submit"
-                            onClick={handleLogin}>
-                            Login
-                        </button>
+                    <div className={styles.buttonContainer}>
+                        <button className={styles.loginButton}>Login</button>
                     </div>
-                    <div className={styles.demoLoginButtonContainer}>
+                    <div className={styles.buttonContainer}>
                         <button
-                            type="submit"
-                            className={styles.demoButton}
-                            onClick={handleDemoLogin}>
+                            onClick={(e) => handleDemoLogin(e)}
+                            className={styles.demoButton}>
                             Demo Login
                         </button>
                     </div>
-                </div>
-            </fieldset>
-        </form>
+                </fieldset>
+            </Form>
+        </Formik>
     );
 }

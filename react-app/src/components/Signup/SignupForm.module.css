@@ -21,7 +21,6 @@ label {
     padding: 25px;
     margin: 2px;
     display: grid;
-    row-gap: 1rem;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
     grid-template-areas:

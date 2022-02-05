@@ -2,16 +2,13 @@
     background-color: #195905;
     border-radius: 5px;
     padding: 10px;
-    min-height: 40vh;
-    min-width: 40vh;
 }
 
 .field {
     color: black;
     border: 4px solid #029e7e;
     padding: 25px;
-    min-height: 38vh;
-    min-width: 25vh;
+    min-width: 30vw;
 }
 
 .legend {
@@ -23,26 +20,10 @@
     color: black;
 }
 
-.inputs {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    padding: 25px 0;
-}
-
 .emailWrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.emailLabel {
-    justify-content: center;
-    color: #029e7e;
-    font-size: 50px;
-    padding: 0 5px 0 0;
-    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
 }
 
 .passwordWrapper {
@@ -51,27 +32,15 @@
     justify-content: center;
 }
 
-.passwordLabel {
-    color: #029e7e;
-    font-size: 50px;
-    padding: 0 5px 0 0;
-    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
-}
-
-.buttonWrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.loginButtonContainer {
+.buttonContainer {
     display: flex;
     margin-bottom: 10px;
     justify-content: center;
     align-items: center;
 }
 .loginButton {
-    width: 150px;
-    font-size: 35px;
+    width: 14rem;
+    font-size: 30px;
     font-weight: 800;
     background-color: #029e7e;
 }
@@ -80,15 +49,9 @@
     background-color: #03b48f;
 }
 
-.demoLoginButtonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .demoButton {
-    width: 250px;
-    font-size: 35px;
+    width: 14rem;
+    font-size: 30px;
     font-weight: 800;
     background-color: #029e7e;
 }
