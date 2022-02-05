@@ -10,18 +10,27 @@ else:
     origins = "*"
 
 # creates socketio instance
-socketio = SocketIO(cors_allowed_origins=origins)
+sio = SocketIO(cors_allowed_origins=origins,logger=True, engineio_logger=True)
 
 
-@socketio.on('chat')
+@sio.on('chat')
 def handle_chat(data):
     '''
     Chat event handler
     '''
     emit("chat", data, broadcast=True)
 
+@sio.on('validate_email', namespace='/is_email')
+def validate_email(data):
+    '''
+    validates email against users in the database
+    '''
+    print(data, "data")
+    emit(data,)
 
-@socketio.on('join')
+
+
+@sio.on('join')
 def on_join(data):
     '''
     Handles user joining chat room
@@ -32,7 +41,7 @@ def on_join(data):
     send(username + ' has entered the room', to=room)
 
 
-@socketio.on('leave')
+@sio.on('leave')
 def on_leave(data):
     username = data['username']
     room = data['room']

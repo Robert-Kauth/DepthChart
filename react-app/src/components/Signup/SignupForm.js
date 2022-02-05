@@ -37,16 +37,12 @@ export default function SignupForm() {
     });
 
     const handleSubmit = async (values) => {
-        console.log("Start Submission", values);
-
         const validValues = await SignupFormSchema.validate(values);
-
-        console.log(validValues, "validValues");
 
         dispatch(signUp(validValues)).then(() => {
             dispatch(hideModal());
             return <Redirect to="/" />;
-        });
+        })
     };
 
     return (
@@ -89,7 +85,7 @@ export default function SignupForm() {
                             autoComplete="new-password"
                         />
                     </div>
-                    <div className={styles.passwordWrapper}>
+                    <div className={styles.confirm_passwordWrapper}>
                         <TextInput
                             label="Confirm Password:"
                             id="confirm_password"

@@ -7,23 +7,45 @@
 }
 
 .formControl {
-    margin-top: 1rem;
-    width: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "label" "input" "feedback";
+    align-items: center;
+}
+
+.label {
+    grid-area: label;
+}
+
+.input {
+    grid-area: input;
+}
+
+.feedback {
+    grid-area: feedback;
+}
+
+input:focus-visible {
+    outline: 2px solid var(--blue-600);
 }
 
 input[type="email"],
 input[type="text"],
 input[type="url"],
 input[type="password"] {
-    width: 100%;
+    width: 90%;
+    font-size: 1rem;
+    border-color: black;
 }
 
 .valid input[type="email"],
 .valid input[type="text"],
 .valid input[type="url"],
 .valid input[type="password"] {
-    border-color: #0bda51;
-    width: 100%;
+    border: 2px solid #0bda51;
+    width: 90%;
     font-size: 1rem;
 }
 
@@ -35,21 +57,11 @@ input[type="password"] {
 .invalid input[type="text"],
 .invalid input[type="url"],
 .invalid input[type="password"] {
-    border-color: red;
-    width: 100%;
+    border: 2px solid red;
+    width: 90%;
     font-size: 1rem;
 }
 
 .invalid .feedback {
     color: red;
-}
-
-.textXs {
-    overflow-wrap: break-word;
-    word-break: break-word;
-    width: 216px;
-    color: black;
-    font-weight: 600;
-    font-size: 15px;
-    padding-top: 5px;
 }

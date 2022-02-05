@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useField } from "formik";
 
 import StyledError from "../StyledComponents/StyledError";
-import StyledCheckmark from "../StyledComponents/StyledCheckmark";
+import StyledIcon from "../StyledComponents/StyledIcon";
 import styles from "./Formik.module.css";
+import { mdiCheckBold } from "@mdi/js";
 
 export default function TextInput({ label, helpText, ...props }) {
     const [field, meta] = useField(props);
@@ -25,19 +26,16 @@ export default function TextInput({ label, helpText, ...props }) {
                     : ""
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
-            {showFeedback ? (
-                <div aria-live="polite">
-                    {meta.error ? (
+            <input {...field} {...props} onFocus={handleFocus} />
+            <div className={styles.feedback}>
+                {showFeedback ? (
+                    meta.error ? (
                         <StyledError error={meta.error} />
                     ) : (
-                        <StyledCheckmark />
-                    )}
-                </div>
-            ) : null}
-            <input {...field} {...props} onFocus={handleFocus} />
-            <p className={styles.textXs} id={`${props.id}-help`} tabIndex="-1">
-                {helpText}
-            </p>
+                        <StyledIcon icon={mdiCheckBold} color="green" />
+                    )
+                ) : null}
+            </div>
         </div>
     );
 }

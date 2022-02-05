@@ -12,7 +12,5 @@
 }
 
 .modalContent {
-    height: fit-content;
-    width: fit-content;
     border-radius: 5px;
 }
