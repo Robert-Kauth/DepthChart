@@ -49,25 +49,19 @@ export const demoLogin = () => async (dispatch) => {
     dispatch(createSession(user));
 };
 
-export const signUp =
-    (username, avatar, email, password) => async (dispatch) => {
-        const res = await fetch("/api/auth/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                avatar,
-                email,
-                password,
-            }),
-        });
-        const user = await res.json();
-        if (user.errors) {
-            return user.errors;
-        } else dispatch(createSession(user));
-    };
+export const signUp = (userInfo) => async (dispatch) => {
+    const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+    });
+    const user = await res.json();
+    if (user.errors) {
+        return user.errors;
+    } else dispatch(createSession(user));
+};
 
 export const logout = () => async (dispatch) => {
     await fetch("/api/auth/logout", {
