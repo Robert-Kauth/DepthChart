@@ -7,13 +7,16 @@ import StyledError from "../StyledComponents/StyledError";
 import styles from "./Formik.module.css";
 
 // Function that checks if username is already in use
-async function validateUsername(username) {
-    const res = await fetch(`/api/auth/validate_username/${username}`);
+async function validateSingupUsername(username) {
+    const res = await fetch(`/api/auth/validate_signup_username/${username}`);
+    const isValid = await res.json();
+    return isValid;
+}
 
-    const { is_username_unique } = await res.json();
-    // is_username_unique = false if already in use
-    // is_username_unique = username (true) if not
-    return is_username_unique;
+async function validateLoginUsername(username) {
+    const res = await fetch(`/api/auth/validate_login_username/${username}`);
+    const isValid = await res.json();
+    return isValid;
 }
 
 export default function LiveUsernameValidation({ label, ...props }) {
@@ -31,31 +34,79 @@ export default function LiveUsernameValidation({ label, ...props }) {
     const handleBlur = () => setDidFocus(true);
 
     const showFeedback =
-        (didFocus && field.value.trim().length > 2) || meta.touched;
+        (didFocus && field.value.toString().trim().length > 2) || meta.touched;
 
     useEffect(() => {
         let isCurrent;
 
-        if (username.trim() !== prev) {
+        if (username.toString().trim() !== prev) {
             isCurrent = true;
         }
 
-        if (username.trim() !== "" && username.trim().length > 2) {
-            validateUsername(username).then((validUsername) => {
-                if (isCurrent && validUsername) {
-                    setFieldValue(props.name, validUsername);
+        if (
+            username.toString().trim() !== "" &&
+            username.toString().trim().length > 2 &&
+            props.signup
+        ) {
+            validateSingupUsername(username).then((isValid) => {
+                const { is_username_unique } = isValid;
+                if (isCurrent && is_username_unique) {
+                    setFieldValue(props.name, username);
                     setprev(username);
                 }
-                if (isCurrent && !validUsername) {
+                if (isCurrent && !is_username_unique) {
                     setFieldError(props.name, "Username is already in use");
-                    setprev(field.value.trim());
+                    setprev(field.value.toString().trim());
                 }
             });
         }
         return () => {
             isCurrent = false;
         };
-    }, [field.value, prev, props.name, setFieldError, setFieldValue, username]);
+    }, [
+        field.value,
+        prev,
+        props.name,
+        props.signup,
+        setFieldError,
+        setFieldValue,
+        username,
+    ]);
+
+    useEffect(() => {
+        let isCurrent;
+        if (username.toString().trim() !== prev) {
+            isCurrent = true;
+        }
+        if (
+            username.trim() !== "" &&
+            username.trim().length > 2 &&
+            props.login
+        ) {
+            validateLoginUsername(username).then((isValid) => {
+                const { is_user } = isValid;
+                if (isCurrent && is_user) {
+                    setFieldValue(props.name, username);
+                    setprev(username);
+                }
+                if (isCurrent && !is_user) {
+                    setFieldError(props.name, "Username not Found");
+                    setprev(field.value.toString().trim());
+                }
+            });
+        }
+        return () => {
+            isCurrent = false;
+        };
+    }, [
+        field.value,
+        prev,
+        props.login,
+        props.name,
+        setFieldError,
+        setFieldValue,
+        username,
+    ]);
 
     return (
         <div

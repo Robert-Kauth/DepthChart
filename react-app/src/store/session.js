@@ -23,16 +23,13 @@ export const authenticate = () => async (dispatch) => {
     if (!user.errors) dispatch(createSession(user));
 };
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (userInfo) => async (dispatch) => {
     const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            email,
-            password,
-        }),
+        body: JSON.stringify(userInfo),
     });
     const user = await response.json();
     if (user.errors) {
@@ -52,25 +49,19 @@ export const demoLogin = () => async (dispatch) => {
     dispatch(createSession(user));
 };
 
-export const signUp =
-    (username, avatar, email, password) => async (dispatch) => {
-        const res = await fetch("/api/auth/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                avatar,
-                email,
-                password,
-            }),
-        });
-        const user = await res.json();
-        if (user.errors) {
-            return user.errors;
-        } else dispatch(createSession(user));
-    };
+export const signUp = (userInfo) => async (dispatch) => {
+    const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+    });
+    const user = await res.json();
+    if (user.errors) {
+        return user.errors;
+    } else dispatch(createSession(user));
+};
 
 export const logout = () => async (dispatch) => {
     await fetch("/api/auth/logout", {

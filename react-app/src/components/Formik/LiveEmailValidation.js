@@ -6,24 +6,17 @@ import StyledIcon from "../StyledComponents/StyledIcon";
 import styles from "./Formik.module.css";
 import { mdiCheckBold } from "@mdi/js";
 
-// Function to check if email is already in use
-async function validateEmail(email) {
-    const isValid = await fetch(`/api/auth/validate_email/${email}`);
-    // console.log(isValid, typeof isValid, "<-");
-    const { is_email_unique, is_user } = await isValid.json();
-    // console.log(is_email_unique, "?????");
-    // console.log(is_user, "@@@@@@@");
-    // is_email_unique = false if already in use
-    // is_email_unique = email (true) if not
-    if (is_user && !is_email_unique) {
-        console.log("hit user");
-        return is_user;
-    } else if (is_email_unique && !is_user) {
-        console.log("hit email");
-        return is_email_unique;
-    }
-    console.log("hit false");
-    return false;
+// Function to check if singup email is already in use
+async function validateSignupEmail(email) {
+    const res = await fetch(`/api/auth/validate_signup_email/${email}`);
+    const isValid = await res.json();
+    return isValid;
+}
+
+async function validateLoginEmail(email) {
+    const res = await fetch(`/api/auth/validate_login_email/${email}`);
+    const isValid = await res.json();
+    return isValid;
 }
 
 export default function LiveEmailValidation({ label, ...props }) {
@@ -41,37 +34,81 @@ export default function LiveEmailValidation({ label, ...props }) {
     const handleFocus = () => setDidFocus(true);
     const handleBlur = () => setDidFocus(true);
 
-    const showFeedback = (didFocus && email.trim().length > 4) || meta.touched;
-    //! Want to create a function to check if input could be a legit email before sending fetch to server
-    // * want to cut done on calls to the server
-    // const isEmail = () => {
-    //     return;
-    // };
+    const showFeedback =
+        (didFocus && email.toString().trim().length > 4) || meta.touched;
 
     useEffect(() => {
         let isCurrent;
 
-        if (email.trim() !== prev) {
+        if (email.toString().trim() !== prev) {
             isCurrent = true;
         }
 
-        if (email.trim() !== "" && email.includes("@")) {
-            validateEmail(email).then((isValid) => {
-                if (isCurrent && isValid) {
-                    console.log(isValid, "@@@");
-                    setFieldValue(props.name, isValid);
+        if (
+            email.toString().trim() !== "" &&
+            email.toString().trim().length > 2 &&
+            props.signup
+        ) {
+            validateSignupEmail(email).then((isValid) => {
+                const { is_email_unique } = isValid;
+                if (isCurrent && is_email_unique) {
+                    setFieldValue(props.name, email);
                     setPrev(email);
                 }
-                if (isCurrent && !isValid) {
+                if (isCurrent && !is_email_unique) {
                     setFieldError(props.name, "Email is already in use");
-                    setPrev(field.value.trim());
+                    setPrev(field.value.toString().trim());
                 }
             });
         }
         return () => {
             isCurrent = false;
         };
-    }, [email, field.value, prev, props.name, setFieldError, setFieldValue]);
+    }, [
+        email,
+        field.value,
+        prev,
+        props.name,
+        props.signup,
+        setFieldError,
+        setFieldValue,
+    ]);
+
+    useEffect(() => {
+        let isCurrent;
+
+        if (email.toString().trim() !== prev) {
+            isCurrent = true;
+        }
+        if (
+            email.toString().trim() !== "" &&
+            email.toString().trim().length > 2 &&
+            props.login
+        ) {
+            validateLoginEmail(email).then((isValid) => {
+                const { is_user } = isValid;
+                if (isCurrent && is_user) {
+                    setFieldValue(props.name, email);
+                    setPrev(email);
+                }
+                if (isCurrent && !is_user) {
+                    setFieldError(props.name, "Email not found");
+                    setPrev(field.value.toString().trim());
+                }
+            });
+        }
+        return () => {
+            isCurrent = false;
+        };
+    }, [
+        email,
+        field.value,
+        prev,
+        props.login,
+        props.name,
+        setFieldError,
+        setFieldValue,
+    ]);
 
     return (
         <div

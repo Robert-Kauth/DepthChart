@@ -1,11 +1,32 @@
+.background {
+    height: 100%;
+    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackground.jpg);
+    background-size: contain;
+    background-attachment: fixed;
+}
+
+/*
+* This media query is used for: iPhone 13 Pro Max and iPhone 12 Pro Max
+2778x1284 pixels at 458ppi
+
+
+@media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+    
+} 
+/*
+
+* This code is for large monitor 
 .splash {
     height: 100%;
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackground.jpg);
-    background-size: cover;
-}
+    background-size: contain;
+    background-attachment: fixed;
+}; 
+*/
 
-.wrapper {
-    display: flex;
+.main {
+    display: grid;
+
     flex-direction: column;
     align-items: center;
     background-color: transparent;
@@ -14,44 +35,42 @@
 }
 
 .titleContainer {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.title {
-    border: 2px solid black;
-    border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
-    padding: 10px 20px;
-    background-color: #195905;
-    font-size: 80px;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
-    margin: 5px;
-}
-
-.subtitleContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
-    border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
+    position: relative;
+    top: 12vh;
+}
+
+.title {
+    color: whitesmoke;
     padding: 10px 20px;
-    background-color: #195905;
-    font-size: 80px;
+    font-size: 8rem;
     text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    margin: 5px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.subtitleContainer {
+    position: relative;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
     margin: 5px;
 }
 
 .subtitle1 {
-    font-size: 80px;
+    font-size: 8rem;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
     margin: 5px;
 }
 .subtitle2 {
-    font-size: 80px;
+    font-size: 8rem;
     margin: 5px;
 }
 

@@ -56,32 +56,54 @@ def logout():
     return {'message': 'User logged out'}
 
 
-@auth_routes.route('/validate_email/<string:email>')
+@auth_routes.route('/validate_signup_email/<string:email>')
 def user_exists(email):
     '''
-    Checks if user email already exists in database
+    Checks if users singup email already exists in database
     '''
-    valid_email = validate_email(email)
-    if validate_email:
-        user = User.query.filter(User.email == email).first()
-        
-        if user is not None:
-            return {'is_email_unique': email, 'is_user': user.to_dict()}
-        else:
-            return {'is_email_unique': email, 'is_user': False}
+    user = User.query.filter(User.email == email).first()
     
+    if user is not None: 
+        return {'is_email_unique': False}
+    else:
+        return {'is_email_unique': email}
 
 
-@auth_routes.route('/validate_username/<string:username>')
+@auth_routes.route('/validate_signup_username/<string:username>')
 def username_exists(username):
     '''
-    Checks if username already exists in database
+    Checks if signup username exists in database
     '''
     user = User.query.filter(User.username == username).first()
     if user is not None:
-        return {'is_username_unique': False, 'is_user': True}
+        return {'is_username_unique': False}
     else:
-        return {'is_username_unique': username, 'is_user': False}
+        return {'is_username_unique': username}
+
+
+@auth_routes.route('/validate_login_email/<string:email>')
+def user_login(email):
+    '''
+    Checks if login email exists in database
+    '''
+    user = User.query.filter(User.email == email).first()
+    
+    if user is not None: 
+        return {'is_user':email}
+    else:
+        return {'is_user': False}
+
+
+@auth_routes.route('/validate_login_username/<string:username>')
+def username_login(username):
+    '''
+    Checks if login username exists in database
+    '''
+    user = User.query.filter(User.username == username).first()
+    if user is not None:
+        return {'is_user': username}
+    else:
+        return {'is_user': False}
 
 
 @auth_routes.route('/signup', methods=['POST'])
