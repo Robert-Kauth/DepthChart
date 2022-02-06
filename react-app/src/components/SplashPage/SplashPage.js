@@ -17,19 +17,19 @@ export default function SplashPage() {
     };
 
     return (
-        <div className={styles.splash}>
-            <div className={styles.wrapper}>
+        <div className={styles.background}>
+            <main className={styles.main}>
                 <div className={styles.titleContainer}>
-                    <p className={styles.title}>Welcome to DepthChart</p>
+                    <h1 className={styles.title}>Welcome to DepthChart</h1>
                     <div className={styles.subtitleContainer}>
-                        <p className={styles.subtitle1}>Don't be BEAT.</p>
-                        <p className={styles.subtitle2}>Avoid the SACKO!</p>
+                        <h2 className={styles.subtitle1}>Don't be BEAT.</h2>
+                        <h3 className={styles.subtitle2}>Avoid the SACKO!</h3>
                     </div>
                 </div>
                 <button className={styles.button} onClick={showSignupForm}>
                     Sign Up
                 </button>
-            </div>
+            </main>
         </div>
     );
 }
