@@ -39,11 +39,9 @@ def login():
     # Get the csrf_token from the request cookie and put it into the
     # form manually so validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
-    email = form.data['email']
-    print("\n\n\n",email,"\n\n\n")
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
+        user = User.query.filter(User.email == form.email.data).first()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -61,7 +59,7 @@ def logout():
 @auth_routes.route('/validate_signup_email/<string:email>')
 def user_exists(email):
     '''
-    Checks if user email already exists in database
+    Checks if users singup email already exists in database
     '''
     user = User.query.filter(User.email == email).first()
     
@@ -74,7 +72,7 @@ def user_exists(email):
 @auth_routes.route('/validate_signup_username/<string:username>')
 def username_exists(username):
     '''
-    Checks if username exists in database
+    Checks if signup username exists in database
     '''
     user = User.query.filter(User.username == username).first()
     if user is not None:
@@ -86,7 +84,7 @@ def username_exists(username):
 @auth_routes.route('/validate_login_email/<string:email>')
 def user_login(email):
     '''
-    Checks if user email exists in database
+    Checks if login email exists in database
     '''
     user = User.query.filter(User.email == email).first()
     
@@ -99,7 +97,7 @@ def user_login(email):
 @auth_routes.route('/validate_login_username/<string:username>')
 def username_login(username):
     '''
-    Checks if username exists in database
+    Checks if login username exists in database
     '''
     user = User.query.filter(User.username == username).first()
     if user is not None:
