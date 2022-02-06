@@ -23,16 +23,13 @@ export const authenticate = () => async (dispatch) => {
     if (!user.errors) dispatch(createSession(user));
 };
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (userInfo) => async (dispatch) => {
     const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            email,
-            password,
-        }),
+        body: JSON.stringify(userInfo),
     });
     const user = await response.json();
     if (user.errors) {

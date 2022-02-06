@@ -25,13 +25,11 @@ export default function LoginForm() {
             .required("Password is required"),
     });
 
-    const handleSubmit = async (e, values) => {
-        e.preventDefault();
+    const handleSubmit = async (values) => {
         const validUser = await LoginFormSchema.validate(values);
-        dispatch(login(validUser)).then(() => {
-            dispatch(hideModal());
-            return <Redirect to="/" />;
-        });
+        dispatch(login(validUser));
+        dispatch(hideModal());
+        return <Redirect to="/" />;
     };
 
     const handleDemoLogin = (e) => {
@@ -57,6 +55,7 @@ export default function LoginForm() {
                             name="email"
                             type="email"
                             autoComplete="email"
+                            login="true"
                         />
                     </div>
                     <div className={styles.passwordWrapper}>
@@ -64,12 +63,14 @@ export default function LoginForm() {
                             label="Password:"
                             id="password"
                             name="password"
-                            type="text"
+                            type="password"
                             autoComplete="password"
                         />
                     </div>
                     <div className={styles.buttonContainer}>
-                        <button className={styles.loginButton}>Login</button>
+                        <button type="submit" className={styles.loginButton}>
+                            Login
+                        </button>
                     </div>
                     <div className={styles.buttonContainer}>
                         <button
