@@ -5,7 +5,7 @@ import styles from "./Footer.module.css";
 
 export default function Footer() {
     return (
-        <div className={styles.footerContainer}>
+        <footer className={styles.footerContainer}>
             <div className={styles.dev}>
                 <p className={styles.name}>Designed by: Robert Kauth</p>
                 <div className={styles.logoContainer}>
@@ -35,6 +35,6 @@ export default function Footer() {
                     </Link>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 }
