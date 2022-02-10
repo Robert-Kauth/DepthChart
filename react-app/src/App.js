@@ -26,24 +26,26 @@ export default function App() {
     }, [dispatch]);
 
     return (
-        <div className={styles.appContainer}>
-            <NavBar />
+        <div className={styles.app}>
             <Modal />
-            <Switch>
-                <ProtectedRoute path="/servers/:serverId">
-                    <Server />
-                </ProtectedRoute>
-                {user && isOnline ? (
-                    <Route path="/">
-                        <Home />
-                    </Route>
-                ) : (
-                    <Route path="/">
-                        <SplashPage />
-                    </Route>
-                )}
-            </Switch>
-            <Footer />
+            <NavBar className={styles.navBar} />
+            <main className={styles.main}>
+                <Switch>
+                    <ProtectedRoute path="/servers/:serverId">
+                        <Server />
+                    </ProtectedRoute>
+                    {user && isOnline ? (
+                        <Route path="/">
+                            <Home />
+                        </Route>
+                    ) : (
+                        <Route path="/">
+                            <SplashPage />
+                        </Route>
+                    )}
+                </Switch>
+            </main>
+            <Footer className={styles.footer} />
         </div>
     );
 }
