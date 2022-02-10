@@ -8,7 +8,7 @@ import { showModal, setCurrentModal } from "../../../store/modal";
 const Button = styled.button`
     background-color: #014421;
     color: #029e7e;
-    margin: 0;
+    margin: 2px;
     padding-top: 5px;
     border: 2px solid darkgreen;
     border-radius: 2px;
