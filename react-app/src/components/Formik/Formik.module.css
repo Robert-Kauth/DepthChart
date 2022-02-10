@@ -10,8 +10,11 @@
     width: 90%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas: "label" "input" "feedback";
+    grid-template-rows: repeat(3, 0.5fr);
+    grid-template-areas:
+        "label"
+        "input"
+        "feedback";
     align-items: center;
 }
 
@@ -25,6 +28,7 @@
 
 .feedback {
     grid-area: feedback;
+    margin: 1px 0;
 }
 
 input:focus-visible {
