@@ -1,12 +1,14 @@
 .background {
-    background: no-repeat center center
-        url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackground.jpg);
+    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-x: center;
+    background-position-y: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
     height: 100%;
-    background-attachment: fixed;
 }
 
 /*
@@ -44,7 +46,7 @@
     grid-area: title;
     color: whitesmoke;
     padding: 10px 20px;
-    font-size: 6rem;
+    font-size: 4rem;
     text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
     margin: 0;
     text-align: center;
@@ -54,13 +56,13 @@
 .subtitle1 {
     grid-area: sub1;
     color: whitesmoke;
-    font-size: 6rem;
+    font-size: 3rem;
     text-align: center;
     text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
 }
 .subtitle2 {
     grid-area: sub2;
-    font-size: 6rem;
+    font-size: 4rem;
     text-align: center;
     color: whitesmoke;
     text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
@@ -76,7 +78,7 @@
     border: 2px solid rgba(204, 0, 0, 1);
     border-radius: 2px;
     box-shadow: 0 0 5px lightcoral;
-    border-style: inset;
+    border-style: outset;
     background-color: rgba(229, 228, 226, 0.5);
     padding: 10px;
     font-size: 5rem;

@@ -14,9 +14,11 @@
     border-color: aliceblue;
     border-style: solid;
     border-width: 2px;
-    background: no-repeat center center
-        url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/sideline_cropped.jpg);
+    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/sideline_cropped.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
 }
 
 .linkedIn {
@@ -38,5 +40,6 @@ img {
     grid-area: name;
     font-weight: 600;
     font-size: 1.5rem;
+    margin: 0;
     text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
 }
