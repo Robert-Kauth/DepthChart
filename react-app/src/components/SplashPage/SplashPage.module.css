@@ -34,56 +34,68 @@
     position: relative;
     top: 2px;
 } */
+.section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+        "title"
+        "sub1"
+        "button"
+        "sub2";
+    height: 100%;
+}
 
-.titleContainer {
+/* .titleContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     top: 12vh;
-}
+} */
 
 .title {
+    grid-area: title;
     color: whitesmoke;
     padding: 10px 20px;
-    font-size: 8rem;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    font-size: 6rem;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
     margin: 0;
     text-align: center;
     font-weight: 600;
 }
 
-.subtitleContainer {
-    position: relative;
-    top: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    margin: 5px;
-}
-
 .subtitle1 {
-    font-size: 8rem;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
-    margin: 5px;
+    grid-area: sub1;
+    color: whitesmoke;
+    font-size: 6rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
 }
 .subtitle2 {
-    font-size: 8rem;
-    margin: 5px;
+    grid-area: sub2;
+    font-size: 6rem;
+    text-align: center;
+    color: whitesmoke;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
 }
-
+.buttonWrapper {
+    grid-area: button;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .button {
-    border: 2px solid lightgreen;
+    width: 24rem;
+    border: 2px solid rgba(204, 0, 0, 1);
     border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
+    box-shadow: 0 0 5px lightcoral;
     border-style: inset;
-    background-color: darkgreen;
+    background-color: rgba(229, 228, 226, 0.5);
     padding: 10px;
-    font-size: 25px;
-    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    font-size: 5rem;
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em red
 }
 
 .button:hover {
