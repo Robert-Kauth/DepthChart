@@ -1,15 +1,27 @@
-.homeBackground {
+/* .homeBackground {
     margin: 0;
     min-height: 100%;
     min-width: 100%;
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
     background-size: cover;
+} */
+
+.homeBackground {
+    background: no-repeat center center
+        url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
 }
 
 .contentWrapper {
     display: grid;
     grid-template-columns: 0.5fr 7.5fr 2fr;
-    grid-template-rows: 100vh;
+    grid-template-rows: 1fr;
+    max-height: 86vh;
     grid-template-areas: "servers main friends";
 }
 
