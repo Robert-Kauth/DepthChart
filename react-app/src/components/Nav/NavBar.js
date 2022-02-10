@@ -34,7 +34,7 @@ export default function NavBar() {
     };
 
     return (
-        <header>
+        <header className={styles.header}>
             <nav className={styles.nav}>
                 <div>
                     {user && (

@@ -5,12 +5,12 @@ import styles from "./Footer.module.css";
 
 export default function Footer() {
     return (
-        <footer className={styles.footerContainer}>
+        <footer className={styles.footer}>
             <div className={styles.dev}>
                 <p className={styles.name}>Designed by: Robert Kauth</p>
-                <div className={styles.logoContainer}>
+                <div className={styles.linkedIn}>
                     <Link
-                        className={styles.linkedIn}
+                        className={styles.linkedInLink}
                         to={{
                             pathname:
                                 "https://www.linkedin.com/in/robert-kauth-043370133/",
@@ -23,9 +23,9 @@ export default function Footer() {
                         />
                     </Link>
                 </div>
-                <div className={styles.logoContainer}>
+                <div className={styles.github}>
                     <Link
-                        className={styles.github}
+                        className={styles.githubLink}
                         to={{ pathname: "https://github.com/Robert-Kauth" }}
                         target="_blank">
                         <img
