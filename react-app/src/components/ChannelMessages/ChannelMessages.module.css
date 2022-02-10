@@ -7,7 +7,7 @@
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
-    border-style: inset;
+    border-style: outset;
 }
 
 .user {

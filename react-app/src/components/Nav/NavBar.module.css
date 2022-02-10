@@ -50,7 +50,7 @@
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
-    border-style: inset;
+    border-style: outset;
     background-color: green;
     font-size: 20px;
     color: black;
@@ -86,7 +86,7 @@
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
-    border-style: inset;
+    border-style: outset;
     background-color: green;
     min-height: 44px;
     min-width: 112px;
@@ -106,7 +106,7 @@
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
-    border-style: inset;
+    border-style: outset;
     background-color: green;
     min-height: 44px;
     min-width: 112px;
@@ -126,7 +126,7 @@
     border: 2px solid darkgreen;
     border-radius: 2px;
     box-shadow: 0 0 5px lightgreen;
-    border-style: inset;
+    border-style: outset;
     background-color: green;
 }
 

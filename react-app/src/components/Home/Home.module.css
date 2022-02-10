@@ -7,13 +7,15 @@
 } */
 
 .homeBackground {
-    background: no-repeat center center
-        url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
+    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-x: center;
+    background-position-y: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
-    background-attachment: fixed;
     height: 100%;
 }
 
