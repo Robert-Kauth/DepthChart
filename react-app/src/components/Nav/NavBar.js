@@ -34,43 +34,37 @@ export default function NavBar() {
     };
 
     return (
-        <header className={styles.header}>
-            <nav className={styles.nav}>
-                <div>
-                    {user && (
-                        <div className={styles.navLeft}>
-                            <NavLink
-                                exact
-                                to="/"
-                                className={styles.link}
-                                activeClassName={styles.active}>
-                                Home
-                            </NavLink>
-                            <button
-                                className={styles.editButton}
-                                onClick={showEditServer}>
-                                Edit Server
-                            </button>
-                        </div>
-                    )}
-                </div>
-                <div className={styles.navRight}>
-                    {user && <Avatar user={user} />}
-                    {!user ? (
+        <nav className={styles.nav}>
+            <div>
+                {user && (
+                    <div className={styles.navLeft}>
+                        <NavLink
+                            exact
+                            to="/"
+                            className={styles.link}
+                            activeClassName={styles.active}>
+                            Home
+                        </NavLink>
                         <button
-                            className={styles.loginButton}
-                            onClick={showLogin}>
-                            Log In
+                            className={styles.editButton}
+                            onClick={showEditServer}>
+                            Edit Server
                         </button>
-                    ) : (
-                        <button
-                            className={styles.logoutButton}
-                            onClick={onLogout}>
-                            Logout
-                        </button>
-                    )}
-                </div>
-            </nav>
-        </header>
+                    </div>
+                )}
+            </div>
+            <div className={styles.navRight}>
+                {user && <Avatar user={user} />}
+                {!user ? (
+                    <button className={styles.loginButton} onClick={showLogin}>
+                        Log In
+                    </button>
+                ) : (
+                    <button className={styles.logoutButton} onClick={onLogout}>
+                        Logout
+                    </button>
+                )}
+            </div>
+        </nav>
     );
 }

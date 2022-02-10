@@ -28,8 +28,10 @@ export default function App() {
     return (
         <div className={styles.app}>
             <Modal />
-            <NavBar className={styles.navBar} />
-            <main className={styles.main}>
+            <div className={styles.navBar}>
+                <NavBar />
+            </div>
+            <div className={styles.main}>
                 <Switch>
                     <ProtectedRoute path="/servers/:serverId">
                         <Server />
@@ -44,8 +46,10 @@ export default function App() {
                         </Route>
                     )}
                 </Switch>
-            </main>
-            <Footer className={styles.footer} />
+            </div>
+            <div className={styles.footer}>
+                <Footer />
+            </div>
         </div>
     );
 }

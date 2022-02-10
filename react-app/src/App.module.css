@@ -16,12 +16,21 @@
 
 .navBar {
     grid-area: navbar;
+    height: 7vh;
+    margin: 0;
 }
 
 .main {
     grid-area: main;
+    margin: 0;
+    height: 86vh;
 }
 
 .footer {
+    margin: 0;
     grid-area: footer;
+    height: 7vh;
 }
+
+/*     min-height: 86vh;
+    min-width: 100vw; */

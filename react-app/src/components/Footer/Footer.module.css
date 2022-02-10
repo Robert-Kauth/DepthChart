@@ -1,12 +1,25 @@
 .footer {
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
-    min-width: 100%;
+    width: 100%;
+    height: inherit;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        ". linkedin github"
+        "name linkedin github";
+    justify-content: center;
+    align-items: center;
+    border-color: aliceblue;
+    border-style: solid;
+    border-width: 2px;
+    background: no-repeat center center
+        url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/sideline_cropped.jpg);
+    background-size: cover;
 }
 
-.dev {
+/* .dev {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: repeat(2, 1fr);
@@ -22,7 +35,7 @@
         url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/sideline_cropped.jpg);
     background-size: cover;
     min-height: 5vh;
-}
+} */
 
 .linkedIn {
     grid-area: linkedin;

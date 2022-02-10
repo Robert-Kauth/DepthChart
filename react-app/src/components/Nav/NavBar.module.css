@@ -1,13 +1,20 @@
-.header {
+/* .header {
     position: fixed;
     min-width: 100%;
     z-index: 2;
     top: 0;
     left: 0;
     right: 0;
-}
+} */
 
 .nav {
+    position: fixed;
+    width: 100%;
+    height: inherit;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +24,6 @@
     background: no-repeat center center
         url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/sideline_cropped.jpg);
     background-size: cover;
-    min-height: 5vh;
 }
 
 .navLeft {
