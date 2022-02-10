@@ -18,22 +18,16 @@
 
 /*
 * This code is for large monitor 
-.splash {
-    height: 100%;
-    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackground.jpg);
-    background-size: contain;
-    background-attachment: fixed;
-}; 
 */
+@media only screen and (min-width: 768px) {
+    .splash {
+        height: 100%;
+        background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackground.jpg);
+        background-size: contain;
+        background-attachment: fixed;
+    }
+}
 
-/* .main {
-    display: grid;
-    flex-direction: column;
-    align-items: center;
-    background-color: transparent;
-    position: relative;
-    top: 2px;
-} */
 .section {
     display: grid;
     grid-template-columns: 1fr;
@@ -45,15 +39,6 @@
         "sub2";
     height: 100%;
 }
-
-/* .titleContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: 12vh;
-} */
 
 .title {
     grid-area: title;
