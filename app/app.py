@@ -107,4 +107,4 @@ def react_root(path):
 
 # Initializes socketio on app startup
 if __name__ == '__main__':
-    socketio.run(app)
+    sio.run(app)
