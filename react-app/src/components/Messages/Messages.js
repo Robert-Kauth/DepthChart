@@ -49,8 +49,11 @@ export default function Messages() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.topbar}>
-                <Title title="Direct Messages" />
-                <CreateMessageButton />
+                <Title
+                    className={styles.title}
+                    title="Direct Messages"
+                    button={<CreateMessageButton />}
+                />
             </div>
             {messagedUsers &&
                 messagedUsers.map((user) => (

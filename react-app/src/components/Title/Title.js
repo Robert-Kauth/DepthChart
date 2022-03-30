@@ -11,6 +11,9 @@ export default function Title(props) {
             ) : props.name ? (
                 <div className={styles.title}>{props.name}</div>
             ) : null}
+            {props.button ? (
+                <div className={styles.button}>{props.button}</div>
+            ) : null}
         </div>
     );
 }
