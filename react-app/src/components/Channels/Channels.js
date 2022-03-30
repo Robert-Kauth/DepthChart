@@ -41,7 +41,15 @@ export default function Channels({ serverId }) {
     return (
         <div className={styles.channelsWrapper}>
             <div className={styles.titleWrapper}>
-                <Title title="Channels" />
+                <Title
+                    title="Channels"
+                    button={
+                        <StyledButton
+                            icon={mdiPlusBox}
+                            form={CreateChannelForm}
+                        />
+                    }
+                />
                 <div className={styles.createButton}>
                     <StyledButton icon={mdiPlusBox} form={CreateChannelForm} />
                 </div>

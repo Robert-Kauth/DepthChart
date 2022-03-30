@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { mdiPlusBox } from "@mdi/js";
 
 import UserInfo from "../UserInfo";
+import NewMessageForm from "../NewMessageForm";
 
 import Title from "../Title";
-import CreateMessageButton from "../CreateMessageButton";
+import StyledButton from "../StyledComponents/StyledButton";
 
 import { loadMessagesBetween } from "../../store/messages";
 import { loadUser } from "../../store/users";
@@ -52,7 +54,9 @@ export default function Messages() {
                 <Title
                     className={styles.title}
                     title="Direct Messages"
-                    button={<CreateMessageButton />}
+                    button={
+                        <StyledButton form={NewMessageForm} icon={mdiPlusBox} />
+                    }
                 />
             </div>
             {messagedUsers &&
