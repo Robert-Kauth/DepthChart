@@ -75,7 +75,7 @@ export default function CreateMessageBar(props) {
     return (
         <div className={styles.wrapper}>
             {errors.length > 0 && <Errors errors={errors} />}
-            <form className={styles.newMessage}>
+            <div className={styles.newMessage}>
                 <Button onClick={handleSend}>
                     <StyledIcon path={mdiSendCircle} size={1} />
                 </Button>
@@ -85,7 +85,7 @@ export default function CreateMessageBar(props) {
                     value={message}
                     onChange={updateMessage}
                 />
-            </form>
+            </div>
         </div>
     );
 }
