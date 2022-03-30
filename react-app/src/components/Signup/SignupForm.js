@@ -11,7 +11,6 @@ import {
     LiveEmailValidation,
 } from "../Formik";
 
-import "./optional";
 import styles from "./SignupForm.module.css";
 
 export default function SignupForm() {

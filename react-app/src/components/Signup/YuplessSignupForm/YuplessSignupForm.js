@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { signUp } from "../../store/session";
-import { hideModal } from "../../store/modal";
+import { signUp } from "../../../store/session";
+import { hideModal } from "../../../store/modal";
 
 import styles from "./SignupForm.module.css";
-import Errors from "../Errors";
+import Errors from "../../Errors";
 // className={styles. }
 
-export default function SignupForm({ setShowModal }) {
+export default function YuplessSignupForm({ setShowModal }) {
     const dispatch = useDispatch();
 
     const user = useSelector((state) => state.session.user);

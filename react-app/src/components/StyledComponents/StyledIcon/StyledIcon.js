@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 
 const CustomIcon = styled(Icon)`
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1rem;
     color: ${(props) => props.color};
 `;
 

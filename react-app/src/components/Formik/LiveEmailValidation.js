@@ -5,19 +5,7 @@ import StyledError from "../StyledComponents/StyledError";
 import StyledIcon from "../StyledComponents/StyledIcon";
 import styles from "./Formik.module.css";
 import { mdiCheckBold } from "@mdi/js";
-
-// Function to check if singup email is already in use
-async function validateSignupEmail(email) {
-    const res = await fetch(`/api/auth/validate_signup_email/${email}`);
-    const isValid = await res.json();
-    return isValid;
-}
-
-async function validateLoginEmail(email) {
-    const res = await fetch(`/api/auth/validate_login_email/${email}`);
-    const isValid = await res.json();
-    return isValid;
-}
+import { validateSignupEmail, validateLoginEmail } from "../utils";
 
 export default function LiveEmailValidation({ label, ...props }) {
     const {
@@ -117,7 +105,7 @@ export default function LiveEmailValidation({ label, ...props }) {
                     ? meta.error
                         ? `${styles.invalid}`
                         : `${styles.valid}`
-                    : ""
+                    : null
             }`}>
             <label htmlFor={props.id || props.name}>{label}</label>
             <input
