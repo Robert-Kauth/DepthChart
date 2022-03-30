@@ -50,9 +50,6 @@ export default function Channels({ serverId }) {
                         />
                     }
                 />
-                <div className={styles.createButton}>
-                    <StyledButton icon={mdiPlusBox} form={CreateChannelForm} />
-                </div>
             </div>
             {serverChannels
                 ? serverChannels.map((channel) => (
