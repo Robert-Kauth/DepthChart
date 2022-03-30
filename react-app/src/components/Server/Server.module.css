@@ -1,3 +1,18 @@
+/*
+* This media query is used for: iPhone 13 Pro Max and iPhone 12 Pro Max
+* 2778x1284 pixels at 458ppi
+*/
+@media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+}
+
+
+/*
+* This code is for large monitor 
+*/
+@media only screen and (min-width: 768px) {
+    
+}
+
 .background {
     background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/stadium_from_above_horizontal.jpg);
     background-repeat: no-repeat;
