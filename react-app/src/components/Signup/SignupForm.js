@@ -16,7 +16,7 @@ import styles from "./SignupForm.module.css";
 export default function SignupForm() {
     const dispatch = useDispatch();
 
-    // Validation schema- Provides livefeed back to user. Generates error message (strings)
+    // Validation schema- Provides livefeed back to user. Generates error messages
     const SignupFormSchema = Yup.object().shape({
         username: Yup.string()
             .min(4, "Must be at least 4 characters")

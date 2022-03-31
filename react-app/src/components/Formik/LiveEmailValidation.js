@@ -16,6 +16,9 @@ export default function LiveEmailValidation({ label, ...props }) {
 
     const [field, meta] = useField(props);
 
+    console.log(meta.error, "!!!!!!!!!!!");
+    console.log(field.errors, "errrors");
+
     const [didFocus, setDidFocus] = useState(false);
     const [prev, setPrev] = useState("");
 
