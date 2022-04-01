@@ -100,13 +100,11 @@ export default function Chat() {
                 <div className={styles.chats}>
                     {user && selectedId === user.id && dbChats
                         ? dbChats.map((chat) => <div>{chat}</div>)
-                        : null}
-                    {localMessages &&
-                        localMessages.map((message, idx) => (
-                            <div className={styles.chat} key={idx}>
-                                {`${message.user}: ${message.msg}`}
-                            </div>
-                        ))}
+                        : localMessages.map((message, idx) => (
+                              <div className={styles.chat} key={idx}>
+                                  {`${message.user}: ${message.msg}`}
+                              </div>
+                          ))}
                 </div>
             }
             {errors && <Errors errors={errors} />}
