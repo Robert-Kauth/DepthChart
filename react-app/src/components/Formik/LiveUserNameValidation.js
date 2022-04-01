@@ -24,20 +24,27 @@ export default function LiveUsernameValidation({ label, ...props }) {
         values: { username },
         setFieldValue,
         setFieldError,
+        errors,
     } = useFormikContext();
 
     const [field, meta] = useField(props);
     const [didFocus, setDidFocus] = useState(false);
     const [prev, setprev] = useState("");
+    const [usernameErrors, setUsernameErrors] = useState("");
 
-    const handleFocus = () => setDidFocus(true);
-    const handleBlur = () => setDidFocus(true);
+    const handleFocus = () => {
+        setDidFocus(true);
+        if (field.value !== prev) {
+            setUsernameErrors("");
+        }
+    };
+    const handleBlur = () => setUsernameErrors(errors.username);
 
     const showFeedback =
         (didFocus && field.value.toString().trim().length > 2) || meta.touched;
 
     useEffect(() => {
-        let isCurrent;
+        let isCurrent = false;
 
         if (username.toString().trim() !== prev) {
             isCurrent = true;
@@ -46,7 +53,8 @@ export default function LiveUsernameValidation({ label, ...props }) {
         if (
             username.toString().trim() !== "" &&
             username.toString().trim().length > 2 &&
-            props.signup
+            props.signup &&
+            isCurrent
         ) {
             validateSingupUsername(username).then((isValid) => {
                 const { is_username_unique } = isValid;
@@ -74,14 +82,16 @@ export default function LiveUsernameValidation({ label, ...props }) {
     ]);
 
     useEffect(() => {
-        let isCurrent;
+        let isCurrent = false;
+
         if (username.toString().trim() !== prev) {
             isCurrent = true;
         }
         if (
             username.trim() !== "" &&
             username.trim().length > 2 &&
-            props.login
+            props.login &&
+            isCurrent
         ) {
             validateLoginUsername(username).then((isValid) => {
                 const { is_user } = isValid;
@@ -112,7 +122,7 @@ export default function LiveUsernameValidation({ label, ...props }) {
         <div
             className={`${styles.formControl} ${
                 showFeedback
-                    ? meta.error
+                    ? meta.error || usernameErrors
                         ? `${styles.invalid}`
                         : `${styles.valid}`
                     : ""
@@ -129,8 +139,8 @@ export default function LiveUsernameValidation({ label, ...props }) {
             />
             <div className={styles.feedback}>
                 {showFeedback ? (
-                    meta.error ? (
-                        <StyledError error={meta.error} />
+                    meta.error || usernameErrors ? (
+                        <StyledError error={meta.error || usernameErrors} />
                     ) : (
                         <StyledIcon icon={mdiCheckBold} color="green" />
                     )

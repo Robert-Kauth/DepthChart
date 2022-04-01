@@ -12,24 +12,29 @@ export default function LiveEmailValidation({ label, ...props }) {
         values: { email },
         setFieldValue,
         setFieldError,
+        errors,
     } = useFormikContext();
 
     const [field, meta] = useField(props);
-
-    console.log(meta.error, "!!!!!!!!!!!");
-    console.log(field.errors, "errrors");
-
     const [didFocus, setDidFocus] = useState(false);
     const [prev, setPrev] = useState("");
+    const [emailErrors, setEmailErrors] = useState("");
 
-    const handleFocus = () => setDidFocus(true);
-    const handleBlur = () => setDidFocus(true);
+    const handleFocus = () => {
+        setDidFocus(true);
+        if (field.value !== prev) {
+            setEmailErrors("");
+        }
+    };
+    const handleBlur = () => {
+        setEmailErrors(errors.email);
+    };
 
     const showFeedback =
         (didFocus && email.toString().trim().length > 4) || meta.touched;
 
     useEffect(() => {
-        let isCurrent;
+        let isCurrent = false;
 
         if (email.toString().trim() !== prev) {
             isCurrent = true;
@@ -38,7 +43,8 @@ export default function LiveEmailValidation({ label, ...props }) {
         if (
             email.toString().trim() !== "" &&
             email.toString().trim().length > 2 &&
-            props.signup
+            props.signup &&
+            isCurrent
         ) {
             validateSignupEmail(email).then((isValid) => {
                 const { is_email_unique } = isValid;
@@ -66,7 +72,7 @@ export default function LiveEmailValidation({ label, ...props }) {
     ]);
 
     useEffect(() => {
-        let isCurrent;
+        let isCurrent = false;
 
         if (email.toString().trim() !== prev) {
             isCurrent = true;
@@ -105,7 +111,7 @@ export default function LiveEmailValidation({ label, ...props }) {
         <div
             className={`${styles.formControl} ${
                 showFeedback
-                    ? meta.error
+                    ? meta.error || emailErrors
                         ? `${styles.invalid}`
                         : `${styles.valid}`
                     : null
@@ -119,8 +125,8 @@ export default function LiveEmailValidation({ label, ...props }) {
             />
             <div className={styles.feedback}>
                 {showFeedback ? (
-                    meta.error ? (
-                        <StyledError error={meta.error} />
+                    meta.error || emailErrors ? (
+                        <StyledError error={meta.error || emailErrors} />
                     ) : (
                         <StyledIcon icon={mdiCheckBold} color="green" />
                     )
