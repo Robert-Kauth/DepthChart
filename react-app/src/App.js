@@ -15,6 +15,8 @@ import { authenticate } from "./store/session";
 import styles from "./App.module.css";
 // className={styles. }
 
+//! Need to add main component here to start
+
 export default function App() {
     const dispatch = useDispatch();
 
