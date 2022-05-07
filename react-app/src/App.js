@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Modal from "./components/Modal";
 import NavBar from "./components/Nav";
@@ -15,13 +15,8 @@ import { authenticate } from "./store/session";
 import styles from "./App.module.css";
 // className={styles. }
 
-//! Need to add main component here to start
-
 export default function App() {
     const dispatch = useDispatch();
-
-    const isOnline = useSelector((state) => state.session.online);
-    const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(authenticate());
@@ -38,16 +33,13 @@ export default function App() {
                     <ProtectedRoute path="/servers/:serverId">
                         <Server />
                     </ProtectedRoute>
-                    {user && isOnline ? (
-                        <Route path="/">
-                            <Home />
-                        </Route>
-                    ) : (
-                        <Route path="/">
-                            <SplashPage />
-                        </Route>
-                    )}
+                    <ProtectedRoute path="/">
+                        <Home />
+                    </ProtectedRoute>
                 </Switch>
+                <Route path="/">
+                    <SplashPage />
+                </Route>
             </div>
             <div className={styles.footer}>
                 <Footer />
