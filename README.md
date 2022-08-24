@@ -1,16 +1,23 @@
 # DepthChart
+
 ## *By Robert Kauth - Visit [DepthChart](https://depthchart.herokuapp.com/)*
+
 ![DepthChart logo](https://fantasydepthchart.s3.us-west-1.amazonaws.com/discord_footballgithub.png)
+
 ---
+
 ## Depthchart Overview
+
 Depthchart is a web application designed with fantasy football leagues in mind. Personally I have found it difficult to keep track of things when four or more apps are being using by our comissioner to desemminate important information. Depthchart aims to solve this problem by getting everything under one roof.
 
 Users at Depthchart can each create their own custom server that can be home to as many custom channels as they like, and all of this can be shared with other members in their league if they decide.
 
 ---
 
-## Application Technology:
-### Backend:
+## Application Technology
+
+### Backend
+
     1. Python
     2. Flask
     3. Postgresql
@@ -21,6 +28,7 @@ SQLAlchemy acts as the python SQL interface and is used as the Object Relational
 ---
 
 ### FrontEnd
+
     1. HTML
     2. Vanilla CSS
     3. Javascript
@@ -32,6 +40,7 @@ React-Redux is a Javascript libray that is used to build the responsive UI. The 
 ---
 
 ## Future Developments
+
 * Instant Chat and Messaging between multiple users
 * Searching other users
 * Integration with fantasy football news sources
