@@ -1,0 +1,104 @@
+{
+  "dsp_spec_version": "0.0.1",
+  "last_updated_by": "Robert Kauth",
+  "last_updated": "2022-08-26T21:33:22.000Z",
+  "settings": {
+    "name": "depthchart-material-theme",
+    "package_version": "0.0.1",
+    "build_tool": "StyleDictionary",
+    "snippet_trigger_prefix": "dc_",
+    "build_status_label": "dev",
+    "build_params": "./config.json",
+    "languages": [
+      {
+        "label": "CSS",
+        "export_tokens": true,
+        "snippet_id": "css",
+        "syntax": "text/css",
+        "ext-com_adobe_xd-styledictionary_id": "css"
+      },
+      {
+        "label": "HTML",
+        "export_tokens": false,
+        "snippet_id": "html",
+        "syntax": "text/html"
+      },
+      {
+        "label": "JavaScript",
+        "export_tokens": false,
+        "snippet_id": "javascript",
+        "syntax": "text/javascript",
+        "ext-com_adobe_xd-styledictionary_id": "js"
+      },
+      {
+        "label": "JavaScript React",
+        "export_tokens": false,
+        "snippet_id": "javascriptreact",
+        "syntax": "text/jsx"
+      },
+      {
+        "label": "Pug",
+        "export_tokens": false,
+        "snippet_id": "jade",
+        "syntax": "text/html"
+      },
+      {
+        "label": "Python",
+        "export_tokens": false,
+        "snippet_id": "python",
+        "syntax": "text/x-python"
+      },
+      {
+        "label": "Rust",
+        "export_tokens": false,
+        "snippet_id": "rust",
+        "syntax": "text/x-rustsrc"
+      },
+      {
+        "label": "SCSS",
+        "export_tokens": true,
+        "snippet_id": "scss",
+        "syntax": "text/x-sass",
+        "ext-com_adobe_xd-styledictionary_id": "scss"
+      },
+      {
+        "label": "SASS",
+        "export_tokens": false,
+        "snippet_id": "sass",
+        "syntax": "text/x-sass"
+      },
+      {
+        "label": "TypeScript",
+        "export_tokens": false,
+        "snippet_id": "typescript",
+        "syntax": "text/typescript"
+      },
+      {
+        "label": "TypeScript React",
+        "export_tokens": false,
+        "snippet_id": "typescriptreact",
+        "syntax": "text/typescript-jsx"
+      },
+      {
+        "label": "Markdown",
+        "export_tokens": false,
+        "snippet_id": "markdown",
+        "syntax": "text/x-markdown"
+      }
+    ]
+  },
+  "import": [
+    {
+      "src": "data/tokens.json"
+    },
+    {
+      "src": "data/fonts.json"
+    },
+    {
+      "src": "data/components.json"
+    },
+    {
+      "src": "data/docs.json"
+    }
+  ]
+}

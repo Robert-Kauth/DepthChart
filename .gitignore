@@ -2,7 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,flask
 
 scratch/*
-
+.vscode
+../.vscode/
 ### Flask ###
 instance/*
 !instance/.gitignore
