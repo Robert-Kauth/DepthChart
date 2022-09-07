@@ -4,6 +4,9 @@
 # Misc.
 .vscode/*
 scratch/*
+double.code-workspace
+oldreadme.md
+
 ### Flask ###
 instance/*
 !instance/.gitignore
