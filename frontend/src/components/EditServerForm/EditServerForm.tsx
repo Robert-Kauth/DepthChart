@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent, MouseEvent } from "react";
 import { mdiArrowLeftCircle } from "@mdi/js";
 import styled from "styled-components";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 
 import { editServer } from "../../store/servers";
 import { hideModal } from "../../store/modal";

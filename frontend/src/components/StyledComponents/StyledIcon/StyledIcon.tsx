@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 
 const CustomIcon = styled(Icon)`
     width: 1rem;

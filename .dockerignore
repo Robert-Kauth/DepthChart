@@ -1,0 +1,9 @@
+.git
+.github
+.claude
+graphify-out
+**/node_modules
+**/__pycache__
+frontend/dist
+app/static
+.env

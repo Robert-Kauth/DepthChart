@@ -31,9 +31,10 @@ SQLAlchemy acts as the python SQL interface and is used as the Object Relational
 
     1. HTML
     2. Vanilla CSS
-    3. Javascript
+    3. TypeScript
     4. React
     5. Redux
+    6. Vite
 React-Redux is a Javascript libray that is used to build the responsive UI. The combination of a virtual DOM via React and state management via Redux allows the user to create/edit servers and channels and render them immediately on the page without the need to refresh the page. The following code snippets show how react and redux combine to render the users servers and dynamically render server tiles in the UI:
 ![Servers](https://fantasydepthchart.s3.us-west-1.amazonaws.com/Code/servers.png)
 
