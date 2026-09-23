@@ -33,31 +33,31 @@
    * When I am on the `/` page:
       * I can view names of team servers I am a member of
 * As a logged in user, I want to be select a specific team server
-     * When I am on the `/servers/:server_id` page
+     * When I am on the `/servers/:serverId` page
         * I can read its description, channels, and messages
         <!-- * I can create a new message that will be posted in the servers channel default channel -->
 ### Creating Servers
 * As a logged in user, I want to create a new team server
   * When I am on the `/` page:
     * I can create a new team server by clicking a button that brings up a modal form which allows me to create a new team server
-  * When I am on the `/servers/:server_id`:
+  * When I am on the `/servers/:serverId`:
     *  I can create a new team server by clicking a button that brings up a modal form which allows me to create a new team server
 
 ### Updating Servers
 * As a logged in user, I want to be able to update the information of a server I own
-  * When I am on the `/servers/:server_id`:
+  * When I am on the `/servers/:serverId`:
     * I can click a button that allows me to update the server information
 
 ### Deleting Servers
 * As a logged in user, I want to be able to delete servers that I own
-  * When I am on the `/servers/:server_id`:
+  * When I am on the `/servers/:serverId`:
     * I can click a button to delete servers, and all associated channels/messages
 
 ## Channels
 ### Create Channels
 * As a logged in user, I want to be able to create custom channels in a team server I own
   * As a memeber of a server, I want to be able to create custom channels
-    * When I'm on the `/servers/:server_id` page:
+    * When I'm on the `/servers/:serverId` page:
       * I can create a new channel for that server
 
 ### Viewing Channels
@@ -65,18 +65,18 @@
   * When I'm on the `/` page:
     * I can see and click on servers I am a member of to view their channels
       * So I can see an organized list of channels and quickly navigate to one
-  * When I'm on the `/servers/:server_id` page:
+  * When I'm on the `/servers/:serverId` page:
     * I can see all the channels associated with a server
       * So I can click on a specific channel and view all the associated messages
 
 ### Update Channels
 * As a logged in user, I want to be able to update the names of channels in a server to which I belong
-  * When I'm on the `/servers/:server_id` page:
+  * When I'm on the `/servers/:serverId` page:
     * I can edit the channels belonging to that server
 
 ### Delete Channel
 * As a logged in user that owns the server I want to be able to delete the channels that have been created
-  * When I'm on the `/servers/:server_id` page:
+  * When I'm on the `/servers/:serverId` page:
     * I can click "Delete" to delete a channel that was previously created
       * So I can easily delete channels
 
@@ -85,7 +85,7 @@
 * As a logged in user, I want to be able to create Messages
   * When I'm on the `/` page I can select a friend/online user to send a message to:
     * So I can easily message my friends or online users
-      * When I'm on the `/server/:serverid` page I can enter a message at the bottom of the selected channels message feed to:
+      * When I'm on the `/servers/:serverId` page I can enter a message at the bottom of the selected channels message feed to:
         * So I easily broadcast messages to the entire channel
 
 ### Viewing Messages
@@ -93,7 +93,7 @@
   * When I'm on the `/` page:
     * I can see all my message threads
       * So I can an keep up with all the message threads I am a member of
-  * When I am on the `/server/:serverid` page I can:
+  * When I am on the `/servers/:serverId` page I can:
     * View all messages of an associated server channel
 
 ### Update Messages
@@ -101,7 +101,7 @@
   * When I'm on the `/` page:
     * I can edit message I have written
       * So I can fix any typos or add anything new that comes to mind
-    * When I am on the `/server/:serverid` page:
+    * When I am on the `/servers/:serverId` page:
       * I can edit messages I have written
         * So I can fix any typos or add anything new that comes to mind
 
@@ -117,7 +117,7 @@
   * When I'm on the `/` page:
     * I can click on a online user to start a chat
       * So I can easily communicate with another user
-  * When I am on the `/server/:serverid` page:
+  * When I am on the `/servers/:serverId` page:
     * I can click on a online user to start a new chat
 ### Viewing Chats
 * As a logged in user, I want to be able to view the chat threads I am a member of
