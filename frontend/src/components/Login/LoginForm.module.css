@@ -1,0 +1,61 @@
+.form {
+    background-color: #195905;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.field {
+    color: black;
+    border: 4px solid #029e7e;
+    padding: 25px;
+    min-width: 30vw;
+}
+
+.legend {
+    background-color: #029e7e;
+    font-size: 40px;
+    padding: 10px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px #0bda51;
+    border-radius: 5px;
+    color: black;
+}
+
+.emailWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.passwordWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonContainer {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.loginButton {
+    width: 14rem;
+    font-size: 30px;
+    font-weight: 800;
+    background-color: #029e7e;
+}
+
+.loginButton:hover {
+    background-color: #03b48f;
+}
+
+.demoButton {
+    width: 14rem;
+    font-size: 30px;
+    font-weight: 800;
+    background-color: #029e7e;
+}
+
+.demoButton:hover {
+    background-color: #03b48f;
+}

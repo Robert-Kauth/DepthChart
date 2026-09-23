@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+}
+.newMessage {
+    display: flex;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+}
+
+.messageInput {
+    width: 100%;
+}

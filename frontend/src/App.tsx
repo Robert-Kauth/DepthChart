@@ -1,34 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Modal from "./components/Modal";
+import NavBar from "./components/Nav";
+import ProtectedRoute from "./components/auth";
+import Server from "./components/Server";
+import SplashPage from "./components/SplashPage";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+import { authenticate } from "./store/session";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+
+import styles from "./App.module.css";
+// className={styles. }
+
+export default function App() {
+    const dispatch = useAppDispatch();
+
+    const isOnline = useAppSelector((state) => state.session.online);
+    const user = useAppSelector((state) => state.session.user);
+
+    useEffect(() => {
+        dispatch(authenticate());
+    }, [dispatch]);
+
+    return (
+        <div className={styles.app}>
+            <Modal />
+            <div className={styles.navBar}>
+                <NavBar />
+            </div>
+            <div className={styles.main}>
+                <Switch>
+                    <ProtectedRoute path="/servers/:serverId">
+                        <Server />
+                    </ProtectedRoute>
+                    {user && isOnline ? (
+                        <Route path="/">
+                            <Home />
+                        </Route>
+                    ) : (
+                        <Route path="/">
+                            <SplashPage />
+                        </Route>
+                    )}
+                </Switch>
+            </div>
+            <div className={styles.footer}>
+                <Footer />
+            </div>
+        </div>
+    );
 }
-
-export default App
