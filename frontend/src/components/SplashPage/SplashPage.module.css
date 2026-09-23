@@ -1,0 +1,93 @@
+.background {
+    background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackgroundResized.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-x: center;
+    background-position-y: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: 100%;
+}
+
+/*
+* This media query is used for: iPhone 13 Pro Max and iPhone 12 Pro Max
+* 2778x1284 pixels at 458ppi
+*/
+@media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+}
+
+/*
+* This code is for large monitor 
+*/
+@media only screen and (min-width: 768px) {
+    .splash {
+        height: 100%;
+        background-image: url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/NFLbackground.jpg);
+        background-size: contain;
+        background-attachment: fixed;
+    }
+}
+
+.section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+        "title"
+        "sub1"
+        "button"
+        "sub2";
+    height: 100%;
+}
+
+.title {
+    grid-area: title;
+    color: whitesmoke;
+    padding: 10px 20px;
+    font-size: 4rem;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.subtitle1 {
+    grid-area: sub1;
+    color: whitesmoke;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
+}
+.subtitle2 {
+    grid-area: sub2;
+    font-size: 4rem;
+    text-align: center;
+    color: whitesmoke;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
+}
+.buttonWrapper {
+    grid-area: button;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button {
+    width: 24rem;
+    border: 2px solid rgba(204, 0, 0, 1);
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightcoral;
+    border-style: outset;
+    background-color: rgba(229, 228, 226, 0.5);
+    padding: 10px;
+    font-size: 5rem;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em red;
+}
+
+.button:hover {
+    color: whitesmoke;
+    background-color: rgb(204, 0, 0);
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em red;
+}

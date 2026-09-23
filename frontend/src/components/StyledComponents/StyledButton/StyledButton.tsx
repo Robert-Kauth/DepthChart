@@ -1,0 +1,45 @@
+import type { ComponentType } from "react";
+import styled from "styled-components";
+import Icon from "@mdi/react";
+
+import { showModal, setCurrentModal } from "../../../store/modal";
+import { useAppDispatch } from "../../../store/hooks";
+
+const Button = styled.button`
+    background-color: #014421;
+    color: #029e7e;
+    margin: 2px;
+    padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    &:hover {
+        background-color: #0bda51;
+        color: #014421;
+    }
+`;
+
+const StyledIcon = styled(Icon)`
+    width: 1rem;
+    height: 1rem;
+`;
+
+interface StyledButtonProps {
+    icon: string;
+    form: ComponentType;
+}
+
+export default function StyledButton({ icon, form }: StyledButtonProps) {
+    const dispatch = useAppDispatch();
+
+    const showForm = () => {
+        dispatch(setCurrentModal(form));
+        dispatch(showModal());
+    };
+
+    return (
+        <Button onClick={showForm}>
+            <StyledIcon path={icon} size={1} />
+        </Button>
+    );
+}

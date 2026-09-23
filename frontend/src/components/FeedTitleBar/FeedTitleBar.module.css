@@ -1,0 +1,43 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 4px solid darkgreen;
+    background-color: rgba(46, 139, 87, 0.8);
+    padding-bottom: 5px;
+    margin-bottom: 0.5px;
+}
+
+.channelWrapper {
+    display: flex;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 75px;
+    z-index: 1;
+}
+
+.user {
+    display: flex;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    padding: 5px;
+    align-items: flex-end;
+    font-weight: 400;
+    margin: 0 0 0 10px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px white;
+}
+
+.lower {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

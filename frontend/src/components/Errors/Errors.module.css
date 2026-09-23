@@ -1,0 +1,16 @@
+.errors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0;
+    margin: 0;
+    list-style-type: "\1F6AB";
+}
+
+.error {
+    color: #ff6347;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 2px 0;
+}

@@ -1,0 +1,136 @@
+/* .header {
+    position: fixed;
+    min-width: 100%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+} */
+
+.nav {
+    position: fixed;
+    width: 100%;
+    height: inherit;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-color: aliceblue;
+    border-style: solid;
+    border-width: 2px;
+    background: no-repeat center center
+        url(https://fantasydepthchart.s3.us-west-1.amazonaws.com/Assets/sideline_cropped.jpg);
+    background-size: cover;
+}
+
+.navLeft {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    gap: 5px;
+}
+
+.navRight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    gap: 5px;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: outset;
+    background-color: green;
+    font-size: 20px;
+    color: black;
+    min-height: 44px;
+    min-width: 112px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.link:hover {
+    font-weight: bold;
+    background-color: #0bda51;
+}
+
+.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    font-weight: bold;
+    background-color: #0bda51;
+}
+
+.loginButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 20px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: outset;
+    background-color: green;
+    min-height: 44px;
+    min-width: 112px;
+}
+
+.loginButton:hover {
+    font-weight: bold;
+    background-color: #0bda51;
+}
+
+.logoutButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 20px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: outset;
+    background-color: green;
+    min-height: 44px;
+    min-width: 112px;
+}
+
+.logoutButton:hover {
+    font-weight: bold;
+    background-color: #0bda51;
+}
+
+.editButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 20px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+    border-style: outset;
+    background-color: green;
+}
+
+.editButton:hover {
+    font-weight: bold;
+    background-color: #0bda51;
+}
