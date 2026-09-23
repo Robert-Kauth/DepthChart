@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent, MouseEvent } from "react";
 import { mdiArrowLeftCircle } from "@mdi/js";
 import styled from "styled-components";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 
 import UserInfo from "../UserInfo";
 import { loadUsers } from "../../store/users";

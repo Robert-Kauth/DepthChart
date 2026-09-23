@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, MouseEvent } from "react";
 import styled from "styled-components";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { mdiSendCircle } from "@mdi/js";
 
 import Errors from "../Errors";

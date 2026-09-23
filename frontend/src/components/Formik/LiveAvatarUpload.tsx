@@ -1,7 +1,7 @@
 import { useState, useRef, ChangeEvent, MouseEvent } from "react";
 import { useField, useFormikContext } from "formik";
 import styled from "styled-components";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { mdiCloudUpload } from "@mdi/js";
 
 import StyledError from "../StyledComponents/StyledError";
