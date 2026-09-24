@@ -56,7 +56,6 @@ def add_chat():
     Function to add chat to database
     '''
     form = ChatForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         chat = Chat(content=form.content.data,
                     sender_id=form.sender_id.data,

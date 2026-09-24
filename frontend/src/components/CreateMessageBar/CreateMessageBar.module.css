@@ -13,3 +13,22 @@
 .messageInput {
     width: 100%;
 }
+
+.styledButton {
+    background-color: #014421;
+    color: #029e7e;
+    margin: 0;
+    padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+}
+
+.styledButton:hover {
+    background-color: #0bda51;
+    color: #014421;
+}
+
+.styledIcon {
+    width: 1rem;
+    height: 1rem;
+}

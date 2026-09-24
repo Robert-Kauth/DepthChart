@@ -1,5 +1,6 @@
 import type { AppThunk } from ".";
 import type { User } from "../types";
+import csrfFetch from "./csrfFetch";
 
 /*-------------ACTION.TYPES-------------*/
 const CREATE = "session/CREATE";
@@ -35,7 +36,7 @@ export interface SignupInfo {
 
 /*-------------THUNK CREATORS-------------*/
 export const authenticate = (): AppThunk => async (dispatch) => {
-    const response = await fetch("/api/auth/", {
+    const response = await csrfFetch("/api/auth/", {
         headers: {
             "Content-Type": "application/json",
         },
@@ -47,7 +48,7 @@ export const authenticate = (): AppThunk => async (dispatch) => {
 export const login =
     (userInfo: LoginInfo): AppThunk<string[] | undefined> =>
     async (dispatch) => {
-        const response = await fetch("/api/auth/login", {
+        const response = await csrfFetch("/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -61,7 +62,7 @@ export const login =
     };
 
 export const demoLogin = (): AppThunk => async (dispatch) => {
-    const res = await fetch("/api/auth/login", {
+    const res = await csrfFetch("/api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -75,7 +76,7 @@ export const demoLogin = (): AppThunk => async (dispatch) => {
 export const signUp =
     (userInfo: SignupInfo): AppThunk<string[] | undefined> =>
     async (dispatch) => {
-        const res = await fetch("/api/auth/signup", {
+        const res = await csrfFetch("/api/auth/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -89,7 +90,7 @@ export const signUp =
     };
 
 export const logout = (): AppThunk => async (dispatch) => {
-    await fetch("/api/auth/logout", {
+    await csrfFetch("/api/auth/logout", {
         headers: {
             "Content-Type": "application/json",
         },

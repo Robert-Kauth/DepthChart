@@ -34,7 +34,6 @@ def create_channel():
     Creates new channel and assigns it to selected server
     '''
     form = ChannelForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         channel = Channel(
             name=form.name.data, server_id=form.server_id.data,
@@ -62,7 +61,6 @@ def editChannel(id):
     Edits channel
     '''
     form = ChannelForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         channel = db.session.get(Channel, id)
         channel.name = form.name.data

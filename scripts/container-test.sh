@@ -17,7 +17,7 @@ IMAGE="${IMAGE:-depthchart}"
 HOST_PORT="${HOST_PORT:-58080}"
 NAME="depthchart-test-$$"
 NET="$NAME-net"
-DB_URL="postgresql://postgres@$NAME-db:5432/depthchart_test"
+DB_URL="postgresql://postgres:container-test@$NAME-db:5432/depthchart_test"
 
 cd "$(dirname "$0")/.."
 
@@ -34,7 +34,7 @@ echo "==> Building images with $ENGINE"
 echo "==> Starting Postgres"
 "$ENGINE" network create "$NET" >/dev/null
 "$ENGINE" run -d --name "$NAME-db" --network "$NET" \
-    -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=depthchart_test \
+    -e POSTGRES_PASSWORD=container-test -e POSTGRES_DB=depthchart_test \
     docker.io/library/postgres:18-alpine >/dev/null
 for _ in $(seq 60); do
     # Wait for the server started after initdb, not the temporary init one

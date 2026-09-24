@@ -163,3 +163,24 @@
     justify-content: center;
     margin-top: 5px;
 }
+
+.styledButton {
+    background-color: #014421;
+    color: #029e7e;
+    margin: 0 5px;
+    height: 74px;
+    padding-top: 5px;
+    border: 2px solid darkgreen;
+    border-radius: 2px;
+    box-shadow: 0 0 5px lightgreen;
+}
+
+.styledButton:hover {
+    background-color: #0bda51;
+    color: #014421;
+}
+
+.styledIcon {
+    width: 1rem;
+    height: 1rem;
+}

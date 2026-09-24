@@ -1,5 +1,6 @@
 import type { AppThunk } from ".";
 import type { ById, Chat } from "../types";
+import csrfFetch from "./csrfFetch";
 
 /*-------------ACTION.TYPES-------------*/
 const LOAD_ALL = "chat/LOAD_ALL";
@@ -57,7 +58,7 @@ export interface NewChat {
 export const loadAllChats =
     (user_id: number): AppThunk<string | undefined> =>
     async (dispatch) => {
-        const res = await fetch(`/api/chats/users/${user_id}`);
+        const res = await csrfFetch(`/api/chats/users/${user_id}`);
 
         const chats = await res.json();
         if (chats.error) {
@@ -68,7 +69,7 @@ export const loadAllChats =
 export const loadChat =
     (chat_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/chats/${chat_id}`);
+        const res = await csrfFetch(`/api/chats/${chat_id}`);
         if (res.ok) {
             const chat = await res.json();
             dispatch(loadOne(chat));
@@ -78,7 +79,7 @@ export const loadChat =
 export const addChat =
     (payload: NewChat): AppThunk =>
     async (dispatch) => {
-        const res = await fetch("/api/chats/new", {
+        const res = await csrfFetch("/api/chats/new", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -94,7 +95,7 @@ export const addChat =
 export const editChat =
     (payload: Chat): AppThunk =>
     async (dispatch) => {
-        const res = await fetch("/api/chats/", {
+        const res = await csrfFetch("/api/chats/", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -110,7 +111,7 @@ export const editChat =
 export const destroyChat =
     (chat_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/messages/${chat_id}`, {
+        const res = await csrfFetch(`/api/messages/${chat_id}`, {
             method: "DELETE",
         });
         const id = await res.json();

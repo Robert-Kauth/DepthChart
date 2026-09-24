@@ -1,14 +1,11 @@
 import {
-    legacy_createStore as createStore,
     combineReducers,
-    applyMiddleware,
-    compose,
-    UnknownAction,
+    configureStore as configureReduxStore,
     Store,
-    StoreEnhancer,
-} from "redux";
-import { thunk, ThunkAction, ThunkDispatch } from "redux-thunk";
-import logger from "redux-logger";
+    ThunkAction,
+    ThunkDispatch,
+    UnknownAction,
+} from "@reduxjs/toolkit";
 import session from "./session";
 import users from "./users";
 import servers from "./servers";
@@ -38,28 +35,29 @@ export type AppThunk<R = void> = ThunkAction<
     UnknownAction
 >;
 
-declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-    }
-}
-
-let enhancer: StoreEnhancer;
-
-if (import.meta.env.PROD) {
-    enhancer = applyMiddleware(thunk);
-} else {
-    const composeEnhancers =
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    enhancer = composeEnhancers(applyMiddleware(thunk, logger));
-}
-
 // Explicit return type: inferring it recurses through modal.mount (HTMLElement)
 // -> Window -> window.store
 export type AppStore = Store<RootState, UnknownAction> & { dispatch: AppDispatch };
 
+// The modal slice holds a DOM node and a React component. The development-only
+// serializability and immutability checks would flag them (and walk the DOM
+// node's internals), so they skip that slice and the actions that set it.
+const MODAL_ACTIONS = ["modal/CURRENT", "modal/MOUNT"];
+
+// Includes thunk middleware; action logging comes from Redux DevTools in development
 const configureStore = (): AppStore => {
-    return createStore(rootReducer, undefined, enhancer) as AppStore;
+    return configureReduxStore({
+        reducer: rootReducer,
+        devTools: import.meta.env.DEV,
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware({
+                immutableCheck: { ignoredPaths: ["modal"] },
+                serializableCheck: {
+                    ignoredPaths: ["modal"],
+                    ignoredActions: MODAL_ACTIONS,
+                },
+            }),
+    }) as AppStore;
 };
 
 export default configureStore;

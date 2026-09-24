@@ -33,7 +33,6 @@ def create_server():
     Creates new server and assigns creator as owner
     '''
     form = ServerForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         server = Server(
             name=form.name.data, topic=form.topic.data,
@@ -67,7 +66,6 @@ def editServer(id):
     Edits server
     '''
     form = ServerForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         server = db.session.get(Server, id)
         server.name = form.name.data

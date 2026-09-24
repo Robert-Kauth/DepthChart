@@ -1,12 +1,7 @@
-import styled from "styled-components";
 import { Icon } from "@mdi/react";
 
-const CustomIcon = styled(Icon)`
-    width: 1rem;
-    height: 1rem;
-    color: ${(props) => props.color};
-`;
+import styles from "./StyledIcon.module.css";
 
 export default function StyledIcon(props: { icon: string; color?: string }) {
-    return <CustomIcon path={props.icon} color={props.color} />;
+    return <Icon className={styles.icon} path={props.icon} color={props.color} />;
 }

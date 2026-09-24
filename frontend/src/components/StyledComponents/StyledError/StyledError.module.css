@@ -1,0 +1,18 @@
+.icon {
+    color: red;
+    height: 0.75rem;
+    width: 0.75rem;
+    vertical-align: baseline;
+}
+
+.message {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--red-800);
+}
+
+@media (prefers-color-scheme: dark) {
+    .message {
+        color: var(--red-400);
+    }
+}

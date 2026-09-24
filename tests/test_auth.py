@@ -8,7 +8,6 @@ def test_responses_set_csrf_cookie(app):
     res = client.get("/api/auth/")
     cookie = res.headers.get("Set-Cookie", "")
     assert cookie.startswith("csrf_token=")
-    assert "HttpOnly" in cookie
 
 
 def test_authenticate_when_logged_out(client):
@@ -49,10 +48,11 @@ def test_signup_rejects_duplicates_and_bad_email(client, user):
 
 def test_signup_requires_csrf_cookie(app):
     client = app.test_client()
-    # No prior request, so no csrf_token cookie to copy into the form
+    # No prior request, so no csrf_token cookie to send in the header
     res = client.post("/api/auth/signup", json={
         "username": "x", "email": "x@x.io", "password": "pw", "avatar": ""})
     assert res.status_code == 400
+    assert res.get_json() == {"errors": ["csrf_token : The CSRF token is missing."]}
 
 
 def test_login_logout(client, user):
