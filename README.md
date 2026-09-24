@@ -59,6 +59,24 @@ Run the backend tests against a disposable Postgres database (every test drops a
 TEST_DATABASE_URL=postgresql://postgres@localhost:5432/depthchart_test uv run pytest
 ```
 
+### Containers
+
+The `Dockerfile` builds with either Podman or Docker (swap `podman` for `docker` below):
+
+```bash
+podman build -t depthchart .                            # production image (default target)
+podman run -p 8000:8000 -e DATABASE_URL=... -e SECRET_KEY=... depthchart
+```
+
+`scripts/container-test.sh` builds the production image and a `test` image (`--target test`), runs the
+pytest suite inside the test image against a throwaway Postgres container, then boots the production
+image and smoke tests it. It uses Podman when installed and Docker otherwise; set
+`CONTAINER_ENGINE=docker` to choose explicitly.
+
+```bash
+scripts/container-test.sh
+```
+
 ---
 
 ## Future Developments

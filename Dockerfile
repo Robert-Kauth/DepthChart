@@ -1,4 +1,6 @@
-FROM node:26 AS build-stage
+# Builds with Docker or Podman. Base images are fully qualified so Podman
+# does not depend on unqualified-search registries being configured.
+FROM docker.io/library/node:26 AS build-stage
 
 WORKDIR /frontend
 
@@ -11,7 +13,7 @@ RUN pnpm install --frozen-lockfile
 COPY frontend/. .
 RUN pnpm run build
 
-FROM python:3.14.7-slim
+FROM docker.io/library/python:3.14.7-slim AS app
 COPY --from=ghcr.io/astral-sh/uv:0.12.18 /uv /uvx /bin/
 
 # Setup Flask environment
@@ -38,4 +40,15 @@ COPY --from=build-stage /frontend/dist/ app/static/
 
 # Run flask environment. Flask-SocketIO runs in threading mode and serves
 # WebSockets through simple-websocket, so use a single threaded worker.
-CMD gunicorn -w 1 --threads 100 app:app
+# Heroku provides $PORT; elsewhere listen on 8000 on all interfaces. exec
+# makes gunicorn PID 1 so it receives SIGTERM and shuts down gracefully.
+CMD exec gunicorn -w 1 --threads 100 -b 0.0.0.0:${PORT:-8000} app:app
+
+# Test image: the app image plus pytest. Build with `--target test`;
+# scripts/container-test.sh runs it against a Postgres container.
+FROM app AS test
+RUN uv sync --locked --dev
+CMD ["pytest"]
+
+# Default target: the production image
+FROM app
