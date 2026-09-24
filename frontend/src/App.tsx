@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Modal from "./components/Modal";
 import NavBar from "./components/Nav";
@@ -32,20 +32,20 @@ export default function App() {
                 <NavBar />
             </div>
             <div className={styles.main}>
-                <Switch>
-                    <ProtectedRoute path="/servers/:serverId">
-                        <Server />
-                    </ProtectedRoute>
-                    {user && isOnline ? (
-                        <Route path="/">
-                            <Home />
-                        </Route>
-                    ) : (
-                        <Route path="/">
-                            <SplashPage />
-                        </Route>
-                    )}
-                </Switch>
+                <Routes>
+                    <Route
+                        path="/servers/:serverId"
+                        element={
+                            <ProtectedRoute>
+                                <Server />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="*"
+                        element={user && isOnline ? <Home /> : <SplashPage />}
+                    />
+                </Routes>
             </div>
             <div className={styles.footer}>
                 <Footer />

@@ -1,14 +1,13 @@
 import {
-    createStore,
+    legacy_createStore as createStore,
     combineReducers,
     applyMiddleware,
     compose,
-    AnyAction,
-    PreloadedState,
+    UnknownAction,
     Store,
     StoreEnhancer,
 } from "redux";
-import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { thunk, ThunkAction, ThunkDispatch } from "redux-thunk";
 import logger from "redux-logger";
 import session from "./session";
 import users from "./users";
@@ -31,12 +30,12 @@ const rootReducer = combineReducers({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, UnknownAction>;
 export type AppThunk<R = void> = ThunkAction<
     Promise<R>,
     RootState,
     unknown,
-    AnyAction
+    UnknownAction
 >;
 
 declare global {
@@ -57,12 +56,10 @@ if (import.meta.env.PROD) {
 
 // Explicit return type: inferring it recurses through modal.mount (HTMLElement)
 // -> Window -> window.store
-export type AppStore = Store<RootState, AnyAction> & { dispatch: AppDispatch };
+export type AppStore = Store<RootState, UnknownAction> & { dispatch: AppDispatch };
 
-const configureStore = (
-    preloadedState?: PreloadedState<RootState>
-): AppStore => {
-    return createStore(rootReducer, preloadedState, enhancer) as AppStore;
+const configureStore = (): AppStore => {
+    return createStore(rootReducer, undefined, enhancer) as AppStore;
 };
 
 export default configureStore;

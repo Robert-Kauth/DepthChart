@@ -1,4 +1,4 @@
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { showModal, setCurrentModal } from "../../store/modal";
 import EditServerForm from "../EditServerForm";
@@ -13,7 +13,7 @@ import styles from "./NavBar.module.css";
 
 export default function NavBar() {
     const dispatch = useAppDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const user = useAppSelector((state) => state.session.user);
 
@@ -29,7 +29,7 @@ export default function NavBar() {
 
     const onLogout = () => {
         dispatch(logout());
-        history.push("/");
+        navigate("/");
     };
 
     return (
@@ -38,10 +38,13 @@ export default function NavBar() {
                 {user && (
                     <div className={styles.navLeft}>
                         <NavLink
-                            exact
+                            end
                             to="/"
-                            className={styles.link}
-                            activeClassName={styles.active}>
+                            className={({ isActive }) =>
+                                isActive
+                                    ? `${styles.link} ${styles.active}`
+                                    : styles.link
+                            }>
                             Home
                         </NavLink>
                         <button

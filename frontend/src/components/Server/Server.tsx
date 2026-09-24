@@ -12,7 +12,7 @@ import styles from "./Server.module.css";
 // className={styles. }
 
 export default function Server() {
-    const { serverId } = useParams<{ serverId: string }>();
+    const { serverId } = useParams() as { serverId: string };
 
     const selectedChannel = useAppSelector((state) => state.channels.channel);
 

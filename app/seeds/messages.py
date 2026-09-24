@@ -1,3 +1,4 @@
+from sqlalchemy import text
 from app.models import db, Message
 from .defaults import total_messages, total_messages_per_user, total_users, total_messages, total_channels, total_messages_per_channel
 from faker import Faker
@@ -26,7 +27,7 @@ def seed_user_messages():
 
 
 def undo_user_messages():
-    db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
+    db.session.execute(text('TRUNCATE messages RESTART IDENTITY CASCADE;'))
     db.session.commit()
 
 
@@ -49,5 +50,5 @@ def seed_channel_messages():
 
 
 def undo_channel_messages():
-    db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
+    db.session.execute(text('TRUNCATE messages RESTART IDENTITY CASCADE;'))
     db.session.commit()

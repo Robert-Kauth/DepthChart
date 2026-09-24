@@ -51,7 +51,7 @@ def loadChannel(id):
     '''
     Loads single channel
     '''
-    channel = Channel.query.get(id)
+    channel = db.session.get(Channel, id)
     return channel.to_dict()
 
 
@@ -64,7 +64,7 @@ def editChannel(id):
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        channel = Channel.query.get(id)
+        channel = db.session.get(Channel, id)
         channel.name = form.name.data
         channel.server_id = form.server_id.data
         channel.topic = form.topic.data

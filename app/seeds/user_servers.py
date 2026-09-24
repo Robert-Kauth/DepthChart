@@ -1,3 +1,4 @@
+from sqlalchemy import text
 from app.models import db, User_server
 from .defaults import total_servers, total_users
 from faker import Faker
@@ -26,5 +27,5 @@ def seed_user_servers():
 
 
 def undo_user_servers():
-    db.session.execute('TRUNCATE user_servers RESTART IDENTITY CASCADE;')
+    db.session.execute(text('TRUNCATE user_servers RESTART IDENTITY CASCADE;'))
     db.session.commit()
