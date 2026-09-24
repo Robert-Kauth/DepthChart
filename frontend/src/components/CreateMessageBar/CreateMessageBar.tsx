@@ -1,5 +1,4 @@
 import { useState, ChangeEvent, MouseEvent } from "react";
-import styled from "styled-components";
 import { Icon } from "@mdi/react";
 import { mdiSendCircle } from "@mdi/js";
 
@@ -10,24 +9,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import styles from "./CreateMessageBar.module.css";
 // className={styles. }
-
-const Button = styled.button`
-    background-color: #014421;
-    color: #029e7e;
-    margin: 0;
-    padding-top: 5px;
-    border: 2px solid darkgreen;
-    border-radius: 2px;
-    &:hover {
-        background-color: #0bda51;
-        color: #014421;
-    }
-`;
-
-const StyledIcon = styled(Icon)`
-    width: 1rem;
-    height: 1rem;
-`;
 
 interface CreateMessageBarProps {
     recipient_id?: number | string;
@@ -81,9 +62,9 @@ export default function CreateMessageBar(props: CreateMessageBarProps) {
         <div className={styles.wrapper}>
             {errors.length > 0 && <Errors errors={errors} />}
             <div className={styles.newMessage}>
-                <Button onClick={handleSend}>
-                    <StyledIcon path={mdiSendCircle} size={1} />
-                </Button>
+                <button className={styles.styledButton} onClick={handleSend}>
+                    <Icon className={styles.styledIcon} path={mdiSendCircle} size={1} />
+                </button>
                 <input
                     className={styles.messageInput}
                     type="text"

@@ -1,5 +1,6 @@
 import type { AppThunk } from ".";
 import type { ById, Message } from "../types";
+import csrfFetch from "./csrfFetch";
 
 /*-------------ACTION.TYPES-------------*/
 const LOAD_ALL = "messages/LOAD_ALL";
@@ -74,7 +75,7 @@ export interface NewMessage {
 export const loadAllUserMessages =
     (user_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/messages/users/${user_id}`);
+        const res = await csrfFetch(`/api/messages/users/${user_id}`);
         const messages = await res.json();
         dispatch(loadAll(messages));
     };
@@ -82,7 +83,7 @@ export const loadAllUserMessages =
 export const loadMessage =
     (message_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/messages/${message_id}`);
+        const res = await csrfFetch(`/api/messages/${message_id}`);
         if (res.ok) {
             const message = await res.json();
             dispatch(loadOne(message));
@@ -92,7 +93,7 @@ export const loadMessage =
 export const loadAllChannelMessages =
     (channel_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/messages/channel/${channel_id}`);
+        const res = await csrfFetch(`/api/messages/channel/${channel_id}`);
         const messages = await res.json();
         dispatch(loadChannel(messages));
     };
@@ -100,7 +101,7 @@ export const loadAllChannelMessages =
 export const loadMessagesBetween =
     (user1_id: number, user2_id: number | string): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(
+        const res = await csrfFetch(
             `/api/messages/users/DM/${user1_id}/${user2_id}`
         );
         if (res.ok) {
@@ -112,7 +113,7 @@ export const loadMessagesBetween =
 export const createMessage =
     (payload: NewMessage): AppThunk<string[] | undefined> =>
     async (dispatch) => {
-        const res = await fetch("/api/messages/", {
+        const res = await csrfFetch("/api/messages/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -128,7 +129,7 @@ export const createMessage =
 export const editMessage =
     (payload: Message): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/messages/${payload.id}`, {
+        const res = await csrfFetch(`/api/messages/${payload.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -142,7 +143,7 @@ export const editMessage =
 export const destroyMessage =
     (message_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/messages/${message_id}`, {
+        const res = await csrfFetch(`/api/messages/${message_id}`, {
             method: "DELETE",
         });
         const id = await res.json();

@@ -1,5 +1,6 @@
 import type { AppThunk } from ".";
 import type { ById, User } from "../types";
+import csrfFetch from "./csrfFetch";
 
 /*-------------ACTION.TYPES-------------*/
 const LOAD_ALL = "users/LOAD_ALL";
@@ -42,7 +43,7 @@ type UserAction =
 /*-------------THUNK CREATORS-------------*/
 
 export const loadUsers = (): AppThunk => async (dispatch) => {
-    const res = await fetch("/api/users/");
+    const res = await csrfFetch("/api/users/");
     const users = await res.json();
     dispatch(loadAll(users));
 };
@@ -50,7 +51,7 @@ export const loadUsers = (): AppThunk => async (dispatch) => {
 export const loadUser =
     (userId: number | string): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/users/${userId}`);
+        const res = await csrfFetch(`/api/users/${userId}`);
         const user = await res.json();
         dispatch(loadOne(user));
     };
@@ -64,7 +65,7 @@ export const uploadFile =
         form.append("user_id", String(user_id));
         form.append("file", file);
 
-        const res = await fetch(`/api/users/${user_id}`, {
+        const res = await csrfFetch(`/api/users/${user_id}`, {
             method: "POST",
             body: form,
         });
@@ -76,7 +77,7 @@ export const uploadFile =
 export const destroyUser =
     (userId: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/users/${userId}`, {
+        const res = await csrfFetch(`/api/users/${userId}`, {
             method: "DELETE",
         });
         const id = await res.json();

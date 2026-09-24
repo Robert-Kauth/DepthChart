@@ -1,5 +1,6 @@
 import type { AppThunk } from ".";
 import type { ById, Channel } from "../types";
+import csrfFetch from "./csrfFetch";
 
 /*-------------ACTION.TYPES-------------*/
 const LOAD_ALL = "channels/LOAD_ALL";
@@ -62,7 +63,7 @@ export interface ChannelEdit {
 
 /*-------------THUNK CREATORS-------------*/
 export const loadChannels = (): AppThunk => async (dispatch) => {
-    const res = await fetch("/api/channels/");
+    const res = await csrfFetch("/api/channels/");
     const channels = await res.json();
     dispatch(load(channels));
 };
@@ -70,7 +71,7 @@ export const loadChannels = (): AppThunk => async (dispatch) => {
 export const loadChannel =
     (id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/channels/${id}`);
+        const res = await csrfFetch(`/api/channels/${id}`);
         const channel = await res.json();
         dispatch(loadOne(channel));
     };
@@ -78,7 +79,7 @@ export const loadChannel =
 export const createChannel =
     (payload: NewChannel): AppThunk<string[] | undefined> =>
     async (dispatch) => {
-        const res = await fetch("/api/channels/", {
+        const res = await csrfFetch("/api/channels/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -95,7 +96,7 @@ export const createChannel =
 export const editChannel =
     (payload: ChannelEdit): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/channels/${payload.id}`, {
+        const res = await csrfFetch(`/api/channels/${payload.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -109,7 +110,7 @@ export const editChannel =
 export const destroyChannel =
     (channelId: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/channels/${channelId}`, {
+        const res = await csrfFetch(`/api/channels/${channelId}`, {
             method: "DELETE",
         });
         const id = await res.json();

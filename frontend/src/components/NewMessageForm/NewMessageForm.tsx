@@ -1,6 +1,5 @@
 import { useState, useEffect, ChangeEvent, FormEvent, MouseEvent } from "react";
 import { mdiArrowLeftCircle } from "@mdi/js";
-import styled from "styled-components";
 import { Icon } from "@mdi/react";
 
 import UserInfo from "../UserInfo";
@@ -11,26 +10,6 @@ import type { User } from "../../types";
 import styles from "./NewMessageForm.module.css";
 import CreateMessageBar from "../CreateMessageBar/CreateMessageBar";
 // className={styles. }
-
-const Button = styled.button`
-    background-color: #014421;
-    color: #029e7e;
-    margin: 0 5px;
-    height: 74px;
-    padding-top: 5px;
-    border: 2px solid darkgreen;
-    border-radius: 2px;
-    box-shadow: 0 0 5px lightgreen;
-    &:hover {
-        background-color: #0bda51;
-        color: #014421;
-    }
-`;
-
-const StyledIcon = styled(Icon)`
-    width: 1rem;
-    height: 1rem;
-`;
 
 export default function NewMessageForm() {
     const dispatch = useAppDispatch();
@@ -97,12 +76,12 @@ export default function NewMessageForm() {
                                 <UserInfo user={selectedUser} />
                             </div>
                             <div className={styles.button}>
-                                <Button onClick={goBack}>
-                                    <StyledIcon
+                                <button className={styles.styledButton} onClick={goBack}>
+                                    <Icon className={styles.styledIcon}
                                         path={mdiArrowLeftCircle}
                                         size={1}
                                     />
-                                </Button>
+                                </button>
                             </div>
                         </div>
                         <CreateMessageBar recipient_id={userId} />

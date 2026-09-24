@@ -1,9 +1,8 @@
 import os
 from flask import Flask, request, redirect
 from app.socket import sio
-from flask_cors import CORS
 from flask_migrate import Migrate
-from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_wtf.csrf import CSRFError, CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
 # Models
@@ -59,10 +58,6 @@ Migrate(app, db)
 sio.init_app(app)
 
 
-# Application Security
-CORS(app)
-
-
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
 # Therefore, we need to make sure that in production any
@@ -79,10 +74,26 @@ def https_redirect():
             return redirect(url, code=code)
 
 
+# Application Security
+# Every POST/PUT/PATCH/DELETE must send the token from the csrf_token cookie
+# in an X-CSRFToken header. Other sites can make the browser send our cookies
+# but cannot read them, so they cannot forge the header.
+CSRFProtect(app)
+
+
+@app.errorhandler(CSRFError)
+def csrf_error(error):
+    '''
+    Returns CSRF failures as JSON errors like the API's form errors
+    '''
+    return {'errors': [f'csrf_token : {error.description}']}, 400
+
+
 @app.after_request
 def inject_csrf_token(response):
     '''
-    Injects csrf_token into response and sets CORS options in production
+    Injects csrf_token into response. The frontend reads it (so it is not
+    httponly) and echoes it in the X-CSRFToken header.
     '''
     response.set_cookie(
         'csrf_token',
@@ -90,7 +101,7 @@ def inject_csrf_token(response):
         secure=True if os.environ.get('FLASK_ENV') == 'production' else False,
         samesite='Strict' if os.environ.get(
             'FLASK_ENV') == 'production' else None,
-        httponly=True)
+        httponly=False)
     return response
 
 

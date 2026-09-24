@@ -1,5 +1,6 @@
 import type { AppThunk } from ".";
 import type { ById, UserServer } from "../types";
+import csrfFetch from "./csrfFetch";
 
 /*-------------ACTION.TYPES-------------*/
 const GET = "user_servers/GET";
@@ -41,7 +42,7 @@ type UserServerAction =
 export const getUserServers =
     (user_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/user_servers/${user_id}`);
+        const res = await csrfFetch(`/api/user_servers/${user_id}`);
         const servers = await res.json();
         dispatch(get(servers));
     };
@@ -49,7 +50,7 @@ export const getUserServers =
 export const loadServerUsers =
     (server_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/user_servers/${server_id}`);
+        const res = await csrfFetch(`/api/user_servers/${server_id}`);
         const users = await res.json();
         dispatch(load(users));
     };
@@ -58,7 +59,7 @@ export const addUserServer =
     (payload: { user_id: number; server_id: number }): AppThunk =>
     async (dispatch) => {
         const { user_id, server_id } = payload;
-        const res = await fetch(`/api/user_servers/join`, {
+        const res = await csrfFetch(`/api/user_servers/join`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -72,7 +73,7 @@ export const addUserServer =
 export const destroyUserServer =
     (server_id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/user_servers/${server_id}`, {
+        const res = await csrfFetch(`/api/user_servers/${server_id}`, {
             method: "DELETE",
         });
         const id = await res.json();

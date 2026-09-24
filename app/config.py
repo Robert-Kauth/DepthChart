@@ -1,11 +1,19 @@
 import os
+import re
+
+
+def database_url(url):
+    '''
+    Selects the psycopg 3 driver for Heroku-style postgres:// URLs and
+    plain postgresql:// URLs, which SQLAlchemy would map to psycopg2
+    '''
+    return re.sub(r'^postgres(ql)?://', 'postgresql+psycopg://', url)
 
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'DATABASE_URL').replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = database_url(os.environ.get('DATABASE_URL'))
     SQLALCHEMY_ECHO = True
 
     S3_BUCKET = os.environ.get("S3_BUCKET_NAME")

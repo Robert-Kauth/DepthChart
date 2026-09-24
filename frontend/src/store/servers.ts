@@ -1,5 +1,6 @@
 import type { AppThunk } from ".";
 import type { ById, Server } from "../types";
+import csrfFetch from "./csrfFetch";
 
 /*-------------ACTION.TYPES-------------*/
 const LOAD_ALL = "servers/LOAD_ALL";
@@ -59,7 +60,7 @@ export interface ServerEdit extends NewServer {
 /*-------------THUNK CREATORS-------------*/
 
 export const loadServers = (): AppThunk => async (dispatch) => {
-    const res = await fetch("/api/servers/");
+    const res = await csrfFetch("/api/servers/");
     const servers = await res.json();
     dispatch(load(servers));
 };
@@ -67,7 +68,7 @@ export const loadServers = (): AppThunk => async (dispatch) => {
 export const loadServer =
     (id: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/servers/${id}`);
+        const res = await csrfFetch(`/api/servers/${id}`);
         const server = await res.json();
         dispatch(loadOne(server));
     };
@@ -75,7 +76,7 @@ export const loadServer =
 export const createServer =
     (payload: NewServer): AppThunk<string[] | undefined> =>
     async (dispatch) => {
-        const res = await fetch("/api/servers/", {
+        const res = await csrfFetch("/api/servers/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -92,7 +93,7 @@ export const createServer =
 export const editServer =
     (payload: ServerEdit): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/servers/${payload.id}`, {
+        const res = await csrfFetch(`/api/servers/${payload.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -106,7 +107,7 @@ export const editServer =
 export const destroyServer =
     (serverId: number): AppThunk =>
     async (dispatch) => {
-        const res = await fetch(`/api/servers/${serverId}`, {
+        const res = await csrfFetch(`/api/servers/${serverId}`, {
             method: "DELETE",
         });
         const id = await res.json();

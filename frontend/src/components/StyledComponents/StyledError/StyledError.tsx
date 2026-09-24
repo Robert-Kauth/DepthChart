@@ -1,28 +1,13 @@
-import styled from "styled-components";
-import { FaExclamation } from "react-icons/fa";
+import { Icon } from "@mdi/react";
+import { mdiExclamation } from "@mdi/js";
 
-const ErrorIcon = styled(FaExclamation)`
-    color: red;
-    height: 0.75rem;
-    width: 0.75rem;
-    vertical-align: baseline;
-`;
-
-const StyledErrorMessage = styled.span`
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--red-800);
-
-    @media (prefers-color-scheme: dark) {
-        color: var(--red-400);
-    }
-`;
+import styles from "./StyledError.module.css";
 
 export default function StyledError({ error }: { error?: string }) {
     return (
         <>
-            <ErrorIcon />
-            <StyledErrorMessage>{error}</StyledErrorMessage>
+            <Icon className={styles.icon} path={mdiExclamation} />
+            <span className={styles.message}>{error}</span>
         </>
     );
 }

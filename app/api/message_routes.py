@@ -77,7 +77,6 @@ def create_message():
     to current_user.id
     '''
     form = MessageForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         if form.channel_id.data == True:
             message = Message(channel_id=form.channel_id.data,

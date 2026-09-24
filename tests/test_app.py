@@ -8,6 +8,7 @@ import pytest
 import sqlalchemy as sa
 from faker import Faker
 
+from app.config import database_url
 from app.models import Channel, Message, Server, User, User_server, db
 from app.socket import sio
 
@@ -79,7 +80,7 @@ def test_seed_all_and_undo(app):
 
 @pytest.fixture
 def migrate_db_url():
-    url = sa.engine.make_url(os.environ["DATABASE_URL"])
+    url = sa.engine.make_url(database_url(os.environ["DATABASE_URL"]))
     name = f"{url.database}_migrations"
     admin = sa.create_engine(url.set(database="postgres"), isolation_level="AUTOCOMMIT")
     with admin.connect() as conn:
