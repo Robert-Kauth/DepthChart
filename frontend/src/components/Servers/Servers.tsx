@@ -1,4 +1,4 @@
-import { useEffect, MouseEvent } from "react";
+import { useEffect, MouseEvent, type JSX } from "react";
 import { mdiPlusBox } from "@mdi/js";
 
 import { loadServers, loadServer } from "../../store/servers";

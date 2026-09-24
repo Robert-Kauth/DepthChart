@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
@@ -29,14 +29,14 @@ export default function LoginForm() {
         const validUser = await LoginFormSchema.validate(values);
         dispatch(login(validUser));
         dispatch(hideModal());
-        return <Redirect to="/" />;
+        return <Navigate to="/" />;
     };
 
     const handleDemoLogin = (e: MouseEvent) => {
         e.preventDefault();
         dispatch(demoLogin()).then(() => {
             dispatch(hideModal());
-            return <Redirect to="/" />;
+            return <Navigate to="/" />;
         });
     };
 

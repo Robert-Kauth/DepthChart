@@ -1,3 +1,4 @@
+from sqlalchemy import text
 from app.models import db, Channel
 from .defaults import total_servers, generated_server_channels
 from faker import Faker
@@ -78,5 +79,5 @@ def seed_channels():
 
 
 def undo_channels():
-    db.session.execute('TRUNCATE channels RESTART IDENTITY CASCADE;')
+    db.session.execute(text('TRUNCATE channels RESTART IDENTITY CASCADE;'))
     db.session.commit()

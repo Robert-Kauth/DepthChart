@@ -40,6 +40,27 @@ React-Redux is a Javascript libray that is used to build the responsive UI. The 
 
 ---
 
+## Development
+
+The backend is a [uv](https://docs.astral.sh/uv/) project on Python 3.14 and the frontend uses pnpm.
+
+```bash
+cp .env.example .env              # then point DATABASE_URL at your Postgres database
+uv sync                           # install Python and backend dependencies into .venv
+uv run flask db upgrade && uv run flask seed all
+uv run flask run                  # API + socket.io on http://localhost:5000
+
+cd frontend && pnpm install && pnpm dev   # Vite dev server, proxies /api and /socket.io to Flask
+```
+
+Run the backend tests against a disposable Postgres database (every test drops and recreates the tables):
+
+```bash
+TEST_DATABASE_URL=postgresql://postgres@localhost:5432/depthchart_test uv run pytest
+```
+
+---
+
 ## Future Developments
 
 * Instant Chat and Messaging between multiple users

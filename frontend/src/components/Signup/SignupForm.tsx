@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import { signUp, SignupInfo } from "../../store/session";
 import { hideModal } from "../../store/modal";
 import { useAppDispatch } from "../../store/hooks";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import {
     TextInput,
@@ -31,14 +31,14 @@ export default function SignupForm() {
             .required("Password is required"),
         confirm_password: Yup.string()
             .required("Must provide password confirmation")
-            .oneOf([Yup.ref("password"), null], "Passwords must match"),
+            .oneOf([Yup.ref("password")], "Passwords must match"),
     });
 
     const handleSubmit = async (values: SignupInfo) => {
         const validValues = await SignupFormSchema.validate(values);
         dispatch(signUp(validValues));
         dispatch(hideModal());
-        return <Redirect to="/" />;
+        return <Navigate to="/" />;
     };
 
     return (

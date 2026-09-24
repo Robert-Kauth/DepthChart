@@ -7,3 +7,4 @@ graphify-out
 frontend/dist
 app/static
 .env
+.venv

@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent, FormEvent } from "react";
+import { useEffect, useState, ChangeEvent, FormEvent, type JSX } from "react";
 import { io, Socket } from "socket.io-client";
 import { addChat, NewChat } from "../../store/chats";
 

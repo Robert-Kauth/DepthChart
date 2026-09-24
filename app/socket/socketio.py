@@ -10,7 +10,10 @@ else:
     origins = "*"
 
 # creates socketio instance
-sio = SocketIO(cors_allowed_origins=origins,logger=True, engineio_logger=True)
+# Threading mode serves WebSockets through simple-websocket under both
+# `flask run` and gunicorn's threaded workers (gunicorn no longer ships eventlet)
+sio = SocketIO(async_mode='threading', cors_allowed_origins=origins,
+               logger=True, engineio_logger=True)
 
 
 @sio.on('chat')

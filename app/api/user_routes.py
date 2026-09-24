@@ -29,7 +29,7 @@ def user(id):
     '''
     Finds user by id and returns user dict
     '''
-    user = User.query.get(id)
+    user = db.session.get(User, id)
     return user.to_dict()
 
 

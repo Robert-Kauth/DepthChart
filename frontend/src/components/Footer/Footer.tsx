@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -7,30 +5,27 @@ export default function Footer() {
         <footer className={styles.footer}>
             <p className={styles.name}>Designed by: Robert Kauth</p>
             <div className={styles.linkedIn}>
-                <Link
+                <a
                     className={styles.linkedInLink}
-                    to={{
-                        pathname:
-                            "https://www.linkedin.com/in/robert-kauth-043370133/",
-                    }}
+                    href="https://www.linkedin.com/in/robert-kauth-043370133/"
                     target="_blank">
                     <img
                         className={styles.logo}
                         src="https://antinote.s3.us-west-1.amazonaws.com/linkedin-logo.png"
                         alt="LinkedIn logo"
                     />
-                </Link>
+                </a>
             </div>
             <div className={styles.github}>
-                <Link
+                <a
                     className={styles.githubLink}
-                    to={{ pathname: "https://github.com/Robert-Kauth" }}
+                    href="https://github.com/Robert-Kauth"
                     target="_blank">
                     <img
                         src="https://antinote.s3.us-west-1.amazonaws.com/Octocat.png"
                         alt="GitHub logo"
                     />
-                </Link>
+                </a>
             </div>
         </footer>
     );

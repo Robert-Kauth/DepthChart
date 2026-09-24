@@ -56,7 +56,7 @@ def loadServer(id):
     '''
     Loads single server
     '''
-    server = Server.query.get(id)
+    server = db.session.get(Server, id)
     return server.to_dict()
 
 
@@ -69,7 +69,7 @@ def editServer(id):
     form = ServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        server = Server.query.get(id)
+        server = db.session.get(Server, id)
         server.name = form.name.data
         server.topic = form.topic.data
         server.icon = form.icon.data
@@ -85,7 +85,7 @@ def destroyServer(id):
     '''
     Deletes a server
     '''
-    server = Server.query.get(id)
+    server = db.session.get(Server, id)
     if server.owner_id == current_user.id:
         Server.query.filter(Server.id == id).delete()
         db.session.commit()
