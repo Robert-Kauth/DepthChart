@@ -91,6 +91,7 @@ export const signUp =
 
 export const logout = (): AppThunk => async (dispatch) => {
     await csrfFetch("/api/auth/logout", {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },

@@ -59,6 +59,26 @@ def test_token_from_another_session_is_rejected(app, client, forger, server):
     assert res.get_json() == {"errors": ["csrf_token : The CSRF tokens do not match."]}
 
 
+def test_logout_rejects_get(client, user):
+    # A link or redirect from another site must not log the user out
+    res = client.get("/api/auth/logout")
+    assert res.status_code == 405
+    assert res.get_json() == {"errors": ["Method GET not allowed"]}
+    assert "POST" in res.headers["Allow"]
+    assert client.get("/api/auth/").get_json()["id"] == user["id"]
+
+
+def test_logout_requires_csrf_token(client, forger, user):
+    res = forger.post("/api/auth/logout")
+    assert res.status_code == 400
+    assert res.get_json() == {"errors": ["csrf_token : The CSRF token is missing."]}
+    assert client.get("/api/auth/").get_json()["id"] == user["id"]
+
+    res = client.post("/api/auth/logout")
+    assert res.get_json() == {"message": "User logged out"}
+    assert client.get("/api/auth/").get_json() == {"errors": ["Unauthorized"]}
+
+
 def test_csrf_applies_to_json_routes_without_forms(forger, server):
     res = forger.delete(f"/api/user_servers/{server['id']}")
     assert res.status_code == 400
