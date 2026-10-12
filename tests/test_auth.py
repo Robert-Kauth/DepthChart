@@ -56,7 +56,7 @@ def test_signup_requires_csrf_cookie(app):
 
 
 def test_login_logout(client, user):
-    client.get("/api/auth/logout")
+    client.post("/api/auth/logout")
     assert client.get("/api/auth/").get_json() == {"errors": ["Unauthorized"]}
 
     res = client.post("/api/auth/login", json={"email": "demo@aa.io", "password": "password"})
@@ -64,7 +64,7 @@ def test_login_logout(client, user):
     assert res.get_json()["id"] == user["id"]
     assert client.get("/api/auth/").get_json()["id"] == user["id"]
 
-    res = client.get("/api/auth/logout")
+    res = client.post("/api/auth/logout")
     assert res.get_json() == {"message": "User logged out"}
 
 
@@ -86,7 +86,7 @@ def test_login_with_legacy_password_hash(app, client):
 
 
 def test_login_errors(client, user):
-    client.get("/api/auth/logout")
+    client.post("/api/auth/logout")
     res = client.post("/api/auth/login", json={"email": "demo@aa.io", "password": "wrong"})
     assert res.status_code == 401
     assert res.get_json()["errors"] == ["password : Password was incorrect."]

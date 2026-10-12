@@ -44,10 +44,11 @@ def login():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@auth_routes.route('/logout')
+@auth_routes.route('/logout', methods=['POST'])
 def logout():
     """
-    Logs a user out
+    Logs a user out. POST so it goes through CSRF protection: another site
+    could otherwise log users out with a link or redirect.
     """
     logout_user()
     return {'message': 'User logged out'}
