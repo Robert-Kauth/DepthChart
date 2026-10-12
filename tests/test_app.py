@@ -26,6 +26,28 @@ def test_serves_react_app_for_unknown_paths(client):
     res.close()
 
 
+@pytest.mark.parametrize("path", ["/api", "/api/", "/api/nope", "/api/servers/1/nope"])
+def test_unknown_api_routes_return_json_404(client, path):
+    res = client.get(path)
+    assert res.status_code == 404
+    assert res.get_json() == {"errors": ["Not found"]}
+
+
+def test_wrong_method_on_api_route_returns_json_405(client, user):
+    res = client.delete("/api/channels/")
+    assert res.status_code == 405
+    assert res.get_json() == {"errors": ["Method DELETE not allowed"]}
+    assert {"GET", "POST"} <= set(res.headers["Allow"].split(", "))
+
+
+def test_non_api_paths_still_serve_the_react_app(client):
+    for path in ("/apis", "/api-docs", "/servers/api"):
+        res = client.get(path)
+        assert res.status_code == 200
+        assert b"<div id='root'></div>" in res.data
+        res.close()
+
+
 def test_https_redirect_in_production(client, monkeypatch):
     monkeypatch.setenv("FLASK_ENV", "production")
     res = client.get("/api/auth/", headers={"X-Forwarded-Proto": "http"})

@@ -1,5 +1,7 @@
 import os
 from flask import Flask, request, redirect
+from werkzeug.exceptions import MethodNotAllowed, NotFound
+from werkzeug.routing import PathConverter
 from app.socket import sio
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFError, CSRFProtect, generate_csrf
@@ -21,8 +23,17 @@ from app.seeds import seed_commands
 
 from app.config import Config
 
+class FrontendPathConverter(PathConverter):
+    '''
+    Matches any path except /api and /api/..., so the React catch-all route
+    never answers for the API and unmatched API requests get real 404/405s
+    '''
+    regex = r'(?!api(?:/|$))[^/].*?'
+
+
 # Initialize flask app instance
 app = Flask(__name__)
+app.url_map.converters['frontend_path'] = FrontendPathConverter
 
 
 # Setup login manager
@@ -89,6 +100,31 @@ def csrf_error(error):
     return {'errors': [f'csrf_token : {error.description}']}, 400
 
 
+def is_api_request():
+    return request.path == '/api' or request.path.startswith('/api/')
+
+
+@app.errorhandler(NotFound)
+def not_found(error):
+    '''
+    Returns JSON for unknown API routes; other paths keep Flask's default 404
+    '''
+    if is_api_request():
+        return {'errors': ['Not found']}, 404
+    return error
+
+
+@app.errorhandler(MethodNotAllowed)
+def method_not_allowed(error):
+    '''
+    Returns JSON when an API route exists but does not accept the method
+    '''
+    if is_api_request():
+        return ({'errors': [f'Method {request.method} not allowed']}, 405,
+                {'Allow': ', '.join(sorted(error.valid_methods or []))})
+    return error
+
+
 @app.after_request
 def inject_csrf_token(response):
     '''
@@ -106,7 +142,7 @@ def inject_csrf_token(response):
 
 
 @app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/<frontend_path:path>')
 def react_root(path):
     '''
     Sends favicon if requested and react app otherwise
